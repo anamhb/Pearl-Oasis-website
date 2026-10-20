@@ -1,0 +1,399 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+    --font-script: 'Alex Brush', cursive;
+  }
+
+  /* The root element carries no background of its own, so the page canvas would
+     fall back to the browser default (white) wherever the body does not paint —
+     which can flash as a thin pale line at the viewport edge while scrolling. */
+  html {
+    background-color: #08090a;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #08090a;
+    color: #e2dfd9;
+    overflow-x: hidden;
+  }
+}
+
+.font-serif-luxury {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', Georgia, serif;
+}
+
+.font-script {
+  font-family: 'Alex Brush', cursive;
+}
+
+/* Luxury gold text gradients */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f7d070 0%, #d4af37 50%, #aa8010 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(120deg, #fce8a6 0%, #e5c158 25%, #fff2b2 50%, #b8860b 75%, #fce8a6 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold-glow {
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.12);
+}
+
+.bg-dark-card {
+  background: radial-gradient(circle at 50% 0%, rgba(28, 26, 23, 0.75), rgba(13, 14, 16, 0.95));
+}
+
+/* 3D Continuous 360 Rotation Keyframes */
+@keyframes rotate3dContinuous {
+  0% {
+    transform: perspective(900px) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(900px) rotateY(180deg);
+  }
+  100% {
+    transform: perspective(900px) rotateY(360deg);
+  }
+}
+
+.animate-rotate-3d {
+  transform-style: preserve-3d;
+  animation: rotate3dContinuous 9s linear infinite;
+  will-change: transform;
+}
+
+.animate-rotate-3d-slow {
+  transform-style: preserve-3d;
+  animation: rotate3dContinuous 14s linear infinite;
+  will-change: transform;
+}
+
+/* Orbit & Ring Rotations for Featured Dishes */
+@keyframes spinClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinCounterClockwise {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinClockwise 50s linear infinite;
+}
+
+.animate-spin-reverse-slow {
+  animation: spinCounterClockwise 38s linear infinite;
+}
+
+.animate-spin-ring-accent {
+  animation: spinClockwise 75s linear infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   Testimonials — stacked-card scroll experience (Courses-style)
+   Pure CSS: each panel is sticky, and the card is flex-centred inside it, so the
+   card always settles on the viewport centre line (top 5vh + 90vh / 2 = 50vh)
+   whatever the quote length. Panels pin one after another and paint in order
+   (z-index grows per card), so each incoming card slides up onto the same
+   central position and covers the previous one, while --stack-offset keeps a
+   18px top edge of the earlier cards visible as a neat pile — with five cards
+   the pile spans -36 / -18 / 0 / +18 / +36px around that centre line, so the
+   alternating light and dark faces of the earlier cards stay visible.
+--------------------------------------------------------------------------- */
+.testimonial-stack__item {
+  position: sticky;
+  top: 5vh;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* The transparent full-height panels must not swallow hover/selection of the
+     cards underneath them — the card re-enables pointer events for itself. */
+  pointer-events: none;
+  z-index: 1; /* raised inline per card so later cards paint above earlier ones */
+}
+
+/* The first panel is deliberately shorter so the first card starts closer to the
+   section heading (a shorter panel means the flex-centred card sits nearer the
+   panel's own top edge). Centring is untouched because the pin line moves with
+   the panel: top 15vh + 70vh / 2 = 50vh, exactly like the full-height panels
+   (5vh + 90vh / 2 = 50vh), so the first card still settles on the centre line.
+
+   Only applied where the card demonstrably fits: the pile shifts the first card
+   up by (cards - 1) / 2 * 18px = 36px, so the panel must leave more than that
+   above the card. Narrow viewports wrap the quote onto more lines (a taller
+   card), so there the full-height panel is kept — the heading margin reduction
+   still applies. Tuned from measured card heights: 287px at the full 576px card
+   width, up to 437px at a 320px viewport width. */
+@media (min-width: 768px), (min-height: 730px) {
+  .testimonial-stack__item:first-child {
+    top: 15vh;
+    height: 70vh;
+  }
+}
+
+.testimonial-stack__card {
+  pointer-events: auto;
+  /* Stagger is set inline per card. Relative positioning only shifts paint, so
+     the sticky geometry of the panels is never affected. */
+  top: var(--stack-offset, 0px);
+}
+
+/* Two-column deck (tablet and up). The cards alternate sides so the film stays
+   open down the middle. `mx-auto` on the card would defeat justify-content in
+   this flex row, so the side rules replace it with a single auto margin, which
+   is what actually pushes the card to its edge. Below 768px the deck keeps its
+   single centred column — two cards plus a gutter do not fit. */
+@media (min-width: 768px) {
+  .testimonial-stack__item--left {
+    justify-content: flex-start;
+  }
+
+  .testimonial-stack__item--right {
+    justify-content: flex-end;
+  }
+
+  .testimonial-stack__item--left .testimonial-stack__card {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .testimonial-stack__item--right .testimonial-stack__card {
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
+/* Reduced motion, and viewports shorter than 560px (where a card may not fit
+   inside a 90vh panel): no pinning at all — a plain centred column that keeps
+   every testimonial fully readable. */
+@media (prefers-reduced-motion: reduce), (max-height: 560px) {
+  /* The :first-child override above is more specific than the base rule, so it
+     has to be reset here as well — otherwise the static column would keep the
+     first item 70vh tall. */
+  .testimonial-stack__item,
+  .testimonial-stack__item:first-child {
+    position: static;
+    top: auto;
+    height: auto;
+    display: block;
+  }
+
+  .testimonial-stack__item + .testimonial-stack__item {
+    margin-top: 1.5rem;
+  }
+
+  .testimonial-stack__card {
+    top: 0;
+  }
+
+  /* The static fallback is one readable column, so the desktop side placement
+     has to be undone here (this block comes after the min-width rules). */
+  .testimonial-stack__item--left .testimonial-stack__card,
+  .testimonial-stack__item--right .testimonial-stack__card {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .testimonial-stack__spacer {
+    display: none;
+  }
+}
+
+/* ── Anchor targets clear the fixed header ───────────────────────────────────
+   The header is 103px tall on desktop and 87px on phones. Without a scroll
+   margin, #story / #signature / #menu / #experience all land with their first
+   heading hidden underneath it. */
+section[id],
+#entrance {
+  scroll-margin-top: 6.5rem;
+}
+
+@media (max-width: 639px) {
+  section[id],
+  #entrance {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+/* ── Menu: which presentation is active ──────────────────────────────────────
+   Desktop gets the pinned five-row stage, which needs roughly 480px of viewport
+   height to fit both columns plus the button. Phones — and landscape phones
+   that are only ~390px tall — get the single-column list, which scrolls
+   normally instead of being clipped by a 100vh sticky stage.
+   The desktop scroll tracker reads the intro heading's height and deactivates
+   itself when that heading is display:none, so only one system runs at a time. */
+.menu-desktop-intro,
+.menu-desktop-stage {
+  display: none;
+}
+
+.menu-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .menu-desktop-intro,
+  .menu-desktop-stage {
+    display: block;
+  }
+
+  .menu-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-height: 480px) {
+  .menu-desktop-intro,
+  .menu-desktop-stage {
+    display: none;
+  }
+
+  .menu-mobile {
+    display: block;
+  }
+}
+
+/* ── Short viewports (landscape phones, ~390–560px tall) ─────────────────────
+   The hero and Our Story are built around a full-height stage. At 390px tall
+   the hero copy slid under the fixed header and the two story beats — which
+   both stay on screen — overlapped each other. These rules compact the type
+   and put the hero cue back into the flow; nothing is hidden, and nothing
+   above 560px tall is affected. */
+@media (max-height: 560px) {
+  .hero-copy {
+    padding-top: 6.75rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.375rem;
+  }
+
+  .hero-title {
+    font-size: 1.625rem;
+    line-height: 1.14;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-lead {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-cta {
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+    font-size: 0.6875rem;
+  }
+
+  /* In the flow, directly under the CTA, so the two can never overlap. */
+  .hero-cue {
+    position: static;
+    margin-top: 0.4rem;
+  }
+
+  .hero-cue-label {
+    font-size: 0.5625rem;
+    letter-spacing: 0.18em;
+  }
+
+  .hero-cue-mouse {
+    width: 0.875rem;
+    height: 1.375rem;
+  }
+
+}
+
+/* Our Story keeps both beats on screen at once, so the two blocks have to share
+   one viewport height. On a landscape phone (390px tall) and on a 320px-wide
+   phone (where the copy wraps into many more lines) they used to collide. The
+   copy is compacted for exactly those two cases, with the top padding kept clear
+   of the fixed header. */
+@media (max-height: 560px), (max-width: 359px) {
+  .story-beat--primary {
+    padding-top: 6.75rem;
+  }
+
+  .story-beat--primary > div {
+    max-width: 20rem;
+  }
+
+  .story-beat--primary .story-eyebrow {
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+  }
+
+  .story-beat--primary h2 {
+    font-size: 1.625rem;
+    line-height: 1.1;
+    margin-top: 0.375rem;
+  }
+
+  .story-beat--primary p {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+    padding-left: 0.75rem;
+  }
+
+  .story-beat--secondary {
+    padding-bottom: 0.5rem;
+  }
+
+  .story-beat--secondary > div {
+    max-width: 23rem;
+  }
+
+  .story-beat--secondary p {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .story-beat--secondary p + p {
+    margin-top: 0.35rem;
+  }
+}
+
+/* Subtle custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #08090a;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2824;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}

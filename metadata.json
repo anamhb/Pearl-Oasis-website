@@ -1,0 +1,6 @@
+{
+  "name": "Pearl Oasis — Immersive 3D Restaurant",
+  "description": "Experience Pearl Oasis: a luxury fine-dining sanctuary. Step through our 3D grand entrance, explore our tasting menus, and reserve an unforgettable evening.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
