@@ -44,6 +44,10 @@ const FILL_INTENSITY = 0.26;
  * navbar. Pass `animate={false}` for a static render — the crest is drawn once
  * (and re-drawn on resize) and no animation frame loop is started, so the logo
  * stays perfectly still.
+ *
+ * On narrow / touch viewports the animated crest is drawn at ~30fps and 1.5×
+ * DPR instead of every frame at 2×: the header is fixed, so this loop otherwise
+ * runs for the entire scroll-driven hero on a phone.
  */
 export const Crest3D = ({ className = '', animate = true }) => {
   const canvasRef = useRef(null);
@@ -58,7 +62,9 @@ export const Crest3D = ({ className = '', animate = true }) => {
         canvas,
         alpha: true,
         antialias: true,
-        preserveDrawingBuffer: true,
+        /* No preserveDrawingBuffer: nothing reads the canvas back, and keeping
+           it forces a copy of the drawing buffer on every frame — while the
+           hero sequence is scrolling underneath this very canvas. */
       });
     } catch (error) {
       // No WebGL (very old device) — the wordmark still renders on its own.
@@ -67,6 +73,16 @@ export const Crest3D = ({ className = '', animate = true }) => {
 
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.NoToneMapping;
+
+    /* The crest is a ~17×30px detail, but each frame is a full WebGL draw call
+       sequence. On phones that runs for the whole hero walk (the header is
+       fixed), so narrow screens render it at 30fps and cap the buffer at 1.5×
+       DPR instead of 2×. The rotation itself is unchanged — same 1.35 rad/s,
+       just sampled 30 times a second, which is still ~140 samples per turn. */
+    const narrowViewport =
+      window.matchMedia('(max-width: 1023px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
+    const frameInterval = narrowViewport ? 1000 / 30 : 0;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
@@ -90,6 +106,9 @@ export const Crest3D = ({ className = '', animate = true }) => {
     let modelHeight = null;
     let disposed = false;
     let frameRequest = 0;
+    let lastWidth = 0;
+    let lastHeight = 0;
+    let lastDpr = 0;
 
     const fitCamera = (height) => {
       const verticalFov = (camera.fov * Math.PI) / 180;
@@ -98,9 +117,23 @@ export const Crest3D = ({ className = '', animate = true }) => {
     };
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, narrowViewport ? 1.5 : 2);
       const width = Math.max(canvas.clientWidth, 1);
       const height = Math.max(canvas.clientHeight, 1);
+      /* The 10-second safety-net interval below used to reallocate the drawing
+         buffer (setSize) fifty times even at an unchanged size. Skip the no-op
+         passes once the first real render has happened. */
+      if (
+        modelHeight &&
+        width === lastWidth &&
+        height === lastHeight &&
+        dpr === lastDpr
+      ) {
+        return;
+      }
+      lastWidth = width;
+      lastHeight = height;
+      lastDpr = dpr;
       renderer.setPixelRatio(dpr);
       // updateStyle = false: CSS (w-full h-full) owns the element size.
       renderer.setSize(width, height, false);
@@ -128,6 +161,8 @@ export const Crest3D = ({ className = '', animate = true }) => {
         scene.add(model);
         modelHeight = size.y;
         fitCamera(modelHeight);
+        // Force the next resize() past the no-op guard: the model just arrived.
+        lastWidth = 0;
         resize();
         // Static variant: the single render performed by resize() is the frame.
         if (animate) startLoop();
@@ -141,6 +176,7 @@ export const Crest3D = ({ className = '', animate = true }) => {
 
     /* Continuous 360-degree rotation animation */
     let lastTime = performance.now();
+    let lastRender = 0;
     let currentAngle = 0;
     const ROTATION_SPEED = 1.35; // radians per second (~4.6s per full 360 rotation)
 
@@ -148,6 +184,10 @@ export const Crest3D = ({ className = '', animate = true }) => {
       if (frameRequest) return;
       const tick = (now) => {
         frameRequest = requestAnimationFrame(tick);
+        // Narrow screens: draw every other frame (~30fps). lastTime only
+        // advances on a drawn frame, so the angle stays exactly time-based.
+        if (frameInterval && now - lastRender < frameInterval) return;
+        lastRender = now;
         const delta = Math.min((now - lastTime) / 1000, 0.1);
         lastTime = now;
         if (model) {

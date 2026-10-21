@@ -14,9 +14,11 @@ import React, { useCallback, useEffect, useRef } from 'react';
  *   2. the flavour paragraph at the bottom right, in once the scrub is halfway.
  * Both stay on screen until the section releases.
  *
- * Frames are 1280×720 and ~36 KB each (≈2 MB for the set), so the whole
- * sequence is warmed up front; the two stacked <img> layers still only swap
- * once the incoming frame has decoded, so a scrub never shows a blank stage.
+ * Frames are 1280×720 and ~36 KB each (≈2 MB for the set). Desktop still warms
+ * the whole sequence up front; phones warm the opening frames and then follow
+ * the scrub (see warmWindow) so the download does not compete with the hero.
+ * The two stacked <img> layers only swap once the incoming frame has decoded,
+ * so a scrub never shows a blank stage.
  */
 
 const FRAME_COUNT = 56;
@@ -43,6 +45,37 @@ export const WelcomeStory = () => {
   const flavourCopyRef = useRef(null);
   const rafRef = useRef(0);
   const reducedMotionRef = useRef(false);
+  /** False while the story stage is more than about a viewport away. */
+  const visibleRef = useRef(true);
+  const metricsRef = useRef({ scrollDistance: 0, viewport: 0 });
+  const narrowRef = useRef(false);
+  const warmedRef = useRef(new Uint8Array(FRAME_COUNT));
+
+  const measure = useCallback(() => {
+    const track = trackRef.current;
+    metricsRef.current = {
+      scrollDistance: track ? Math.max(0, track.offsetHeight - window.innerHeight) : 0,
+      viewport: window.innerHeight,
+    };
+  }, []);
+
+  /**
+   * Narrow-screen warm-up window: fetch the frames around the scrub instead of
+   * all 56 at mount. Desktop keeps the eager warm-up; the sequence, order and
+   * scrub mapping do not change either way.
+   */
+  const warmWindow = useCallback((center) => {
+    if (!narrowRef.current) return;
+    const from = Math.max(0, center - 3);
+    const to = Math.min(FRAME_COUNT - 1, center + 9);
+    for (let index = from; index <= to; index += 1) {
+      if (warmedRef.current[index]) continue;
+      warmedRef.current[index] = 1;
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = frameSrc(index);
+    }
+  }, []);
 
   /**
    * Double-buffered frame swap: the next frame loads into the hidden layer and
@@ -70,26 +103,43 @@ export const WelcomeStory = () => {
       lastGoodIndexRef.current = safe;
     };
 
-    next.onload = reveal;
+    next.onload = () => {
+      /* Decode before the swap so the 1280×720 bitmap is ready when it becomes
+         visible, instead of decoding on the paint path mid-scroll. */
+      if (typeof next.decode === 'function') {
+        next.decode().then(reveal, reveal);
+      } else {
+        reveal();
+      }
+    };
     next.onerror = () => {
       if (requestedIndexRef.current !== safe) return;
       requestedIndexRef.current = lastGoodIndexRef.current;
     };
     next.src = target;
+    warmWindow(safe);
 
     if (next.complete && next.naturalWidth > 0 && next.currentSrc.endsWith(target)) {
       reveal();
     }
-  }, []);
+  }, [warmWindow]);
 
-  /* Warm the whole sequence once; it is small and this keeps the scrub smooth. */
+  /* Warm the sequence. Desktop fetches all 56 once (it is small and keeps the
+     scrub perfectly smooth); phones take the first frames and then follow the
+     scrub, so the story does not spend 2 MB at mount alongside the hero. */
   useEffect(() => {
-    for (let index = 0; index < FRAME_COUNT; index += 1) {
+    narrowRef.current =
+      window.matchMedia('(max-width: 1023px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
+    measure();
+    const count = narrowRef.current ? 8 : FRAME_COUNT;
+    for (let index = 0; index < count; index += 1) {
+      warmedRef.current[index] = 1;
       const image = new Image();
       image.decoding = 'async';
       image.src = frameSrc(index);
     }
-  }, []);
+  }, [measure]);
 
   useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -100,9 +150,11 @@ export const WelcomeStory = () => {
 
     const update = () => {
       const track = trackRef.current;
-      if (!track) return;
+      if (!track || !visibleRef.current) return;
 
-      const scrollDistance = track.offsetHeight - window.innerHeight;
+      if (metricsRef.current.viewport !== window.innerHeight) measure();
+
+      const scrollDistance = metricsRef.current.scrollDistance;
       const rect = track.getBoundingClientRect();
       const progress = scrollDistance > 0 ? clamp01(-rect.top / scrollDistance) : 0;
 
@@ -140,9 +192,11 @@ export const WelcomeStory = () => {
       }
     };
 
-    /* Coalesce scroll events into one rAF pass; re-post on every event so the
-       loop cannot wedge if a frame is skipped. */
+    /* Coalesce scroll events into one rAF pass. One pending frame only: a burst
+       of touch events used to post several callbacks, each re-measuring the
+       track and re-writing both copy layers in the same frame. */
     const schedule = () => {
+      if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = 0;
         update();
@@ -154,18 +208,40 @@ export const WelcomeStory = () => {
       schedule();
     };
 
+    const onResize = () => {
+      measure();
+      schedule();
+    };
+
+    /* Skip the per-scroll work while the stage is more than a viewport away;
+       the catch-up pass runs as it re-enters. */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const near = entries.some((entry) => entry.isIntersecting);
+        if (near === visibleRef.current) return;
+        visibleRef.current = near;
+        if (near) {
+          measure();
+          update();
+        }
+      },
+      { rootMargin: '50% 0px' },
+    );
+    observer.observe(trackRef.current);
+
     update();
     window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
+    window.addEventListener('resize', onResize);
     motionQuery.addEventListener?.('change', onMotionChange);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
+      window.removeEventListener('resize', onResize);
       motionQuery.removeEventListener?.('change', onMotionChange);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [showFrame]);
+  }, [showFrame, measure]);
 
   return (
     <section

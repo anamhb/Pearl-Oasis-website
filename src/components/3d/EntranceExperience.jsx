@@ -63,6 +63,50 @@ export const EntranceExperience = () => {
   const entranceCueRef = useRef(null);
   const rafRef = useRef(0);
   const reducedMotionRef = useRef(false);
+  /**
+   * False while the hero is far outside the viewport. The scroll listener is
+   * global, so without this every scroll anywhere in the ~16 000 px document
+   * still measured this track and wrote six styles, even with the stage 10
+   * viewports away.
+   */
+  const visibleRef = useRef(true);
+  /**
+   * Layout values that only change on resize, cached so a scroll frame does not
+   * have to read `track.offsetHeight` (a layout flush on the 3.3-viewport track).
+   */
+  const metricsRef = useRef({ scrollDistance: 0, viewport: 0 });
+  /** Narrow / touch devices: slide a warm-up window instead of fetching all 299. */
+  const narrowRef = useRef(false);
+  const warmedRef = useRef(new Uint8Array(FRAME_COUNT));
+
+  const measure = useCallback(() => {
+    const track = trackRef.current;
+    metricsRef.current = {
+      scrollDistance: track ? Math.max(0, track.offsetHeight - window.innerHeight) : 0,
+      viewport: window.innerHeight,
+    };
+  }, []);
+
+  /**
+   * Narrow-screen warm-up window.
+   *
+   * The sequence is 299 × 1920×1080 JPEGs (≈15 MB). Pulling all of it on a
+   * phone keeps the radio and the decode queue busy while the user is scrubbing
+   * — the frames fight the one on screen for bandwidth, which is what makes the
+   * walk stutter. Narrow screens therefore warm only the frames around the
+   * current one (a few behind, more ahead) and refill as the scrub advances.
+   * The frames, their order and the animation are untouched.
+   */
+  const warmWindow = useCallback((center) => {
+    if (!narrowRef.current) return;
+    const from = Math.max(0, center - 4);
+    const to = Math.min(FRAME_COUNT - 1, center + 16);
+    for (let index = from; index <= to; index += 1) {
+      if (warmedRef.current[index]) continue;
+      warmedRef.current[index] = 1;
+      fetch(frameSrc(index)).catch(() => {});
+    }
+  }, []);
 
   /**
    * Double-buffered frame swap.
@@ -96,7 +140,17 @@ export const EntranceExperience = () => {
     const target = frameSrc(safe);
     next.onload = () => {
       if (next.getAttribute('src') !== target) return;
-      reveal();
+      /* Decode off the paint path before showing the frame. `onload` only means
+         the bytes arrived; the 1920×1080 bitmap is still decoded on the main
+         thread when it first paints, which on a phone is a visible stall per
+         frame. decode() resolves when the bitmap is ready, so the swap is a
+         compositor-only change. A rejected decode (src replaced meanwhile) just
+         falls through to the old behaviour. */
+      if (typeof next.decode === 'function') {
+        next.decode().then(reveal, reveal);
+      } else {
+        reveal();
+      }
     };
     next.onerror = () => {
       if (requestedIndexRef.current !== safe) return;
@@ -104,6 +158,8 @@ export const EntranceExperience = () => {
       requestedIndexRef.current = lastGoodIndexRef.current;
     };
     next.src = target;
+    // Keep the next stretch of the sequence warm around wherever we are.
+    warmWindow(safe);
 
     // Already decoded for this exact URL: re-assigning the same src does not
     // restart the request, so no load event will follow. (`currentSrc` still
@@ -112,13 +168,16 @@ export const EntranceExperience = () => {
     if (next.complete && next.naturalWidth > 0 && next.currentSrc.endsWith(target)) {
       reveal();
     }
-  }, []);
+  }, [warmWindow]);
 
   const update = useCallback(() => {
     const track = trackRef.current;
-    if (!track) return;
+    if (!track || !visibleRef.current) return;
 
-    const scrollDistance = track.offsetHeight - window.innerHeight;
+    // Only a resize (including a mobile URL bar collapse) can change these.
+    if (metricsRef.current.viewport !== window.innerHeight) measure();
+
+    const scrollDistance = metricsRef.current.scrollDistance;
     const rect = track.getBoundingClientRect();
     const progress =
       scrollDistance > 0 ? clamp01(-rect.top / scrollDistance) : 0;
@@ -172,11 +231,18 @@ export const EntranceExperience = () => {
        heading is readable — and the two "continue" labels never overlap. */
     const cue = entranceCueRef.current;
     if (cue) cue.style.opacity = String(clamp01(1 - mix / 0.2));
-  }, [showFrame]);
+  }, [showFrame, measure]);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
+
+    /* Phones and tablets get the sliding window; desktop keeps the full
+       progressive warm-up (its scrub never has to wait on the network). */
+    narrowRef.current =
+      window.matchMedia('(max-width: 1023px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
+    measure();
 
     /* Reduced motion: keep the frames (the user drives them) but swap the
        copy abruptly instead of dissolving/sliding it. */
@@ -190,7 +256,8 @@ export const EntranceExperience = () => {
 
     /* Progressive warm-up: the first dozen frames go out immediately, the
        rest trickle in during idle time, so scrubbing never has to wait on
-       the network but the page is not flooded with 15 MB at once. */
+       the network but the page is not flooded with 15 MB at once.
+       Narrow screens stop after the opening frames — see warmWindow. */
     let cancelled = false;
     let next = 1; // frame 001 is already requested by the <img> itself
     const idle =
@@ -202,22 +269,28 @@ export const EntranceExperience = () => {
       if (cancelled || next >= FRAME_COUNT) return;
       const end = Math.min(next + size, FRAME_COUNT);
       for (; next < end; next += 1) {
+        warmedRef.current[next] = 1;
         fetch(frameSrc(next)).catch(() => {});
       }
     };
 
-    warmBatch(11);
-    const warmNext = () => {
-      if (cancelled) return;
+    if (narrowRef.current) {
+      warmedRef.current[0] = 1; // already requested by the first <img>
       warmBatch(6);
-      if (next < FRAME_COUNT) idle(warmNext);
-    };
-    idle(warmNext);
+    } else {
+      warmBatch(11);
+      const warmNext = () => {
+        if (cancelled) return;
+        warmBatch(6);
+        if (next < FRAME_COUNT) idle(warmNext);
+      };
+      idle(warmNext);
+    }
 
-    // One measurement per animation frame: coalesce scroll bursts into a
-    // single read/write pass, and re-posting on every event means the
-    // listener can never wedge on a callback the browser chose not to run
-    // (e.g. while the tab is hidden).
+    /* One measurement per animation frame: coalesce scroll bursts into a
+       single read/write pass, and re-posting on every event means the
+       listener can never wedge on a callback the browser chose not to run
+       (e.g. while the tab is hidden). */
     const onScroll = () => {
       if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
       rafRef.current = window.requestAnimationFrame(() => {
@@ -226,18 +299,41 @@ export const EntranceExperience = () => {
       });
     };
 
+    const onResize = () => {
+      measure();
+      onScroll();
+    };
+
+    /* Stop doing per-scroll work entirely once the stage is a viewport away.
+       The margin keeps the hand-over seamless: the observer fires before the
+       stage re-enters and runs one catch-up pass. */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const near = entries.some((entry) => entry.isIntersecting);
+        if (near === visibleRef.current) return;
+        visibleRef.current = near;
+        if (near) {
+          measure();
+          update();
+        }
+      },
+      { rootMargin: '50% 0px' },
+    );
+    observer.observe(track);
+
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', onResize);
     update();
 
     return () => {
       cancelled = true;
+      observer.disconnect();
       if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
       motionQuery.removeEventListener?.('change', syncMotionPreference);
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('resize', onResize);
     };
-  }, [update]);
+  }, [update, measure]);
 
   const handleEnterClick = () => {
     const secondSection = document.getElementById('story');
