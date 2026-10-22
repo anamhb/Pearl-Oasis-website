@@ -84,6 +84,11 @@ export const Crest3D = ({ className = '', animate = true }) => {
       window.matchMedia('(pointer: coarse)').matches;
     const frameInterval = narrowViewport ? 1000 / 30 : 0;
 
+    /* Users who ask for less motion get a still crest: one render, no loop.
+       The loop starts or stops if the preference changes while mounted. */
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let prefersReducedMotion = motionQuery.matches;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
 
@@ -165,7 +170,7 @@ export const Crest3D = ({ className = '', animate = true }) => {
         lastWidth = 0;
         resize();
         // Static variant: the single render performed by resize() is the frame.
-        if (animate) startLoop();
+        if (animate && !prefersReducedMotion) startLoop();
       },
       undefined,
       (error) => {
@@ -199,6 +204,19 @@ export const Crest3D = ({ className = '', animate = true }) => {
       frameRequest = requestAnimationFrame(tick);
     };
 
+    const syncMotion = () => {
+      prefersReducedMotion = motionQuery.matches;
+      if (prefersReducedMotion) {
+        if (frameRequest) cancelAnimationFrame(frameRequest);
+        frameRequest = 0;
+        if (model) renderer.render(scene, camera);
+      } else if (animate && model) {
+        lastTime = performance.now();
+        startLoop();
+      }
+    };
+    motionQuery.addEventListener?.('change', syncMotion);
+
     const observer =
       typeof ResizeObserver !== 'undefined' ? new ResizeObserver(resize) : null;
     if (observer) observer.observe(canvas);
@@ -219,6 +237,7 @@ export const Crest3D = ({ className = '', animate = true }) => {
       if (frameRequest) cancelAnimationFrame(frameRequest);
       frameRequest = 0;
       window.clearInterval(interval);
+      motionQuery.removeEventListener?.('change', syncMotion);
       if (observer) observer.disconnect();
       window.removeEventListener('resize', resize);
       gold.dispose();

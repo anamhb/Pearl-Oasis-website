@@ -20,28 +20,34 @@ export const Footer = () => {
             <p className="text-xs text-[#8c8477] font-sans leading-relaxed pt-2">
               An architectural dining sanctuary where fine gastronomy, amber warmth, and timeless hospitality converge.
             </p>
-            <div className="flex items-center gap-3 pt-2">
-              <a
-                href="#social"
-                className="w-8 h-8 rounded-full bg-[#141517] border border-[#2b261d] flex items-center justify-center text-[#d4af37] hover:border-[#d4af37] transition-colors"
-                aria-label="Instagram"
+            {/* No social profile URLs have been supplied, so these are not
+                links: they are static icons with a visible "Coming soon" label. */}
+            <div
+              role="group"
+              aria-label="Social media links, coming soon"
+              className="flex flex-wrap items-center gap-3 pt-2"
+            >
+              <span
+                aria-hidden="true"
+                className="w-8 h-8 rounded-full bg-[#141517] border border-[#2b261d] flex items-center justify-center text-[#d4af37]/60"
               >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="#social"
-                className="w-8 h-8 rounded-full bg-[#141517] border border-[#2b261d] flex items-center justify-center text-[#d4af37] hover:border-[#d4af37] transition-colors"
-                aria-label="Facebook"
+              </span>
+              <span
+                aria-hidden="true"
+                className="w-8 h-8 rounded-full bg-[#141517] border border-[#2b261d] flex items-center justify-center text-[#d4af37]/60"
               >
                 <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="#social"
-                className="w-8 h-8 rounded-full bg-[#141517] border border-[#2b261d] flex items-center justify-center text-[#d4af37] hover:border-[#d4af37] transition-colors"
-                aria-label="Twitter"
+              </span>
+              <span
+                aria-hidden="true"
+                className="w-8 h-8 rounded-full bg-[#141517] border border-[#2b261d] flex items-center justify-center text-[#d4af37]/60"
               >
                 <Twitter className="w-4 h-4" />
-              </a>
+              </span>
+              <span className="text-[10px] font-sans uppercase tracking-[0.15em] text-[#a39a8c]">
+                Coming soon
+              </span>
             </div>
           </div>
 
@@ -51,22 +57,22 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-0.5 text-xs font-sans">
               <li>
-                <a href="#story" className="inline-block py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="#story" className="inline-flex items-center min-h-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Our Story
                 </a>
               </li>
               <li>
-                <a href="#signature" className="inline-block py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="#signature" className="inline-flex items-center min-h-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Featured Dishes
                 </a>
               </li>
               <li>
-                <a href="#menu" className="inline-block py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="#menu" className="inline-flex items-center min-h-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Menu
                 </a>
               </li>
               <li>
-                <a href="#experience" className="inline-block py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="#experience" className="inline-flex items-center min-h-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Testimonials
                 </a>
               </li>
@@ -82,7 +88,7 @@ export const Footer = () => {
                 <Clock className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                 <div>
                   <div className="text-white font-medium">Daily Hours</div>
-                  <div className="text-neutral-500">Mon – Sun: 2:00 PM – 11:00 PM</div>
+                  <div className="text-[#a39a8c]">Mon – Sun: 2:00 PM – 11:00 PM</div>
                 </div>
               </div>
 
@@ -90,7 +96,7 @@ export const Footer = () => {
                 <Clock className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                 <div>
                   <div className="text-white font-medium">Lunch and Afternoon Service</div>
-                  <div className="text-neutral-500">Mon – Sun: 2:00 PM – 5:00 PM</div>
+                  <div className="text-[#a39a8c]">Mon – Sun: 2:00 PM – 5:00 PM</div>
                 </div>
               </div>
 
@@ -98,7 +104,7 @@ export const Footer = () => {
                 <Clock className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                 <div>
                   <div className="text-white font-medium">Dinner and Evening Service</div>
-                  <div className="text-neutral-500">Mon – Sun: 5:00 PM – 11:00 PM</div>
+                  <div className="text-[#a39a8c]">Mon – Sun: 5:00 PM – 11:00 PM</div>
                 </div>
               </div>
             </div>
@@ -117,7 +123,7 @@ export const Footer = () => {
               </div>
               <div className="flex items-center gap-2 pt-1">
                 <Phone className="w-4 h-4 text-[#d4af37] shrink-0" />
-                <a href="tel:+923327515538" className="inline-block py-1 hover:text-[#d4af37] transition-colors">
+                <a href="tel:+923327515538" className="inline-flex items-center min-h-11 py-1 hover:text-[#d4af37] transition-colors">
                   +92 332 7515538
                 </a>
               </div>
@@ -125,14 +131,14 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-[#1d1b16] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#787164]">
+        <div className="border-t border-[#1d1b16] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#a39a8c]">
           <div>
             © {new Date().getFullYear()} Pearl Oasis Restaurant. All rights reserved. Culinary and address details are editable placeholders.
           </div>
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 py-1 text-[#d4af37] hover:text-[#fff3cf] transition-colors"
+            className="flex items-center gap-1.5 min-h-11 py-1 text-[#d4af37] hover:text-[#fff3cf] transition-colors"
           >
             <span>Return to Top Entrance</span>
             <ArrowUp className="w-3.5 h-3.5" />

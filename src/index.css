@@ -114,6 +114,19 @@
   animation: spinClockwise 75s linear infinite;
 }
 
+/* Continuous decorative motion is switched off for reduced-motion users.
+   Scroll-driven choreography keeps its own handling inside each component. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce,
+  .animate-spin-slow,
+  .animate-spin-reverse-slow,
+  .animate-spin-ring-accent,
+  .animate-rotate-3d,
+  .animate-rotate-3d-slow {
+    animation: none !important;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Testimonials — stacked-card scroll experience (Courses-style)
    Pure CSS: each panel is sticky, and the card is flex-centred inside it, so the

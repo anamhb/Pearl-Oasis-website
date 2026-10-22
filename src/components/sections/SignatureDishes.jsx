@@ -80,6 +80,7 @@ export const SignatureDishes = () => {
   const startTimeRef = useRef(null);
 
   const [stageSize, setStageSize] = useState({ width: 1000, height: 600 });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Update container dimensions responsively
   const updateStageSize = useCallback(() => {
@@ -98,6 +99,15 @@ export const SignatureDishes = () => {
     return () => window.removeEventListener('resize', updateStageSize);
   }, [updateStageSize]);
 
+  /* Match the rest of the site: honor the user's reduced-motion setting. */
+  useEffect(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncMotion = () => setPrefersReducedMotion(motionQuery.matches);
+    syncMotion();
+    motionQuery.addEventListener?.('change', syncMotion);
+    return () => motionQuery.removeEventListener?.('change', syncMotion);
+  }, []);
+
   // ============================================================================
   // Covis Knowledge Reference Sequence:
   // - Central hub with stationary logo and continuously rotating outer decorative ring
@@ -113,6 +123,44 @@ export const SignatureDishes = () => {
     const initialHubDelay = 0.8; // Let central hub establish itself first
     const staggerStep = cycleDuration / totalDishes; // ~1.14s stagger between dishes
 
+    const w = stageSize.width;
+    const isMobile = w < 640;
+    const isTablet = w >= 640 && w < 1024;
+
+    // Radial boundaries tailored to stage proportions. The horizontal radius
+    // is additionally clamped so the widest dish (half of its box) can never
+    // be pushed past the stage's rounded, overflow-hidden edge — at 320px the
+    // raw 0.36 × width pushed the left-most dish 10px outside the frame and
+    // the stage clipped it.
+    const dishHalfWidth = isMobile ? 56 : isTablet ? 72 : 88;
+    const maxRadius = Math.max(0, w / 2 - dishHalfWidth - 6);
+    const rx = Math.min(
+      isMobile ? 160 : isTablet ? 330 : 430,
+      w * (isMobile ? 0.36 : 0.38),
+      maxRadius,
+    );
+
+    const ry = isMobile ? 135 : isTablet ? 155 : 180;
+
+    const stations = STATIONS.map((station) => ({
+      x: Math.cos(station.angle) * rx,
+      y: Math.sin(station.angle) * ry,
+    }));
+
+    // Reduced motion: no orbit, no float, no fade. Every dish sits at its
+    // station at full size, so the section still reads as a composed plate.
+    if (prefersReducedMotion) {
+      for (let i = 0; i < totalDishes; i++) {
+        const el = dishDomRefs.current[i];
+        if (!el) continue;
+        const point = stations[i] || { x: 0, y: 0 };
+        el.style.transform = `translate3d(calc(-50% + ${point.x.toFixed(2)}px), calc(-50% + ${point.y.toFixed(2)}px), 0) scale(1)`;
+        el.style.opacity = '1';
+        el.style.zIndex = 25;
+      }
+      return undefined;
+    }
+
     // Easing helpers
     const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3);
     const easeInQuad = (x) => x * x;
@@ -123,32 +171,13 @@ export const SignatureDishes = () => {
       }
       const elapsedTime = (currentTime - startTimeRef.current) / 1000;
 
-      const w = stageSize.width;
-      const isMobile = w < 640;
-      const isTablet = w >= 640 && w < 1024;
-
-      // Radial boundaries tailored to stage proportions. The horizontal radius
-      // is additionally clamped so the widest dish (half of its box) can never
-      // be pushed past the stage's rounded, overflow-hidden edge — at 320px the
-      // raw 0.36 × width pushed the left-most dish 10px outside the frame and
-      // the stage clipped it.
-      const dishHalfWidth = isMobile ? 56 : isTablet ? 72 : 88;
-      const maxRadius = Math.max(0, w / 2 - dishHalfWidth - 6);
-      const rx = Math.min(
-        isMobile ? 160 : isTablet ? 330 : 430,
-        w * (isMobile ? 0.36 : 0.38),
-        maxRadius,
-      );
-
-      const ry = isMobile ? 135 : isTablet ? 155 : 180;
-
       for (let i = 0; i < totalDishes; i++) {
         const el = dishDomRefs.current[i];
         if (!el) continue;
 
-        const station = STATIONS[i] || { angle: (2 * Math.PI * i) / totalDishes };
-        const baseX = Math.cos(station.angle) * rx;
-        const baseY = Math.sin(station.angle) * ry;
+        const point = stations[i] || { x: 0, y: 0 };
+        const baseX = point.x;
+        const baseY = point.y;
 
         // Individual timeline offset for staggered choreography
         const dishStartTime = initialHubDelay + i * staggerStep;
@@ -245,7 +274,7 @@ export const SignatureDishes = () => {
         cancelAnimationFrame(rafIdRef.current);
       }
     };
-  }, [stageSize]);
+  }, [stageSize, prefersReducedMotion]);
 
   return (
     <section
@@ -286,7 +315,7 @@ export const SignatureDishes = () => {
           >
             {/* Restored First Rotating Outer Ring (Covis inspired dashed decorative ring) */}
             <div
-              className="absolute -inset-3.5 sm:-inset-4 md:-inset-5 rounded-full pointer-events-none animate-spin-slow"
+              className={`absolute -inset-3.5 sm:-inset-4 md:-inset-5 rounded-full pointer-events-none${prefersReducedMotion ? '' : ' animate-spin-slow'}`}
               style={{ animationDuration: '45s' }}
             >
               <svg className="w-full h-full" viewBox="0 0 100 100">

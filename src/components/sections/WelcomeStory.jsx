@@ -14,16 +14,21 @@ import React, { useCallback, useEffect, useRef } from 'react';
  *   2. the flavour paragraph at the bottom right, in once the scrub is halfway.
  * Both stay on screen until the section releases.
  *
- * Frames are 1280×720 and ~36 KB each (≈2 MB for the set). Desktop still warms
- * the whole sequence up front; phones warm the opening frames and then follow
- * the scrub (see warmWindow) so the download does not compete with the hero.
- * The two stacked <img> layers only swap once the incoming frame has decoded,
- * so a scrub never shows a blank stage.
+ * Frames are 1280×720 and ~36 KB each (≈2 MB for the set). A small decoded
+ * pool follows the scrub and predicts the next jump, instead of loading the
+ * whole set at mount alongside the hero. The visible layer only swaps once a
+ * replacement has decoded, so a scrub never shows a blank stage.
  */
 
 const FRAME_COUNT = 56;
 /** 56 × 2 vh = 112 vh of pinned travel (the track is 212 vh tall). */
 const SCROLL_VH_PER_FRAME = 2;
+
+/** Visible layer plus a small decoded buffer, as in the hero walkthrough. */
+const MAX_LAYERS = 5;
+const NARROW_LAYERS = 4;
+const MAX_PREDICT_STEP = 16;
+const DECODE_FALLBACK_MS = 300;
 
 /** Reveal windows in progress (0 → 1 across the pinned travel). */
 const STORY_IN = [0.02, 0.12];
@@ -37,111 +42,252 @@ const frameSrc = (index) =>
 
 export const WelcomeStory = () => {
   const trackRef = useRef(null);
-  const frameLayersRef = useRef({ a: null, b: null });
-  const activeFrameRef = useRef('a');
-  const requestedIndexRef = useRef(0);
-  const lastGoodIndexRef = useRef(0);
+  const layersRef = useRef(
+    Array.from({ length: MAX_LAYERS }, () => ({
+      node: null,
+      index: null,
+      loading: false,
+      ready: false,
+      token: 0,
+      timer: 0,
+    })),
+  );
+  const activeLayerRef = useRef(0);
+  const visibleIndexRef = useRef(0);
+  const targetIndexRef = useRef(0);
+  const directionRef = useRef(1);
+  const stepRef = useRef(1);
+  const settleTimerRef = useRef(0);
+  const scheduleRef = useRef(null);
   const storyCopyRef = useRef(null);
   const flavourCopyRef = useRef(null);
   const rafRef = useRef(0);
   const reducedMotionRef = useRef(false);
   /** False while the story stage is more than about a viewport away. */
-  const visibleRef = useRef(true);
-  const metricsRef = useRef({ scrollDistance: 0, viewport: 0 });
+  const visibleRef = useRef(false);
+  const metricsRef = useRef({ top: 0, scrollDistance: 0, viewport: 0 });
   const narrowRef = useRef(false);
-  const warmedRef = useRef(new Uint8Array(FRAME_COUNT));
+  const poolSizeRef = useRef(NARROW_LAYERS);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
+    if (!track) return;
     metricsRef.current = {
-      scrollDistance: track ? Math.max(0, track.offsetHeight - window.innerHeight) : 0,
+      top: track.getBoundingClientRect().top + window.scrollY,
+      scrollDistance: Math.max(0, track.offsetHeight - window.innerHeight),
       viewport: window.innerHeight,
     };
   }, []);
 
-  /**
-   * Narrow-screen warm-up window: fetch the frames around the scrub instead of
-   * all 56 at mount. Desktop keeps the eager warm-up; the sequence, order and
-   * scrub mapping do not change either way.
-   */
-  const warmWindow = useCallback((center) => {
-    if (!narrowRef.current) return;
-    const from = Math.max(0, center - 3);
-    const to = Math.min(FRAME_COUNT - 1, center + 9);
-    for (let index = from; index <= to; index += 1) {
-      if (warmedRef.current[index]) continue;
-      warmedRef.current[index] = 1;
-      const image = new Image();
-      image.decoding = 'async';
-      image.src = frameSrc(index);
+  const revealLayer = useCallback((layer) => {
+    const node = layer.node;
+    if (!node || layer.index === null || !layer.ready) return;
+    const active = layersRef.current[activeLayerRef.current];
+    if (active === layer) {
+      visibleIndexRef.current = layer.index;
+      return;
     }
+
+    node.style.opacity = '1';
+    if (active?.node) active.node.style.opacity = '0';
+    activeLayerRef.current = layersRef.current.indexOf(layer);
+    visibleIndexRef.current = layer.index;
   }, []);
 
-  /**
-   * Double-buffered frame swap: the next frame loads into the hidden layer and
-   * only replaces the visible one once it has decoded. A failed request leaves
-   * the current frame on screen and lets the next scroll retry.
-   */
-  const showFrame = useCallback((rawIndex) => {
-    const safe = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(rawIndex)));
-    if (safe === requestedIndexRef.current) return;
-    requestedIndexRef.current = safe;
+  /** Show the closest decoded frame while the exact target is on its way. */
+  const showBest = useCallback(() => {
+    const target = targetIndexRef.current;
+    const direction = directionRef.current || 1;
+    const currentDistance = Math.abs(visibleIndexRef.current - target);
+    let best = null;
 
-    const activeKey = activeFrameRef.current;
-    const nextKey = activeKey === 'a' ? 'b' : 'a';
-    const next = frameLayersRef.current[nextKey];
-    const current = frameLayersRef.current[activeKey];
-    if (!next || !current) return;
-
-    const target = frameSrc(safe);
-    const reveal = () => {
-      if (requestedIndexRef.current !== safe) return;
-      if (next.getAttribute('src') !== target) return;
-      next.style.opacity = '1';
-      current.style.opacity = '0';
-      activeFrameRef.current = nextKey;
-      lastGoodIndexRef.current = safe;
-    };
-
-    next.onload = () => {
-      /* Decode before the swap so the 1280×720 bitmap is ready when it becomes
-         visible, instead of decoding on the paint path mid-scroll. */
-      if (typeof next.decode === 'function') {
-        next.decode().then(reveal, reveal);
-      } else {
-        reveal();
-      }
-    };
-    next.onerror = () => {
-      if (requestedIndexRef.current !== safe) return;
-      requestedIndexRef.current = lastGoodIndexRef.current;
-    };
-    next.src = target;
-    warmWindow(safe);
-
-    if (next.complete && next.naturalWidth > 0 && next.currentSrc.endsWith(target)) {
-      reveal();
+    for (const layer of layersRef.current) {
+      if (!layer.ready || layer.index === null) continue;
+      const delta = layer.index - target;
+      const ahead = delta * direction > 0;
+      const score = Math.abs(delta) + (ahead ? 0.35 : 0);
+      if (!best || score < best.score) best = { layer, score };
     }
-  }, [warmWindow]);
 
-  /* Warm the sequence. Desktop fetches all 56 once (it is small and keeps the
-     scrub perfectly smooth); phones take the first frames and then follow the
-     scrub, so the story does not spend 2 MB at mount alongside the hero. */
+    if (!best) return;
+    if (best.layer === layersRef.current[activeLayerRef.current]) {
+      visibleIndexRef.current = best.layer.index;
+      return;
+    }
+    if (best.score >= currentDistance - 0.25) return;
+    revealLayer(best.layer);
+  }, [revealLayer]);
+
+  /**
+   * Decode one frame into an inactive layer. Per-layer tokens keep an older
+   * load from revealing after the layer has been reassigned.
+   */
+  const loadLayer = useCallback(
+    (layer, index) => {
+      const node = layer.node;
+      if (!node) return;
+
+      const token = layer.token + 1;
+      layer.token = token;
+      layer.index = index;
+      layer.loading = true;
+      layer.ready = false;
+      window.clearTimeout(layer.timer);
+
+      const src = frameSrc(index);
+      if ('fetchPriority' in node) node.fetchPriority = 'high';
+
+      const finish = () => {
+        if (layer.token !== token || !layer.loading) return;
+        if (node.getAttribute('src') !== src || node.naturalWidth === 0) {
+          layer.loading = false;
+          layer.ready = false;
+          return;
+        }
+        layer.loading = false;
+        layer.ready = true;
+        window.clearTimeout(layer.timer);
+        showBest();
+        scheduleRef.current?.();
+      };
+
+      const fail = () => {
+        if (layer.token !== token) return;
+        window.clearTimeout(layer.timer);
+        layer.loading = false;
+        layer.ready = false;
+        layer.index = null;
+      };
+
+      node.onload = () => {
+        if (layer.token !== token) return;
+        layer.timer = window.setTimeout(finish, DECODE_FALLBACK_MS);
+        if (typeof node.decode === 'function') node.decode().then(finish, finish);
+        else finish();
+      };
+      node.onerror = fail;
+      node.src = src;
+
+      if (node.complete && node.naturalWidth > 0 && node.currentSrc.endsWith(src)) {
+        if (typeof node.decode === 'function') node.decode().then(finish, finish);
+        else finish();
+      }
+    },
+    [showBest],
+  );
+
+  /**
+   * Predictive buffer: the step is the last target jump, so a steady scrub
+   * preloads the frames the next events will ask for instead of a fixed
+   * 9-frame window that can only be used once.
+   */
+  const schedule = useCallback(() => {
+    if (!visibleRef.current) return;
+    const target = targetIndexRef.current;
+    const active = layersRef.current[activeLayerRef.current];
+    const slots = Math.max(0, poolSizeRef.current - 1);
+    const direction = directionRef.current || 1;
+    const step = Math.max(1, Math.min(stepRef.current, MAX_PREDICT_STEP));
+    const desired = [];
+
+    for (let offset = 0; offset <= slots; offset += 1) {
+      const index = Math.min(
+        FRAME_COUNT - 1,
+        Math.max(0, target + direction * step * offset),
+      );
+      if (!desired.includes(index)) desired.push(index);
+    }
+
+    const desiredSet = new Set(desired);
+    for (const index of desired) {
+      const present = layersRef.current.some(
+        (layer) => layer.index === index && (layer.loading || layer.ready),
+      );
+      if (present) continue;
+
+      let layer = layersRef.current.find(
+        (candidate) => candidate !== active && !candidate.loading && !candidate.ready,
+      );
+
+      if (!layer) {
+        const candidates = layersRef.current.filter((candidate) => candidate !== active);
+        if (!candidates.length) break;
+
+        // Replace a decoded frame outside the window; wait for in-flight
+        // frames instead of cancelling a nearby load for a farther one.
+        const recyclable = candidates.filter(
+          (candidate) => candidate.ready && !desiredSet.has(candidate.index),
+        );
+        if (recyclable.length) {
+          recyclable.sort((a, b) => {
+            const aDistance = a.index === null ? Infinity : Math.abs(a.index - target);
+            const bDistance = b.index === null ? Infinity : Math.abs(b.index - target);
+            return bDistance - aDistance;
+          });
+          layer = recyclable[0];
+        }
+      }
+
+      if (!layer) continue;
+      loadLayer(layer, index);
+    }
+  }, [loadLayer]);
+
+  const showFrame = useCallback(
+    (rawIndex) => {
+      const safe = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(rawIndex)));
+      const previous = targetIndexRef.current;
+
+      if (safe !== previous) {
+        const delta = safe - previous;
+        directionRef.current = delta > 0 ? 1 : -1;
+        stepRef.current = Math.max(1, Math.min(Math.abs(delta), MAX_PREDICT_STEP));
+        targetIndexRef.current = safe;
+
+        window.clearTimeout(settleTimerRef.current);
+        settleTimerRef.current = window.setTimeout(() => {
+          stepRef.current = 1;
+          scheduleRef.current?.();
+        }, 180);
+      }
+
+      schedule();
+      showBest();
+    },
+    [schedule, showBest],
+  );
+
   useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
     narrowRef.current =
       window.matchMedia('(max-width: 1023px)').matches ||
       window.matchMedia('(pointer: coarse)').matches;
+    poolSizeRef.current = narrowRef.current ? NARROW_LAYERS : MAX_LAYERS;
     measure();
-    const count = narrowRef.current ? 8 : FRAME_COUNT;
-    for (let index = 0; index < count; index += 1) {
-      warmedRef.current[index] = 1;
-      const image = new Image();
-      image.decoding = 'async';
-      image.src = frameSrc(index);
-    }
-  }, [measure]);
 
-  useEffect(() => {
+    /* Start from one visible frame and an empty prefetch pool. */
+    const layers = layersRef.current;
+    layers.forEach((layer, index) => {
+      window.clearTimeout(layer.timer);
+      layer.token += 1;
+      layer.loading = false;
+      layer.ready = index === 0;
+      layer.index = index === 0 ? 0 : null;
+      if (layer.node) {
+        layer.node.style.opacity = index === 0 ? '1' : '0';
+        if (index !== 0) layer.node.removeAttribute('src');
+      }
+    });
+    activeLayerRef.current = 0;
+    visibleIndexRef.current = 0;
+    targetIndexRef.current = 0;
+    directionRef.current = 1;
+    stepRef.current = 1;
+    visibleRef.current = false;
+    scheduleRef.current = schedule;
+
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const syncMotion = () => {
       reducedMotionRef.current = motionQuery.matches;
@@ -149,14 +295,15 @@ export const WelcomeStory = () => {
     syncMotion();
 
     const update = () => {
-      const track = trackRef.current;
-      if (!track || !visibleRef.current) return;
+      if (!visibleRef.current) return;
 
       if (metricsRef.current.viewport !== window.innerHeight) measure();
 
-      const scrollDistance = metricsRef.current.scrollDistance;
-      const rect = track.getBoundingClientRect();
-      const progress = scrollDistance > 0 ? clamp01(-rect.top / scrollDistance) : 0;
+      const { top, scrollDistance } = metricsRef.current;
+      const scrollY = window.scrollY;
+      const progress =
+        scrollDistance > 0 ? clamp01((scrollY - top) / scrollDistance) : 0;
+      const rectTop = top - scrollY;
 
       showFrame(progress * (FRAME_COUNT - 1));
 
@@ -165,7 +312,7 @@ export const WelcomeStory = () => {
       /* The left copy also fades in while the section is still coming up the
          viewport, so it is already in place when the stage pins instead of
          blinking in a moment later. */
-      const entry = clamp01((window.innerHeight - rect.top) / (window.innerHeight * 0.45));
+      const entry = clamp01((window.innerHeight - rectTop) / (window.innerHeight * 0.45));
       const story = reducedMotion
         ? 1
         : Math.max(entry, windowMix(progress, STORY_IN));
@@ -195,8 +342,8 @@ export const WelcomeStory = () => {
     /* Coalesce scroll events into one rAF pass. One pending frame only: a burst
        of touch events used to post several callbacks, each re-measuring the
        track and re-writing both copy layers in the same frame. */
-    const schedule = () => {
-      if (rafRef.current) return;
+    const queueUpdate = () => {
+      if (!visibleRef.current || rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = 0;
         update();
@@ -205,12 +352,12 @@ export const WelcomeStory = () => {
 
     const onMotionChange = () => {
       syncMotion();
-      schedule();
+      queueUpdate();
     };
 
     const onResize = () => {
       measure();
-      schedule();
+      queueUpdate();
     };
 
     /* Skip the per-scroll work while the stage is more than a viewport away;
@@ -227,21 +374,27 @@ export const WelcomeStory = () => {
       },
       { rootMargin: '50% 0px' },
     );
-    observer.observe(trackRef.current);
+    observer.observe(track);
 
-    update();
-    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('scroll', queueUpdate, { passive: true });
     window.addEventListener('resize', onResize);
     motionQuery.addEventListener?.('change', onMotionChange);
 
     return () => {
+      layers.forEach((layer) => {
+        window.clearTimeout(layer.timer);
+        layer.token += 1;
+        layer.loading = false;
+      });
+      scheduleRef.current = null;
+      window.clearTimeout(settleTimerRef.current);
       observer.disconnect();
-      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('scroll', queueUpdate);
       window.removeEventListener('resize', onResize);
       motionQuery.removeEventListener?.('change', onMotionChange);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [showFrame, measure]);
+  }, [showFrame, measure, schedule]);
 
   return (
     <section
@@ -254,28 +407,21 @@ export const WelcomeStory = () => {
       {/* Pinned stage — full-bleed, so the whole sequence is the section, not a
           picture in the right-hand column. */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c]">
-        <img
-          ref={(node) => {
-            frameLayersRef.current.a = node;
-          }}
-          src={frameSrc(0)}
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-          style={{ opacity: 1 }}
-        />
-        <img
-          ref={(node) => {
-            frameLayersRef.current.b = node;
-          }}
-          src={frameSrc(0)}
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-          style={{ opacity: 0 }}
-        />
+        {layersRef.current.map((layer, index) => (
+          <img
+            key={index}
+            ref={(node) => {
+              layer.node = node;
+            }}
+            src={index === 0 ? frameSrc(0) : undefined}
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            decoding="async"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+            style={{ opacity: index === 0 ? 1 : 0 }}
+          />
+        ))}
 
         {/* A light grade only; the footage is already dark (~48–70 luma). */}
         <div className="absolute inset-0 pointer-events-none bg-black/10" />

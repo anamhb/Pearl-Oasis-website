@@ -165,6 +165,18 @@ export const MenuExperience = () => {
   const [mobileRevealedSteps, setMobileRevealedSteps] = useState(new Set());
   const [isFullMenuModalOpen, setIsFullMenuModalOpen] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const modalRef = useRef(null);
+  const modalCloseRef = useRef(null);
+  const modalOpenerRef = useRef(null);
+
+  const openFullMenu = (event) => {
+    modalOpenerRef.current = event?.currentTarget ?? null;
+    setIsFullMenuModalOpen(true);
+  };
+
+  const closeFullMenu = () => {
+    setIsFullMenuModalOpen(false);
+  };
 
   // Check prefers-reduced-motion accessibility preference
   useEffect(() => {
@@ -175,6 +187,54 @@ export const MenuExperience = () => {
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
+
+  /* Full-menu dialog behavior: Escape closes, Tab stays inside, and focus
+     returns to the control that opened it. Backdrop click, the close button
+     and Escape all end in the same state change, so there is one close path. */
+  useEffect(() => {
+    if (!isFullMenuModalOpen) return undefined;
+
+    const dialog = modalRef.current;
+    const closeButton = modalCloseRef.current;
+    const opener = modalOpenerRef.current;
+    const focusableSelector =
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const getFocusable = () =>
+      dialog ? Array.from(dialog.querySelectorAll(focusableSelector)) : [];
+
+    closeButton?.focus();
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setIsFullMenuModalOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      const items = getFocusable();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && (active === first || !dialog?.contains(active))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || !dialog?.contains(active))) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      if (opener && typeof opener.focus === 'function') opener.focus();
+    };
+  }, [isFullMenuModalOpen]);
 
   // Desktop Pinned Scroll-Driven Step Tracker
   // Important: Section root MUST NOT have overflow: hidden, allowing sticky top: 0 to pin smoothly to viewport
@@ -451,7 +511,9 @@ export const MenuExperience = () => {
             <div className="flex justify-center items-center h-11 shrink-0 mt-1">
               <button
                 type="button"
-                onClick={() => setIsFullMenuModalOpen(true)}
+                onClick={openFullMenu}
+                tabIndex={isExploreButtonVisibleDesktop ? 0 : -1}
+                aria-hidden={!isExploreButtonVisibleDesktop}
                 className={`inline-flex items-center gap-2.5 px-7 py-2.5 rounded-full font-cinzel text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-xl cursor-pointer ${
                   isExploreButtonVisibleDesktop
                     ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-[#b8860b] text-[#0a0a0b] shadow-[0_4px_25px_rgba(212,175,55,0.45)] hover:scale-105 hover:shadow-[0_6px_30px_rgba(212,175,55,0.6)] active:scale-95'
@@ -536,8 +598,10 @@ export const MenuExperience = () => {
           <div data-mobile-step="11" className="pt-6 pb-2 text-center">
             <button
               type="button"
-              onClick={() => setIsFullMenuModalOpen(true)}
-              className={`inline-flex items-center gap-2 px-7 py-3 rounded-full font-cinzel text-xs font-bold uppercase tracking-wider transition-all duration-500 shadow-xl cursor-pointer ${
+              onClick={openFullMenu}
+              tabIndex={isExploreButtonVisibleMobile ? 0 : -1}
+              aria-hidden={!isExploreButtonVisibleMobile}
+              className={`inline-flex items-center justify-center gap-2 min-h-11 px-7 py-3 rounded-full font-cinzel text-xs font-bold uppercase tracking-wider transition-all duration-500 shadow-xl cursor-pointer ${
                 isExploreButtonVisibleMobile
                   ? 'opacity-100 scale-100 bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#0a0a0b] shadow-[0_4px_20px_rgba(212,175,55,0.4)] active:scale-95'
                   : 'opacity-0 scale-90 pointer-events-none'
@@ -557,9 +621,13 @@ export const MenuExperience = () => {
       {isFullMenuModalOpen && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
-          onClick={() => setIsFullMenuModalOpen(false)}
+          onClick={closeFullMenu}
         >
           <div 
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="full-menu-title"
             className="relative max-w-4xl w-full max-h-[90vh] bg-[#111317] border border-[#d4af37]/50 rounded-2xl p-6 sm:p-8 text-[#e5e2db] shadow-[0_20px_60px_rgba(0,0,0,0.95)] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
@@ -568,8 +636,9 @@ export const MenuExperience = () => {
 
             {/* Close button */}
             <button
-              onClick={() => setIsFullMenuModalOpen(false)}
-              className="absolute top-5 right-5 p-2 text-neutral-400 hover:text-white rounded-full bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+              ref={modalCloseRef}
+              onClick={closeFullMenu}
+              className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/5 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white cursor-pointer"
               aria-label="Close full menu"
             >
               <X className="w-5 h-5" />
@@ -580,7 +649,7 @@ export const MenuExperience = () => {
               <span className="text-[10px] font-cinzel text-[#d4af37] uppercase tracking-[0.25em] block mb-1">
                 Pearl Oasis Grand Dining
               </span>
-              <h3 className="font-serif-luxury text-2xl sm:text-3xl text-[#fbf6ec]">
+              <h3 id="full-menu-title" className="font-serif-luxury text-2xl sm:text-3xl text-[#fbf6ec]">
                 Complete Culinary Catalog
               </h3>
               <p className="text-xs sm:text-sm text-[#a39b8e] font-sans mt-2 max-w-xl mx-auto">
@@ -628,15 +697,15 @@ export const MenuExperience = () => {
               </div>
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => setIsFullMenuModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-[#3b362c] text-xs font-cinzel text-[#c2baa8] hover:text-white transition-colors uppercase tracking-wider cursor-pointer"
+                  onClick={closeFullMenu}
+                  className="inline-flex items-center justify-center min-h-11 px-4 py-2 rounded-lg border border-[#3b362c] text-xs font-cinzel text-[#c2baa8] hover:text-white transition-colors uppercase tracking-wider cursor-pointer"
                 >
                   Close
                 </button>
                 <a
                   href="tel:+923327515538"
-                  onClick={() => setIsFullMenuModalOpen(false)}
-                  className="px-5 py-2 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
+                  onClick={closeFullMenu}
+                  className="inline-flex items-center justify-center min-h-11 px-5 py-2 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
                 >
                   Reserve Table & Order
                 </a>

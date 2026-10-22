@@ -52,7 +52,7 @@ const CARD_BASE =
  *
  *  A — cards 1, 3, 5 (original testimonial theme)
  *      charcoal card #121316, #232019 border, muted gold quote mark (#d4af37/30),
- *      warm off-white quote text #ece5d8, #221f18 divider, neutral-500 meta.
+ *      warm off-white quote text #ece5d8, #221f18 divider, neutral-400 meta.
  *
  *  B — cards 2 and 4 (gold-accented counterpart)
  *      warm card #1f1d18 (the section's own border colour), gold border
@@ -69,7 +69,8 @@ const CARD_THEMES = [
     quote: 'text-[#ece5d8]',
     divider: 'border-[#221f18]',
     publication: 'text-[#f2e6cf]',
-    meta: 'text-neutral-500',
+    /* neutral-400 (#a3a3a3) is 7.36:1 on #121316; neutral-500 was 3.92:1. */
+    meta: 'text-neutral-400',
   },
   {
     card: 'bg-[#1f1d18] border border-[#d4af37]/40 hover:border-[#d4af37]/70',
@@ -136,46 +137,51 @@ export const Testimonials = () => {
     };
   }, []);
 
+  /*
+   * Placeholder content only. No real guest comment or press endorsement has
+   * been supplied, so each card says exactly that. Quote lengths stay close to
+   * the previous set so the measured card heights in the stacked deck hold.
+   */
   const testimonials = [
     {
       id: '1',
       quote:
-        'From the moment the towering double doors open into the warm marble colonnade, Pearl Oasis creates a rare sense of arrival. The Wagyu tenderloin with truffle glaze was exceptional.',
-      publication: 'Michelin Guide Inspector Note',
-      role: 'Restaurant Evaluation',
-      context: 'Sample Press Placeholder',
+        'Sample guest feedback placeholder. A real comment from a diner will appear here once it has been collected and approved for publication by the restaurant. Until then, this card stands in for a genuine review.',
+      publication: 'Guest Review Placeholder',
+      role: 'Sample Feedback',
+      context: 'Not a real review',
     },
     {
       id: '2',
       quote:
-        'A masterclass in mood and culinary restraint. The lighting is flattering, the sommelier pairings are inventive, and the poached lobster tail is nothing short of sublime.',
-      publication: 'Financial Times Luxury',
-      role: 'Fine Dining Review',
-      context: 'Sample Press Placeholder',
+        'Guest review placeholder. This card is reserved for a verified comment from a real visitor, and no such comment has been supplied yet. When one is available, it will replace this text.',
+      publication: 'Guest Review Placeholder',
+      role: 'Sample Feedback',
+      context: 'Not a real review',
     },
     {
       id: '3',
       quote:
-        'Pearl Oasis elevates hospitality into an architectural journey. The spatial progression from the quiet exterior to the intimate dining salon is unforgettable.',
-      publication: 'Architectural Digest Dining',
-      role: 'Design & Ambience Feature',
-      context: 'Sample Press Placeholder',
+        'This is placeholder text, not a customer quote. It will be replaced with a real guest comment when one is available and cleared for publication. No endorsement is implied by this card or its placement.',
+      publication: 'Guest Review Placeholder',
+      role: 'Sample Feedback',
+      context: 'Not a real review',
     },
     {
       id: '4',
       quote:
-        'Weeknight karahi and tandoori naan that taste like a family kitchen, plus a fast-food counter the children insist on. Generous, hot and beautifully spiced.',
-      publication: 'DAWN Weekend Magazine',
-      role: 'Casual Dining Review',
-      context: 'Sample Press Placeholder',
+        'Sample feedback placeholder. Nothing on this card comes from a diner, and no review has been collected for it yet. A real comment will appear here once the restaurant has one to publish.',
+      publication: 'Guest Review Placeholder',
+      role: 'Sample Feedback',
+      context: 'Not a real review',
     },
     {
       id: '5',
       quote:
-        'The Chinese menu is a genuine surprise: wok-seared chow mein, crisp spring rolls and chilli chicken with real heat, served with genuine warmth.',
-      publication: 'The Express Tribune Dining',
-      role: 'Cuisine Spotlight',
-      context: 'Sample Press Placeholder',
+        'Placeholder review. The words above are not a guest\u2019s own, and no real comment has been provided for this card. It will be replaced when a verified comment is available for publication.',
+      publication: 'Guest Review Placeholder',
+      role: 'Sample Feedback',
+      context: 'Not a real review',
     },
   ];
 
@@ -239,15 +245,15 @@ export const Testimonials = () => {
           />
 
           <div className="flex items-center justify-center gap-2 text-xs font-cinzel tracking-[0.3em] text-[#d4af37] uppercase mb-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-            <span>Critical Acclaim</span>
+            <span>Guest Feedback</span>
             <span aria-hidden="true" className="text-neutral-700">·</span>
-            <span>Guest Impressions</span>
+            <span>Review Placeholders</span>
           </div>
           <h2 className="font-serif-luxury text-4xl sm:text-5xl text-[#f6efe4] font-normal tracking-tight mb-4 drop-shadow-[0_3px_18px_rgba(0,0,0,0.95)]">
             Words of Appreciation
           </h2>
           <p className="text-xs text-neutral-300 font-sans drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-            Note: All quotes and press attributions below are clearly identified editorial placeholders.
+            Note: The cards below are placeholders, not real guest reviews or press endorsements.
           </p>
         </div>
 

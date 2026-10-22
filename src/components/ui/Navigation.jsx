@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrandWordmark } from '../brand/BrandWordmark.jsx';
-import { Menu, X, ShoppingBag } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -63,13 +63,12 @@ export const Navigation = () => {
             href="#menu"
             className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#12110d] font-cinzel text-xs font-bold tracking-[0.18em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_20px_rgba(212,175,55,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap shrink-0"
           >
-            <ShoppingBag className="w-3.5 h-3.5 text-[#12110d]" />
-            <span>Order Now</span>
+            <span>View Menu</span>
           </a>
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-[#d4af37] hover:text-white transition-colors"
+            className="lg:hidden flex h-11 w-11 items-center justify-center rounded-full text-[#d4af37] hover:text-white transition-colors"
             aria-label="Toggle navigation menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -84,38 +83,37 @@ export const Navigation = () => {
             <a
               href="#story"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-white/5 hover:text-[#d4af37]"
+              className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
               Our Story
             </a>
             <a
               href="#signature"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-white/5 hover:text-[#d4af37]"
+              className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
               Featured Dishes
             </a>
             <a
               href="#menu"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-white/5 hover:text-[#d4af37]"
+              className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
               Menu
             </a>
             <a
               href="#experience"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 border-b border-white/5 hover:text-[#d4af37]"
+              className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
               Testimonial
             </a>
             <a
               href="#menu"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-2 py-3 rounded bg-[#d4af37] text-[#0d0e10] font-bold text-xs tracking-[0.2em]"
+              className="mt-2 inline-flex items-center justify-center min-h-11 py-3 rounded bg-[#d4af37] text-[#0d0e10] font-bold text-xs tracking-[0.2em]"
             >
-              <ShoppingBag className="w-4 h-4" />
-              <span>Order Now</span>
+              <span>View Menu</span>
             </a>
           </nav>
         </div>
