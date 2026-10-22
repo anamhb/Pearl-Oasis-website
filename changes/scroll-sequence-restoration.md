@@ -541,3 +541,120 @@ uses no throttle. The following remain NOT TESTED:
   not rely on `fetchPriority`, but neither browser was available here.
 - A headed GUI browser. The Browser pane reports `visibility: hidden`, so all
   runs are headless and rAF-driven behaviour in a visible window is assumed.
+
+## 13. Phase 4 — physical-device lag investigation
+
+The report from a physical phone and tablet was that the Hero still stutters,
+even though the Phase 3 emulation reached single-digit lag on slow touch. This
+phase treated that as a different problem from index tracking, and looked at
+main-thread work, offscreen competition, and the image set itself.
+
+### 13.1 What was measured
+
+- **Slow touch, 4G, current build:** 390x844 DSF3 P90 3 / P95 4 / max 7 with
+  134 frame changes; 768x1024 DSF2 P90 5 / P95 9 / max 15 with 120 changes.
+  The sequence follows the finger; the remaining stutter is not the frame
+  index falling behind.
+- **Fast wheel, 4G:** 390 DSF3 P90 26, P95 33, max 44. The baseline's repeat
+  runs were P90 25 with the same spread, so this is unchanged within run noise.
+- **Fast wheel, local, 390 DSF3 CPU 4x:** baseline P90 22, current P90 20.
+- **Trace, 390 DSF3 CPU 4x, wheel:** `ProxyMain::BeginMainFrame` was 16.6 ms
+  per frame over 57 frames, with `UpdateLifecycle` 597 ms, style/layout 218 ms,
+  `Layerize` 226 ms, paint 41 ms, and GPU JPEG decode about 119 ms total.
+  Decode is not the largest item at this setting.
+- **Trace, 390 DSF3 CPU 20x, wheel:** style recalculation (658 ms) and
+  layerization (626 ms) dominate; image decode is about 111 ms. The main thread
+  is the bottleneck, not the pipe. These CPU-20 runs are directional only: the
+  page's load event took ~60 s at that throttle, so the test starts after an
+  unusually warm page. They are not used as an A/B claim.
+- **Offscreen layout:** `MenuExperience` owned a global scroll listener that
+  called `introHeadingRef.getBoundingClientRect()` on every scroll, including
+  while the Hero was on screen, forcing a synchronous layout. `WelcomeStory`
+  already gates its handler with an IntersectionObserver; the menu did not.
+- **Redundant style writes:** the Hero's scroll handler wrote six inline styles
+  on every tick, even when the values were unchanged inside one frame bucket.
+  Writing an unchanged inline style still dirties style/layout for the next
+  frame.
+- **End-of-scroll glitch:** the visible frame flipped `299 -> 262 -> 299` when
+  a late middle frame decoded after the final frame was already up.
+
+### 13.2 Changes
+
+`src/components/3d/EntranceExperience.jsx`
+
+- **Style cache:** each scroll-driven style is compared with the last value
+  written and skipped when unchanged. Identical visual output; fewer style and
+  layout invalidations.
+- **One schedule per new target:** `schedule()` / `showBest()` now run only when
+  the target frame actually changes. The content hand-over still runs every
+  tick because its progress is continuous. Pace and settle timers still call
+  `schedule()` independently, so held frames are not stranded.
+- **Mount prefetch restored:** the early return above would have skipped the
+  original first pass; an explicit `schedule()` at mount restores the next
+  frame and the narrow-screen final frame at startup.
+- **End lock:** once the final artwork is visible and the scrub is still moving
+  forward near the end, `showBest` keeps it instead of jumping back to a
+  later-decoded middle frame.
+
+`src/components/sections/MenuExperience.jsx`
+
+- Added a `nearRef` and an IntersectionObserver (`rootMargin: 100% 0px`) on the
+  menu section. The global scroll handler, the resize handler, and
+  `updateDesktopScroll` no longer read the heading rect while the menu is more
+  than a viewport away. The observer calls `updateDesktopScroll` when the menu
+  comes near, preserving the pinned reveal (verified 0 -> 5 -> 10 cards and the
+  "Explore Full Menu" button).
+
+`WelcomeStory.jsx` and `BrandWordmark.jsx` were not touched.
+
+### 13.3 Why the JPEG set was not replaced
+
+A 1280x720 re-encode of frame 150 at q80 is 89.2 KB, q85 101.4 KB, q90
+123.2 KB, against a 50.6 KB source at 1920x1080. The existing frames are already
+heavily compressed (~0.2 bits per pixel); downscaling at high quality makes the
+files bigger, not smaller. A q75 re-encode of an 810x1080 center crop is
+51.7 KB, essentially the source size, so it saves decoded pixels but not bytes.
+
+Two asset options remain, both intentionally **not** applied:
+
+- **640x1080 center crop** for phones (aspect <= 0.59): re-encode q75 measured
+  28.4 KB, 44 % fewer bytes, 3x fewer decoded pixels, and pixel-identical to
+  today's centered `object-cover` view on those screens.
+- **832x1080 MCU-aligned lossless crop** for portrait tablets (and phones):
+  2.3x fewer decoded pixels, visually identical to the centered view. A
+  lossless tool was not available to prove the byte reduction; a q75 re-encode
+  did not reduce bytes.
+
+Both need a new 299-file set, orientation-aware selection, and a reload path on
+rotation. Because slow touch already tracks within 2 to 5 frames and the
+emulator cannot reproduce a real phone decoder, this phase did not add the
+files without approval.
+
+### 13.4 Tests
+
+- `npm run lint` (tsc --noEmit) and `npm run build` pass.
+- 390 forward: ends on frame 299 (`naturalWidth` 1920), zero backward reveals in
+  the forward scroll, no blank frame. Reverse returns to frame 1. Re-entry
+  restores frame 299. No horizontal overflow.
+- 1440 forward/reverse/re-entry: same result. The final reveal can arrive on a
+  decode after the last scroll event, which is expected.
+- Reduced motion (390): Hero ends on frame 299; Story still scrubs (frames 5 to
+  41) at 1280 px; no console errors.
+- Menu: 0 -> 5 -> 10 revealed cards, button opacity 0 -> 1, no console errors.
+- Console: 0 errors in the functional runs.
+
+### 13.5 Not tested / remaining risk
+
+- Physical iOS, Android, and tablet hardware. This is still required; headless
+  cannot prove the stutter is gone.
+- Real GPU, real image decoder, and decoded-bitmap memory pressure. The
+  emulator's decode threads are not slowed proportionally by CPU throttling.
+- Safari and Firefox, and a headed browser.
+- 1024x768 with the final build: the load event exceeded the 30 s harness
+  timeout on the 4G profile, so no 1024 metric is reported. The Phase 3 1024
+  numbers still stand for the earlier build.
+- Remaining stutter at CPU 4x is rAF cadence and long tasks (P50 25 to 50 ms on
+  touch, with occasional 0.4 to 1.8 s stalls), not frame-index lag. On a real
+  phone the image decode/composite cost is the open question.
+
+No commit or push was made for this phase.

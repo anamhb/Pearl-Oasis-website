@@ -98,6 +98,10 @@ export const EntranceExperience = () => {
   const centerScrimRef = useRef(null);
   const bottomScrimRef = useRef(null);
   const entranceCueRef = useRef(null);
+  /* Last value written to each scroll-driven style. Several scroll ticks can
+     land inside one frame bucket with the same values, and writing an
+     unchanged inline style still dirties style and layout for the next frame. */
+  const styleCacheRef = useRef({});
   const rafRef = useRef(0);
   const reducedMotionRef = useRef(false);
   /**
@@ -161,6 +165,16 @@ export const EntranceExperience = () => {
   const showBest = useCallback(() => {
     const target = targetIndexRef.current;
     const direction = directionRef.current || 1;
+    /* Once the end artwork is up and the scrub is still moving forward, keep
+       it. Letting the nearest-ready rule pick a later-decoded middle frame
+       flipped the visible sequence 299 -> 262 -> 299 at the end of a drag. */
+    if (
+      visibleIndexRef.current === FRAME_COUNT - 1 &&
+      direction > 0 &&
+      target >= FRAME_COUNT - 1 - LADDER_STEP * 2
+    ) {
+      return;
+    }
     const currentDistance = Math.abs(visibleIndexRef.current - target);
     let best = null;
 
@@ -421,10 +435,13 @@ export const EntranceExperience = () => {
           velocityRef.current = 0;
           scheduleRef.current?.();
         }, 180);
-      }
 
-      schedule();
-      showBest();
+        /* A scroll can fire several times inside one frame bucket. Only a new
+           target needs a lane lookup; the content hand-over below still runs
+           every time because its progress is continuous. */
+        schedule();
+        showBest();
+      }
     },
     [schedule, showBest],
   );
@@ -457,38 +474,62 @@ export const EntranceExperience = () => {
           ),
         );
 
-    const entrance = entranceContentRef.current;
-    if (entrance) {
-      entrance.style.opacity = String(1 - mix);
-      entrance.style.transform = reducedMotion
-        ? 'none'
-        : `translateY(${(-14 * mix).toFixed(2)}px)`;
-      entrance.style.pointerEvents = mix < 0.5 ? 'auto' : 'none';
-    }
+    const cache = styleCacheRef.current;
+    const setStyle = (node, key, property, value) => {
+      if (!node || cache[key] === value) return;
+      cache[key] = value;
+      node.style[property] = value;
+    };
 
-    const dining = diningContentRef.current;
-    if (dining) {
-      dining.style.opacity = String(mix);
-      dining.style.transform = reducedMotion
-        ? 'none'
-        : `translateY(${(20 * (1 - mix)).toFixed(2)}px)`;
-      dining.style.pointerEvents = mix >= 0.5 ? 'auto' : 'none';
-    }
+    setStyle(
+      entranceContentRef.current,
+      'entranceOpacity',
+      'opacity',
+      String(1 - mix),
+    );
+    setStyle(
+      entranceContentRef.current,
+      'entranceTransform',
+      'transform',
+      reducedMotion ? 'none' : `translateY(${(-14 * mix).toFixed(2)}px)`,
+    );
+    setStyle(
+      entranceContentRef.current,
+      'entrancePointer',
+      'pointerEvents',
+      mix < 0.5 ? 'auto' : 'none',
+    );
+
+    setStyle(diningContentRef.current, 'diningOpacity', 'opacity', String(mix));
+    setStyle(
+      diningContentRef.current,
+      'diningTransform',
+      'transform',
+      reducedMotion ? 'none' : `translateY(${(20 * (1 - mix)).toFixed(2)}px)`,
+    );
+    setStyle(
+      diningContentRef.current,
+      'diningPointer',
+      'pointerEvents',
+      mix >= 0.5 ? 'auto' : 'none',
+    );
 
     /* Each phase carries its own contrast scrim: the ellipse behind the
        centred entrance copy fades away as the dining copy drops to the
        bottom, where its own scrim takes over. The middle of the frame is
        left clear once the entrance copy is gone. */
-    const centerScrim = centerScrimRef.current;
-    if (centerScrim) centerScrim.style.opacity = String(1 - mix);
-    const bottomScrim = bottomScrimRef.current;
-    if (bottomScrim) bottomScrim.style.opacity = String(mix);
+    setStyle(centerScrimRef.current, 'centerScrim', 'opacity', String(1 - mix));
+    setStyle(bottomScrimRef.current, 'bottomScrim', 'opacity', String(mix));
 
     /* The entrance scroll cue sits exactly where the dining copy lands, so it
        clears out over the first 20 % of the dissolve — long before the dining
        heading is readable — and the two "continue" labels never overlap. */
-    const cue = entranceCueRef.current;
-    if (cue) cue.style.opacity = String(clamp01(1 - mix / 0.2));
+    setStyle(
+      entranceCueRef.current,
+      'cueOpacity',
+      'opacity',
+      String(clamp01(1 - mix / 0.2)),
+    );
   }, [showFrame, measure]);
 
   useEffect(() => {
@@ -527,6 +568,9 @@ export const EntranceExperience = () => {
     window.clearTimeout(paceTimerRef.current);
     paceTimerRef.current = 0;
     scheduleRef.current = schedule;
+    /* Seed the pool once at mount so the first notch already has the next
+       frame and, on narrow screens, the final artwork in flight. */
+    schedule();
 
     /* One low-priority pass caches the final frame first, then seven evenly
        spaced anchors (frame 0 is already visible). It stops when finished; it

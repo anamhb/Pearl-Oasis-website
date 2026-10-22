@@ -159,6 +159,11 @@ const MENU_REVEAL_LAST_STEP = 11;
 export const MenuExperience = () => {
   const sectionRef = useRef(null);
   const introHeadingRef = useRef(null);
+  /* The scroll listener is global. Reading the heading rect on every scroll
+     while the hero is on screen forces a synchronous layout of the whole
+     document, which is the most expensive thing the page does during the
+     hero scrub. Only track the menu once it is within a viewport. */
+  const nearRef = useRef(false);
   const [activeStep, setActiveStep] = useState(0);
   // Mobile cards are revealed by their own IntersectionObserver, exactly like cards 2..10:
   // nothing is hardcoded as visible, so Card 1 also has to come into view to appear.
@@ -239,6 +244,8 @@ export const MenuExperience = () => {
   // Desktop Pinned Scroll-Driven Step Tracker
   // Important: Section root MUST NOT have overflow: hidden, allowing sticky top: 0 to pin smoothly to viewport
   const updateDesktopScroll = useCallback(() => {
+    if (!nearRef.current) return;
+
     if (prefersReducedMotion) {
       setActiveStep(MENU_REVEAL_LAST_STEP);
       return;
@@ -279,16 +286,26 @@ export const MenuExperience = () => {
   useEffect(() => {
     let rafId;
     const handleScroll = () => {
+      if (!nearRef.current) return;
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(updateDesktopScroll);
     };
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        nearRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) updateDesktopScroll();
+      },
+      { rootMargin: '100% 0px' },
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
-    updateDesktopScroll();
 
     return () => {
       cancelAnimationFrame(rafId);
+      observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
