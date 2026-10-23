@@ -61,6 +61,9 @@ export const WelcomeStory = () => {
   const scheduleRef = useRef(null);
   const storyCopyRef = useRef(null);
   const flavourCopyRef = useRef(null);
+  /* Several scroll ticks can land in one frame with identical copy values.
+     Writing the same inline style again still dirties style and layout. */
+  const styleCacheRef = useRef({});
   const rafRef = useRef(0);
   const reducedMotionRef = useRef(false);
   /** False while the story stage is more than about a viewport away. */
@@ -233,6 +236,30 @@ export const WelcomeStory = () => {
     }
   }, [loadLayer]);
 
+  /**
+   * Free every prefetched bitmap once the story stage is a viewport away.
+   * Keeping 1280x720 decoded frames alive while Hero, menu and the rest of the
+   * page are on screen adds avoidable memory pressure on phones. The visible
+   * frame is kept; the pool refills on entry.
+   */
+  const releaseIdleLayers = useCallback(() => {
+    const active = layersRef.current[activeLayerRef.current];
+    for (const layer of layersRef.current) {
+      if (layer === active) continue;
+      window.clearTimeout(layer.timer);
+      layer.token += 1;
+      layer.loading = false;
+      layer.ready = false;
+      layer.index = null;
+      if (layer.node) {
+        layer.node.style.opacity = '0';
+        layer.node.removeAttribute('src');
+      }
+    }
+    window.clearTimeout(settleTimerRef.current);
+    stepRef.current = 1;
+  }, []);
+
   const showFrame = useCallback(
     (rawIndex) => {
       const safe = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(rawIndex)));
@@ -249,10 +276,12 @@ export const WelcomeStory = () => {
           stepRef.current = 1;
           scheduleRef.current?.();
         }, 180);
-      }
 
-      schedule();
-      showBest();
+        /* Only a new target needs a lane lookup. The copy hand-over still
+           runs on every tick because its progress is continuous. */
+        schedule();
+        showBest();
+      }
     },
     [schedule, showBest],
   );
@@ -322,21 +351,33 @@ export const WelcomeStory = () => {
           : 0
         : windowMix(progress, FLAVOUR_IN);
 
-      const storyCopy = storyCopyRef.current;
-      if (storyCopy) {
-        storyCopy.style.opacity = String(story);
-        storyCopy.style.transform = reducedMotion
-          ? 'none'
-          : `translateY(${(18 * (1 - story)).toFixed(2)}px)`;
-      }
+      const cache = styleCacheRef.current;
+      const setStyle = (node, key, property, value) => {
+        if (!node || cache[key] === value) return;
+        cache[key] = value;
+        node.style[property] = value;
+      };
 
-      const flavourCopy = flavourCopyRef.current;
-      if (flavourCopy) {
-        flavourCopy.style.opacity = String(flavour);
-        flavourCopy.style.transform = reducedMotion
-          ? 'none'
-          : `translateY(${(18 * (1 - flavour)).toFixed(2)}px)`;
-      }
+      setStyle(storyCopyRef.current, 'storyOpacity', 'opacity', String(story));
+      setStyle(
+        storyCopyRef.current,
+        'storyTransform',
+        'transform',
+        reducedMotion ? 'none' : `translateY(${(18 * (1 - story)).toFixed(2)}px)`,
+      );
+
+      setStyle(
+        flavourCopyRef.current,
+        'flavourOpacity',
+        'opacity',
+        String(flavour),
+      );
+      setStyle(
+        flavourCopyRef.current,
+        'flavourTransform',
+        'transform',
+        reducedMotion ? 'none' : `translateY(${(18 * (1 - flavour)).toFixed(2)}px)`,
+      );
     };
 
     /* Coalesce scroll events into one rAF pass. One pending frame only: a burst
@@ -370,9 +411,12 @@ export const WelcomeStory = () => {
         if (near) {
           measure();
           update();
+          scheduleRef.current?.();
+        } else {
+          releaseIdleLayers();
         }
       },
-      { rootMargin: '50% 0px' },
+      { rootMargin: '0px 0px -10% 0px' },
     );
     observer.observe(track);
 
@@ -394,7 +438,7 @@ export const WelcomeStory = () => {
       motionQuery.removeEventListener?.('change', onMotionChange);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [showFrame, measure, schedule]);
+  }, [showFrame, measure, schedule, releaseIdleLayers]);
 
   return (
     <section

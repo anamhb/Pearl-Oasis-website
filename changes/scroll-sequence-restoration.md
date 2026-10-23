@@ -658,3 +658,165 @@ files without approval.
   phone the image decode/composite cost is the open question.
 
 No commit or push was made for this phase.
+
+---
+
+## 14. Phase 5 - real-device stutter diagnosis and crop prototype
+
+### 14.1 Scope
+
+Physical-device testing still reports visible Hero stutter and some remaining
+Story lag. The headless frame-index metric was already good, so this phase
+separated tracking from rendering and measured the image pipeline itself.
+No Anti-Slop audit finding was implemented, and no Hero/Story artwork, copy,
+scroll range, frame order, 3D crest, reduced-motion path, or accessibility
+behaviour was changed.
+
+### 14.2 Confirmed root causes
+
+1. **The Hero decodes 2.07 MP per frame, four frames at a time.** At 1920x1080
+   RGBA that is 7.91 MB per decoded bitmap and 31.6 MB for the narrow pool,
+   before the compositor copies anything. A portrait phone only shows about
+   499x1080 of those pixels (390x844). The rest is decoded, stored, and then
+   thrown away by `object-cover`.
+2. **Decode spike, not frame-index logic.** On the 4G profile at 390x844,
+   CPU 4x, the app's Hero decodes averaged 24 ms with a 66 ms p90 and 111 ms
+   max in the baseline run. Those decodes overlap with scroll work and
+   layerization, so the stage pauses even though the target frame changes
+   correctly.
+3. **Offscreen pools stayed resident.** When Story was active, Hero kept four
+   decoded 1920x1080 bitmaps (plus its visible frame). Story then decoded a
+   second pool. This is avoidable memory pressure and a likely cause of
+   image-cache eviction on phones.
+4. **Story repeated identical work every scroll tick.** The copy hand-over
+   wrote both inline styles on every update, and `schedule()` / `showBest()`
+   ran even when the rounded target had not changed. The target changes are
+   the only time a lane lookup can change.
+5. **Story also wastes pixels in portrait.** 1280x720 shows only about
+   333x720 at 390x844. Its bytes are already small, so the saving is decoded
+   pixels and texture memory, not download size.
+
+### 14.3 Code changes
+
+`src/components/3d/EntranceExperience.jsx`
+
+- Added `releaseIdleLayers()`. When the IntersectionObserver reports the Hero
+  has left the viewport (`rootMargin: 0px`), every inactive lane is
+  token-invalidated, marked unready, and has its `src` removed. The visible
+  frame stays on screen. `schedule()` now returns while the Hero is offscreen,
+  and the observer schedules a refill on entry.
+- No pool-size change. `NARROW_LAYERS = 3` was tested in isolation and made
+  tracking materially worse (390 slow p90 106 frames vs 29; 768 slow p90 54 vs
+  24), so it was reverted.
+- No ladder-anchor removal. Removing the in-pool ladder frame was tested in
+  isolation and made the fast fling worse (390 fast p90 136 vs 46-75), so it
+  was reverted. The startup `warmLadder` fetch is unchanged.
+
+`src/components/sections/WelcomeStory.jsx`
+
+- Added a last-value style cache for the Story and flavour copy. Identical
+  opacity/transform values are no longer rewritten.
+- `schedule()` / `showBest()` now run only when the rounded target changes.
+  The copy mix still runs every tick because it is continuous.
+- Added the same `releaseIdleLayers()` behaviour for the Story pool, plus an
+  observer margin of `0px 0px -10% 0px` so Story does not start loading four
+  1280x720 frames while the Hero is still finishing. Verified that the Hero's
+  mounted image count drops from 5 to 1 at Story-top, and Story drops from 5 to
+  1 at Hero-mid. Both refill immediately on re-entry.
+
+`MenuExperience.jsx`, `BrandWordmark.jsx`, the frame folders, and all visual
+classes were not changed.
+
+### 14.4 Asset prototype
+
+The prototype is in `prototype/` and is deliberately outside the app build. It
+contains nine representative frames per variant, a standalone four-layer lab,
+and screenshots. See `prototype/README.md`.
+
+Measurements, headless CPU 4x, 4G, 40 ms target interval, nine-frame loop:
+
+| Run | Decode p50 | Decode p90 | Lag p90 | Frames >1 behind |
+| --- | --- | --- | --- | --- |
+| Hero original 390 | 11.3 ms | 21.9 ms | 2 | 56 |
+| Hero phone 390 | 5.0 ms | 8.2 ms | 0 | 7 |
+| Hero original 768 | 11.6 ms | 26.0 ms | 2 | 30 |
+| Hero tablet 768 | 5.9 ms | 7.6 ms | 1 | 11 |
+| Story original 390 | 6.2 ms | 9.9 ms | 1 | 7 |
+| Story portrait 390 | 3.9 ms | 6.0 ms | 0 | 7 |
+
+Local-network runs showed the same decode reduction (Hero 390 p50 11.3 -> 4.7
+ms, p90 21.1 -> 8.2 ms; Story 390 p50 6.1 -> 3.7 ms, p90 9.5 -> 6.3 ms).
+
+Crop costs:
+
+| Set | Crop | Nine-file total | One decoded frame | Four-layer pool |
+| --- | --- | --- | --- | --- |
+| Hero original | none | 491.2 KB | 7.91 MB | 31.6 MB |
+| Hero phone | 640x1080 q82 | 309.8 KB | 2.64 MB | 10.6 MB |
+| Hero tablet | 832x1080 q82 | 403.8 KB | 3.43 MB | 13.7 MB |
+| Story original | none | 322.8 KB | 3.52 MB | 14.1 MB |
+| Story portrait | 560x720 q82 | 309.1 KB | 1.54 MB | 6.2 MB |
+
+Projected over 299 files, the phone Hero set is about 10.3 MB instead of
+15.07 MB. The tablet set is about 13.4 MB. Story is about 1.9 MB instead of
+2.0 MB.
+
+Framing check at the same viewport and frame: Hero 390 mean absolute channel
+difference 0.280/255 (0.42% over 2), Hero 768 mean 0.327/255 (2.28% over 2),
+Story 390 mean 0.927/255 (9.60% over 2). The differences are JPEG re-encode
+noise; the visible composition does not shift. The phone crop covers portrait
+phones up to a 0.593 aspect ratio; the tablet crop covers 768x1024, 820x1180,
+and 1024x1366. Landscape must keep the original frames.
+
+### 14.5 Before / after in the running app
+
+Triplicate 390x844, CPU 4x, 4G, slow wheel. Values are p90 target/visible frame
+distance; the middle value is the median.
+
+| Scenario | Baseline | Phase 5 |
+| --- | --- | --- |
+| Story alone | 8, 16, 35 (median 16) | 6, 7 (median 6.5; two runs) |
+| Story after Hero | 17, 8, 6 (median 8) | 49, 6, 8 (median 8; one load outlier) |
+| Hero alone | 35, 29, 24 (median 29) | 24, 22, 24 (median 24) |
+
+The Story changes and the earlier Hero release are small improvements; the
+single 49 is a cold-load outlier, not a stable regression. The Hero app-level
+number is still noisy and does not prove the physical stutter is gone. The
+portrait asset prototype is the important result: it changes the decode cost
+that the code-only scheduler cannot remove.
+
+A 1024x768 landscape run ended on the correct frames (Hero 298, Story 55) with
+no overflow and no console errors.
+
+### 14.6 Tests
+
+- `npm run lint` (tsc --noEmit) and `npm run build` pass.
+- Hero 390 forward: ends on frame 299 (`naturalWidth` 1920). Reverse returns
+  to frame 1. Re-entry after Story-mid restores frame 165 and then frame 299.
+  No backward reveals in the forward pass and no console errors.
+- Story 390 re-entry run: at Hero-end Story stays at 1 mounted image; at
+  Story-top Hero drops 5 -> 1 and Story fills to 4; at Story-mid Story reaches
+  5; returning to Hero-mid releases Story back to 1 and refills Hero to 5. The
+  active frames remain valid (naturalWidth 1920 / 1280).
+- Reduced motion: Hero ends on frame 299; Story still scrubs (5 -> 41).
+- Menu: 0 -> 5 -> 10 cards, button opacity 0 -> 1.
+- Crop lab: 320x568, 390x844, and 768x1024; local and 4G; CPU 4x. Screenshots
+  and JSON are in `prototype/evidence/`.
+- CPU 20x was run but is not a clean A/B: page load itself produced 1-7 s long
+  tasks before the scrub started. It is directional only.
+
+### 14.7 Limitations and decision needed
+
+- No physical iOS, Android, or tablet hardware was available. Headless decode
+  times and long tasks cannot prove the real-device stutter is gone.
+- The prototype is nine frames per variant, not a full 299-frame sequence. It
+  demonstrates framing, decode cost, and loading behaviour; it does not prove
+  full-sequence memory behaviour on a phone.
+- A 299-file conversion has not been generated. Approval is needed for the
+  phone set first (`640x1080`, q82), with the tablet set (`832x1080`, q82)
+  only if tablet testing still shows lag.
+- That conversion also needs orientation-aware variant selection and a reload
+  path on rotation. The current app still loads the original 1920x1080 frames.
+- Physical verification remains required after the conversion.
+
+No commit or push was made for this phase.

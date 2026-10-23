@@ -1,0 +1,111 @@
+{
+  "label": "lab-hero-original-768-40-4g",
+  "set": "hero-original",
+  "width": 768,
+  "height": 1024,
+  "dsf": 2,
+  "cpu": 4,
+  "network": "4g",
+  "interval": 40,
+  "summary": {
+    "end": 6816,
+    "samples": 269,
+    "targetRange": [
+      0,
+      8
+    ],
+    "lag": {
+      "p50": 0,
+      "p90": 2,
+      "p95": 2,
+      "max": 4
+    },
+    "over1": 30,
+    "raf": {
+      "count": 268,
+      "p50": 25.09999999999991,
+      "p95": 25.299999999999727,
+      "max": 25.700000000000273
+    },
+    "longtasks": 1,
+    "longtaskMs": 77,
+    "loaf": [
+      {
+        "t": -18.30000001192093,
+        "d": 112,
+        "blocking": 59.4,
+        "styleLayout": 21.099999994039536
+      },
+      {
+        "t": 770.6999999880791,
+        "d": 70.5,
+        "blocking": 0,
+        "styleLayout": 840.5
+      }
+    ],
+    "decodes": 107,
+    "decodeMs": {
+      "p50": 11.600000023841858,
+      "p90": 26,
+      "max": 77
+    },
+    "failedDecodes": 0,
+    "reveals": 136,
+    "revealsLast": [
+      {
+        "t": 6657.699999988079,
+        "index": 5,
+        "src": "http://127.0.0.1:4174/frames/hero-original/ezgif-frame-200.jpg"
+      },
+      {
+        "t": 6690.0999999940395,
+        "index": 6,
+        "src": "http://127.0.0.1:4174/frames/hero-original/ezgif-frame-240.jpg"
+      },
+      {
+        "t": 6735.899999976158,
+        "index": 7,
+        "src": "http://127.0.0.1:4174/frames/hero-original/ezgif-frame-280.jpg"
+      },
+      {
+        "t": 6772.5,
+        "index": 8,
+        "src": "http://127.0.0.1:4174/frames/hero-original/ezgif-frame-299.jpg"
+      }
+    ],
+    "resources": {
+      "count": 103,
+      "bytes": 5760382
+    },
+    "images": [
+      {
+        "src": "ezgif-frame-280.jpg",
+        "opacity": "0",
+        "nw": 1920,
+        "nh": 1080
+      },
+      {
+        "src": "ezgif-frame-240.jpg",
+        "opacity": "0",
+        "nw": 1920,
+        "nh": 1080
+      },
+      {
+        "src": "ezgif-frame-299.jpg",
+        "opacity": "1",
+        "nw": 1920,
+        "nh": 1080
+      },
+      {
+        "src": "ezgif-frame-200.jpg",
+        "opacity": "0",
+        "nw": 1920,
+        "nh": 1080
+      }
+    ],
+    "memory": {
+      "used": 1266096
+    },
+    "dpr": 2
+  }
+}

@@ -88,7 +88,7 @@ export const SignatureDishes = () => {
       const rect = containerRef.current.getBoundingClientRect();
       const w = Math.max(300, rect.width);
       // Adaptive height according to viewport width
-      const h = w < 640 ? 500 : w < 1024 ? 560 : 620;
+      const h = w < 640 ? 540 : w < 1024 ? 560 : 620;
       setStageSize({ width: w, height: h });
     }
   }, []);
@@ -132,20 +132,31 @@ export const SignatureDishes = () => {
     // be pushed past the stage's rounded, overflow-hidden edge — at 320px the
     // raw 0.36 × width pushed the left-most dish 10px outside the frame and
     // the stage clipped it.
-    const dishHalfWidth = isMobile ? 56 : isTablet ? 72 : 88;
+    const dishHalfWidth = isMobile ? 48 : isTablet ? 72 : 88;
     const maxRadius = Math.max(0, w / 2 - dishHalfWidth - 6);
     const rx = Math.min(
-      isMobile ? 160 : isTablet ? 330 : 430,
+      isMobile ? 150 : isTablet ? 330 : 430,
       w * (isMobile ? 0.36 : 0.38),
       maxRadius,
     );
 
     const ry = isMobile ? 135 : isTablet ? 155 : 180;
 
-    const stations = STATIONS.map((station) => ({
-      x: Math.cos(station.angle) * rx,
-      y: Math.sin(station.angle) * ry,
-    }));
+    // On mobile the original STATIONS angles (tuned for a wide desktop ellipse)
+    // cluster two dishes at the narrow top of the constrained orbit — stations 0
+    // and 6 sit only ~21° apart, producing a ~46px center-to-center gap at mobile
+    // rx values, while dish images are 96px wide. Evenly spacing all seven positions
+    // around the full circle (51.4° per step) guarantees every adjacent pair
+    // maintains equal arc distance and eliminates the overlap at any mobile width.
+    const stations = isMobile
+      ? Array.from({ length: STATIONS.length }, (_, i) => ({
+          x: Math.cos(-Math.PI / 2 + (2 * Math.PI * i) / STATIONS.length) * rx,
+          y: Math.sin(-Math.PI / 2 + (2 * Math.PI * i) / STATIONS.length) * ry,
+        }))
+      : STATIONS.map((station) => ({
+          x: Math.cos(station.angle) * rx,
+          y: Math.sin(station.angle) * ry,
+        }));
 
     // Reduced motion: no orbit, no float, no fade. Every dish sits at its
     // station at full size, so the section still reads as a composed plate.
@@ -385,7 +396,7 @@ export const SignatureDishes = () => {
                 src={dish.src}
                 alt={dish.alt || dish.name}
                 draggable={false}
-                className="w-28 sm:w-36 md:w-44 max-w-[190px] h-auto max-h-[160px] sm:max-h-[190px] md:max-h-[220px] object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,0.85)] filter contrast-[1.02] hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer"
+                className="w-24 sm:w-36 md:w-44 max-w-[190px] h-auto max-h-[130px] sm:max-h-[190px] md:max-h-[220px] object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,0.85)] filter contrast-[1.02] hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer"
               />
             </div>
           ))}

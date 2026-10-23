@@ -12,6 +12,10 @@ const BASE = import.meta.env.BASE_URL || '/';
  *   frames 1 - 161   restaurant entrance  (exterior → glass doors)
  *   frames 162 - 299 the grand dining hall (inside the room)
  *
+ * /public/video-frames-final-phone carries the same 299 frames cropped to a
+ * centred 640x1080 portrait tile. Narrow portrait phones use that set; every
+ * other viewport keeps the original 1920x1080 sequence.
+ *
  * Scroll position - not elapsed time - is the only source of truth: it picks
  * the frame AND drives the hand-over between the two content overlays.
  *
@@ -66,8 +70,27 @@ const LOAD_PACING_MS = 80;
 /** Observed round trip before the first frame reports back, in ms. */
 const INITIAL_LATENCY = 120;
 
-const frameSrc = (index) =>
-  `${BASE}video-frames-final/ezgif-frame-${String(index + 1).padStart(3, '0')}.jpg`;
+const FULL_FRAME_FOLDER = 'video-frames-final';
+const PHONE_FRAME_FOLDER = 'video-frames-final-phone';
+const PHONE_MAX_WIDTH = 640;
+/* The phone tile covers the stage exactly while the portrait aspect ratio is
+   at or below 640/1080. Wider portrait windows need the original frame. */
+const PHONE_MAX_ASPECT = 640 / 1080;
+
+const frameSrc = (index, variant = 'full') =>
+  `${BASE}${variant === 'phone' ? PHONE_FRAME_FOLDER : FULL_FRAME_FOLDER}/ezgif-frame-${String(index + 1).padStart(3, '0')}.jpg`;
+
+const viewportFrameVariant = () => {
+  if (typeof window === 'undefined') return 'full';
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  return width > 0 &&
+    height > width &&
+    width <= PHONE_MAX_WIDTH &&
+    width / height <= PHONE_MAX_ASPECT
+    ? 'phone'
+    : 'full';
+};
 
 const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 
@@ -76,6 +99,7 @@ const smoothstep = (value) => value * value * (3 - 2 * value);
 
 export const EntranceExperience = () => {
   const trackRef = useRef(null);
+  const stageRef = useRef(null);
   const layersRef = useRef(
     Array.from({ length: MAX_LAYERS }, () => ({
       node: null,
@@ -84,6 +108,7 @@ export const EntranceExperience = () => {
       ready: false,
       token: 0,
       timer: 0,
+      variant: null,
     })),
   );
   const activeLayerRef = useRef(0);
@@ -131,6 +156,12 @@ export const EntranceExperience = () => {
   const lastTargetAtRef = useRef(0);
   const lastLoadAtRef = useRef(0);
   const paceTimerRef = useRef(0);
+  /** Asset set for the current viewport. */
+  const variantRef = useRef(viewportFrameVariant());
+  /** Invalidates callbacks and low-priority prefetches from an older asset set. */
+  const sourceEpochRef = useRef(0);
+  /** The outgoing frame is painted on the stage until the new set is decoded. */
+  const switchBackgroundRef = useRef('');
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -142,9 +173,17 @@ export const EntranceExperience = () => {
     };
   }, []);
 
+  const clearSwitchBackground = useCallback(() => {
+    const stage = stageRef.current;
+    if (!stage || !switchBackgroundRef.current) return;
+    stage.style.backgroundImage = '';
+    switchBackgroundRef.current = '';
+  }, []);
+
   const revealLayer = useCallback((layer) => {
     const node = layer.node;
     if (!node || layer.index === null || !layer.ready) return;
+    if (layer.variant !== variantRef.current) return;
     const active = layersRef.current[activeLayerRef.current];
     if (active === layer) {
       visibleIndexRef.current = layer.index;
@@ -155,7 +194,8 @@ export const EntranceExperience = () => {
     if (active?.node) active.node.style.opacity = '0';
     activeLayerRef.current = layersRef.current.indexOf(layer);
     visibleIndexRef.current = layer.index;
-  }, []);
+    clearSwitchBackground();
+  }, [clearSwitchBackground]);
 
   /**
    * Show the closest decoded frame instead of waiting for the exact target.
@@ -180,6 +220,7 @@ export const EntranceExperience = () => {
 
     for (const layer of layersRef.current) {
       if (!layer.ready || layer.index === null) continue;
+      if (layer.variant !== variantRef.current) continue;
       // A pre-decoded final frame is a fallback for the end of a fling, not
       // for the middle of the artwork. Do not jump the whole sequence early
       // just because that frame happens to be ready.
@@ -221,14 +262,27 @@ export const EntranceExperience = () => {
       layer.index = index;
       layer.loading = true;
       layer.ready = false;
+      layer.variant = variantRef.current;
+      const variant = layer.variant;
+      const epoch = sourceEpochRef.current;
       window.clearTimeout(layer.timer);
       const requestedAt = performance.now();
 
-      const src = frameSrc(index);
+      const src = frameSrc(index, variant);
       if ('fetchPriority' in node) node.fetchPriority = 'high';
 
       const finish = () => {
         if (layer.token !== token || !layer.loading) return;
+        if (
+          layer.variant !== variantRef.current ||
+          sourceEpochRef.current !== epoch
+        ) {
+          layer.loading = false;
+          layer.ready = false;
+          layer.index = null;
+          layer.variant = null;
+          return;
+        }
         if (node.getAttribute('src') !== src || node.naturalWidth === 0) {
           layer.loading = false;
           layer.ready = false;
@@ -253,6 +307,7 @@ export const EntranceExperience = () => {
         layer.loading = false;
         layer.ready = false;
         layer.index = null;
+        layer.variant = null;
       };
 
       node.onload = () => {
@@ -278,6 +333,7 @@ export const EntranceExperience = () => {
    * for; a slow scrub falls back to consecutive frames.
    */
   const schedule = useCallback(() => {
+    if (!visibleRef.current) return;
     const target = targetIndexRef.current;
     const active = layersRef.current[activeLayerRef.current];
     const slots = Math.max(0, poolSizeRef.current - 1);
@@ -403,6 +459,35 @@ export const EntranceExperience = () => {
       }
     }
   }, [loadLayer]);
+
+  /**
+   * Drop decoded bitmaps for every inactive lane once the stage is far away.
+   * The active frame stays on screen; the prefetch pool is rebuilt on entry.
+   * Without this, four 1920x1080 Hero bitmaps stayed resident while Story was
+   * decoding its own pool, which is exactly where mobile memory pressure and
+   * image-cache eviction hurt most.
+   */
+  const releaseIdleLayers = useCallback(() => {
+    const active = layersRef.current[activeLayerRef.current];
+    for (const layer of layersRef.current) {
+      if (layer === active) continue;
+      window.clearTimeout(layer.timer);
+      layer.token += 1;
+      layer.loading = false;
+      layer.ready = false;
+      layer.index = null;
+      layer.variant = null;
+      if (layer.node) {
+        layer.node.style.opacity = '0';
+        layer.node.removeAttribute('src');
+      }
+    }
+    window.clearTimeout(paceTimerRef.current);
+    paceTimerRef.current = 0;
+    window.clearTimeout(settleTimerRef.current);
+    stepRef.current = 1;
+    velocityRef.current = 0;
+  }, []);
 
   const showFrame = useCallback(
     (index) => {
@@ -536,6 +621,9 @@ export const EntranceExperience = () => {
     const track = trackRef.current;
     if (!track) return;
 
+    const initialVariant = viewportFrameVariant();
+    variantRef.current = initialVariant;
+    sourceEpochRef.current += 1;
     narrowRef.current =
       window.matchMedia('(max-width: 1023px)').matches ||
       window.matchMedia('(pointer: coarse)').matches;
@@ -551,6 +639,7 @@ export const EntranceExperience = () => {
       layer.loading = false;
       layer.ready = index === 0;
       layer.index = index === 0 ? 0 : null;
+      layer.variant = index === 0 ? initialVariant : null;
       if (layer.node) {
         layer.node.style.opacity = index === 0 ? '1' : '0';
         if (index !== 0) layer.node.removeAttribute('src');
@@ -577,14 +666,24 @@ export const EntranceExperience = () => {
        is a fallback for a hard fling, not a background download. */
     let ladderCancelled = false;
     const warmLadder = async () => {
+      const ladderVariant = variantRef.current;
+      const ladderEpoch = sourceEpochRef.current;
       const ladderIndexes = [FRAME_COUNT - 1];
       for (let index = LADDER_STEP; index < FRAME_COUNT - 1; index += LADDER_STEP) {
         ladderIndexes.push(index);
       }
       for (const index of ladderIndexes) {
-        if (ladderCancelled) return;
+        if (
+          ladderCancelled ||
+          variantRef.current !== ladderVariant ||
+          sourceEpochRef.current !== ladderEpoch
+        ) {
+          return;
+        }
         try {
-          const response = await fetch(frameSrc(index), { priority: 'low' });
+          const response = await fetch(frameSrc(index, ladderVariant), {
+            priority: 'low',
+          });
           await response.arrayBuffer();
         } catch {}
       }
@@ -616,8 +715,67 @@ export const EntranceExperience = () => {
       });
     };
 
-    const onResize = () => {
+    /* Orientation changes swap the whole asset set. Keep the outgoing frame
+       painted on the stage, invalidate every old request, then let the new
+       set decode behind it. The first new frame clears the stage background
+       in the same task that it becomes visible, so there is no black gap and
+       no moment where two asset sets are both showing. */
+    const applyVariant = (nextVariant) => {
+      if (nextVariant === variantRef.current) return;
+
+      const stage = stageRef.current;
+      const active = layers[activeLayerRef.current];
+      const oldSrc = active?.node?.currentSrc || active?.node?.src || '';
+      if (stage && oldSrc && active?.node?.naturalWidth) {
+        stage.style.backgroundImage = `url("${oldSrc.replace(/"/g, '\\"')}")`;
+        stage.style.backgroundSize = 'cover';
+        stage.style.backgroundPosition = 'center';
+        switchBackgroundRef.current = oldSrc;
+      }
+
+      sourceEpochRef.current += 1;
+      for (const layer of layers) {
+        window.clearTimeout(layer.timer);
+        layer.token += 1;
+        layer.loading = false;
+        layer.ready = false;
+        layer.index = null;
+        layer.variant = null;
+        if (layer.node) {
+          layer.node.style.opacity = '0';
+          layer.node.removeAttribute('src');
+        }
+      }
+
+      variantRef.current = nextVariant;
+      activeLayerRef.current = 0;
+      visibleIndexRef.current = -1;
+      directionRef.current = 1;
+      stepRef.current = 1;
+      velocityRef.current = 0;
+      keepFinalRef.current =
+        nextVariant === 'phone' &&
+        targetIndexRef.current >= FRAME_COUNT - 1 - LADDER_STEP * 2;
+      lastTargetAtRef.current = 0;
+      lastLoadAtRef.current = 0;
+      window.clearTimeout(settleTimerRef.current);
+      window.clearTimeout(paceTimerRef.current);
+      paceTimerRef.current = 0;
+
       measure();
+      if (visibleRef.current) {
+        update();
+        scheduleRef.current?.();
+      }
+    };
+
+    const onResize = () => {
+      const nextVariant = viewportFrameVariant();
+      if (nextVariant !== variantRef.current) {
+        applyVariant(nextVariant);
+      } else {
+        measure();
+      }
       onScroll();
     };
 
@@ -632,9 +790,12 @@ export const EntranceExperience = () => {
         if (near) {
           measure();
           update();
+          scheduleRef.current?.();
+        } else {
+          releaseIdleLayers();
         }
       },
-      { rootMargin: '50% 0px' },
+      { rootMargin: '0px 0px' },
     );
     observer.observe(track);
 
@@ -661,7 +822,7 @@ export const EntranceExperience = () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
     };
-  }, [update, measure, schedule]);
+  }, [update, measure, schedule, releaseIdleLayers]);
 
   const handleEnterClick = () => {
     const secondSection = document.getElementById('story');
@@ -687,7 +848,10 @@ export const EntranceExperience = () => {
     >
       {/* Pinned stage: the frame never leaves the viewport while the track
           scrolls past it, so the camera walk reads as one continuous take. */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none">
+      <div
+        ref={stageRef}
+        className="sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none"
+      >
         {/* The frame is swapped from scroll progress only, through a small
             pool of stacked layers. One is visible, the others hold decoded
             frames near the predicted scroll position. The last good frame
@@ -699,7 +863,7 @@ export const EntranceExperience = () => {
             ref={(node) => {
               layer.node = node;
             }}
-            src={index === 0 ? frameSrc(0) : undefined}
+            src={index === 0 ? frameSrc(0, variantRef.current) : undefined}
             alt=""
             aria-hidden="true"
             draggable={false}
