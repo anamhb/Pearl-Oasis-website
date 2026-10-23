@@ -812,11 +812,255 @@ no overflow and no console errors.
 - The prototype is nine frames per variant, not a full 299-frame sequence. It
   demonstrates framing, decode cost, and loading behaviour; it does not prove
   full-sequence memory behaviour on a phone.
-- A 299-file conversion has not been generated. Approval is needed for the
-  phone set first (`640x1080`, q82), with the tablet set (`832x1080`, q82)
-  only if tablet testing still shows lag.
+- At the time of this phase, a 299-file conversion had not been generated.
+  Approval was needed for the phone set first (`640x1080`, q82), with the tablet
+  set (`832x1080`, q82) only if tablet testing still showed lag.
 - That conversion also needs orientation-aware variant selection and a reload
-  path on rotation. The current app still loads the original 1920x1080 frames.
+  path on rotation.
 - Physical verification remains required after the conversion.
 
+**Superseded by Phase 6:** the 299-file phone set was generated and is now
+selected on narrow portrait phones. The tablet and Story sets remain
+ungenerated. See section 15.
+
 No commit or push was made for this phase.
+
+---
+
+## 15. Phase 6 - production phone set verification and asset decisions
+
+### 15.1 What is in the tree
+
+The 299-frame phone crop is present and selected at runtime:
+
+- `public/video-frames-final-phone/ezgif-frame-001...299.jpg`, 640x1080 q82,
+  299 contiguous files, 9.53 MB. The original set is still 299 x 1920x1080,
+  15.07 MB. `video-frames-second` is 56 x 1280x720, 2.00 MB.
+- `EntranceExperience.jsx` uses the phone folder only when the viewport is
+  portrait, `innerWidth <= 640`, and `width / height <= 640 / 1080`. Landscape,
+  tablets, and desktop keep the original set.
+- The nine prototype frames in `prototype/frames/hero-phone/` are SHA-256
+  identical to the production phone files, so the measured prototype and the
+  shipped crop are the same pixels.
+- On rotation, `applyVariant()` copies the outgoing frame to the stage
+  background, bumps the source epoch to invalidate every in-flight request from
+  the old set, decodes the new set behind it, and clears the background in the
+  task that reveals the first new frame. Verified 640 -> 1920 -> 640 with no
+  blank sample and no black gap.
+
+This phase made no source change. The set and the selection code arrived in
+`c84584b`; the temporary scheduler diagnostics used during the investigation
+were removed, and `git diff` for `src/` is empty. The only file changed in this
+phase is this note.
+
+### 15.2 Asset integrity
+
+Checked with a JPEG marker parser and SHA-256, not a visual sample.
+
+| Folder | Files | Dimensions | Size | Contiguous | Unreadable |
+| --- | --- | --- | --- | --- | --- |
+| `video-frames-final-phone` | 299 | 640x1080 (all) | 9.53 MB | 001-299 | 0 |
+| `video-frames-final` | 299 | 1920x1080 (all) | 15.07 MB | 001-299 | 0 |
+| `video-frames-second` | 56 | 1280x720 (all) | 2.00 MB | 001-056 | 0 |
+
+The nine `prototype/frames/hero-phone/` files match the production phone files
+byte for byte.
+
+### 15.3 Method
+
+All numbers below are headless Chrome 155, production `dist`, exact device
+metrics, browser cache cleared before each run, and labelled as headless.
+Phones use CPU 4x and the 1.25 MB/s, 40 ms, 4G profile; portrait tablets use
+CPU 2x; 1440 uses CPU 1x on localhost. Scroll is an in-page time-linear
+`scrollTo` per rAF (1931 px in 2200 ms slow, 380 ms fast), not synthetic wheel
+events. Lag is `|target frame - visible frame|` sampled per rAF; rAF cadence
+and long tasks are reported separately.
+
+The A/B runs the same application code in both arms. The full arm rewrites
+`video-frames-final-phone/` to `video-frames-final/` through a `Fetch`
+interception; interception is enabled in both arms, so the scheduler, layer
+pool, pacing, and variant selection are identical. Two runs per arm.
+
+Correction: the first 4G attempt in this phase used 1.25 **Mbit/s** (a mistaken
+`/8`) instead of 1.25 **MB/s**. That made a 50 KB frame take roughly ten times
+longer and produced an apparent four-second stall with only five frame
+requests. The cap was corrected to the Phase 3-5 profile; the stall disappeared
+with no code change. The discarded run is not used below.
+
+### 15.4 Hero A/B, 390x844
+
+Each cell is run 1 / run 2. p90 and max are frame distance; KB is the image
+bytes transferred during that run, not the size of the folder.
+
+Localhost, CPU 4x:
+
+| Arm | Slow p90 | Slow max | Slow changes | Slow KB | Fast p90 | Fast max | Fast changes | Fast KB |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Phone crop | 20 / 12 | 50 / 52 | 19 / 26 | 1241 / 1423 | 5 / 5 | 93 / 99 | 6 / 6 | 626 / 625 |
+| Full frames | 13 / 9 | 31 / 23 | 21 / 26 | 1927 / 2148 | 14 / 12 | 93 / 94 | 6 / 5 | 1005 / 947 |
+
+4G, CPU 4x:
+
+| Arm | Slow p90 | Slow max | Slow changes | Slow KB | Fast p90 | Fast max | Fast changes | Fast KB |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Phone crop | 22 / 26 | 39 / 57 | 17 / 12 | 1063 / 1006 | 40 / 27 | 217 / 204 | 3 / 3 | 557 / 593 |
+| Full frames | 19 / 19 | 39 / 43 | 10 / 12 | 1697 / 1604 | 69 / 139 | 296 / 211 | 4 / 5 | 954 / 1001 |
+
+All eight 4G runs and all eight local runs ended on frame 299, had p50 lag 0,
+zero blank samples, no console errors, and no HTTP errors. One aborted request
+appears in `phone fast r1` on 4G; that is the scheduler abandoning a stale lane
+(`net::ERR_ABORTED`), not a failed asset.
+
+Reading:
+
+- The crop transfers roughly 34-42 % fewer image bytes across the A/B runs
+  (37 % in the decode lab).
+- Slow scroll lag is equivalent within run-to-run noise. Local p90 is 9-20 for
+  both arms; 4G p90 is 19-26. The crop does not make a slow cold scroll track
+  more closely, because that run is delivery-bound.
+- On a cold 4G fast fling the crop is materially better: p90 27-40 vs 69-139,
+  max 204-217 vs 211-296, with fewer bytes and the same final frame. The full
+  set often cannot show a middle frame before the fling is over.
+- The crop does not remove the app's long tasks. At CPU 4x the Hero runs still
+  show 4-16 long tasks (0.3-1.5 s total, 100-233 ms max) during the measured
+  window. The image-only lab produced none, so those tasks are not proven to be
+  frame decode. They need real-device attribution; see 15.9.
+
+### 15.5 Decode lab
+
+Nine-frame loop, localhost, CPU 4x for phones / 2x for the 768 tablet / 1x for
+the 1024 decode-only run. Decode time is the patched `decode()` duration.
+
+| Set | Interval | Decode p50 | p90 | Max | Image KB / 9 s |
+| --- | --- | --- | --- | --- | --- |
+| Hero original 390 | 120 ms | 7.7 | 13.2 | 40.4 | 2765 |
+| Hero phone 390 | 120 ms | 3.2 | 5.5 | 10.1 | 1740 |
+| Hero original 390 | 40 ms | 7.8 | 13.8 | 52.8 | 7839 |
+| Hero phone 390 | 40 ms | 3.0 | 4.2 | 20.9 | 4936 |
+| Story original 390 | 120 ms | 3.9 | 5.5 | 16.3 | 1854 |
+| Story portrait 390 | 120 ms | 2.5 | 3.5 | 10.2 | 1757 |
+| Story original 390 | 40 ms | 4.1 | 8.2 | 17.9 | 5191 |
+| Story portrait 390 | 40 ms | 2.7 | 6.1 | 14.8 | 4934 |
+| Hero original 768 | 120 ms | 7.3 | 11.8 | 33.3 | 2765 |
+| Hero tablet 768 | 120 ms | 3.9 | 6.7 | 21.7 | 2267 |
+| Hero original 1024 | 120 ms | 9.5 | 20.2 | 25.7 | 2765 |
+| Hero tablet 1024 | 120 ms | 4.7 | 11.5 | 15.6 | 2309 |
+
+The 1024 rows are a decode-only comparison in the lab. The app keeps the
+original set in landscape, so that row is not a proposal to use the tablet crop
+at 1024x768.
+
+Hero phone: median decode is 58-62 % lower, p90 is 58-70 % lower, image bytes
+are 37 % lower. Story portrait: median decode is 34-36 % lower, but bytes are
+only 5 % lower. Tablet: median decode is 47 % lower and bytes 18 % lower at
+768; the 1024 lab shows the same direction.
+
+### 15.6 Viewport and behaviour checks
+
+Cold 4G except 1440. Phones CPU 4x, tablets CPU 2x, desktop CPU 1x.
+
+| Viewport | Hero final | Story final | Hero lag p90 | Story lag p90 | Hero long tasks | Blanks |
+| --- | --- | --- | --- | --- | --- | --- |
+| 320x568 | 299 | - | 31 | - | 15 / 1324 ms | 0 |
+| 375x812 | 299 | - | 56 | - | 12 / 1112 ms | 0 |
+| 390x844 | 299 | 55 | 22 | 19 / 43 (two runs) | 15 / 1258 ms | 0 |
+| 768x1024 | 299 | 55 | 102 | 17 | 9 / 769 ms | 0 |
+| 1024x768 | 299 | 55 | 146 | 14 | 4 / 424 ms | 0 |
+| 1440x900 local | 299 | 55 | 31 | 0 | 0 / 0 ms | 0 |
+
+Hero 299 is the last 1-based file. Story 55 is the last 0-based index used by
+the code (file 056), matching the labels in the earlier sections.
+
+Story warm-cache check, 390x844, 4G: p50 0, p90 6, max 11, 32 changes, 2.21 MB
+transferred, ends on 55, zero blanks. The same Story run cold had p90 19 and
+43 on its two reps. The Story's remaining lag is cold delivery, not decode.
+
+Functional checks:
+
+| Check | Result |
+| --- | --- |
+| Hero reverse, 390 | ends on frame 001; p90 30 with an 8 s settle; no blanks |
+| Hero pause / resume, 390 | ends on frame 299; p90 19; no blanks |
+| Hero re-entry, 390 | visible index 148, target 149 after 500 ms (one frame behind; 0-based probe indices); no blanks |
+| Orientation 390 portrait -> landscape -> portrait | 640 -> 1920 -> 640; no black gap; 299 in landscape is correct for that scroll position |
+| Reduced motion, Hero | ends on 299; p90 42; no blanks |
+| Reduced motion, Story | ends on 55; p90 25; no blanks |
+| Console / HTTP | 0 errors; no frame 404s |
+
+The 768 and 1024 Hero p90 values are cold-delivery numbers: 299 original
+frames at roughly 100 KB each are far more than 1.25 MB/s can deliver in 2.2 s,
+and the run made only 14-20 requests. They are not evidence that the tablet
+crop would fix the view, because an 18 % byte reduction cannot close that gap.
+The 1440 localhost run, where delivery is not the limit, has zero long tasks and
+p90 31.
+
+### 15.7 Story: crop decision
+
+The prototype portrait crop cuts Story decode p50 from 3.9 to 2.5 ms (120 ms
+interval) and 4.1 to 2.7 ms (40 ms), but the nine-file image bytes barely move
+(1854 -> 1757 KB, 5191 -> 4934 KB over 9 s). The app-level Story ends on 55 at
+every viewport with zero blanks; its cold 4G lag is removed by a warm cache
+(p90 6 vs 19-43). A 56-file crop would not fix the observed cold lag and would
+add a second asset pipeline and a second selection rule. **Not generated.** The
+crop is only worth revisiting if a physical phone shows Story lag that survives
+a second pass, or if decoded-bitmap memory is measured as the limiter.
+
+### 15.8 Tablet: crop decision
+
+The 832x1080 tablet prototype cuts decode p50 from 7.3 to 3.9 ms at 768 and
+11.8 to 6.7 p90, with 18 % fewer bytes. That is a real decode saving, but the
+app-level tablet runs end correctly with zero blanks and the observed lag is
+delivery-bound on the cold 4G profile. A 19 % byte cut does not change the
+order of magnitude. **Not generated.** If a physical tablet still lags after a
+warm pass, the tablet set is worth pricing; the first lever to test then is
+delivery/preload, not another scheduler constant.
+
+### 15.9 Limits and what is still not proven
+
+- No physical iOS, Android, or tablet hardware was available. Nothing here
+  proves the real-device stutter is gone.
+- CPU throttling is not a phone decoder, GPU, or memory-pressure model. The
+  real decode/composite cost remains the open question.
+- The cold 4G frame-index lag is a delivery metric. It is not a smoothness
+  score, and a high p90 does not by itself mean a visible stutter.
+- The long tasks at CPU 4x (4-16 per run, up to 1.5 s total) are not attributed.
+  The image-only lab at the same CPU rate had none, so the Hero pipeline is not
+  the sole source; the app shell (Lenis, other sections, the navbar crest, React)
+  needs a real-device Performance trace.
+- Only Chrome 155 was tested. Safari and Firefox were not.
+- The `ERR_ABORTED` entries in the network log are scheduler cancellations of
+  stale lanes, not missing frames. There were no HTTP errors and no frame 404s.
+
+### 15.10 Real-device retest procedure
+
+1. Serve the current `dist` (`npm run build`, then `npm run preview -- --host
+   0.0.0.0 --port 4173`) or deploy it. Do not use the dev server for timings.
+2. Use a narrow portrait phone (CSS width <= 640), a portrait tablet
+   (768-1024), and a desktop. Record the model, OS, browser, and network.
+3. Cold pass: clear site data, reload, and scroll the Hero slowly for about
+   10 s, then fling, reverse, pause for 2 s, and go to the end. Repeat the same
+   interactions on a second pass without clearing the cache.
+4. Android: `chrome://inspect`, open the page, Performance panel, enable
+   screenshots, record the interactions. iOS: Safari Web Inspector, Timelines,
+   enable Layout & Rendering and Media, record the same interactions.
+5. Check: the stage never goes blank or black; the scrub follows the finger;
+   no repeated multi-frame hitch or freeze over 100 ms; Hero settles on 299 and
+   Story on 55; no console errors or frame 404s; memory does not climb across
+   the two passes.
+6. Confirm the network tab: portrait phones request
+   `video-frames-final-phone/`; landscape and tablets request
+   `video-frames-final/`. Rotate during the trace and confirm the request set
+   switches without a blank stage.
+7. Keep the trace and a screen recording. If the phone still hitches, attach
+   the trace before changing code. If the Story still lags after the warm pass,
+   treat it as a scheduling/delivery issue, not a reason to generate the Story
+   crop.
+
+### 15.11 Checks run
+
+- Asset integrity: counts, contiguity, dimensions, sizes, SHA-256 of the nine
+  prototype phone frames.
+- `npm run lint` (tsc --noEmit) and `npm run build` pass.
+- A/B, decode lab, viewport matrix, Story cold/warm, reverse, pause, re-entry,
+  orientation, reduced motion, final-frame and blank-frame checks.
+- No commit or push was made for this phase.

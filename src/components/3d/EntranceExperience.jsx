@@ -6,15 +6,17 @@ const BASE = import.meta.env.BASE_URL || '/';
 /**
  * One continuous, scroll-driven walkthrough.
  *
- * The merged sequence in /public/video-frames-final holds both halves of the
- * walk (ezgif-frame-001 ... -299, 1920x1080, 299 contiguous files):
+ * /public/video-frames-final holds the current 70-frame sequence
+ * (ezgif-frame-001 ... -070, 1280x720, 70 contiguous files):
  *
- *   frames 1 - 161   restaurant entrance  (exterior → glass doors)
- *   frames 162 - 299 the grand dining hall (inside the room)
+ *   frames 1 - 23   restaurant entrance  (hallway → glass doors)
+ *   frames 24 - 70  the grand dining hall (inside → buffet → final dish)
  *
- * /public/video-frames-final-phone carries the same 299 frames cropped to a
- * centred 640x1080 portrait tile. Narrow portrait phones use that set; every
- * other viewport keeps the original 1920x1080 sequence.
+ * Every viewport, phone included, uses this one set. The superseded
+ * 299-frame 640x1080 crop in /public/video-frames-final-phone belongs to the
+ * previous footage; it is deliberately no longer selected. `object-cover`
+ * keeps the portrait framing, and the current frames are already small
+ * enough (and few enough) that a second phone set is not required.
  *
  * Scroll position - not elapsed time - is the only source of truth: it picks
  * the frame AND drives the hand-over between the two content overlays.
@@ -23,21 +25,27 @@ const BASE = import.meta.env.BASE_URL || '/';
  * the end returns the dev server's index.html (200 text/html) instead of a
  * JPEG, which decodes to nothing and shows the stage's black background.
  */
-const FRAME_COUNT = 299;
+const FRAME_COUNT = 70;
 
 /**
  * Pinned scroll distance per frame, in vh.
  *
- * The original 56-frame entrance hero travelled 2.2vh per frame (≈123vh for
- * the whole entrance). The merged sequence samples that same footage about
- * 4.2x more densely, so the per-frame distance is scaled down to keep the
- * same scroll distance for the same footage: 161 frames x 0.765vh ≈ 123vh
- * of pinned travel for the entrance, ≈105vh for the dining room.
+ * The walkthrough should keep the same total pinned travel as before (about
+ * 229vh, so the Hero still releases at the same point on the page). The new
+ * sequence has 70 frames instead of 299, so the per-frame distance grows:
+ * 70 x 3.27vh ≈ 229vh. This keeps the section height at ≈329vh.
  */
-const SCROLL_VH_PER_FRAME = 0.765;
+const SCROLL_VH_PER_FRAME = 3.27;
 
-/** First dining-room frame, 1-based 162 → 0-based 161 (the hard cut). */
-const DINING_ROOM_FRAME = 161;
+/** First dining-room frame, 1-based 24 → 0-based 23 (the hard cut). */
+const DINING_ROOM_FRAME = 23;
+
+/**
+ * Bump when the files in the frame folders are replaced in place. The public
+ * folder is copied to the build without a content hash, so an unchanged
+ * filename can otherwise keep serving the previous sequence from cache.
+ */
+const ASSET_VERSION = '2026-10-23';
 
 /**
  * Half-width of the content dissolve, in scroll progress. The dissolve is
@@ -53,44 +61,34 @@ const TRANSITION_HALF_WIDTH = 0.04;
  */
 const MAX_LAYERS = 5;
 const NARROW_LAYERS = 4;
-const MAX_PREDICT_STEP = 32;
+/**
+ * Frame-index distances scale with the sequence: the old 299-frame figures
+ * were 32 / 38 / 80 / 64 frames. At 70 frames the equivalent distances are
+ * 8 / 9 / 19 / 15, so the end-of-sequence guards still describe a real
+ * stretch of the walk instead of swallowing the whole set.
+ */
+const MAX_PREDICT_STEP = 8;
 const DECODE_FALLBACK_MS = 300;
 /** A handful of evenly spaced fallback frames, fetched once at startup. */
-const LADDER_STEP = 38;
+const LADDER_STEP = 9;
 /** Only this far behind the scrub is an in-flight frame worth abandoning. */
-const STALE_DISTANCE = 80;
+const STALE_DISTANCE = 19;
 /**
  * Narrow screens only. A cold frame needs roughly 200-250 ms, and three lanes
  * started together finish together, so only one of the three can be shown per
  * round trip. Requesting the frame the scrub will be reading on arrival, and
  * starting the lanes a little apart, turns that batch into a steady stream.
  */
-const MAX_PREDICT_LEAD = 64;
+const MAX_PREDICT_LEAD = 15;
 const LOAD_PACING_MS = 80;
 /** Observed round trip before the first frame reports back, in ms. */
 const INITIAL_LATENCY = 120;
 
-const FULL_FRAME_FOLDER = 'video-frames-final';
-const PHONE_FRAME_FOLDER = 'video-frames-final-phone';
-const PHONE_MAX_WIDTH = 640;
-/* The phone tile covers the stage exactly while the portrait aspect ratio is
-   at or below 640/1080. Wider portrait windows need the original frame. */
-const PHONE_MAX_ASPECT = 640 / 1080;
+const FRAME_FOLDER = 'video-frames-final';
 
-const frameSrc = (index, variant = 'full') =>
-  `${BASE}${variant === 'phone' ? PHONE_FRAME_FOLDER : FULL_FRAME_FOLDER}/ezgif-frame-${String(index + 1).padStart(3, '0')}.jpg`;
-
-const viewportFrameVariant = () => {
-  if (typeof window === 'undefined') return 'full';
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  return width > 0 &&
-    height > width &&
-    width <= PHONE_MAX_WIDTH &&
-    width / height <= PHONE_MAX_ASPECT
-    ? 'phone'
-    : 'full';
-};
+/** One asset set for every viewport. */
+const frameSrc = (index) =>
+  `${BASE}${FRAME_FOLDER}/ezgif-frame-${String(index + 1).padStart(3, '0')}.jpg?v=${ASSET_VERSION}`;
 
 const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 
@@ -99,7 +97,6 @@ const smoothstep = (value) => value * value * (3 - 2 * value);
 
 export const EntranceExperience = () => {
   const trackRef = useRef(null);
-  const stageRef = useRef(null);
   const layersRef = useRef(
     Array.from({ length: MAX_LAYERS }, () => ({
       node: null,
@@ -108,7 +105,6 @@ export const EntranceExperience = () => {
       ready: false,
       token: 0,
       timer: 0,
-      variant: null,
     })),
   );
   const activeLayerRef = useRef(0);
@@ -140,7 +136,7 @@ export const EntranceExperience = () => {
    * Layout values that only change on resize, cached so a scroll frame does not
    * have to read the track's height or bounding rect.
    */
-  const metricsRef = useRef({ top: 0, scrollDistance: 0, viewport: 0 });
+  const metricsRef = useRef({ top: 0, scrollDistance: 0, viewport: 0, width: 0 });
   /** Phones and touch tablets get a smaller decode pool. */
   const narrowRef = useRef(false);
   const poolSizeRef = useRef(NARROW_LAYERS);
@@ -156,12 +152,6 @@ export const EntranceExperience = () => {
   const lastTargetAtRef = useRef(0);
   const lastLoadAtRef = useRef(0);
   const paceTimerRef = useRef(0);
-  /** Asset set for the current viewport. */
-  const variantRef = useRef(viewportFrameVariant());
-  /** Invalidates callbacks and low-priority prefetches from an older asset set. */
-  const sourceEpochRef = useRef(0);
-  /** The outgoing frame is painted on the stage until the new set is decoded. */
-  const switchBackgroundRef = useRef('');
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -170,20 +160,13 @@ export const EntranceExperience = () => {
       top: track.getBoundingClientRect().top + window.scrollY,
       scrollDistance: Math.max(0, track.offsetHeight - window.innerHeight),
       viewport: window.innerHeight,
+      width: window.innerWidth,
     };
-  }, []);
-
-  const clearSwitchBackground = useCallback(() => {
-    const stage = stageRef.current;
-    if (!stage || !switchBackgroundRef.current) return;
-    stage.style.backgroundImage = '';
-    switchBackgroundRef.current = '';
   }, []);
 
   const revealLayer = useCallback((layer) => {
     const node = layer.node;
     if (!node || layer.index === null || !layer.ready) return;
-    if (layer.variant !== variantRef.current) return;
     const active = layersRef.current[activeLayerRef.current];
     if (active === layer) {
       visibleIndexRef.current = layer.index;
@@ -194,8 +177,7 @@ export const EntranceExperience = () => {
     if (active?.node) active.node.style.opacity = '0';
     activeLayerRef.current = layersRef.current.indexOf(layer);
     visibleIndexRef.current = layer.index;
-    clearSwitchBackground();
-  }, [clearSwitchBackground]);
+  }, []);
 
   /**
    * Show the closest decoded frame instead of waiting for the exact target.
@@ -220,7 +202,6 @@ export const EntranceExperience = () => {
 
     for (const layer of layersRef.current) {
       if (!layer.ready || layer.index === null) continue;
-      if (layer.variant !== variantRef.current) continue;
       // A pre-decoded final frame is a fallback for the end of a fling, not
       // for the middle of the artwork. Do not jump the whole sequence early
       // just because that frame happens to be ready.
@@ -262,27 +243,14 @@ export const EntranceExperience = () => {
       layer.index = index;
       layer.loading = true;
       layer.ready = false;
-      layer.variant = variantRef.current;
-      const variant = layer.variant;
-      const epoch = sourceEpochRef.current;
       window.clearTimeout(layer.timer);
       const requestedAt = performance.now();
 
-      const src = frameSrc(index, variant);
+      const src = frameSrc(index);
       if ('fetchPriority' in node) node.fetchPriority = 'high';
 
       const finish = () => {
         if (layer.token !== token || !layer.loading) return;
-        if (
-          layer.variant !== variantRef.current ||
-          sourceEpochRef.current !== epoch
-        ) {
-          layer.loading = false;
-          layer.ready = false;
-          layer.index = null;
-          layer.variant = null;
-          return;
-        }
         if (node.getAttribute('src') !== src || node.naturalWidth === 0) {
           layer.loading = false;
           layer.ready = false;
@@ -307,7 +275,6 @@ export const EntranceExperience = () => {
         layer.loading = false;
         layer.ready = false;
         layer.index = null;
-        layer.variant = null;
       };
 
       node.onload = () => {
@@ -476,7 +443,6 @@ export const EntranceExperience = () => {
       layer.loading = false;
       layer.ready = false;
       layer.index = null;
-      layer.variant = null;
       if (layer.node) {
         layer.node.style.opacity = '0';
         layer.node.removeAttribute('src');
@@ -621,9 +587,6 @@ export const EntranceExperience = () => {
     const track = trackRef.current;
     if (!track) return;
 
-    const initialVariant = viewportFrameVariant();
-    variantRef.current = initialVariant;
-    sourceEpochRef.current += 1;
     narrowRef.current =
       window.matchMedia('(max-width: 1023px)').matches ||
       window.matchMedia('(pointer: coarse)').matches;
@@ -639,7 +602,6 @@ export const EntranceExperience = () => {
       layer.loading = false;
       layer.ready = index === 0;
       layer.index = index === 0 ? 0 : null;
-      layer.variant = index === 0 ? initialVariant : null;
       if (layer.node) {
         layer.node.style.opacity = index === 0 ? '1' : '0';
         if (index !== 0) layer.node.removeAttribute('src');
@@ -666,22 +628,14 @@ export const EntranceExperience = () => {
        is a fallback for a hard fling, not a background download. */
     let ladderCancelled = false;
     const warmLadder = async () => {
-      const ladderVariant = variantRef.current;
-      const ladderEpoch = sourceEpochRef.current;
       const ladderIndexes = [FRAME_COUNT - 1];
       for (let index = LADDER_STEP; index < FRAME_COUNT - 1; index += LADDER_STEP) {
         ladderIndexes.push(index);
       }
       for (const index of ladderIndexes) {
-        if (
-          ladderCancelled ||
-          variantRef.current !== ladderVariant ||
-          sourceEpochRef.current !== ladderEpoch
-        ) {
-          return;
-        }
+        if (ladderCancelled) return;
         try {
-          const response = await fetch(frameSrc(index, ladderVariant), {
+          const response = await fetch(frameSrc(index), {
             priority: 'low',
           });
           await response.arrayBuffer();
@@ -715,66 +669,24 @@ export const EntranceExperience = () => {
       });
     };
 
-    /* Orientation changes swap the whole asset set. Keep the outgoing frame
-       painted on the stage, invalidate every old request, then let the new
-       set decode behind it. The first new frame clears the stage background
-       in the same task that it becomes visible, so there is no black gap and
-       no moment where two asset sets are both showing. */
-    const applyVariant = (nextVariant) => {
-      if (nextVariant === variantRef.current) return;
-
-      const stage = stageRef.current;
-      const active = layers[activeLayerRef.current];
-      const oldSrc = active?.node?.currentSrc || active?.node?.src || '';
-      if (stage && oldSrc && active?.node?.naturalWidth) {
-        stage.style.backgroundImage = `url("${oldSrc.replace(/"/g, '\\"')}")`;
-        stage.style.backgroundSize = 'cover';
-        stage.style.backgroundPosition = 'center';
-        switchBackgroundRef.current = oldSrc;
-      }
-
-      sourceEpochRef.current += 1;
-      for (const layer of layers) {
-        window.clearTimeout(layer.timer);
-        layer.token += 1;
-        layer.loading = false;
-        layer.ready = false;
-        layer.index = null;
-        layer.variant = null;
-        if (layer.node) {
-          layer.node.style.opacity = '0';
-          layer.node.removeAttribute('src');
-        }
-      }
-
-      variantRef.current = nextVariant;
-      activeLayerRef.current = 0;
-      visibleIndexRef.current = -1;
-      directionRef.current = 1;
-      stepRef.current = 1;
-      velocityRef.current = 0;
-      keepFinalRef.current =
-        nextVariant === 'phone' &&
-        targetIndexRef.current >= FRAME_COUNT - 1 - LADDER_STEP * 2;
-      lastTargetAtRef.current = 0;
-      lastLoadAtRef.current = 0;
-      window.clearTimeout(settleTimerRef.current);
-      window.clearTimeout(paceTimerRef.current);
-      paceTimerRef.current = 0;
-
-      measure();
-      if (visibleRef.current) {
-        update();
-        scheduleRef.current?.();
-      }
-    };
-
+    /* Orientation changes only re-measure: every viewport shares the same
+       updated sequence, so there is no asset set to swap and no window in
+       which an old portrait crop can reappear. The track height is in vh, so
+       keep the same point of the walk after a width change instead of letting
+       an unchanged scrollY land near the final frame. A height-only resize
+       (mobile URL bar) is left alone. */
     const onResize = () => {
-      const nextVariant = viewportFrameVariant();
-      if (nextVariant !== variantRef.current) {
-        applyVariant(nextVariant);
-      } else {
-        measure();
+      const previous = metricsRef.current;
+      const progress =
+        previous.scrollDistance > 0
+          ? clamp01((window.scrollY - previous.top) / previous.scrollDistance)
+          : 0;
+      const widthChanged =
+        previous.width > 0 && window.innerWidth !== previous.width;
+      measure();
+      if (widthChanged && visibleRef.current) {
+        const { top, scrollDistance } = metricsRef.current;
+        window.scrollTo(0, top + progress * scrollDistance);
       }
       onScroll();
     };
@@ -848,10 +760,7 @@ export const EntranceExperience = () => {
     >
       {/* Pinned stage: the frame never leaves the viewport while the track
           scrolls past it, so the camera walk reads as one continuous take. */}
-      <div
-        ref={stageRef}
-        className="sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none"
-      >
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none">
         {/* The frame is swapped from scroll progress only, through a small
             pool of stacked layers. One is visible, the others hold decoded
             frames near the predicted scroll position. The last good frame
@@ -863,7 +772,7 @@ export const EntranceExperience = () => {
             ref={(node) => {
               layer.node = node;
             }}
-            src={index === 0 ? frameSrc(0, variantRef.current) : undefined}
+            src={index === 0 ? frameSrc(0) : undefined}
             alt=""
             aria-hidden="true"
             draggable={false}
@@ -888,11 +797,13 @@ export const EntranceExperience = () => {
         />
 
         {/* Dining text scrim: the dining copy sits at the bottom, so its
-            contrast comes from a low ellipse that is anchored to the bottom
-            edge (the copy is positioned in px, not %) and fades in with it. */}
+            contrast comes from a short, soft wash anchored to the bottom
+            edge. It covers the copy and fades out well above it; the old
+            19rem scrim plus the 36%-tall bottom fade stacked into a flat dark
+            band across the lower third of the frame. */}
         <div
           ref={bottomScrimRef}
-          className="absolute inset-x-0 bottom-0 h-[19rem] pointer-events-none bg-[radial-gradient(ellipse_62%_78%_at_50%_48%,rgba(9,10,12,0.5)_0%,rgba(9,10,12,0.3)_55%,transparent_86%)]"
+          className="absolute inset-x-0 bottom-0 h-[13rem] sm:h-[15rem] max-h-[32vh] pointer-events-none bg-[linear-gradient(to_top,rgba(9,10,12,0.52)_0%,rgba(9,10,12,0.3)_38%,rgba(9,10,12,0.1)_70%,transparent_100%)]"
           style={{ opacity: 0 }}
         />
 
@@ -900,9 +811,9 @@ export const EntranceExperience = () => {
             the corners ~91% black once combined with the flat tint). */}
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_58%,rgba(9,10,12,0.4)_100%)]" />
 
-        {/* Bottom fade for the scroll cue only — floor and furniture stay
-            legible (was black/80 across the whole lower half). */}
-        <div className="absolute inset-x-0 bottom-0 h-[36%] pointer-events-none bg-[linear-gradient(to_top,rgba(9,10,12,0.62)_0%,rgba(9,10,12,0.18)_45%,transparent_100%)]" />
+        {/* The scroll cue keeps its own text shadow; the wide 36% bottom fade
+            that used to sit here has been removed so the floor of the shot
+            stays visible underneath the copy. */}
 
         {/* Top blend under the fixed header so header and hero meet without
             a visible seam. Now a short gradient below the header line rather
