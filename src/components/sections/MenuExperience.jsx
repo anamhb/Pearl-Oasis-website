@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { 
-  Sparkles, 
-  BookOpen, 
-  ChevronRight, 
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import {
+  BookOpen,
+  ChevronLeft,
+  ChevronRight,
   X,
   CheckCircle2,
-  Utensils
 } from 'lucide-react';
 
-// Relevant Existing Dish Image Assets for the 10 Categories
+// Existing category images. Each tile uses the image that belongs to its
+// existing menu section; no new categories or stock photography are added.
 import soupImg from '../../assets/images/Chicken_soup.png';
 import chineseImg from '../../assets/images/Chowmen.png';
 import handiImg from '../../assets/images/royal_dum_biryani_1792250482066.jpg';
@@ -21,23 +21,6 @@ import tandoorImg from '../../assets/images/mint.png';
 import fastFoodImg from '../../assets/images/labenese_wrap.png';
 import pizzaImg from '../../assets/images/truffle_artisan_burger_1792250513993.jpg';
 
-/**
- * Exact 10 Categories in the Requested Reveal Sequence:
- * 
- * LEFT COLUMN:
- * 1. Soup
- * 2. Chinese Cuisine
- * 3. Traditional Handi
- * 4. Traditional BBQ
- * 5. BBQ Platters
- * 
- * RIGHT COLUMN:
- * 6. Oasis Rice
- * 7. Pakistani Karahi
- * 8. Traditional Tandoor
- * 9. Fast Food
- * 10. Chief Special Pizza Section
- */
 const LEFT_CARDS = [
   {
     id: 'soup',
@@ -127,7 +110,7 @@ const RIGHT_CARDS = [
     id: 'chief-special-pizza-section',
     step: 10,
     stepNumber: '10',
-    title: 'Chief Special Pizza Section',
+    title: "Chef's Special Pizza Section",
     categoryTag: 'Stone-Baked Crust',
     description: 'Hand-stretched sourdough pizzas loaded with tikka & mozzarella.',
     image: pizzaImg,
@@ -135,44 +118,37 @@ const RIGHT_CARDS = [
 ];
 
 const ALL_CARDS_IN_ORDER = [...LEFT_CARDS, ...RIGHT_CARDS].sort((a, b) => a.step - b.step);
+const CATEGORY_COUNT = ALL_CARDS_IN_ORDER.length;
 
-/**
- * Desktop scroll-driven reveal timing.
- *
- * These three values are deliberately independent of the 360vh pinned track, so
- * revealing a single card never costs a large slice of the track: the full
- * sequence (10 cards + button) is always exactly 11 identical steps long.
- *
- * MENU_REVEAL_TRIGGER_LINE  Vertical fraction of the viewport the "Our Menu"
- *                           heading must reach for the sequence to start.
- *                           0.2 = the top area of the screen, with the card
- *                           grid already visible below the heading.
- * MENU_REVEAL_STEP_LENGTH   Scrolling cost of ONE step, as a fraction of the
- *                           viewport height (0.15 ≈ one mouse-wheel notch on a
- *                           typical display, and it scales on other screens).
- * MENU_REVEAL_LAST_STEP     Final step: cards 1..10 then the button (step 11).
- */
-const MENU_REVEAL_TRIGGER_LINE = 0.2;
-const MENU_REVEAL_STEP_LENGTH = 0.15;
-const MENU_REVEAL_LAST_STEP = 11;
+const MENU_STEP = 3;
+const MENU_GAP = 14;
+const MENU_MIN_TILE_WIDTH = 176;
+const MENU_MAX_VISIBLE = 6;
+const MENU_HOVER_GROWTH = 0.32;
 
 export const MenuExperience = () => {
-  const sectionRef = useRef(null);
-  const introHeadingRef = useRef(null);
-  /* The scroll listener is global. Reading the heading rect on every scroll
-     while the hero is on screen forces a synchronous layout of the whole
-     document, which is the most expensive thing the page does during the
-     hero scrub. Only track the menu once it is within a viewport. */
-  const nearRef = useRef(false);
-  const [activeStep, setActiveStep] = useState(0);
-  // Mobile cards are revealed by their own IntersectionObserver, exactly like cards 2..10:
-  // nothing is hardcoded as visible, so Card 1 also has to come into view to appear.
-  const [mobileRevealedSteps, setMobileRevealedSteps] = useState(new Set());
+  const viewportRef = useRef(null);
+  const scrollTimerRef = useRef(null);
+  const programmaticScrollRef = useRef(false);
+  const indexRef = useRef(0);
+  const [layout, setLayout] = useState({
+    visible: MENU_MAX_VISIBLE,
+    tileWidth: 0,
+    imageHeight: 0,
+    trackWidth: 0,
+  });
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const [isFullMenuModalOpen, setIsFullMenuModalOpen] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const modalRef = useRef(null);
   const modalCloseRef = useRef(null);
   const modalOpenerRef = useRef(null);
+
+  const maxIndex = Math.max(0, CATEGORY_COUNT - layout.visible);
+  const canGoBack = !isMobile && activeIndex > 0;
+  const canGoForward = !isMobile && activeIndex < maxIndex;
 
   const openFullMenu = (event) => {
     modalOpenerRef.current = event?.currentTarget ?? null;
@@ -183,19 +159,89 @@ export const MenuExperience = () => {
     setIsFullMenuModalOpen(false);
   };
 
-  // Check prefers-reduced-motion accessibility preference
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
 
-    const handleChange = (e) => setPrefersReducedMotion(e.matches);
+    const handleChange = (event) => setPrefersReducedMotion(event.matches);
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  /* Full-menu dialog behavior: Escape closes, Tab stays inside, and focus
-     returns to the control that opened it. Backdrop click, the close button
-     and Escape all end in the same state change, so there is one close path. */
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return undefined;
+
+    let frame = 0;
+
+    const measure = () => {
+      const width = viewport.clientWidth;
+      const mobile = window.matchMedia('(max-width: 767px)').matches;
+
+      setIsMobile(mobile);
+
+      if (mobile || width === 0) {
+        setHoveredIndex(null);
+        setLayout({
+          visible: 1,
+          tileWidth: 0,
+          imageHeight: 0,
+          trackWidth: 0,
+        });
+        return;
+      }
+
+      const visible = Math.min(
+        MENU_MAX_VISIBLE,
+        Math.max(1, Math.floor((width + MENU_GAP) / (MENU_MIN_TILE_WIDTH + MENU_GAP))),
+      );
+      const tileWidth = (width - (visible - 1) * MENU_GAP) / visible;
+      const imageHeight = Math.round(tileWidth * 0.75);
+      const trackWidth = CATEGORY_COUNT * tileWidth + (CATEGORY_COUNT - 1) * MENU_GAP;
+      const nextMaxIndex = Math.max(0, CATEGORY_COUNT - visible);
+
+      setLayout({ visible, tileWidth, imageHeight, trackWidth });
+      setActiveIndex((previousIndex) => {
+        const nextIndex = Math.min(previousIndex, nextMaxIndex);
+        indexRef.current = nextIndex;
+        return nextIndex;
+      });
+    };
+
+    const scheduleMeasure = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(measure);
+    };
+
+    const observer = new ResizeObserver(scheduleMeasure);
+    observer.observe(viewport);
+    window.addEventListener('resize', scheduleMeasure);
+    measure();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener('resize', scheduleMeasure);
+    };
+  }, []);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport || isMobile || !layout.tileWidth) return;
+
+    const targetIndex = Math.min(indexRef.current, maxIndex);
+    const targetScroll = targetIndex * (layout.tileWidth + MENU_GAP);
+    if (Math.abs(viewport.scrollLeft - targetScroll) > 1) {
+      viewport.scrollLeft = targetScroll;
+    }
+  }, [isMobile, layout.tileWidth, layout.visible, maxIndex]);
+
+  useEffect(() => () => {
+    if (scrollTimerRef.current) window.clearTimeout(scrollTimerRef.current);
+  }, []);
+
+  /* Escape closes, Tab stays inside the dialog, and focus returns to the
+     tile or footer button that opened it. */
   useEffect(() => {
     if (!isFullMenuModalOpen) return undefined;
 
@@ -241,417 +287,252 @@ export const MenuExperience = () => {
     };
   }, [isFullMenuModalOpen]);
 
-  // Desktop Pinned Scroll-Driven Step Tracker
-  // Important: Section root MUST NOT have overflow: hidden, allowing sticky top: 0 to pin smoothly to viewport
-  const updateDesktopScroll = useCallback(() => {
-    if (!nearRef.current) return;
+  const syncIndexFromScroll = () => {
+    if (isMobile || !layout.tileWidth || programmaticScrollRef.current) return;
 
-    if (prefersReducedMotion) {
-      setActiveStep(MENU_REVEAL_LAST_STEP);
-      return;
-    }
+    const viewport = viewportRef.current;
+    if (!viewport) return;
 
-    // The sequence is anchored to the "Our Menu" heading. The heading sits in normal
-    // flow above the pinned track, so it moves 1:1 with the page scroll for the whole
-    // section (before, during and after the pin) and is therefore a stable reference
-    // that increases monotonically while scrolling down and unwinds when scrolling up.
-    const headingEl = introHeadingRef.current;
-    if (!headingEl) return;
-
-    const headingRect = headingEl.getBoundingClientRect();
-
-    // Below md the desktop intro is display:none (height 0): the mobile
-    // IntersectionObserver drives those cards instead, so this system stays inert.
-    if (headingRect.height === 0) return;
-
-    // ── ONE progress calculation for every card ───────────────────────────────
-    // Distance scrolled since the moment the heading reached the trigger line,
-    // expressed in whole reveal steps of identical length.
-    const stepLength = window.innerHeight * MENU_REVEAL_STEP_LENGTH;
-    const scrolledPastTrigger = window.innerHeight * MENU_REVEAL_TRIGGER_LINE - headingRect.top;
-    const stepsDone = Math.floor(scrolledPastTrigger / stepLength);
-
-    // ── ONE ordered ladder: card 1 → card 10 → button ─────────────────────────
-    // stepsDone <  0 : heading has not reached the trigger line yet → nothing shown
-    // stepsDone =  0 : Card 1 (Soup) begins revealing the instant the heading arrives
-    // stepsDone =  n : cards 1..n+1 (each identical step adds exactly one card)
-    // stepsDone >= 10: all 10 cards plus "Explore Full Menu". The button always takes
-    //                  one full step AFTER card 10, so scrolling up hides the button
-    //                  first and then unwinds the cards 10 → 1 in reverse order.
-    const step = Math.min(MENU_REVEAL_LAST_STEP, Math.max(0, stepsDone + 1));
-
-    setActiveStep((prev) => (prev !== step ? step : prev));
-  }, [prefersReducedMotion]);
-
-  useEffect(() => {
-    let rafId;
-    const handleScroll = () => {
-      if (!nearRef.current) return;
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updateDesktopScroll);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        nearRef.current = entry.isIntersecting;
-        if (entry.isIntersecting) updateDesktopScroll();
-      },
-      { rootMargin: '100% 0px' },
+    const rawIndex = viewport.scrollLeft / (layout.tileWidth + MENU_GAP);
+    const nextIndex = Math.min(maxIndex, Math.max(0, Math.round(rawIndex)));
+    indexRef.current = nextIndex;
+    setActiveIndex((previousIndex) =>
+      previousIndex === nextIndex ? previousIndex : nextIndex,
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
+  };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+  const scrollToIndex = (nextIndex, behavior) => {
+    const viewport = viewportRef.current;
+    const clampedIndex = Math.min(maxIndex, Math.max(0, nextIndex));
+    indexRef.current = clampedIndex;
+    setActiveIndex(clampedIndex);
+    setHoveredIndex(null);
 
-    return () => {
-      cancelAnimationFrame(rafId);
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, [updateDesktopScroll]);
+    if (!viewport || !layout.tileWidth) return;
 
-  // Mobile In-View Step Reveal
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setMobileRevealedSteps(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]));
-      return;
+    programmaticScrollRef.current = true;
+    if (scrollTimerRef.current) window.clearTimeout(scrollTimerRef.current);
+
+    viewport.scrollTo({
+      left: clampedIndex * (layout.tileWidth + MENU_GAP),
+      behavior,
+    });
+
+    scrollTimerRef.current = window.setTimeout(() => {
+      programmaticScrollRef.current = false;
+    }, behavior === 'smooth' ? 700 : 40);
+  };
+
+  const goToPrevious = () => {
+    scrollToIndex(activeIndex - MENU_STEP, prefersReducedMotion ? 'auto' : 'smooth');
+  };
+
+  const goToNext = () => {
+    scrollToIndex(activeIndex + MENU_STEP, prefersReducedMotion ? 'auto' : 'smooth');
+  };
+
+  const hoverEnabled =
+    !isMobile &&
+    !prefersReducedMotion &&
+    layout.tileWidth > 0 &&
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  const hoverWidth = layout.tileWidth * (1 + MENU_HOVER_GROWTH);
+  const peerWidth =
+    layout.tileWidth * (1 - MENU_HOVER_GROWTH / Math.max(1, layout.visible - 1));
+
+  const handleTilePointerEnter = (index, event) => {
+    if (!hoverEnabled || event.pointerType !== 'mouse') return;
+    setHoveredIndex(index);
+  };
+
+  const handleTilePointerLeave = (index, event) => {
+    if (event.pointerType !== 'mouse') return;
+    setHoveredIndex((currentIndex) => (currentIndex === index ? null : currentIndex));
+  };
+
+  const handleTileFocus = (index) => {
+    if (isMobile || !layout.tileWidth) return;
+
+    const firstVisible = activeIndex;
+    const lastVisible = activeIndex + layout.visible - 1;
+
+    if (index < firstVisible) {
+      scrollToIndex(index, 'instant');
+    } else if (index > lastVisible) {
+      scrollToIndex(index - layout.visible + 1, 'instant');
     }
+  };
 
-    const cardElements = document.querySelectorAll('[data-mobile-step]');
-    if (!cardElements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const stepVal = parseInt(entry.target.getAttribute('data-mobile-step') || '0', 10);
-          if (stepVal > 0) {
-            setMobileRevealedSteps((prev) => {
-              const next = new Set(prev);
-              if (entry.isIntersecting) {
-                next.add(stepVal);
-              } else {
-                if (entry.boundingClientRect.top > window.innerHeight * 0.75) {
-                  next.delete(stepVal);
-                }
-              }
-              return next;
-            });
-          }
-        });
-      },
-      {
-        threshold: 0.15,
-        rootMargin: '0px 0px -10% 0px',
+  const trackStyle = layout.tileWidth
+    ? {
+        '--menu-tile-width': `${layout.tileWidth}px`,
+        '--menu-image-height': `${layout.imageHeight}px`,
+        '--menu-track-width': `${layout.trackWidth}px`,
+        '--menu-hover-width': `${hoverWidth}px`,
+        '--menu-peer-width': `${peerWidth}px`,
       }
-    );
-
-    cardElements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [prefersReducedMotion]);
-
-  // Explore Full Menu Button takes one full step after the 10th card (step 11), so it is
-  // never visible unless Card 10 is, and scrolling up hides it before any card disappears.
-  const isExploreButtonVisibleDesktop = prefersReducedMotion || activeStep >= MENU_REVEAL_LAST_STEP;
-  const isExploreButtonVisibleMobile = prefersReducedMotion || mobileRevealedSteps.has(10) || mobileRevealedSteps.has(11);
+    : undefined;
 
   return (
     <section
       id="menu"
-      ref={sectionRef}
       className="relative bg-[#08090a] text-[#e5e2db] border-t border-[#1d1b16]"
-      style={{
-        // Desktop uses extended scroll track to drive the pinned 10-step reveal experience smoothly.
-        // Mobile resets to auto so normal vertical page scrolling remains fluid without dead space.
-      }}
-      aria-label="Our Menu"
+      aria-labelledby="menu-heading"
     >
-      {/* Ambient background glows (clipped inside its own container so section remains overflow: visible for sticky) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute left-1/4 top-32 w-96 h-96 rounded-full bg-[#d4af37]/8 blur-[140px]" />
         <div className="absolute right-1/4 bottom-32 w-96 h-96 rounded-full bg-[#ffd875]/6 blur-[130px]" />
         <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d4af37]/15 to-transparent" />
       </div>
 
-      {/* =========================================================================
-          DESKTOP SECTION INTRODUCTION (md and above)
-          - Kept in normal flow ABOVE the pinned track (same markup, typography
-            and styling as before, only repositioned).
-          - The pinned stage is exactly 100vh tall, so the intro must not consume
-            space inside it: otherwise the bottom of the 5-row, 2-column grid and
-            the "Explore Full Menu" button overflow past the bottom of the
-            viewport and get cut off on shorter screens (e.g. a 1366x768 display
-            with browser chrome + taskbar reduce the real viewport height).
-         ========================================================================= */}
-      <div className="menu-desktop-intro px-4 sm:px-6 lg:px-8 pt-8 pb-2">
-        <div className="text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#161512] border border-[#d4af37]/30 text-[10px] font-cinzel text-[#ffd875] tracking-[0.2em] uppercase mb-1.5 shadow-sm">
-            <Sparkles className="w-2.5 h-2.5 text-[#d4af37]" />
-            <span>Kohat Culinary Collection</span>
+      <div className="relative max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+        <div className="menu-carousel__header">
+          <div className="max-w-3xl">
+            <p className="text-[10px] font-cinzel text-[#ffd875] tracking-[0.2em] uppercase mb-3">
+              Kohat Culinary Collection
+            </p>
+            <h2
+              id="menu-heading"
+              className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl text-[#fcf9f2] font-normal tracking-tight max-w-2xl"
+            >
+              A Taste for Every Craving.
+            </h2>
+            <div className="w-20 h-0.5 bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-transparent mt-5 mb-4 opacity-80" />
+            <p className="text-sm sm:text-[15px] lg:text-base text-[#d8d0c2] font-sans leading-relaxed tracking-wide max-w-2xl">
+              Discover the flavours of Pearl Oasis, from satisfying favourites to dishes made for sharing.
+            </p>
           </div>
 
-          <h2
-            ref={introHeadingRef}
-            className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl text-[#fcf9f2] font-normal tracking-tight mb-2"
+          <div
+            className="menu-carousel__controls"
+            role="group"
+            aria-label="Menu carousel controls"
           >
-            Our Menu
-          </h2>
-
-          <div className="w-20 h-0.5 mx-auto bg-gradient-to-r from-transparent via-[#d4af37] to-transparent mb-2.5 opacity-80" />
-
-          <p className="text-sm sm:text-[15px] lg:text-base text-[#d8d0c2] font-sans leading-relaxed tracking-wide max-w-2xl mx-auto">
-            Pearl Oasis offers a rich variety of Pakistani traditional dishes, authentic Chinese cuisine, live charcoal BBQ, fragrant rice specialties, fresh tandoor breads, gourmet fast food, and signature pizzas.
-          </p>
-        </div>
-      </div>
-
-      {/* =========================================================================
-          DESKTOP PINNED PRESENTATION (md and above)
-          - Track height 360vh: provides plenty of scroll distance (~260vh of travel).
-          - Inner sticky container pinned at top-0 h-screen: stays locked in view
-            while the user scrolls, showing cards revealing one by one.
-          - Stage content is only the balanced 2-column grid (5 left + 5 right)
-            plus the "Explore Full Menu" button, so all five rows of both columns
-            and the button always fit inside the visible area of the viewport.
-          - "Explore Full Menu" button reveals cleanly once all 10 cards are revealed.
-         ========================================================================= */}
-      {/* The pinned stage is pulled up under the intro so the gap between the
-          intro paragraph and the first card row is small. The pull is bounded:
-          it stops at 14vh and never moves the cards above (navbar height + 24px)
-          while pinned, so the first row is never hidden behind the fixed navbar. */}
-      <div className="menu-desktop-stage mt-[min(0px,max(-14vh,calc(340px-50vh)))]" style={{ height: '360vh' }}>
-        <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 pt-12 pb-3 select-none">
-          <div className="max-w-5xl w-full mx-auto flex flex-col items-center justify-center gap-2.5 lg:gap-3.5 my-auto">
-
-            {/* 1. Balanced Two-Column Cards Grid */}
-            <div className="grid grid-cols-2 gap-3.5 lg:gap-5 w-full">
-              
-              {/* LEFT COLUMN: Categories 1 through 5 */}
-              <div className="flex flex-col space-y-2 lg:space-y-2.5">
-                {LEFT_CARDS.map((card) => {
-                  const isRevealed = prefersReducedMotion || activeStep >= card.step;
-                  return (
-                    <div
-                      key={card.id}
-                      className={`relative flex items-center gap-3.5 py-2 px-3 lg:py-2.5 lg:px-4 rounded-xl border transition-all duration-500 ease-out will-change-transform ${
-                        isRevealed
-                          ? 'opacity-100 translate-y-0 scale-100 bg-[#121419]/95 border-[#d4af37]/45 shadow-[0_4px_18px_rgba(0,0,0,0.6)] backdrop-blur-md hover:border-[#ffd875]/70'
-                          : 'opacity-0 translate-y-3 scale-95 pointer-events-none bg-[#0e1014]/20 border-transparent'
-                      }`}
-                    >
-                      {/* Dish Thumbnail */}
-                      <div className="relative w-12 h-12 lg:w-13 lg:h-13 rounded-lg overflow-hidden shrink-0 border border-[#d4af37]/40 bg-black/70 shadow-sm">
-                        <img
-                          src={card.image}
-                          alt={card.title}
-                          className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
-                        />
-                        <div className="absolute top-0.5 left-0.5 px-1 py-0.2 rounded bg-black/90 text-[8.5px] font-mono text-[#ffd875] border border-[#d4af37]/30 leading-none">
-                          {card.stepNumber}
-                        </div>
-                      </div>
-
-                      {/* Card Content */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-1 leading-none">
-                          <span className="text-[10px] lg:text-[10.5px] font-cinzel text-[#ffd875] tracking-[0.14em] uppercase font-semibold truncate">
-                            {card.categoryTag}
-                          </span>
-                          <span className="text-[9px] font-mono text-[#d4af37]/80 shrink-0">
-                            Course {card.stepNumber}
-                          </span>
-                        </div>
-                        <h3 className="font-serif-luxury text-sm lg:text-[15px] xl:text-base text-[#ffffff] font-medium leading-snug truncate mt-0.5">
-                          {card.title}
-                        </h3>
-                        <p className="text-[11px] lg:text-xs text-[#b5ada0] font-sans line-clamp-1 leading-tight mt-0.5">
-                          {card.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* RIGHT COLUMN: Categories 6 through 10 */}
-              <div className="flex flex-col space-y-2 lg:space-y-2.5">
-                {RIGHT_CARDS.map((card) => {
-                  const isRevealed = prefersReducedMotion || activeStep >= card.step;
-                  return (
-                    <div
-                      key={card.id}
-                      className={`relative flex items-center gap-3.5 py-2 px-3 lg:py-2.5 lg:px-4 rounded-xl border transition-all duration-500 ease-out will-change-transform ${
-                        isRevealed
-                          ? 'opacity-100 translate-y-0 scale-100 bg-[#121419]/95 border-[#d4af37]/45 shadow-[0_4px_18px_rgba(0,0,0,0.6)] backdrop-blur-md hover:border-[#ffd875]/70'
-                          : 'opacity-0 translate-y-3 scale-95 pointer-events-none bg-[#0e1014]/20 border-transparent'
-                      }`}
-                    >
-                      {/* Dish Thumbnail */}
-                      <div className="relative w-12 h-12 lg:w-13 lg:h-13 rounded-lg overflow-hidden shrink-0 border border-[#d4af37]/40 bg-black/70 shadow-sm">
-                        <img
-                          src={card.image}
-                          alt={card.title}
-                          className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
-                        />
-                        <div className="absolute top-0.5 left-0.5 px-1 py-0.2 rounded bg-black/90 text-[8.5px] font-mono text-[#ffd875] border border-[#d4af37]/30 leading-none">
-                          {card.stepNumber}
-                        </div>
-                      </div>
-
-                      {/* Card Content */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-1 leading-none">
-                          <span className="text-[10px] lg:text-[10.5px] font-cinzel text-[#ffd875] tracking-[0.14em] uppercase font-semibold truncate">
-                            {card.categoryTag}
-                          </span>
-                          <span className="text-[9px] font-mono text-[#d4af37]/80 shrink-0">
-                            Course {card.stepNumber}
-                          </span>
-                        </div>
-                        <h3 className="font-serif-luxury text-sm lg:text-[15px] xl:text-base text-[#ffffff] font-medium leading-snug truncate mt-0.5">
-                          {card.title}
-                        </h3>
-                        <p className="text-[11px] lg:text-xs text-[#b5ada0] font-sans line-clamp-1 leading-tight mt-0.5">
-                          {card.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-            </div>
-
-            {/* 2. "Explore Full Menu" Button: Appears only after all 10 cards appear */}
-            <div className="flex justify-center items-center h-11 shrink-0 mt-1">
-              <button
-                type="button"
-                onClick={openFullMenu}
-                tabIndex={isExploreButtonVisibleDesktop ? 0 : -1}
-                aria-hidden={!isExploreButtonVisibleDesktop}
-                className={`inline-flex items-center gap-2.5 px-7 py-2.5 rounded-full font-cinzel text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-xl cursor-pointer ${
-                  isExploreButtonVisibleDesktop
-                    ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-[#b8860b] text-[#0a0a0b] shadow-[0_4px_25px_rgba(212,175,55,0.45)] hover:scale-105 hover:shadow-[0_6px_30px_rgba(212,175,55,0.6)] active:scale-95'
-                    : 'opacity-0 translate-y-2 scale-95 pointer-events-none'
-                }`}
-              >
-                <BookOpen className="w-4 h-4 text-[#0a0a0b]" />
-                <span>Explore Full Menu</span>
-                <ChevronRight className="w-4 h-4 text-[#0a0a0b]" />
-              </button>
-            </div>
-
+            <button
+              type="button"
+              onClick={goToPrevious}
+              disabled={!canGoBack}
+              aria-label="Previous menu categories"
+              aria-controls="menu-carousel-viewport"
+              className="menu-carousel__arrow"
+            >
+              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={goToNext}
+              disabled={!canGoForward}
+              aria-label="Next menu categories"
+              aria-controls="menu-carousel-viewport"
+              className="menu-carousel__arrow"
+            >
+              <ChevronRight className="w-5 h-5" aria-hidden="true" />
+            </button>
           </div>
         </div>
-      </div>
 
-      {/* =========================================================================
-          SINGLE-COLUMN PRESENTATION (phones, and landscape phones where the
-          pinned desktop stage would be cut off — see .menu-mobile in index.css)
-          - Clean introductory header with improved typography
-          - Single vertical column in exact order 1 through 10
-          - Smooth natural touch scrolling without trapping
-          - Cards reveal gracefully as visitor scrolls down
-         ========================================================================= */}
-      <div className="menu-mobile px-4 py-12 sm:py-14">
-        {/* Mobile Header */}
-        <div className="text-center max-w-md mx-auto mb-5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#161512] border border-[#d4af37]/30 text-[10px] font-cinzel text-[#ffd875] tracking-widest uppercase mb-3">
-            <Sparkles className="w-3 h-3 text-[#d4af37]" />
-            <span>Kohat Culinary Collection</span>
+        <div
+          className="menu-carousel"
+          role="group"
+          aria-roledescription="carousel"
+          aria-label="Menu categories"
+        >
+          <div
+            id="menu-carousel-viewport"
+            ref={viewportRef}
+            className="menu-carousel__viewport"
+            onScroll={syncIndexFromScroll}
+          >
+            <div className="menu-carousel__track" style={trackStyle}>
+              {ALL_CARDS_IN_ORDER.map((card, index) => {
+                const isVisibleTile =
+                  index >= activeIndex && index < activeIndex + layout.visible;
+                const isHovered = hoveredIndex === index;
+                const isPeer = hoveredIndex !== null && isVisibleTile && !isHovered;
+                const tileClassName = [
+                  'menu-tile',
+                  isHovered ? 'menu-tile--hovered' : '',
+                  isPeer ? 'menu-tile--peer' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ');
+
+                return (
+                  <button
+                    key={card.id}
+                    type="button"
+                    onClick={openFullMenu}
+                    onFocus={() => handleTileFocus(index)}
+                    onPointerEnter={(event) => handleTilePointerEnter(index, event)}
+                    onPointerLeave={(event) => handleTilePointerLeave(index, event)}
+                    className={tileClassName}
+                    aria-label={`Open full menu: ${card.title}`}
+                  >
+                    <span className="menu-tile__media">
+                      <img
+                        src={card.image}
+                        alt=""
+                        loading={index < 6 ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                      <span className="menu-tile__step" aria-hidden="true">
+                        {card.stepNumber}
+                      </span>
+                    </span>
+                    <span className="menu-tile__body">
+                      <span className="menu-tile__tag">{card.categoryTag}</span>
+                      <span className="menu-tile__title">{card.title}</span>
+                      <span className="menu-tile__description">{card.description}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-          <h2 className="font-serif-luxury text-3xl sm:text-4xl text-[#fcf9f2] mb-2.5 font-normal">
-            Our Menu
-          </h2>
-          <div className="w-16 h-0.5 mx-auto bg-gradient-to-r from-transparent via-[#d4af37] to-transparent mb-3 opacity-80" />
-          <p className="text-sm text-[#d0c8b9] font-sans leading-relaxed">
-            Pearl Oasis offers Pakistani traditional dishes, authentic Chinese cuisine, live BBQ, fragrant rice, tandoor specialties, fast food, and signature pizzas.
+
+          <p className="sr-only" role="status" aria-live="polite">
+            {isMobile
+              ? ''
+              : `Showing ${Math.min(
+                  activeIndex + 1,
+                  CATEGORY_COUNT,
+                )} to ${Math.min(
+                  activeIndex + layout.visible,
+                  CATEGORY_COUNT,
+                )} of ${CATEGORY_COUNT} menu categories`}
           </p>
-        </div>
 
-        {/* 10 Vertical Cards */}
-        <div className="max-w-md mx-auto space-y-3.5">
-          {ALL_CARDS_IN_ORDER.map((card) => {
-            const isRevealed = prefersReducedMotion || mobileRevealedSteps.has(card.step);
-            return (
-              <div
-                key={card.id}
-                data-mobile-step={card.step}
-                className={`flex items-center gap-3.5 p-3 rounded-xl border transition-all duration-500 ease-out ${
-                  isRevealed
-                    ? 'opacity-100 translate-y-0 bg-[#121418]/95 border-[#d4af37]/45 shadow-lg'
-                    : 'opacity-0 translate-y-5 pointer-events-none bg-black/40 border-transparent'
-                }`}
-              >
-                <div className="relative w-15 h-15 rounded-lg overflow-hidden shrink-0 border border-[#d4af37]/40 bg-black/50">
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <span className="absolute top-1 left-1 px-1 py-0.2 rounded bg-black/80 text-[8px] font-mono text-[#ffd875]">
-                    #{card.stepNumber}
-                  </span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-cinzel text-[#ffd875] tracking-wider uppercase font-semibold block">
-                    {card.categoryTag}
-                  </span>
-                  <h4 className="font-serif-luxury text-base sm:text-lg text-[#ffffff] font-medium leading-snug truncate">
-                    {card.title}
-                  </h4>
-                  <p className="text-xs text-[#a89f92] font-sans line-clamp-1 mt-0.5">
-                    {card.description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-
-          {/* Explore Full Menu Button on Mobile (appears after card 10) */}
-          <div data-mobile-step="11" className="pt-6 pb-2 text-center">
+          <div className="menu-carousel__footer">
             <button
               type="button"
               onClick={openFullMenu}
-              tabIndex={isExploreButtonVisibleMobile ? 0 : -1}
-              aria-hidden={!isExploreButtonVisibleMobile}
-              className={`inline-flex items-center justify-center gap-2 min-h-11 px-7 py-3 rounded-full font-cinzel text-xs font-bold uppercase tracking-wider transition-all duration-500 shadow-xl cursor-pointer ${
-                isExploreButtonVisibleMobile
-                  ? 'opacity-100 scale-100 bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#0a0a0b] shadow-[0_4px_20px_rgba(212,175,55,0.4)] active:scale-95'
-                  : 'opacity-0 scale-90 pointer-events-none'
-              }`}
+              className="inline-flex items-center justify-center gap-2.5 min-h-11 px-7 py-3 rounded bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-[0.18em] shadow-[0_4px_20px_rgba(212,175,55,0.3)] transition-[transform,box-shadow] duration-300 hover:shadow-[0_6px_28px_rgba(212,175,55,0.45)] active:scale-[0.98] cursor-pointer"
             >
-              <BookOpen className="w-3.5 h-3.5 text-[#0a0a0b]" />
-              <span>Explore Full Menu</span>
-              <ChevronRight className="w-3.5 h-3.5 text-[#0a0a0b]" />
+              <BookOpen className="w-4 h-4" aria-hidden="true" />
+              <span>See Menu Sections</span>
+              <ChevronRight className="w-4 h-4" aria-hidden="true" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* =========================================================================
-          FULL MENU MODAL (Triggered by "Explore Full Menu")
-         ========================================================================= */}
       {isFullMenuModalOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
           onClick={closeFullMenu}
         >
-          <div 
+          <div
             ref={modalRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="full-menu-title"
-            className="relative max-w-4xl w-full max-h-[90vh] bg-[#111317] border border-[#d4af37]/50 rounded-2xl p-6 sm:p-8 text-[#e5e2db] shadow-[0_20px_60px_rgba(0,0,0,0.95)] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-4xl w-full max-h-[90vh] bg-[#111317] border border-[#d4af37]/50 rounded-xl p-6 sm:p-8 text-[#e5e2db] shadow-[0_20px_60px_rgba(0,0,0,0.95)] overflow-y-auto"
+            onClick={(event) => event.stopPropagation()}
           >
-            {/* Top gold line */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent" />
 
-            {/* Close button */}
             <button
               ref={modalCloseRef}
               onClick={closeFullMenu}
@@ -661,25 +542,23 @@ export const MenuExperience = () => {
               <X className="w-5 h-5" />
             </button>
 
-            {/* Modal Header */}
             <div className="text-center mb-6 pr-8">
               <span className="text-[10px] font-cinzel text-[#d4af37] uppercase tracking-[0.25em] block mb-1">
                 Pearl Oasis Grand Dining
               </span>
               <h3 id="full-menu-title" className="font-serif-luxury text-2xl sm:text-3xl text-[#fbf6ec]">
-                Complete Culinary Catalog
+                Menu Sections
               </h3>
               <p className="text-xs sm:text-sm text-[#a39b8e] font-sans mt-2 max-w-xl mx-auto">
-                Explore our full culinary portfolio: Pakistani traditional karahis & clay handis, fresh tandoor flatbreads, wok stir-fries, live charcoal BBQ, and artisanal pizzas.
+                Explore our full culinary portfolio: Pakistani traditional karahis &amp; clay handis, fresh tandoor flatbreads, wok stir-fries, live charcoal BBQ, and artisanal pizzas.
               </p>
             </div>
 
-            {/* 10 Sections Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
               {ALL_CARDS_IN_ORDER.map((item) => (
                 <div
                   key={item.id}
-                  className="p-3 sm:p-3.5 rounded-xl bg-[#16181d] border border-[#2b271f] flex items-center gap-3.5 hover:border-[#d4af37]/40 transition-colors"
+                  className="p-3 sm:p-3.5 rounded-xl bg-[#16181d] border border-[#2b271f] flex items-center gap-3.5 transition-colors"
                 >
                   <img
                     src={item.image}
@@ -698,7 +577,7 @@ export const MenuExperience = () => {
                     <h4 className="font-serif-luxury text-base text-[#fbf6ec] font-medium leading-tight">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-[#9c9384] font-sans mt-0.5 leading-relaxed line-clamp-1">
+                    <p className="text-xs text-[#9c9384] font-sans mt-0.5 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -706,33 +585,30 @@ export const MenuExperience = () => {
               ))}
             </div>
 
-            {/* Modal Footer Call-To-Action */}
             <div className="mt-6 pt-5 border-t border-[#232018] flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-xs text-[#a09789]">
                 <CheckCircle2 className="w-4 h-4 text-[#d4af37]" />
-                <span>100% Zabiha Halal • Freshly prepared to order in Kohat</span>
+                <span>Freshly prepared to order in Kohat</span>
               </div>
               <div className="flex items-center gap-3">
                 <button
                   onClick={closeFullMenu}
-                  className="inline-flex items-center justify-center min-h-11 px-4 py-2 rounded-lg border border-[#3b362c] text-xs font-cinzel text-[#c2baa8] hover:text-white transition-colors uppercase tracking-wider cursor-pointer"
+                  className="inline-flex items-center justify-center min-h-11 px-4 py-2 rounded border border-[#3b362c] text-xs font-cinzel text-[#c2baa8] hover:text-white transition-colors uppercase tracking-wider cursor-pointer"
                 >
                   Close
                 </button>
                 <a
                   href="tel:+923327515538"
                   onClick={closeFullMenu}
-                  className="inline-flex items-center justify-center min-h-11 px-5 py-2 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center min-h-11 px-5 py-2 rounded bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
                 >
-                  Reserve Table & Order
+                  Call to Reserve
                 </a>
               </div>
             </div>
-
           </div>
         </div>
       )}
-
     </section>
   );
 };

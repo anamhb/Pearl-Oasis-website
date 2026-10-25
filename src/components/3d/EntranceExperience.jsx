@@ -531,6 +531,20 @@ export const EntranceExperience = () => {
       cache[key] = value;
       node.style[property] = value;
     };
+    /* Keep the tab order in step with the visible phase. The copy that has
+       faded out must not stay reachable, and the dining copy must stay out of
+       the tab order until it is actually on screen. */
+    const setInert = (node, key, hidden) => {
+      if (!node || cache[key] === hidden) return;
+      cache[key] = hidden;
+      if (hidden) {
+        node.setAttribute('inert', '');
+        node.setAttribute('aria-hidden', 'true');
+      } else {
+        node.removeAttribute('inert');
+        node.removeAttribute('aria-hidden');
+      }
+    };
 
     setStyle(
       entranceContentRef.current,
@@ -581,6 +595,12 @@ export const EntranceExperience = () => {
       'opacity',
       String(clamp01(1 - mix / 0.2)),
     );
+
+    /* Opacity is the source of truth: once a layer has effectively faded, it
+       leaves the keyboard order until it fades back in. */
+    setInert(entranceContentRef.current, 'entranceInert', mix > 0.95);
+    setInert(diningContentRef.current, 'diningInert', mix < 0.05);
+    setInert(entranceCueRef.current, 'cueInert', mix >= 0.2);
   }, [showFrame, measure]);
 
   useEffect(() => {
@@ -747,7 +767,13 @@ export const EntranceExperience = () => {
       secondSection.dataset.scrollAlign === 'top' ? 0 : headerHeight;
     const targetY =
       secondSection.getBoundingClientRect().top + window.scrollY - alignment;
-    window.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
+    /* Reduced-motion users jump straight there; everyone else keeps the
+       existing glide. The scroll target and header offset are unchanged. */
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({
+      top: Math.max(targetY, 0),
+      behavior: reduceMotion ? 'auto' : 'smooth',
+    });
   };
 
   return (
@@ -827,9 +853,17 @@ export const EntranceExperience = () => {
           style={{ opacity: 1, transform: 'none', pointerEvents: 'auto' }}
         >
           <div className="flex flex-col items-center max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto w-full">
-            {/* Meaningful Eyebrow */}
-            <span className="hero-eyebrow text-[10px] sm:text-xs md:text-sm font-cinzel tracking-[0.25em] sm:tracking-[0.35em] text-[#fed766] uppercase font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] mb-2 sm:mb-3">
-              Fine Dining &amp; Flame-Grilled Cuisine
+            {/* Meaningful Eyebrow. The soft local scrim keeps the 10px gold
+                label above 4.5:1 over the brightest frames without darkening
+                the rest of the shot. */}
+            <span className="hero-eyebrow relative isolate inline-flex items-center justify-center mb-2 sm:mb-3 text-[10px] sm:text-xs md:text-sm font-cinzel tracking-[0.25em] sm:tracking-[0.35em] text-[#fed766] uppercase font-semibold">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-x-7 -inset-y-2 -z-10 rounded-full bg-[#090a0c]/70 blur-sm"
+              />
+              <span className="relative drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+                Fine Dining &amp; Flame-Grilled Cuisine
+              </span>
             </span>
 
             {/* Heading */}
@@ -845,7 +879,7 @@ export const EntranceExperience = () => {
             {/* Enter Restaurant button with no icon, navigates to second section */}
             <button
               onClick={handleEnterClick}
-              className="hero-cta px-6 py-2.5 sm:px-8 sm:py-3.5 md:px-10 md:py-4 rounded bg-gradient-to-r from-[#d4af37] via-[#f5d78e] to-[#aa8010] text-[#0e0f12] font-cinzel text-[11px] sm:text-xs md:text-sm font-bold tracking-[0.18em] sm:tracking-[0.25em] uppercase shadow-[0_4px_24px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_32px_rgba(212,175,55,0.65)] hover:scale-105 active:scale-95 transition-all duration-300"
+              className="hero-cta inline-flex items-center justify-center min-h-11 px-6 py-2.5 sm:px-8 sm:py-3.5 md:px-10 md:py-4 rounded bg-gradient-to-r from-[#d4af37] via-[#f5d78e] to-[#aa8010] text-[#0e0f12] font-cinzel text-[11px] sm:text-xs md:text-sm font-bold tracking-[0.18em] sm:tracking-[0.25em] uppercase shadow-[0_4px_24px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_32px_rgba(212,175,55,0.65)] hover:scale-105 active:scale-95 transition-all duration-300"
             >
               Enter Restaurant
             </button>
@@ -859,8 +893,8 @@ export const EntranceExperience = () => {
           >
             <button
               onClick={handleEnterClick}
-              className="flex flex-col items-center gap-1 sm:gap-2 group cursor-pointer"
-              aria-label="Scroll to Our Story"
+              className="flex min-h-11 flex-col items-center justify-center gap-1 sm:gap-2 group cursor-pointer"
+              aria-label="Unfold the story: scroll to Our Story"
             >
               <span className="hero-cue-label text-[9px] sm:text-xs md:text-sm font-cinzel font-bold tracking-[0.22em] sm:tracking-[0.28em] text-[#ffd875] group-hover:text-white transition-colors uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                 UNFOLD THE STORY
@@ -877,6 +911,8 @@ export const EntranceExperience = () => {
           ref={diningContentRef}
           className="absolute inset-0 z-20 flex flex-col items-center justify-end px-4 sm:px-6 pb-10 sm:pb-12 md:pb-16 text-center will-change-[opacity,transform]"
           style={{ opacity: 0, transform: 'translateY(20px)', pointerEvents: 'none' }}
+          inert=""
+          aria-hidden="true"
         >
           <button
             onClick={handleEnterClick}

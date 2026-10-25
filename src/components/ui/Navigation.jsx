@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrandWordmark } from '../brand/BrandWordmark.jsx';
 import { Menu, X } from 'lucide-react';
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +14,20 @@ export const Navigation = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  /* Escape closes the open panel and puts focus back on the control that
+     opened it, so keyboard users are never dropped at the top of the page. */
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      setIsMobileMenuOpen(false);
+      menuButtonRef.current?.focus();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
 
   return (
     <header
@@ -61,16 +76,18 @@ export const Navigation = () => {
         <div className="flex items-center gap-4 shrink-0">
           <a
             href="#menu"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#12110d] font-cinzel text-xs font-bold tracking-[0.18em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_20px_rgba(212,175,55,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap shrink-0"
+            className="hidden sm:inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#12110d] font-cinzel text-xs font-bold tracking-[0.18em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_20px_rgba(212,175,55,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap shrink-0"
           >
             <span>View Menu</span>
           </a>
 
           <button
+            ref={menuButtonRef}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden flex h-11 w-11 items-center justify-center rounded-full text-[#d4af37] hover:text-white transition-colors"
             aria-label="Toggle navigation menu"
             aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -78,7 +95,10 @@ export const Navigation = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#0e0f12] border-b border-[#2b271d] px-6 py-6 transition-all max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain">
+        <div
+          id="mobile-navigation"
+          className="lg:hidden bg-[#0e0f12] border-b border-[#2b271d] px-6 py-6 transition-all max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain"
+        >
           <nav className="flex flex-col gap-4 text-sm font-cinzel tracking-[0.2em] text-[#d6d3cd] uppercase">
             <a
               href="#story"

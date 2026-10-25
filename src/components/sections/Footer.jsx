@@ -4,7 +4,9 @@ import { MapPin, Phone, Clock, Instagram, Facebook, Twitter, ArrowUp } from 'luc
 
 export const Footer = () => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    /* Reduced-motion users jump; everyone else keeps the existing glide. */
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
   return (
@@ -52,27 +54,27 @@ export const Footer = () => {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
+            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
               Explore
-            </h4>
+            </h3>
             <ul className="space-y-0.5 text-xs font-sans">
               <li>
-                <a href="#story" className="inline-flex items-center min-h-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="#story" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Our Story
                 </a>
               </li>
               <li>
-                <a href="#signature" className="inline-flex items-center min-h-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="#signature" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Featured Dishes
                 </a>
               </li>
               <li>
-                <a href="#menu" className="inline-flex items-center min-h-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="#menu" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Menu
                 </a>
               </li>
               <li>
-                <a href="#experience" className="inline-flex items-center min-h-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="#experience" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Testimonials
                 </a>
               </li>
@@ -80,9 +82,9 @@ export const Footer = () => {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
+            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
               Opening Hours
-            </h4>
+            </h3>
             <div className="space-y-2 text-xs font-sans">
               <div className="flex items-start gap-2">
                 <Clock className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
@@ -111,9 +113,9 @@ export const Footer = () => {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
+            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
               Sanctuary Location
-            </h4>
+            </h3>
             <div className="space-y-2 text-xs font-sans">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
@@ -133,7 +135,7 @@ export const Footer = () => {
 
         <div className="border-t border-[#1d1b16] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#a39a8c]">
           <div>
-            © {new Date().getFullYear()} Pearl Oasis Restaurant. All rights reserved. Culinary and address details are editable placeholders.
+            © {new Date().getFullYear()} Pearl Oasis Restaurant. All rights reserved.
           </div>
 
           <button

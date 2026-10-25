@@ -117,6 +117,12 @@
 /* Continuous decorative motion is switched off for reduced-motion users.
    Scroll-driven choreography keeps its own handling inside each component. */
 @media (prefers-reduced-motion: reduce) {
+  /* Anchor jumps and handler-driven scrolls become immediate. The Hero's
+     scroll mapping is untouched; only the easing of the jump changes. */
+  html {
+    scroll-behavior: auto !important;
+  }
+
   .animate-bounce,
   .animate-spin-slow,
   .animate-spin-reverse-slow,
@@ -128,113 +134,363 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Testimonials — stacked-card scroll experience (Courses-style)
-   Pure CSS: each panel is sticky, and the card is flex-centred inside it, so the
-   card always settles on the viewport centre line (top 5vh + 90vh / 2 = 50vh)
-   whatever the quote length. Panels pin one after another and paint in order
-   (z-index grows per card), so each incoming card slides up onto the same
-   central position and covers the previous one, while --stack-offset keeps a
-   18px top edge of the earlier cards visible as a neat pile — with five cards
-   the pile spans -36 / -18 / 0 / +18 / +36px around that centre line, so the
-   alternating light and dark faces of the earlier cards stay visible.
+   Testimonials: one card per side, independent sequences
+
+   The heading stays in normal flow. Below it, the film is a full-width,
+   reduced-height layer, not an inset panel. The source is cropped with a
+   bottom-biased focal position so the copper bowl and its base stay in frame.
+   One glass card sits on each side of the open centre. Each side has its own
+   sequence and arrow. No tint, gradient, vignette or filter is applied.
+
+   From 768px the film is absolute inside the full-width stage and the cards
+   overlay its sides. Below 768px the film returns to normal flow and the two
+   cards stack, each with its own arrow.
 --------------------------------------------------------------------------- */
-.testimonial-stack__item {
-  position: sticky;
-  top: 5vh;
-  height: 90vh;
+.testimonial-stage {
+  --testimonial-arrow-size: 2.75rem;
+  --testimonial-film-height: min(68vh, calc(100vw * 9 / 16));
+  --testimonial-card-column: 13rem;
+  --testimonial-column-gap: 0.75rem;
+  position: relative;
+  min-height: var(--testimonial-film-height);
+  isolation: isolate;
+}
+
+.testimonial-film {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  width: 100%;
+  height: var(--testimonial-film-height);
+  overflow: hidden;
+  border-block: 1px solid rgba(212, 175, 55, 0.24);
+  border-inline: 0;
+  background: #0a0b0d;
+  pointer-events: none;
+}
+
+.testimonial-film__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  filter: none;
+}
+
+.testimonial-stage__grid {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns:
+    var(--testimonial-card-column)
+    minmax(0, 1fr)
+    var(--testimonial-card-column);
+  grid-template-areas:
+    "left-card center right-card"
+    "left-nav center right-nav";
+  column-gap: var(--testimonial-column-gap);
+  row-gap: 0.75rem;
+  align-items: start;
+  padding-block: 1.5rem 3rem;
+}
+
+.testimonial-stage__center {
+  grid-area: center;
+  min-width: 0;
+}
+
+.testimonial-column {
+  min-width: 0;
+}
+
+.testimonial-column--left {
+  grid-area: left-card;
+}
+
+.testimonial-column--right {
+  grid-area: right-card;
+}
+
+.testimonial-nav {
   display: flex;
+  min-width: 0;
+  align-items: center;
+}
+
+.testimonial-nav--left {
+  grid-area: left-nav;
+  justify-content: flex-start;
+}
+
+.testimonial-nav--right {
+  grid-area: right-nav;
+  justify-content: flex-end;
+}
+
+.testimonial-arrow {
+  display: inline-flex;
+  width: var(--testimonial-arrow-size);
+  height: var(--testimonial-arrow-size);
   align-items: center;
   justify-content: center;
-  /* The transparent full-height panels must not swallow hover/selection of the
-     cards underneath them — the card re-enables pointer events for itself. */
-  pointer-events: none;
-  z-index: 1; /* raised inline per card so later cards paint above earlier ones */
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  border-radius: 9999px;
+  background: rgba(10, 11, 13, 0.72);
+  color: #e7c873;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 10px 28px -18px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(246, 239, 228, 0.08);
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
 }
 
-/* The first panel is deliberately shorter so the first card starts closer to the
-   section heading (a shorter panel means the flex-centred card sits nearer the
-   panel's own top edge). Centring is untouched because the pin line moves with
-   the panel: top 15vh + 70vh / 2 = 50vh, exactly like the full-height panels
-   (5vh + 90vh / 2 = 50vh), so the first card still settles on the centre line.
+.testimonial-arrow:hover {
+  border-color: rgba(212, 175, 55, 0.78);
+  background: rgba(212, 175, 55, 0.16);
+  color: #f7e3ad;
+  box-shadow:
+    0 12px 30px -18px rgba(0, 0, 0, 0.95),
+    inset 0 0 0 1px rgba(212, 175, 55, 0.22);
+}
 
-   Only applied where the card demonstrably fits: the pile shifts the first card
-   up by (cards - 1) / 2 * 18px = 36px, so the panel must leave more than that
-   above the card. Narrow viewports wrap the quote onto more lines (a taller
-   card), so there the full-height panel is kept — the heading margin reduction
-   still applies. Tuned from measured card heights: 287px at the full 576px card
-   width, up to 437px at a 320px viewport width. */
-@media (min-width: 768px), (min-height: 730px) {
-  .testimonial-stack__item:first-child {
-    top: 15vh;
-    height: 70vh;
+.testimonial-arrow:focus-visible {
+  outline: 2px solid #d4af37;
+  outline-offset: 3px;
+}
+
+/* One glass treatment for all five cards. The panes are dark enough to keep
+   the placeholder copy readable over moving footage, while the 16px blur and
+   gold hairline keep the film present. The fallback replaces the transparent
+   pane with a solid charcoal surface when backdrop-filter is unavailable. */
+.testimonial-card {
+  position: relative;
+  width: 100%;
+  padding: 1.25rem;
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  border-radius: 0.75rem;
+  background-color: transparent;
+  background-image:
+    linear-gradient(
+      150deg,
+      rgba(212, 175, 55, 0.07),
+      rgba(212, 175, 55, 0) 42%
+    ),
+    linear-gradient(
+      165deg,
+      rgba(10, 11, 13, 0.76) 0%,
+      rgba(10, 11, 13, 0.8) 52%,
+      rgba(10, 11, 13, 0.84) 100%
+    );
+  -webkit-backdrop-filter: blur(16px) saturate(118%);
+  backdrop-filter: blur(16px) saturate(118%);
+  box-shadow:
+    0 28px 64px -36px rgba(0, 0, 0, 0.98),
+    inset 0 1px 0 rgba(246, 239, 228, 0.08);
+  outline: none;
+  transform: perspective(1100px) rotateY(var(--testimonial-tilt, 0deg));
+  transform-origin: center;
+  transition:
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+/* Inward-facing tilts: left cards turn their faces toward the centre, right
+   cards mirror them. The angle is intentionally small so the quote remains
+   easy to read and the transformed corners stay inside the column gap. */
+.testimonial-card--left {
+  --testimonial-tilt: 2.5deg;
+}
+
+.testimonial-card--right {
+  --testimonial-tilt: -2.5deg;
+}
+
+@media (hover: hover) {
+  .testimonial-card--left:hover {
+    transform: perspective(1100px) rotateY(0.6deg) translateY(-2px);
+  }
+
+  .testimonial-card--right:hover {
+    transform: perspective(1100px) rotateY(-0.6deg) translateY(-2px);
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(212, 175, 55, 0.55);
   }
 }
 
-.testimonial-stack__card {
-  pointer-events: auto;
-  /* Stagger is set inline per card. Relative positioning only shifts paint, so
-     the sticky geometry of the panels is never affected. */
-  top: var(--stack-offset, 0px);
+.testimonial-card:focus-visible {
+  border-color: rgba(212, 175, 55, 0.7);
+  outline: 2px solid #d4af37;
+  outline-offset: 4px;
+  box-shadow:
+    0 30px 70px -34px rgba(0, 0, 0, 0.98),
+    inset 0 0 0 1px rgba(212, 175, 55, 0.35);
 }
 
-/* Two-column deck (tablet and up). The cards alternate sides so the film stays
-   open down the middle. `mx-auto` on the card would defeat justify-content in
-   this flex row, so the side rules replace it with a single auto margin, which
-   is what actually pushes the card to its edge. Below 768px the deck keeps its
-   single centred column — two cards plus a gutter do not fit. */
+.testimonial-card--left:focus-visible {
+  transform: perspective(1100px) rotateY(0.6deg) translateY(-2px);
+}
+
+.testimonial-card--right:focus-visible {
+  transform: perspective(1100px) rotateY(-0.6deg) translateY(-2px);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .testimonial-card {
+    background-color: #111216;
+    background-image: none;
+  }
+}
+
+/* The cards enter from their own side, away from the centre, so the small
+   entrance never travels across the bowl. */
+@keyframes testimonial-card-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes testimonial-card-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.testimonial-card__body {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+  animation: testimonial-card-in-left 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.testimonial-card__body--right {
+  animation-name: testimonial-card-in-right;
+}
+
 @media (min-width: 768px) {
-  .testimonial-stack__item--left {
-    justify-content: flex-start;
-  }
-
-  .testimonial-stack__item--right {
-    justify-content: flex-end;
-  }
-
-  .testimonial-stack__item--left .testimonial-stack__card {
-    margin-left: 0;
-    margin-right: auto;
-  }
-
-  .testimonial-stack__item--right .testimonial-stack__card {
-    margin-left: auto;
-    margin-right: 0;
+  .testimonial-card {
+    padding: 1rem;
   }
 }
 
-/* Reduced motion, and viewports shorter than 560px (where a card may not fit
-   inside a 90vh panel): no pinning at all — a plain centred column that keeps
-   every testimonial fully readable. */
-@media (prefers-reduced-motion: reduce), (max-height: 560px) {
-  /* The :first-child override above is more specific than the base rule, so it
-     has to be reset here as well — otherwise the static column would keep the
-     first item 70vh tall. */
-  .testimonial-stack__item,
-  .testimonial-stack__item:first-child {
-    position: static;
-    top: auto;
-    height: auto;
-    display: block;
+@media (min-width: 1024px) {
+  .testimonial-stage {
+    --testimonial-card-column: 15rem;
+    --testimonial-column-gap: 0.75rem;
   }
 
-  .testimonial-stack__item + .testimonial-stack__item {
-    margin-top: 1.5rem;
+  .testimonial-stage__grid {
+    grid-template-columns:
+      var(--testimonial-arrow-size)
+      var(--testimonial-card-column)
+      minmax(0, 1fr)
+      var(--testimonial-card-column)
+      var(--testimonial-arrow-size);
+    grid-template-areas: "left-nav left-card center right-card right-nav";
+    row-gap: 0;
   }
 
-  .testimonial-stack__card {
-    top: 0;
+  .testimonial-nav {
+    align-self: center;
   }
 
-  /* The static fallback is one readable column, so the desktop side placement
-     has to be undone here (this block comes after the min-width rules). */
-  .testimonial-stack__item--left .testimonial-stack__card,
-  .testimonial-stack__item--right .testimonial-stack__card {
-    margin-left: auto;
-    margin-right: auto;
+  .testimonial-card {
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .testimonial-stage {
+    --testimonial-card-column: 18rem;
+    --testimonial-column-gap: 1rem;
+  }
+}
+
+/* Phones: the film returns to normal flow, then the two visible cards stack,
+   each with its own arrow. Tilts are removed so a full-width card never leans
+   against a phone edge. */
+@media (max-width: 767px) {
+  .testimonial-stage {
+    --testimonial-film-height: min(42vh, calc(100vw * 9 / 16));
+    min-height: 0;
   }
 
-  .testimonial-stack__spacer {
+  .testimonial-film {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: var(--testimonial-film-height);
+  }
+
+  .testimonial-stage__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-block: 1.5rem 3rem;
+  }
+
+  .testimonial-stage__center {
     display: none;
+  }
+
+  .testimonial-nav {
+    width: 100%;
+  }
+
+  .testimonial-card,
+  .testimonial-card--left,
+  .testimonial-card--right {
+    --testimonial-tilt: 0deg;
+    transform: none;
+  }
+
+  .testimonial-card--left:hover,
+  .testimonial-card--right:hover,
+  .testimonial-card--left:focus-visible,
+  .testimonial-card--right:focus-visible {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-card,
+  .testimonial-card--left,
+  .testimonial-card--right,
+  .testimonial-card--left:hover,
+  .testimonial-card--right:hover,
+  .testimonial-card--left:focus-visible,
+  .testimonial-card--right:focus-visible {
+    --testimonial-tilt: 0deg;
+    transform: none;
+    transition: none;
+  }
+
+  .testimonial-card__body {
+    animation: none;
+  }
+
+  .testimonial-arrow {
+    transition: none;
   }
 }
 
@@ -254,41 +510,294 @@ section[id],
   }
 }
 
-/* ── Menu: which presentation is active ──────────────────────────────────────
-   Desktop gets the pinned five-row stage, which needs roughly 480px of viewport
-   height to fit both columns plus the button. Phones — and landscape phones
-   that are only ~390px tall — get the single-column list, which scrolls
-   normally instead of being clipped by a 100vh sticky stage.
-   The desktop scroll tracker reads the intro heading's height and deactivates
-   itself when that heading is display:none, so only one system runs at a time. */
-.menu-desktop-intro,
-.menu-desktop-stage {
+/* ── Menu: expanding-tile carousel ──────────────────────────────────────────
+   The header stays in normal flow. The track is clipped by its own viewport,
+   so the page never gains horizontal overflow. Desktop tile widths, track
+   width and scroll offsets are calculated from the measured viewport and the
+   shared gap in MenuExperience.jsx. On phones the same track becomes a native
+   scroll-snap row with the next tile peeking into view. */
+.menu-carousel__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.25rem;
+}
+
+.menu-carousel__controls {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.625rem;
+  padding-bottom: 0.25rem;
+}
+
+.menu-carousel__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  border-radius: 9999px;
+  background: rgba(15, 16, 18, 0.82);
+  color: #ffd875;
+  cursor: pointer;
+  transition:
+    border-color 250ms ease,
+    background-color 250ms ease,
+    color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.menu-carousel__arrow:hover:not(:disabled) {
+  border-color: rgba(255, 216, 117, 0.8);
+  background: rgba(212, 175, 55, 0.14);
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.16);
+}
+
+.menu-carousel__arrow:focus-visible {
+  outline: 2px solid #ffd875;
+  outline-offset: 3px;
+}
+
+.menu-carousel__arrow:disabled {
+  opacity: 0.34;
+  cursor: not-allowed;
+}
+
+.menu-carousel__viewport {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+  /* Room for the focus ring without changing the track's visual rhythm. */
+  padding-block: 6px;
+  margin-block: -6px;
+}
+
+.menu-carousel__viewport::-webkit-scrollbar {
   display: none;
 }
 
-.menu-mobile {
+.menu-carousel__track {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  width: var(--menu-track-width, max-content);
+}
+
+.menu-tile {
+  display: flex;
+  flex: 0 0 var(--menu-tile-width, 12rem);
+  flex-direction: column;
+  min-width: 0;
+  /* A minimum, not a fixed height: normal-size content sits inside it, and
+     enlarged text can still grow the row instead of being clipped. */
+  min-height: calc(var(--menu-image-height, 9rem) + 9.5rem);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 0.9rem;
+  background:
+    linear-gradient(180deg, rgba(26, 24, 20, 0.98), rgba(13, 14, 16, 0.98));
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.3);
+  transition:
+    flex-basis 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.menu-tile:focus-visible {
+  outline: 2px solid #ffd875;
+  /* Drawn inside the card so the viewport's horizontal clip cannot cut it
+     when a focused tile sits at either edge of the carousel. */
+  outline-offset: -2px;
+  border-color: rgba(255, 216, 117, 0.78);
+  z-index: 2;
+}
+
+.menu-tile__media {
+  position: relative;
   display: block;
+  flex: 0 0 var(--menu-image-height, 9rem);
+  height: var(--menu-image-height, 9rem);
+  overflow: hidden;
+  background: #0b0c0e;
 }
 
-@media (min-width: 768px) {
-  .menu-desktop-intro,
-  .menu-desktop-stage {
-    display: block;
+.menu-tile__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 58%, rgba(8, 9, 10, 0.34));
+  pointer-events: none;
+}
+
+.menu-tile__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 350ms ease;
+}
+
+.menu-tile__step {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.55rem;
+  z-index: 1;
+  padding: 0.18rem 0.34rem;
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 0.28rem;
+  background: rgba(6, 7, 8, 0.86);
+  color: #ffd875;
+  font-family: var(--font-heading);
+  font-size: 0.56rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+}
+
+.menu-tile__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  gap: 0.22rem;
+  padding: 0.8rem 0.85rem 0.9rem;
+  transition: opacity 300ms ease;
+}
+
+.menu-tile__tag {
+  display: block;
+  overflow: hidden;
+  color: #ffd875;
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu-tile__title {
+  display: block;
+  color: #fcf9f2;
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.menu-tile__description {
+  display: block;
+  margin-top: 0.08rem;
+  color: #b5ada0;
+  font-family: var(--font-sans);
+  font-size: 0.73rem;
+  line-height: 1.45;
+}
+
+.menu-carousel__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Expansion and the restrained dimming of the other tiles are pointer-only.
+   The visible group is exactly balanced: the hovered tile gains 32% of a
+   tile width, and the other visible tiles give up that same total width
+   between them. Offscreen tiles keep their base width. The track itself never
+   changes width, so the carousel viewport and section stay still. */
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .menu-tile--hovered {
+    flex-basis: var(--menu-hover-width, var(--menu-tile-width, 12rem));
+    border-color: rgba(255, 216, 117, 0.66);
+    box-shadow:
+      0 12px 34px rgba(0, 0, 0, 0.44),
+      0 0 24px rgba(212, 175, 55, 0.12);
   }
 
-  .menu-mobile {
-    display: none;
+  .menu-tile--hovered .menu-tile__media img {
+    transform: scale(1.035);
+  }
+
+  .menu-tile--peer {
+    flex-basis: var(--menu-peer-width, var(--menu-tile-width, 12rem));
+    border-color: rgba(212, 175, 55, 0.18);
+  }
+
+  .menu-tile--peer .menu-tile__media img {
+    filter: brightness(0.68) saturate(0.9);
+  }
+
+  .menu-tile--peer .menu-tile__body {
+    opacity: 0.78;
   }
 }
 
-@media (min-width: 768px) and (max-height: 480px) {
-  .menu-desktop-intro,
-  .menu-desktop-stage {
+@media (max-width: 767px) {
+  .menu-carousel__header {
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .menu-carousel__controls {
     display: none;
   }
 
-  .menu-mobile {
-    display: block;
+  .menu-carousel__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    padding-block: 6px 10px;
+    margin-block: 0;
+  }
+
+  .menu-carousel__track {
+    width: max-content;
+    gap: 12px;
+  }
+
+  .menu-tile {
+    flex: 0 0 min(78vw, 19rem);
+    min-height: 0;
+    scroll-snap-align: start;
+  }
+
+  .menu-tile__media {
+    flex: 0 0 auto;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .menu-tile__body {
+    min-height: 8.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-carousel__viewport {
+    scroll-behavior: auto;
+  }
+
+  .menu-tile,
+  .menu-tile__media img,
+  .menu-tile__body {
+    transition: none;
   }
 }
 

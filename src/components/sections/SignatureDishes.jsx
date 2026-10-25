@@ -75,9 +75,10 @@ const STATIONS = [
 export const SignatureDishes = () => {
   const containerRef = useRef(null);
   const dishDomRefs = useRef([]);
-  const hoveredDishIndexRef = useRef(null);
   const rafIdRef = useRef(null);
   const startTimeRef = useRef(null);
+  const settledRef = useRef(false);
+  const replayRef = useRef(null);
 
   const [stageSize, setStageSize] = useState({ width: 1000, height: 600 });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -109,13 +110,12 @@ export const SignatureDishes = () => {
   }, []);
 
   // ============================================================================
-  // Covis Knowledge Reference Sequence:
-  // - Central hub with stationary logo and continuously rotating outer decorative ring
-  // - Phase 1: Hub establishes itself first
-  // - Phase 2: Staggered entrance of dish images to their designated stations
-  // - Phase 3: Brief stay/hold at stationary positions (NO orbital spinning)
-  // - Phase 4: Smooth exit transition converging toward the central hub
-  // - Phase 5: Continuous staggered loop
+  // Featured dish sequence:
+  // - Central hub with the stationary logo and the slow decorative ring
+  // - The hub establishes itself first
+  // - Dishes make one staggered entrance to their designated stations
+  // - They settle there and stay put; the animation loop then stops
+  // - Hovering or tapping the stage replays the entrance once
   // ============================================================================
   useEffect(() => {
     const totalDishes = FEATURED_DISH_IMAGES.length;
@@ -169,18 +169,27 @@ export const SignatureDishes = () => {
         el.style.opacity = '1';
         el.style.zIndex = 25;
       }
+      settledRef.current = true;
+      replayRef.current = null;
       return undefined;
     }
 
-    // Easing helpers
+    // Easing helper for the one-shot entrance.
     const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3);
-    const easeInQuad = (x) => x * x;
+    const holdEnd = 0.65;
+
+    const placeAtStation = (el, point) => {
+      el.style.transform = `translate3d(calc(-50% + ${point.x.toFixed(2)}px), calc(-50% + ${point.y.toFixed(2)}px), 0) scale(1)`;
+      el.style.opacity = '1';
+      el.style.zIndex = 25;
+    };
 
     const animate = (currentTime) => {
-      if (!startTimeRef.current) {
+      if (startTimeRef.current === null) {
         startTimeRef.current = currentTime;
       }
       const elapsedTime = (currentTime - startTimeRef.current) / 1000;
+      let pending = 0;
 
       for (let i = 0; i < totalDishes; i++) {
         const el = dishDomRefs.current[i];
@@ -190,102 +199,84 @@ export const SignatureDishes = () => {
         const baseX = point.x;
         const baseY = point.y;
 
-        // Individual timeline offset for staggered choreography
+        // Individual timeline offset for the staggered entrance.
         const dishStartTime = initialHubDelay + i * staggerStep;
 
         if (elapsedTime < dishStartTime) {
-          // Pre-appearance phase: hidden
+          // Pre-appearance phase: hidden.
           el.style.opacity = '0';
           el.style.transform = `translate3d(calc(-50% + ${baseX.toFixed(2)}px), calc(-50% + ${baseY.toFixed(2)}px), 0) scale(0)`;
+          pending += 1;
           continue;
         }
 
-        // Cycle progress for this dish: u in [0, 1)
-        const timeInCycle = (elapsedTime - dishStartTime) % cycleDuration;
-        const u = timeInCycle / cycleDuration;
+        // One-shot progress. Unlike the old loop, this never wraps.
+        const u = (elapsedTime - dishStartTime) / cycleDuration;
 
-        let scale = 1.0;
-        let opacity = 1.0;
-        let curX = baseX;
-        let curY = baseY;
-        let zIndex = 25;
-
-        // Check if user is currently hovering this dish (freeze/hold)
-        const isHovered = hoveredDishIndexRef.current === i;
-
-        if (u < 0.16) {
-          // ------------------------------------------------------------------
-          // Phase 2: Staggered Entrance
-          // Smoothly blooms into its designated stationary location
-          // ------------------------------------------------------------------
-          const p = u / 0.16;
-          const e = easeOutCubic(p);
-
-          // Subtle radial settle from 1.10x outward to 1.00x station
-          const radialBloom = 1.1 - 0.1 * e;
-          curX = baseX * radialBloom;
-          curY = baseY * radialBloom;
-
-          scale = 0.45 + 0.55 * e;
-          opacity = e;
-          zIndex = 25;
-        } else if (u < 0.65 || isHovered) {
-          // ------------------------------------------------------------------
-          // Phase 3: Stationary Stay / Hold
-          // Remains at its designated position briefly.
-          // IMPORTANT: Does NOT orbit or travel around the circle!
-          // Gentle organic floating micro-motion gives it elegance.
-          // ------------------------------------------------------------------
-          const floatOffset = Math.sin(elapsedTime * 1.8 + i * 1.1) * 3.5;
-          curX = baseX;
-          curY = baseY + floatOffset;
-
-          scale = isHovered ? 1.08 : 1.0;
-          opacity = 1.0;
-          zIndex = 25;
-        } else if (u < 0.90) {
-          // ------------------------------------------------------------------
-          // Phase 4: Exit Transition toward the Center Hub
-          // Moves smoothly inward toward the central hub, fading as it reaches
-          // the central circle, visually being absorbed behind the brand disc.
-          // ------------------------------------------------------------------
-          const p = (u - 0.65) / 0.25;
-          const e = easeInQuad(p);
-
-          // Converge towards central hub (from 1.0 down to ~0.18 at hub edge)
-          const radialFactor = Math.max(0.12, 1.0 - 0.88 * e);
-          curX = baseX * radialFactor;
-          curY = baseY * radialFactor;
-
-          scale = 1.0 - 0.52 * e; // Shrinks down to ~0.48
-          opacity = Math.max(0, 1.0 - e * 1.1); // Smoothly fades out to 0
-          zIndex = 10; // Passes behind central circle (which is z-index 20)
-        } else {
-          // ------------------------------------------------------------------
-          // Phase 5: Offscreen pause before next loop cycle
-          // ------------------------------------------------------------------
-          opacity = 0;
-          scale = 0;
-          zIndex = 10;
+        if (u >= holdEnd) {
+          placeAtStation(el, point);
+          continue;
         }
 
-        el.style.transform = `translate3d(calc(-50% + ${curX.toFixed(2)}px), calc(-50% + ${curY.toFixed(2)}px), 0) scale(${scale.toFixed(3)})`;
-        el.style.opacity = opacity.toFixed(3);
-        el.style.zIndex = zIndex;
+        pending += 1;
+
+        if (u < 0.16) {
+          // Staggered entrance: bloom into the designated station.
+          const p = u / 0.16;
+          const e = easeOutCubic(p);
+          const radialBloom = 1.1 - 0.1 * e;
+
+          el.style.transform = `translate3d(calc(-50% + ${(baseX * radialBloom).toFixed(2)}px), calc(-50% + ${(baseY * radialBloom).toFixed(2)}px), 0) scale(${(0.45 + 0.55 * e).toFixed(3)})`;
+          el.style.opacity = e.toFixed(3);
+          el.style.zIndex = 25;
+        } else {
+          // Stationary hold with a gentle float. The float ends when the dish
+          // settles, so the resting composition is completely still.
+          const floatOffset = Math.sin(elapsedTime * 1.8 + i * 1.1) * 3.5;
+          el.style.transform = `translate3d(calc(-50% + ${baseX.toFixed(2)}px), calc(-50% + ${(baseY + floatOffset).toFixed(2)}px), 0) scale(1)`;
+          el.style.opacity = '1';
+          el.style.zIndex = 25;
+        }
+      }
+
+      if (pending === 0) {
+        rafIdRef.current = null;
+        settledRef.current = true;
+        return;
       }
 
       rafIdRef.current = requestAnimationFrame(animate);
     };
 
+    const replay = () => {
+      /* Only replay a finished composition. A pointer moving over the stage
+         during the entrance should not restart it mid-flight. */
+      if (prefersReducedMotion || !settledRef.current) return;
+      settledRef.current = false;
+      startTimeRef.current = null;
+      rafIdRef.current = requestAnimationFrame(animate);
+    };
+    replayRef.current = replay;
+
     startTimeRef.current = null;
+    settledRef.current = false;
     rafIdRef.current = requestAnimationFrame(animate);
 
     return () => {
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current);
       }
+      rafIdRef.current = null;
+      replayRef.current = null;
     };
   }, [stageSize, prefersReducedMotion]);
+
+  /* Hover or tap replays the one-shot entrance. Touch pointerenter is
+     suppressed so a single tap does not fire both pointer events. */
+  const handleStageReplay = (event) => {
+    if (event.type === 'pointerenter' && event.pointerType === 'touch') return;
+    replayRef.current?.();
+  };
 
   return (
     <section
@@ -313,7 +304,9 @@ export const SignatureDishes = () => {
         {/* 2. Motion Experience Stage */}
         <div
           ref={containerRef}
-          className="relative w-full rounded-2xl bg-gradient-to-b from-[#0c0d10] via-[#090a0d] to-[#07080a] border border-[#1f1d18] shadow-[0_20px_60px_rgba(0,0,0,0.85)] overflow-hidden flex items-center justify-center"
+          onPointerEnter={handleStageReplay}
+          onPointerDown={handleStageReplay}
+          className="relative w-full rounded-xl bg-gradient-to-b from-[#0c0d10] via-[#090a0d] to-[#07080a] border border-[#1f1d18] shadow-[0_20px_60px_rgba(0,0,0,0.85)] overflow-hidden flex items-center justify-center"
           style={{ minHeight: `${stageSize.height}px` }}
         >
           {/* ================================================================== */}
@@ -377,14 +370,6 @@ export const SignatureDishes = () => {
               ref={(el) => {
                 dishDomRefs.current[index] = el;
               }}
-              onMouseEnter={() => {
-                hoveredDishIndexRef.current = index;
-              }}
-              onMouseLeave={() => {
-                if (hoveredDishIndexRef.current === index) {
-                  hoveredDishIndexRef.current = null;
-                }
-              }}
               className="absolute top-1/2 left-1/2 will-change-transform pointer-events-auto select-none"
               style={{
                 transform: 'translate3d(-50%, -50%, 0) scale(0)',
@@ -396,7 +381,7 @@ export const SignatureDishes = () => {
                 src={dish.src}
                 alt={dish.alt || dish.name}
                 draggable={false}
-                className="w-24 sm:w-36 md:w-44 max-w-[190px] h-auto max-h-[130px] sm:max-h-[190px] md:max-h-[220px] object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,0.85)] filter contrast-[1.02] hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer"
+                className="w-24 sm:w-36 md:w-44 max-w-[190px] h-auto max-h-[130px] sm:max-h-[190px] md:max-h-[220px] object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,0.85)] filter contrast-[1.02] pointer-events-auto"
               />
             </div>
           ))}

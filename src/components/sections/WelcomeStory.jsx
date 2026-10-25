@@ -497,7 +497,7 @@ export const WelcomeStory = () => {
             </h2>
 
             <p className="mt-4 sm:mt-5 border-l-2 border-[#d4af37]/50 pl-4 sm:pl-5 text-[#f0e9dd] font-serif-luxury text-base sm:text-lg lg:text-xl leading-relaxed font-light italic drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]">
-              Every great meal carries an essence — the subtle aroma of spices, the richness of
+              Every great meal carries an essence. The subtle aroma of spices, the richness of
               texture, and the warmth of shared moments. It is the heart of human connection, of
               community, and of life’s simple pleasures.
             </p>
