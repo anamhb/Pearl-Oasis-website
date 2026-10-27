@@ -1,0 +1,415 @@
+{
+  "testedAt": "2026-10-25T15:32:19.405Z",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "deviceScaleFactor": 1,
+    "headless": true,
+    "browser": "Microsoft Edge"
+  },
+  "method": {
+    "seeked": "performance.now() from assigning currentTime to the seeked event",
+    "display": "performance.now() from assigning currentTime to the first requestVideoFrameCallback whose mediaTime is within 0.13s of the target",
+    "targets": [
+      0.5,
+      5,
+      9.9
+    ],
+    "rounds": 3
+  },
+  "variants": {
+    "cloud-q_auto_best_ki_1": {
+      "metadata": {
+        "duration": 10.005,
+        "width": 1280,
+        "height": 720,
+        "readyState": 4,
+        "networkState": 1,
+        "ms": 0.10000000149011612
+      },
+      "canPlay": {
+        "readyState": 4,
+        "networkState": 1,
+        "buffered": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "ms": 0.3999999985098839
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 191.89999999850988
+              },
+              "display": {
+                "status": "frame",
+                "ms": 160.20000000298023,
+                "mediaTime": 0.5,
+                "presentedFrames": 2,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 78.60000000149012
+              },
+              "display": {
+                "status": "frame",
+                "ms": 60.79999999701977,
+                "mediaTime": 5,
+                "presentedFrames": 3,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 242
+              },
+              "display": {
+                "status": "frame",
+                "ms": 241.30000000447035,
+                "mediaTime": 9.875,
+                "presentedFrames": 4,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 173.5
+              },
+              "display": {
+                "status": "frame",
+                "ms": 149.10000000149012,
+                "mediaTime": 0.5,
+                "presentedFrames": 6,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 70.39999999850988
+              },
+              "display": {
+                "status": "frame",
+                "ms": 55.80000000447035,
+                "mediaTime": 5,
+                "presentedFrames": 7,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 283.30000000447035
+              },
+              "display": {
+                "status": "frame",
+                "ms": 282.6000000014901,
+                "mediaTime": 9.875,
+                "presentedFrames": 8,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 189.69999999552965
+              },
+              "display": {
+                "status": "frame",
+                "ms": 161.60000000149012,
+                "mediaTime": 0.5,
+                "presentedFrames": 10,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 70.79999999701977
+              },
+              "display": {
+                "status": "frame",
+                "ms": 61.399999998509884,
+                "mediaTime": 5,
+                "presentedFrames": 11,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 250.80000000447035
+              },
+              "display": {
+                "status": "frame",
+                "ms": 250,
+                "mediaTime": 9.875,
+                "presentedFrames": 12,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/media/cloud-q_auto_best_ki_1.mp4",
+          "range": "bytes=0-",
+          "status": 206,
+          "start": 0,
+          "end": 3019837,
+          "size": 3019838
+        }
+      ]
+    }
+  },
+  "exceptions": [],
+  "logs": []
+}

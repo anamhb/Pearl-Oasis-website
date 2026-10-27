@@ -1,0 +1,209 @@
+{
+  "generatedAt": "2026-10-27T05:04:54.534Z",
+  "viewports": {
+    "320": {
+      "width": 320,
+      "exploreUlDisplay": "grid",
+      "exploreUlCols": "128px 128px",
+      "exploreUlGapX": "16px",
+      "exploreUlGapY": "2px",
+      "links": [
+        {
+          "t": "Our Story",
+          "x": 24,
+          "y": 113,
+          "w": 54,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Featured Dishes",
+          "x": 168,
+          "y": 113,
+          "w": 92,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Menu",
+          "x": 24,
+          "y": 159,
+          "w": 44,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Testimonials",
+          "x": 168,
+          "y": 159,
+          "w": 70,
+          "h": 44,
+          "clipped": false
+        }
+      ],
+      "linkOverlaps": [],
+      "clipped": [],
+      "gridColOverlaps": [],
+      "gridCols": "272px",
+      "colors": {
+        "bg": "rgb(7, 7, 8)",
+        "borderColor": "rgb(29, 27, 22)",
+        "accent": "rgb(176, 169, 157)"
+      },
+      "footerHeight": 871
+    },
+    "390": {
+      "width": 390,
+      "exploreUlDisplay": "grid",
+      "exploreUlCols": "163px 163px",
+      "exploreUlGapX": "16px",
+      "exploreUlGapY": "2px",
+      "links": [
+        {
+          "t": "Our Story",
+          "x": 24,
+          "y": 257,
+          "w": 54,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Featured Dishes",
+          "x": 203,
+          "y": 257,
+          "w": 92,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Menu",
+          "x": 24,
+          "y": 303,
+          "w": 44,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Testimonials",
+          "x": 203,
+          "y": 303,
+          "w": 70,
+          "h": 44,
+          "clipped": false
+        }
+      ],
+      "linkOverlaps": [],
+      "clipped": [],
+      "gridColOverlaps": [],
+      "gridCols": "342px",
+      "colors": {
+        "bg": "rgb(7, 7, 8)",
+        "borderColor": "rgb(29, 27, 22)",
+        "accent": "rgb(176, 169, 157)"
+      },
+      "footerHeight": 851.5
+    },
+    "430": {
+      "width": 430,
+      "exploreUlDisplay": "grid",
+      "exploreUlCols": "183px 183px",
+      "exploreUlGapX": "16px",
+      "exploreUlGapY": "2px",
+      "links": [
+        {
+          "t": "Our Story",
+          "x": 24,
+          "y": 345,
+          "w": 54,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Featured Dishes",
+          "x": 223,
+          "y": 345,
+          "w": 92,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Menu",
+          "x": 24,
+          "y": 391,
+          "w": 44,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Testimonials",
+          "x": 223,
+          "y": 391,
+          "w": 70,
+          "h": 44,
+          "clipped": false
+        }
+      ],
+      "linkOverlaps": [],
+      "clipped": [],
+      "gridColOverlaps": [],
+      "gridCols": "382px",
+      "colors": {
+        "bg": "rgb(7, 7, 8)",
+        "borderColor": "rgb(29, 27, 22)",
+        "accent": "rgb(176, 169, 157)"
+      },
+      "footerHeight": 851.5
+    },
+    "1440": {
+      "width": 1440,
+      "exploreUlDisplay": "block",
+      "exploreUlCols": "repeat(2, minmax(0px, 1fr))",
+      "exploreUlGapX": "16px",
+      "exploreUlGapY": "2px",
+      "links": [
+        {
+          "t": "Our Story",
+          "x": 412,
+          "y": 532,
+          "w": 54,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Featured Dishes",
+          "x": 412,
+          "y": 578,
+          "w": 92,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Menu",
+          "x": 412,
+          "y": 624,
+          "w": 44,
+          "h": 44,
+          "clipped": false
+        },
+        {
+          "t": "Testimonials",
+          "x": 412,
+          "y": 670,
+          "w": 70,
+          "h": 44,
+          "clipped": false
+        }
+      ],
+      "linkOverlaps": [],
+      "clipped": [],
+      "gridColOverlaps": [],
+      "gridCols": "284px 284px 284px 284px",
+      "colors": {
+        "bg": "rgb(7, 7, 8)",
+        "borderColor": "rgb(29, 27, 22)",
+        "accent": "rgb(176, 169, 157)"
+      },
+      "footerHeight": 456.5
+    }
+  }
+}

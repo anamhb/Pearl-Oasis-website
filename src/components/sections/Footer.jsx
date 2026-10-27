@@ -10,16 +10,17 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#070708] border-t border-[#1d1b16] pt-14 pb-10 px-6 sm:px-12 text-[#b0a99d]">
+    <footer className="relative bg-[#070708] border-t border-[#1d1b16] pt-9 pb-8 sm:pt-14 sm:pb-10 px-6 sm:px-12 text-[#b0a99d]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          <div className="space-y-4">
-            {/* Same logo asset and wordmark treatment as the navbar, rendered
-                with a static (non-rotating) crest. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 sm:gap-12 sm:mb-16">
+          <div className="space-y-3 sm:space-y-4">
+            {/* Same logo asset, 3D crest, gold material and lighting as the
+                navbar. The crest turns continuously while the footer is on
+                screen and pauses its loop once scrolled away. */}
             <div className="flex items-start">
-              <BrandWordmark animate={false} />
+              <BrandWordmark animate pauseWhenOffscreen />
             </div>
-            <p className="text-xs text-[#8c8477] font-sans leading-relaxed pt-2">
+            <p className="text-xs text-[#8c8477] font-sans leading-relaxed pt-1 sm:pt-2">
               An architectural dining sanctuary where fine gastronomy, amber warmth, and timeless hospitality converge.
             </p>
             {/* No social profile URLs have been supplied, so these are not
@@ -27,7 +28,7 @@ export const Footer = () => {
             <div
               role="group"
               aria-label="Social media links, coming soon"
-              className="flex flex-wrap items-center gap-3 pt-2"
+              className="flex flex-wrap items-center gap-3 pt-1 sm:pt-2"
             >
               <span
                 aria-hidden="true"
@@ -54,10 +55,10 @@ export const Footer = () => {
           </div>
 
           <div className="space-y-3">
-            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
+            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-3 sm:mb-4">
               Explore
             </h3>
-            <ul className="space-y-0.5 text-xs font-sans">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-0.5 sm:block sm:space-y-0.5 text-xs font-sans">
               <li>
                 <a href="#story" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Our Story
@@ -82,7 +83,7 @@ export const Footer = () => {
           </div>
 
           <div className="space-y-3">
-            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
+            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-3 sm:mb-4">
               Opening Hours
             </h3>
             <div className="space-y-2 text-xs font-sans">
@@ -94,7 +95,7 @@ export const Footer = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-2 pt-2">
+              <div className="flex items-start gap-2 pt-1 sm:pt-2">
                 <Clock className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                 <div>
                   <div className="text-white font-medium">Lunch and Afternoon Service</div>
@@ -102,7 +103,7 @@ export const Footer = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-2 pt-2">
+              <div className="flex items-start gap-2 pt-1 sm:pt-2">
                 <Clock className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                 <div>
                   <div className="text-white font-medium">Dinner and Evening Service</div>
@@ -113,7 +114,7 @@ export const Footer = () => {
           </div>
 
           <div className="space-y-3">
-            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-4">
+            <h3 className="font-cinzel text-xs font-bold tracking-[0.2em] text-[#faedd4] uppercase mb-3 sm:mb-4">
               Sanctuary Location
             </h3>
             <div className="space-y-2 text-xs font-sans">
@@ -133,7 +134,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-[#1d1b16] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#a39a8c]">
+        <div className="border-t border-[#1d1b16] pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-[11px] text-[#a39a8c]">
           <div>
             © {new Date().getFullYear()} Pearl Oasis Restaurant. All rights reserved.
           </div>

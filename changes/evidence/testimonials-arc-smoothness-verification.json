@@ -1,0 +1,2228 @@
+{
+  "generatedAt": "2026-10-27T01:36:42.892Z",
+  "url": "http://127.0.0.1:3000/",
+  "viewports": {
+    "mobile390": {
+      "progress": "01",
+      "live": "Testimonial 1 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 0,
+      "activeClasses": [
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "P",
+          "className": "testimonial-card__quote",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 45.5
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 300,
+          "decodedBodySize": 0,
+          "duration": 420.30000000447035
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 771042,
+          "decodedBodySize": 836278,
+          "duration": 277.69999999552965
+        }
+      ]
+    },
+    "desktop1440": {
+      "progress": "02",
+      "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 1,
+      "activeClasses": [
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 260,
+        "height": 350,
+        "left": 587,
+        "top": 341.09375
+      },
+      "sectionRect": {
+        "width": 1434,
+        "height": 801,
+        "top": 76.09375
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 1434,
+        "bodyScrollWidth": 1434,
+        "innerWidth": 1440
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 800
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 717,
+          "y": 516.09375
+        },
+        "atCard": {
+          "tag": "DIV",
+          "className": "",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 516.64375
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-stage",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 56291,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 926.5999999940395
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 387,
+          "decodedBodySize": 34903,
+          "duration": 634
+        }
+      ]
+    },
+    "narrow320": {
+      "progress": "01",
+      "live": "Testimonial 1 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 0,
+      "activeClasses": [
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 210,
+        "height": 320,
+        "left": 55,
+        "top": 378.484375
+      },
+      "sectionRect": {
+        "width": 320,
+        "height": 782,
+        "top": 76.484375
+      },
+      "viewport": {
+        "width": 320,
+        "height": 700,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 320,
+        "bodyScrollWidth": 320,
+        "innerWidth": 320
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 781
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 160,
+          "y": 538.484375
+        },
+        "atCard": {
+          "tag": "P",
+          "className": "testimonial-card__quote",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 506.584375
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 1121.6999999955297
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 17078,
+          "duration": 4.200000002980232
+        }
+      ]
+    }
+  },
+  "tests": {
+    "timing": {
+      "clickAt": 4687.89999999851,
+      "progress": [
+        {
+          "t": 5422.80000000447,
+          "text": "02"
+        }
+      ],
+      "live": [
+        {
+          "t": 5422.89999999851,
+          "text": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review."
+        }
+      ],
+      "classes": [
+        {
+          "t": 5086.89999999851,
+          "index": 0,
+          "className": "testimonial-card testimonial-card--side"
+        },
+        {
+          "t": 5086.89999999851,
+          "index": 1,
+          "className": "testimonial-card testimonial-card--active"
+        }
+      ]
+    },
+    "timingState": {
+      "progress": "02",
+      "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 1,
+      "activeClasses": [
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "DIV",
+          "className": "",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 45.5
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 300,
+          "decodedBodySize": 0,
+          "duration": 420.30000000447035
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 771042,
+          "decodedBodySize": 836278,
+          "duration": 277.69999999552965
+        }
+      ]
+    },
+    "interrupted": {
+      "firstClickAt": 2438.5999999940395,
+      "secondClickAt": 2667.5,
+      "beforeInterrupt": [
+        {
+          "x": -3.43,
+          "y": 0.18,
+          "opacity": 0.991
+        },
+        {
+          "x": 34.76,
+          "y": 18.97,
+          "opacity": 0.909
+        },
+        {
+          "x": 71.78,
+          "y": 82.87,
+          "opacity": 0.827
+        },
+        {
+          "x": -78.2,
+          "y": 98.94,
+          "opacity": 0.453
+        },
+        {
+          "x": -41.51,
+          "y": 27.14,
+          "opacity": 0.893
+        }
+      ],
+      "afterInterrupt": [
+        {
+          "x": -3.43,
+          "y": 0.18,
+          "opacity": 0.991
+        },
+        {
+          "x": 34.76,
+          "y": 18.97,
+          "opacity": 0.909
+        },
+        {
+          "x": 71.78,
+          "y": 82.87,
+          "opacity": 0.827
+        },
+        {
+          "x": -78.2,
+          "y": 98.94,
+          "opacity": 0.453
+        },
+        {
+          "x": -41.51,
+          "y": 27.14,
+          "opacity": 0.893
+        }
+      ],
+      "maxTranslationDelta": 0,
+      "postSettleDelta": 0,
+      "final": {
+        "progress": "03",
+        "live": "Testimonial 3 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+        "active": 2,
+        "activeClasses": [
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--active",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side"
+        ],
+        "cardRect": {
+          "width": 240,
+          "height": 320,
+          "left": 75,
+          "top": 332.6875
+        },
+        "sectionRect": {
+          "width": 390,
+          "height": 748.015625,
+          "top": 75.671875
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1
+        },
+        "overflow": {
+          "documentScrollWidth": 390,
+          "bodyScrollWidth": 390,
+          "innerWidth": 390
+        },
+        "arcTouchAction": "pan-y",
+        "cardTransition": "border-color, box-shadow",
+        "cardWillChange": "transform, opacity",
+        "cardBackface": "hidden",
+        "film": {
+          "zIndex": "0",
+          "pointerEvents": "none",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "position": "absolute",
+          "height": 747.015625
+        },
+        "hitTest": {
+          "cardCenter": {
+            "x": 195,
+            "y": 492.6875
+          },
+          "atCard": {
+            "tag": "P",
+            "className": "testimonial-card__quote",
+            "insideCard": true,
+            "insideFilm": false
+          },
+          "outsidePoint": {
+            "x": 16,
+            "y": 487.08046875
+          },
+          "outside": {
+            "tag": "DIV",
+            "className": "testimonial-arc",
+            "insideFilm": false
+          }
+        },
+        "video": {
+          "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "readyState": 4,
+          "networkState": 1,
+          "paused": false,
+          "muted": true,
+          "loop": true,
+          "controls": false,
+          "playsInline": true,
+          "videoWidth": 720,
+          "videoHeight": 404,
+          "error": null,
+          "pointerEvents": "none"
+        },
+        "resources": [
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+            "transferSize": 0,
+            "decodedBodySize": 30861,
+            "duration": 0
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 0,
+            "duration": 341.69999999552965
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 17078,
+            "duration": 23.599999994039536
+          }
+        ]
+      },
+      "timing": {
+        "clickAt": 2667.5,
+        "progress": [
+          {
+            "t": 3396,
+            "text": "03"
+          }
+        ],
+        "live": [
+          {
+            "t": 3396,
+            "text": "Testimonial 3 of 5: Guest Review Placeholder. Sample Feedback. Not a real review."
+          }
+        ],
+        "classes": [
+          {
+            "t": 2972.0999999940395,
+            "index": 0,
+            "className": "testimonial-card testimonial-card--side"
+          },
+          {
+            "t": 2972.1999999955297,
+            "index": 1,
+            "className": "testimonial-card testimonial-card--active"
+          },
+          {
+            "t": 3147.5999999940395,
+            "index": 1,
+            "className": "testimonial-card testimonial-card--side"
+          },
+          {
+            "t": 3147.5999999940395,
+            "index": 2,
+            "className": "testimonial-card testimonial-card--active"
+          }
+        ]
+      }
+    },
+    "sideCardClick": {
+      "progress": "02",
+      "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 1,
+      "activeClasses": [
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "DIV",
+          "className": "",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 285.20000000298023
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 836278,
+          "duration": 186.70000000298023
+        }
+      ]
+    },
+    "keyboardRight": {
+      "progress": "02",
+      "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 1,
+      "activeClasses": [
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "DIV",
+          "className": "",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 389.70000000298023
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 49846,
+          "duration": 82.79999999701977
+        }
+      ]
+    },
+    "keyboardLeft": {
+      "progress": "01",
+      "live": "Testimonial 1 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 0,
+      "activeClasses": [
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "P",
+          "className": "testimonial-card__quote",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 389.70000000298023
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 49846,
+          "duration": 82.79999999701977
+        }
+      ]
+    },
+    "loopWrap": {
+      "previous": {
+        "progress": "05",
+        "live": "Testimonial 5 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+        "active": 4,
+        "activeClasses": [
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--active"
+        ],
+        "cardRect": {
+          "width": 240,
+          "height": 320,
+          "left": 75,
+          "top": 332.6875
+        },
+        "sectionRect": {
+          "width": 390,
+          "height": 748.015625,
+          "top": 75.671875
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1
+        },
+        "overflow": {
+          "documentScrollWidth": 390,
+          "bodyScrollWidth": 390,
+          "innerWidth": 390
+        },
+        "arcTouchAction": "pan-y",
+        "cardTransition": "border-color, box-shadow",
+        "cardWillChange": "transform, opacity",
+        "cardBackface": "hidden",
+        "film": {
+          "zIndex": "0",
+          "pointerEvents": "none",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "position": "absolute",
+          "height": 747.015625
+        },
+        "hitTest": {
+          "cardCenter": {
+            "x": 195,
+            "y": 492.6875
+          },
+          "atCard": {
+            "tag": "DIV",
+            "className": "",
+            "insideCard": true,
+            "insideFilm": false
+          },
+          "outsidePoint": {
+            "x": 16,
+            "y": 487.08046875
+          },
+          "outside": {
+            "tag": "DIV",
+            "className": "testimonial-arc",
+            "insideFilm": false
+          }
+        },
+        "video": {
+          "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "readyState": 4,
+          "networkState": 1,
+          "paused": false,
+          "muted": true,
+          "loop": true,
+          "controls": false,
+          "playsInline": true,
+          "videoWidth": 720,
+          "videoHeight": 404,
+          "error": null,
+          "pointerEvents": "none"
+        },
+        "resources": [
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+            "transferSize": 0,
+            "decodedBodySize": 30861,
+            "duration": 0
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 0,
+            "duration": 288.6000000014901
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 836278,
+            "duration": 16.799999997019768
+          }
+        ]
+      },
+      "next": {
+        "progress": "01",
+        "live": "Testimonial 1 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+        "active": 0,
+        "activeClasses": [
+          "testimonial-card testimonial-card--active",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side"
+        ],
+        "cardRect": {
+          "width": 240,
+          "height": 320,
+          "left": 75,
+          "top": 332.6875
+        },
+        "sectionRect": {
+          "width": 390,
+          "height": 748.015625,
+          "top": 75.671875
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1
+        },
+        "overflow": {
+          "documentScrollWidth": 390,
+          "bodyScrollWidth": 390,
+          "innerWidth": 390
+        },
+        "arcTouchAction": "pan-y",
+        "cardTransition": "border-color, box-shadow",
+        "cardWillChange": "transform, opacity",
+        "cardBackface": "hidden",
+        "film": {
+          "zIndex": "0",
+          "pointerEvents": "none",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "position": "absolute",
+          "height": 747.015625
+        },
+        "hitTest": {
+          "cardCenter": {
+            "x": 195,
+            "y": 492.6875
+          },
+          "atCard": {
+            "tag": "P",
+            "className": "testimonial-card__quote",
+            "insideCard": true,
+            "insideFilm": false
+          },
+          "outsidePoint": {
+            "x": 16,
+            "y": 487.08046875
+          },
+          "outside": {
+            "tag": "DIV",
+            "className": "testimonial-arc",
+            "insideFilm": false
+          }
+        },
+        "video": {
+          "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "readyState": 4,
+          "networkState": 1,
+          "paused": false,
+          "muted": true,
+          "loop": true,
+          "controls": false,
+          "playsInline": true,
+          "videoWidth": 720,
+          "videoHeight": 404,
+          "error": null,
+          "pointerEvents": "none"
+        },
+        "resources": [
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+            "transferSize": 0,
+            "decodedBodySize": 30861,
+            "duration": 0
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 0,
+            "duration": 288.6000000014901
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 836278,
+            "duration": 16.799999997019768
+          }
+        ]
+      }
+    },
+    "mouseDrag": {
+      "progress": "02",
+      "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 1,
+      "activeClasses": [
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "DIV",
+          "className": "",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 270.6000000014901
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 508598,
+          "duration": 16.200000002980232
+        }
+      ]
+    },
+    "touchSwipe": {
+      "progress": "02",
+      "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 1,
+      "activeClasses": [
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "DIV",
+          "className": "",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 235.39999999850988
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 17078,
+          "duration": 9
+        }
+      ]
+    },
+    "verticalScroll": {
+      "before": 6060,
+      "after": 5895,
+      "delta": -165,
+      "touchAction": "pan-y"
+    },
+    "resizeMeasurement": {
+      "heightOnlyMutations": 0,
+      "widthMutations": 1
+    },
+    "mobileVideo": {
+      "progress": "01",
+      "live": "Testimonial 1 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 0,
+      "activeClasses": [
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "P",
+          "className": "testimonial-card__quote",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 217.79999999701977
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 574134,
+          "duration": 14
+        }
+      ]
+    },
+    "landscapeVideo": {
+      "progress": "01",
+      "live": "Testimonial 1 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 0,
+      "activeClasses": [
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 334,
+        "left": 302,
+        "top": 312.875
+      },
+      "sectionRect": {
+        "width": 844,
+        "height": 742.65625,
+        "top": 75.875
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 844,
+        "bodyScrollWidth": 844,
+        "innerWidth": 844
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 741.65625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 422,
+          "y": 479.875
+        },
+        "atCard": null,
+        "outsidePoint": {
+          "x": 16,
+          "y": 484.33593750000006
+        },
+        "outside": null
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 217.79999999701977
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 574134,
+          "duration": 14
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 56291,
+          "duration": 2.8000000044703484
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 115.60000000149012
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 35203,
+          "decodedBodySize": 34903,
+          "duration": 318.20000000298023
+        }
+      ]
+    },
+    "mobileVideoAfterReturn": {
+      "progress": "01",
+      "live": "Testimonial 1 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 0,
+      "activeClasses": [
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "border-color, box-shadow",
+      "cardWillChange": "transform, opacity",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "P",
+          "className": "testimonial-card__quote",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 217.79999999701977
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 574134,
+          "duration": 14
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 56291,
+          "duration": 2.8000000044703484
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 115.60000000149012
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 35203,
+          "decodedBodySize": 34903,
+          "duration": 318.20000000298023
+        }
+      ]
+    },
+    "reducedMotion": {
+      "progress": "02",
+      "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+      "active": 1,
+      "activeClasses": [
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--active",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side",
+        "testimonial-card testimonial-card--side"
+      ],
+      "cardRect": {
+        "width": 240,
+        "height": 320,
+        "left": 75,
+        "top": 332.6875
+      },
+      "sectionRect": {
+        "width": 390,
+        "height": 748.015625,
+        "top": 75.671875
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "overflow": {
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "innerWidth": 390
+      },
+      "arcTouchAction": "pan-y",
+      "cardTransition": "none",
+      "cardWillChange": "auto",
+      "cardBackface": "hidden",
+      "film": {
+        "zIndex": "0",
+        "pointerEvents": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "position": "absolute",
+        "height": 747.015625
+      },
+      "hitTest": {
+        "cardCenter": {
+          "x": 195,
+          "y": 492.6875
+        },
+        "atCard": {
+          "tag": "DIV",
+          "className": "",
+          "insideCard": true,
+          "insideFilm": false
+        },
+        "outsidePoint": {
+          "x": 16,
+          "y": 487.08046875
+        },
+        "outside": {
+          "tag": "DIV",
+          "className": "testimonial-arc",
+          "insideFilm": false
+        }
+      },
+      "video": {
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "playsInline": true,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "error": null,
+        "pointerEvents": "none"
+      },
+      "resources": [
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "transferSize": 0,
+          "decodedBodySize": 30861,
+          "duration": 0
+        },
+        {
+          "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "transferSize": 0,
+          "decodedBodySize": 0,
+          "duration": 198.60000000149012
+        }
+      ]
+    },
+    "reducedMotionTiming": {
+      "clickAt": 2023.9000000059605,
+      "progress": [
+        {
+          "t": 2040.4000000059605,
+          "text": "02"
+        }
+      ],
+      "live": [
+        {
+          "t": 2040.5,
+          "text": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review."
+        }
+      ],
+      "classes": [
+        {
+          "t": 2040.6000000014901,
+          "index": 0,
+          "className": "testimonial-card testimonial-card--side"
+        },
+        {
+          "t": 2040.6000000014901,
+          "index": 1,
+          "className": "testimonial-card testimonial-card--active"
+        }
+      ]
+    },
+    "autoplay": {
+      "before": {
+        "progress": "01",
+        "live": "Testimonial 1 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+        "active": 0,
+        "activeClasses": [
+          "testimonial-card testimonial-card--active",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side"
+        ],
+        "cardRect": {
+          "width": 240,
+          "height": 320,
+          "left": 75,
+          "top": 332.6875
+        },
+        "sectionRect": {
+          "width": 390,
+          "height": 748.015625,
+          "top": 75.671875
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1
+        },
+        "overflow": {
+          "documentScrollWidth": 390,
+          "bodyScrollWidth": 390,
+          "innerWidth": 390
+        },
+        "arcTouchAction": "pan-y",
+        "cardTransition": "border-color, box-shadow",
+        "cardWillChange": "transform, opacity",
+        "cardBackface": "hidden",
+        "film": {
+          "zIndex": "0",
+          "pointerEvents": "none",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "position": "absolute",
+          "height": 747.015625
+        },
+        "hitTest": {
+          "cardCenter": {
+            "x": 195,
+            "y": 492.6875
+          },
+          "atCard": {
+            "tag": "P",
+            "className": "testimonial-card__quote",
+            "insideCard": true,
+            "insideFilm": false
+          },
+          "outsidePoint": {
+            "x": 16,
+            "y": 487.08046875
+          },
+          "outside": {
+            "tag": "DIV",
+            "className": "testimonial-arc",
+            "insideFilm": false
+          }
+        },
+        "video": {
+          "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "readyState": 4,
+          "networkState": 1,
+          "paused": false,
+          "muted": true,
+          "loop": true,
+          "controls": false,
+          "playsInline": true,
+          "videoWidth": 720,
+          "videoHeight": 404,
+          "error": null,
+          "pointerEvents": "none"
+        },
+        "resources": [
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+            "transferSize": 0,
+            "decodedBodySize": 30861,
+            "duration": 0
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 0,
+            "duration": 250.10000000149012
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 17078,
+            "duration": 9
+          }
+        ]
+      },
+      "after": {
+        "progress": "02",
+        "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+        "active": 1,
+        "activeClasses": [
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--active",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side"
+        ],
+        "cardRect": {
+          "width": 240,
+          "height": 320,
+          "left": 75,
+          "top": 332.6875
+        },
+        "sectionRect": {
+          "width": 390,
+          "height": 748.015625,
+          "top": 75.671875
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1
+        },
+        "overflow": {
+          "documentScrollWidth": 390,
+          "bodyScrollWidth": 390,
+          "innerWidth": 390
+        },
+        "arcTouchAction": "pan-y",
+        "cardTransition": "border-color, box-shadow",
+        "cardWillChange": "transform, opacity",
+        "cardBackface": "hidden",
+        "film": {
+          "zIndex": "0",
+          "pointerEvents": "none",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "position": "absolute",
+          "height": 747.015625
+        },
+        "hitTest": {
+          "cardCenter": {
+            "x": 195,
+            "y": 492.6875
+          },
+          "atCard": {
+            "tag": "DIV",
+            "className": "",
+            "insideCard": true,
+            "insideFilm": false
+          },
+          "outsidePoint": {
+            "x": 16,
+            "y": 487.08046875
+          },
+          "outside": {
+            "tag": "DIV",
+            "className": "testimonial-arc",
+            "insideFilm": false
+          }
+        },
+        "video": {
+          "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "readyState": 4,
+          "networkState": 1,
+          "paused": false,
+          "muted": true,
+          "loop": true,
+          "controls": false,
+          "playsInline": true,
+          "videoWidth": 720,
+          "videoHeight": 404,
+          "error": null,
+          "pointerEvents": "none"
+        },
+        "resources": [
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+            "transferSize": 0,
+            "decodedBodySize": 30861,
+            "duration": 0
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 0,
+            "duration": 250.10000000149012
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 17078,
+            "duration": 9
+          }
+        ]
+      }
+    },
+    "hoverPause": {
+      "before": {
+        "progress": "02",
+        "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+        "active": 1,
+        "activeClasses": [
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--active",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side"
+        ],
+        "cardRect": {
+          "width": 240,
+          "height": 320,
+          "left": 75,
+          "top": 332.6875
+        },
+        "sectionRect": {
+          "width": 390,
+          "height": 748.015625,
+          "top": 75.671875
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1
+        },
+        "overflow": {
+          "documentScrollWidth": 390,
+          "bodyScrollWidth": 390,
+          "innerWidth": 390
+        },
+        "arcTouchAction": "pan-y",
+        "cardTransition": "border-color, box-shadow",
+        "cardWillChange": "transform, opacity",
+        "cardBackface": "hidden",
+        "film": {
+          "zIndex": "0",
+          "pointerEvents": "none",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "position": "absolute",
+          "height": 747.015625
+        },
+        "hitTest": {
+          "cardCenter": {
+            "x": 195,
+            "y": 492.6875
+          },
+          "atCard": {
+            "tag": "DIV",
+            "className": "",
+            "insideCard": true,
+            "insideFilm": false
+          },
+          "outsidePoint": {
+            "x": 16,
+            "y": 487.08046875
+          },
+          "outside": {
+            "tag": "DIV",
+            "className": "testimonial-arc",
+            "insideFilm": false
+          }
+        },
+        "video": {
+          "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "readyState": 4,
+          "networkState": 1,
+          "paused": false,
+          "muted": true,
+          "loop": true,
+          "controls": false,
+          "playsInline": true,
+          "videoWidth": 720,
+          "videoHeight": 404,
+          "error": null,
+          "pointerEvents": "none"
+        },
+        "resources": [
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+            "transferSize": 0,
+            "decodedBodySize": 30861,
+            "duration": 0
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 0,
+            "duration": 250.10000000149012
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 17078,
+            "duration": 9
+          }
+        ]
+      },
+      "after": {
+        "progress": "02",
+        "live": "Testimonial 2 of 5: Guest Review Placeholder. Sample Feedback. Not a real review.",
+        "active": 1,
+        "activeClasses": [
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--active",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side",
+          "testimonial-card testimonial-card--side"
+        ],
+        "cardRect": {
+          "width": 240,
+          "height": 320,
+          "left": 75,
+          "top": 332.6875
+        },
+        "sectionRect": {
+          "width": 390,
+          "height": 748.015625,
+          "top": 75.671875
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "dpr": 1
+        },
+        "overflow": {
+          "documentScrollWidth": 390,
+          "bodyScrollWidth": 390,
+          "innerWidth": 390
+        },
+        "arcTouchAction": "pan-y",
+        "cardTransition": "border-color, box-shadow",
+        "cardWillChange": "transform, opacity",
+        "cardBackface": "hidden",
+        "film": {
+          "zIndex": "0",
+          "pointerEvents": "none",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "position": "absolute",
+          "height": 747.015625
+        },
+        "hitTest": {
+          "cardCenter": {
+            "x": 195,
+            "y": 492.6875
+          },
+          "atCard": {
+            "tag": "DIV",
+            "className": "",
+            "insideCard": true,
+            "insideFilm": false
+          },
+          "outsidePoint": {
+            "x": 16,
+            "y": 487.08046875
+          },
+          "outside": {
+            "tag": "DIV",
+            "className": "testimonial-arc",
+            "insideFilm": false
+          }
+        },
+        "video": {
+          "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+          "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+          "readyState": 4,
+          "networkState": 1,
+          "paused": false,
+          "muted": true,
+          "loop": true,
+          "controls": false,
+          "playsInline": true,
+          "videoWidth": 720,
+          "videoHeight": 404,
+          "error": null,
+          "pointerEvents": "none"
+        },
+        "resources": [
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+            "transferSize": 0,
+            "decodedBodySize": 30861,
+            "duration": 0
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 0,
+            "duration": 250.10000000149012
+          },
+          {
+            "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "transferSize": 0,
+            "decodedBodySize": 17078,
+            "duration": 9
+          }
+        ]
+      }
+    }
+  },
+  "consoleErrors": [
+    {
+      "type": "log",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "badResponses": [
+    {
+      "url": "http://127.0.0.1:3000/favicon.ico",
+      "status": 404
+    }
+  ]
+}

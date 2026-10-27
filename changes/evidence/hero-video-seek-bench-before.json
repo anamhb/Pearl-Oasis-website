@@ -1,0 +1,1197 @@
+{
+  "testedAt": "2026-10-25T15:21:13.498Z",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "deviceScaleFactor": 1,
+    "headless": true,
+    "browser": "Microsoft Edge"
+  },
+  "method": {
+    "seeked": "performance.now() from assigning currentTime to the seeked event",
+    "display": "performance.now() from assigning currentTime to the first requestVideoFrameCallback whose mediaTime is within 0.13s of the target",
+    "targets": [
+      0.5,
+      5,
+      9.9
+    ],
+    "rounds": 3
+  },
+  "variants": {
+    "original": {
+      "metadata": {
+        "duration": 10.005,
+        "width": 1280,
+        "height": 720,
+        "readyState": 4,
+        "networkState": 1,
+        "ms": 0.19999999552965164
+      },
+      "canPlay": {
+        "readyState": 4,
+        "networkState": 1,
+        "buffered": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "ms": 0.5
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 229.09999999403954
+              },
+              "display": {
+                "status": "frame",
+                "ms": 181.69999999552965,
+                "mediaTime": 0.5,
+                "presentedFrames": 2,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 1723.1000000014901
+              },
+              "display": {
+                "status": "frame",
+                "ms": 1697.2000000029802,
+                "mediaTime": 5,
+                "presentedFrames": 3,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 2575.10000000149
+              },
+              "display": {
+                "status": "frame",
+                "ms": 2574.39999999851,
+                "mediaTime": 9.875,
+                "presentedFrames": 4,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 250.40000000596046
+              },
+              "display": {
+                "status": "frame",
+                "ms": 208.30000000447035,
+                "mediaTime": 0.5,
+                "presentedFrames": 6,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 1842.5
+              },
+              "display": {
+                "status": "frame",
+                "ms": 1808.4000000059605,
+                "mediaTime": 5,
+                "presentedFrames": 7,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 2658.89999999851
+              },
+              "display": {
+                "status": "frame",
+                "ms": 2658.2000000029802,
+                "mediaTime": 9.875,
+                "presentedFrames": 8,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 232.60000000149012
+              },
+              "display": {
+                "status": "frame",
+                "ms": 182.39999999850988,
+                "mediaTime": 0.5,
+                "presentedFrames": 10,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 1532
+              },
+              "display": {
+                "status": "frame",
+                "ms": 1486.1999999955297,
+                "mediaTime": 5,
+                "presentedFrames": 11,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 3259.8000000044703
+              },
+              "display": {
+                "status": "frame",
+                "ms": 3259.10000000149,
+                "mediaTime": 9.875,
+                "presentedFrames": 12,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/media/original.mp4",
+          "range": "bytes=0-",
+          "status": 206,
+          "start": 0,
+          "end": 5099088,
+          "size": 5099089
+        }
+      ]
+    },
+    "cloud-q_auto": {
+      "metadata": {
+        "duration": 10.048,
+        "width": 1280,
+        "height": 720,
+        "readyState": 4,
+        "networkState": 1,
+        "ms": 0.29999999701976776
+      },
+      "canPlay": {
+        "readyState": 4,
+        "networkState": 1,
+        "buffered": [
+          [
+            0,
+            10.048
+          ]
+        ],
+        "ms": 0.5
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 169.5
+              },
+              "display": {
+                "status": "frame",
+                "ms": 141.69999999552965,
+                "mediaTime": 0.5,
+                "presentedFrames": 2,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 1366
+              },
+              "display": {
+                "status": "frame",
+                "ms": 1315,
+                "mediaTime": 5,
+                "presentedFrames": 3,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 2368.5
+              },
+              "display": {
+                "status": "frame",
+                "ms": 2354,
+                "mediaTime": 9.875,
+                "presentedFrames": 4,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 190.89999999850988
+              },
+              "display": {
+                "status": "frame",
+                "ms": 152.60000000149012,
+                "mediaTime": 0.5,
+                "presentedFrames": 6,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 1286.2000000029802
+              },
+              "display": {
+                "status": "frame",
+                "ms": 1249.8999999985099,
+                "mediaTime": 5,
+                "presentedFrames": 7,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 3127
+              },
+              "display": {
+                "status": "frame",
+                "ms": 3117.89999999851,
+                "mediaTime": 9.875,
+                "presentedFrames": 8,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 196.79999999701977
+              },
+              "display": {
+                "status": "frame",
+                "ms": 156.5,
+                "mediaTime": 0.5,
+                "presentedFrames": 10,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 1107.3999999985099
+              },
+              "display": {
+                "status": "frame",
+                "ms": 1069.3999999985099,
+                "mediaTime": 5,
+                "presentedFrames": 11,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 2154.60000000149
+              },
+              "display": {
+                "status": "frame",
+                "ms": 2140.7000000029802,
+                "mediaTime": 9.875,
+                "presentedFrames": 12,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.048
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/media/cloud-q_auto.mp4",
+          "range": "bytes=0-",
+          "status": 206,
+          "start": 0,
+          "end": 1798093,
+          "size": 1798094
+        }
+      ]
+    },
+    "optimized": {
+      "metadata": {
+        "duration": 10.005,
+        "width": 1280,
+        "height": 720,
+        "readyState": 4,
+        "networkState": 1,
+        "ms": 0.10000000149011612
+      },
+      "canPlay": {
+        "readyState": 4,
+        "networkState": 1,
+        "buffered": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "ms": 0.30000000447034836
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 278.1000000014901
+              },
+              "display": {
+                "status": "frame",
+                "ms": 234.19999999552965,
+                "mediaTime": 0.5,
+                "presentedFrames": 2,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 100.70000000298023
+              },
+              "display": {
+                "status": "frame",
+                "ms": 77.70000000298023,
+                "mediaTime": 5,
+                "presentedFrames": 3,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 328.3999999985099
+              },
+              "display": {
+                "status": "frame",
+                "ms": 327,
+                "mediaTime": 9.875,
+                "presentedFrames": 4,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 275.20000000298023
+              },
+              "display": {
+                "status": "frame",
+                "ms": 210.30000000447035,
+                "mediaTime": 0.5,
+                "presentedFrames": 6,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 101
+              },
+              "display": {
+                "status": "frame",
+                "ms": 69.39999999850988,
+                "mediaTime": 5,
+                "presentedFrames": 7,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 309.90000000596046
+              },
+              "display": {
+                "status": "frame",
+                "ms": 309.30000000447035,
+                "mediaTime": 9.875,
+                "presentedFrames": 8,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "measured": [
+            {
+              "target": 0.5,
+              "before": {
+                "currentTime": 0,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 240.79999999701977
+              },
+              "display": {
+                "status": "frame",
+                "ms": 197.10000000149012,
+                "mediaTime": 0.5,
+                "presentedFrames": 10,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 5,
+              "before": {
+                "currentTime": 0.5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 87.39999999850988
+              },
+              "display": {
+                "status": "frame",
+                "ms": 59.600000001490116,
+                "mediaTime": 5,
+                "presentedFrames": 11,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            },
+            {
+              "target": 9.9,
+              "before": {
+                "currentTime": 5,
+                "readyState": 4,
+                "seeking": false,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              },
+              "seek": {
+                "status": "seeked",
+                "ms": 331.40000000596046
+              },
+              "display": {
+                "status": "frame",
+                "ms": 330.70000000298023,
+                "mediaTime": 9.875,
+                "presentedFrames": 12,
+                "width": 1280,
+                "height": 720
+              },
+              "after": {
+                "currentTime": 9.9,
+                "readyState": 4,
+                "seeking": false,
+                "networkState": 1,
+                "buffered": [
+                  [
+                    0,
+                    10.005
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/media/optimized.mp4",
+          "range": "bytes=0-",
+          "status": 206,
+          "start": 0,
+          "end": 5129163,
+          "size": 5129164
+        }
+      ]
+    }
+  },
+  "exceptions": [],
+  "logs": []
+}

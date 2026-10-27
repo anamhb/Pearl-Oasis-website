@@ -60,27 +60,45 @@ export const FEATURED_DISH_IMAGES = [
   },
 ];
 
-// 7 Designated Stationary Stations around the Central Hub (angles in radians)
-// Carefully balanced so dishes are evenly spaced and visible across screen widths
-const STATIONS = [
-  { angle: -Math.PI * 0.5 + 0.12 }, // Station 0: High Top
-  { angle: -Math.PI * 0.18 },       // Station 1: Upper Right
-  { angle: Math.PI * 0.14 },        // Station 2: Lower Right
-  { angle: Math.PI * 0.46 },        // Station 3: Bottom Right
-  { angle: Math.PI * 0.78 },        // Station 4: Bottom Left
-  { angle: Math.PI * 1.10 },        // Station 5: Lower Left
-  { angle: Math.PI * 1.42 },        // Station 6: Upper Left
-];
+const TAU = Math.PI * 2;
+const ORBIT_START_ANGLE = -Math.PI / 2;
+const DISH_COUNT = FEATURED_DISH_IMAGES.length;
+
+// The orbit is shared by every dish. Only the stage dimensions and the dish
+// index decide a station; there are no hand-picked or random coordinates.
+const getOrbitGeometry = (stageWidth, stageHeight, viewportWidth) => {
+  const isMobile = viewportWidth < 640;
+  const isTablet = viewportWidth < 1024;
+  const dishHalfWidth = isMobile ? 40 : isTablet ? 64 : 88;
+  const edgeHalfHeight = isMobile ? 46 : isTablet ? 70 : 92;
+
+  const maxRx = Math.max(0, stageWidth / 2 - dishHalfWidth - 6);
+  const maxRy = Math.max(0, stageHeight / 2 - edgeHalfHeight - 8);
+  const rx = Math.min(
+    isMobile ? 150 : isTablet ? 330 : 430,
+    stageWidth * (isMobile ? 0.36 : 0.38),
+    maxRx,
+  );
+  const ry = Math.min(isMobile ? 150 : isTablet ? 184 : 210, maxRy);
+
+  return { rx, ry };
+};
 
 export const SignatureDishes = () => {
   const containerRef = useRef(null);
   const dishDomRefs = useRef([]);
   const rafIdRef = useRef(null);
   const startTimeRef = useRef(null);
-  const settledRef = useRef(false);
-  const replayRef = useRef(null);
+  /* Visibility and pause bookkeeping for the orbit loop. These are refs so the
+     IntersectionObserver can start/stop the loop without re-rendering the
+     section. */
+  const visibleRef = useRef(true);
+  const pausedAtRef = useRef(0);
 
   const [stageSize, setStageSize] = useState({ width: 1000, height: 600 });
+  const [viewportWidth, setViewportWidth] = useState(() => (
+    typeof window === 'undefined' ? 1440 : window.innerWidth
+  ));
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Update container dimensions responsively
@@ -88,9 +106,11 @@ export const SignatureDishes = () => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const w = Math.max(300, rect.width);
-      // Adaptive height according to viewport width
-      const h = w < 640 ? 540 : w < 1024 ? 560 : 620;
+      const vw = window.innerWidth;
+      // Keep the stage height and the CSS dish breakpoints in step.
+      const h = vw < 640 ? 540 : vw < 1024 ? 560 : 620;
       setStageSize({ width: w, height: h });
+      setViewportWidth(vw);
     }
   }, []);
 
@@ -110,173 +130,199 @@ export const SignatureDishes = () => {
   }, []);
 
   // ============================================================================
-  // Featured dish sequence:
-  // - Central hub with the stationary logo and the slow decorative ring
-  // - The hub establishes itself first
-  // - Dishes make one staggered entrance to their designated stations
-  // - They settle there and stay put; the animation loop then stops
-  // - Hovering or tapping the stage replays the entrance once
+  // Continuous orbit sequence:
+  // - Every dish owns one evenly spaced station on the shared orbit.
+  // - A dish enters from just outside the orbit and settles on its station.
+  // - It rests, then spirals inward and is absorbed by the central hub.
+  // - The next dish follows at a fixed interval, so the loop never stops.
   // ============================================================================
   useEffect(() => {
-    const totalDishes = FEATURED_DISH_IMAGES.length;
-    const cycleDuration = 8.0; // 8 seconds per dish full cycle
-    const initialHubDelay = 0.8; // Let central hub establish itself first
-    const staggerStep = cycleDuration / totalDishes; // ~1.14s stagger between dishes
+    const totalDishes = DISH_COUNT;
+    const cycleDuration = 8.4;
+    const staggerStep = cycleDuration / totalDishes;
+    const entranceEnd = 0.12;
+    // The exit now starts 0.02 cycle earlier while ending at the same point,
+    // lengthening the centre-bound glide from 1.008s to 1.176s (+16.7%).
+    // It remains shorter than the 1.2s stagger, so only one dish is absorbed
+    // at a time and the sequence cadence is unchanged.
+    const exitStart = 0.86;
+    const { rx, ry } = getOrbitGeometry(stageSize.width, stageSize.height, viewportWidth);
 
-    const w = stageSize.width;
-    const isMobile = w < 640;
-    const isTablet = w >= 640 && w < 1024;
+    const stations = Array.from({ length: totalDishes }, (_, index) => {
+      const angle = ORBIT_START_ANGLE + (TAU * index) / totalDishes;
+      return { angle, x: Math.cos(angle) * rx, y: Math.sin(angle) * ry };
+    });
 
-    // Radial boundaries tailored to stage proportions. The horizontal radius
-    // is additionally clamped so the widest dish (half of its box) can never
-    // be pushed past the stage's rounded, overflow-hidden edge — at 320px the
-    // raw 0.36 × width pushed the left-most dish 10px outside the frame and
-    // the stage clipped it.
-    const dishHalfWidth = isMobile ? 48 : isTablet ? 72 : 88;
-    const maxRadius = Math.max(0, w / 2 - dishHalfWidth - 6);
-    const rx = Math.min(
-      isMobile ? 150 : isTablet ? 330 : 430,
-      w * (isMobile ? 0.36 : 0.38),
-      maxRadius,
-    );
-
-    const ry = isMobile ? 135 : isTablet ? 155 : 180;
-
-    // On mobile the original STATIONS angles (tuned for a wide desktop ellipse)
-    // cluster two dishes at the narrow top of the constrained orbit — stations 0
-    // and 6 sit only ~21° apart, producing a ~46px center-to-center gap at mobile
-    // rx values, while dish images are 96px wide. Evenly spacing all seven positions
-    // around the full circle (51.4° per step) guarantees every adjacent pair
-    // maintains equal arc distance and eliminates the overlap at any mobile width.
-    const stations = isMobile
-      ? Array.from({ length: STATIONS.length }, (_, i) => ({
-          x: Math.cos(-Math.PI / 2 + (2 * Math.PI * i) / STATIONS.length) * rx,
-          y: Math.sin(-Math.PI / 2 + (2 * Math.PI * i) / STATIONS.length) * ry,
-        }))
-      : STATIONS.map((station) => ({
-          x: Math.cos(station.angle) * rx,
-          y: Math.sin(station.angle) * ry,
-        }));
-
-    // Reduced motion: no orbit, no float, no fade. Every dish sits at its
+    // Reduced motion: no orbit, no fade. Every dish sits at its calculated
     // station at full size, so the section still reads as a composed plate.
     if (prefersReducedMotion) {
       for (let i = 0; i < totalDishes; i++) {
         const el = dishDomRefs.current[i];
         if (!el) continue;
-        const point = stations[i] || { x: 0, y: 0 };
+        const point = stations[i];
         el.style.transform = `translate3d(calc(-50% + ${point.x.toFixed(2)}px), calc(-50% + ${point.y.toFixed(2)}px), 0) scale(1)`;
         el.style.opacity = '1';
         el.style.zIndex = 25;
       }
-      settledRef.current = true;
-      replayRef.current = null;
+      startTimeRef.current = null;
+      pausedAtRef.current = 0;
       return undefined;
     }
 
-    // Easing helper for the one-shot entrance.
     const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3);
-    const holdEnd = 0.65;
+    const easeInOutCubic = (x) => (
+      x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
+    );
 
-    const placeAtStation = (el, point) => {
-      el.style.transform = `translate3d(calc(-50% + ${point.x.toFixed(2)}px), calc(-50% + ${point.y.toFixed(2)}px), 0) scale(1)`;
-      el.style.opacity = '1';
-      el.style.zIndex = 25;
+    const renderDish = (el, x, y, scale, opacity, zIndex) => {
+      el.style.transform = `translate3d(calc(-50% + ${x.toFixed(2)}px), calc(-50% + ${y.toFixed(2)}px), 0) scale(${scale.toFixed(3)})`;
+      el.style.opacity = opacity.toFixed(3);
+      el.style.zIndex = String(zIndex);
     };
 
+    let cancelled = false;
+
     const animate = (currentTime) => {
+      if (cancelled || !visibleRef.current) {
+        rafIdRef.current = null;
+        return;
+      }
       if (startTimeRef.current === null) {
         startTimeRef.current = currentTime;
       }
       const elapsedTime = (currentTime - startTimeRef.current) / 1000;
-      let pending = 0;
 
       for (let i = 0; i < totalDishes; i++) {
         const el = dishDomRefs.current[i];
         if (!el) continue;
 
-        const point = stations[i] || { x: 0, y: 0 };
-        const baseX = point.x;
-        const baseY = point.y;
-
-        // Individual timeline offset for the staggered entrance.
-        const dishStartTime = initialHubDelay + i * staggerStep;
+        const station = stations[i];
+        const dishStartTime = i * staggerStep;
 
         if (elapsedTime < dishStartTime) {
-          // Pre-appearance phase: hidden.
-          el.style.opacity = '0';
-          el.style.transform = `translate3d(calc(-50% + ${baseX.toFixed(2)}px), calc(-50% + ${baseY.toFixed(2)}px), 0) scale(0)`;
-          pending += 1;
+          renderDish(el, station.x, station.y, 0, 0, 10);
           continue;
         }
 
-        // One-shot progress. Unlike the old loop, this never wraps.
-        const u = (elapsedTime - dishStartTime) / cycleDuration;
+        // Local cycle progress. The wrap happens only while the dish is fully
+        // transparent, so the reset to the outer entry point is never visible.
+        const u = ((elapsedTime - dishStartTime) / cycleDuration) % 1;
 
-        if (u >= holdEnd) {
-          placeAtStation(el, point);
-          continue;
-        }
-
-        pending += 1;
-
-        if (u < 0.16) {
-          // Staggered entrance: bloom into the designated station.
-          const p = u / 0.16;
+        if (u < entranceEnd) {
+          // Enter from outside the orbit, curving into the station.
+          const p = u / entranceEnd;
           const e = easeOutCubic(p);
-          const radialBloom = 1.1 - 0.1 * e;
-
-          el.style.transform = `translate3d(calc(-50% + ${(baseX * radialBloom).toFixed(2)}px), calc(-50% + ${(baseY * radialBloom).toFixed(2)}px), 0) scale(${(0.45 + 0.55 * e).toFixed(3)})`;
-          el.style.opacity = e.toFixed(3);
-          el.style.zIndex = 25;
+          const radial = 1.3 - 0.3 * e;
+          const angle = station.angle - 0.1 * (1 - e);
+          renderDish(
+            el,
+            Math.cos(angle) * rx * radial,
+            Math.sin(angle) * ry * radial,
+            0.55 + 0.45 * e,
+            e,
+            26,
+          );
+        } else if (u < exitStart) {
+          // Rest on the station. All positions are exact, so the ring of dishes
+          // stays symmetrical between beats.
+          renderDish(el, station.x, station.y, 1, 1, 25);
         } else {
-          // Stationary hold with a gentle float. The float ends when the dish
-          // settles, so the resting composition is completely still.
-          const floatOffset = Math.sin(elapsedTime * 1.8 + i * 1.1) * 3.5;
-          el.style.transform = `translate3d(calc(-50% + ${baseX.toFixed(2)}px), calc(-50% + ${(baseY + floatOffset).toFixed(2)}px), 0) scale(1)`;
-          el.style.opacity = '1';
-          el.style.zIndex = 25;
+          // Spiral into the hub. Opacity stays at 1 until the dish reaches the
+          // centre, then it fades out behind the stationary logo disc.
+          const p = (u - exitStart) / (1 - exitStart);
+          const e = easeInOutCubic(p);
+          const radial = 1 - e;
+          const angle = station.angle + 0.55 * e;
+          const opacity = p < 0.82 ? 1 : Math.max(0, 1 - (p - 0.82) / 0.18);
+          renderDish(
+            el,
+            Math.cos(angle) * rx * radial,
+            Math.sin(angle) * ry * radial,
+            1 - 0.48 * e,
+            opacity,
+            10,
+          );
         }
       }
 
-      if (pending === 0) {
+      if (!cancelled && visibleRef.current) {
+        rafIdRef.current = requestAnimationFrame(animate);
+      } else {
         rafIdRef.current = null;
-        settledRef.current = true;
-        return;
       }
+    };
 
+    const startLoop = () => {
+      if (cancelled || rafIdRef.current || !visibleRef.current) return;
       rafIdRef.current = requestAnimationFrame(animate);
     };
 
-    const replay = () => {
-      /* Only replay a finished composition. A pointer moving over the stage
-         during the entrance should not restart it mid-flight. */
-      if (prefersReducedMotion || !settledRef.current) return;
-      settledRef.current = false;
-      startTimeRef.current = null;
-      rafIdRef.current = requestAnimationFrame(animate);
-    };
-    replayRef.current = replay;
-
-    startTimeRef.current = null;
-    settledRef.current = false;
-    rafIdRef.current = requestAnimationFrame(animate);
-
-    return () => {
+    const stopLoop = () => {
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current);
       }
       rafIdRef.current = null;
-      replayRef.current = null;
     };
-  }, [stageSize, prefersReducedMotion]);
 
-  /* Hover or tap replays the one-shot entrance. Touch pointerenter is
-     suppressed so a single tap does not fire both pointer events. */
-  const handleStageReplay = (event) => {
-    if (event.type === 'pointerenter' && event.pointerType === 'touch') return;
-    replayRef.current?.();
-  };
+    const pause = () => {
+      stopLoop();
+      /* Remember when the orbit stopped so resume() can keep its phase instead
+         of jumping forward by the time spent offscreen. */
+      if (startTimeRef.current !== null && pausedAtRef.current === 0) {
+        pausedAtRef.current = performance.now();
+      }
+    };
+
+    const resume = () => {
+      if (pausedAtRef.current !== 0 && startTimeRef.current !== null) {
+        startTimeRef.current += performance.now() - pausedAtRef.current;
+      }
+      pausedAtRef.current = 0;
+      startLoop();
+    };
+
+    const setVisible = (nextVisible) => {
+      if (nextVisible === visibleRef.current) return;
+      visibleRef.current = nextVisible;
+      if (nextVisible) resume();
+      else pause();
+    };
+
+    const container = containerRef.current;
+    let observer = null;
+
+    if (typeof IntersectionObserver === 'undefined' || !container) {
+      /* Without an observer, keep the original always-on behavior. */
+      visibleRef.current = true;
+      resume();
+    } else {
+      observer = new IntersectionObserver(
+        (entries) => {
+          setVisible(entries.some((entry) => entry.isIntersecting));
+        },
+        { rootMargin: '200px 0px' },
+      );
+      observer.observe(container);
+
+      /* The first observer callback is asynchronous. Seed visibility from the
+         current layout so the loop does not run while the stage is offscreen. */
+      const margin = 200;
+      const rect = container.getBoundingClientRect();
+      const initiallyVisible =
+        rect.bottom > -margin && rect.top < window.innerHeight + margin;
+      visibleRef.current = initiallyVisible;
+      if (initiallyVisible) resume();
+      else pause();
+    }
+
+    return () => {
+      cancelled = true;
+      stopLoop();
+      if (observer) observer.disconnect();
+    };
+  }, [stageSize, viewportWidth, prefersReducedMotion]);
+
+  const orbit = getOrbitGeometry(stageSize.width, stageSize.height, viewportWidth);
 
   return (
     <section
@@ -301,14 +347,42 @@ export const SignatureDishes = () => {
           </p>
         </div>
 
-        {/* 2. Motion Experience Stage */}
+        {/* 2. Motion Experience Stage. No card border or shadow: the orbit and
+            the dishes should sit directly on the section. */}
         <div
           ref={containerRef}
-          onPointerEnter={handleStageReplay}
-          onPointerDown={handleStageReplay}
-          className="relative w-full rounded-xl bg-gradient-to-b from-[#0c0d10] via-[#090a0d] to-[#07080a] border border-[#1f1d18] shadow-[0_20px_60px_rgba(0,0,0,0.85)] overflow-hidden flex items-center justify-center"
+          className="relative isolate w-full rounded-xl bg-gradient-to-b from-[#0c0d10] via-[#090a0d] to-[#07080a] overflow-hidden flex items-center justify-center"
           style={{ minHeight: `${stageSize.height}px` }}
         >
+          {/* Faint orbit guide, aligned to the same ellipse the dishes use. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            style={{
+              width: `${orbit.rx * 2}px`,
+              height: `${orbit.ry * 2}px`,
+              zIndex: 5,
+            }}
+          >
+            <svg
+              className="w-full h-full overflow-visible"
+              viewBox={`0 0 ${orbit.rx * 2} ${orbit.ry * 2}`}
+              fill="none"
+            >
+              <ellipse
+                cx={orbit.rx}
+                cy={orbit.ry}
+                rx={Math.max(1, orbit.rx - 0.5)}
+                ry={Math.max(1, orbit.ry - 0.5)}
+                stroke="#d4af37"
+                strokeWidth="0.9"
+                strokeDasharray="2 10"
+                strokeLinecap="round"
+                strokeOpacity="0.3"
+              />
+            </svg>
+          </div>
+
           {/* ================================================================== */}
           {/* Central Hub: Restored previous visual style, materials & rotating ring */}
           {/* Logo and main circle are STRICTLY STATIONARY. Only outer ring rotates. */}
@@ -341,9 +415,10 @@ export const SignatureDishes = () => {
               </svg>
             </div>
 
-            {/* Main Central Circle (Stationary, kept at exact current size) */}
+            {/* Main Central Circle (stationary; reduced only on narrow phones so
+                the orbit stays clear of the logo) */}
             <div
-              className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full flex items-center justify-center p-5 sm:p-6 bg-gradient-to-b from-[#18191d] via-[#111215] to-[#0a0a0d] border border-[#d4af37]/45 shadow-[0_12px_40px_rgba(0,0,0,0.85),inset_0_1px_1px_rgba(255,255,255,0.06)]"
+              className="relative w-28 h-28 sm:w-44 sm:h-44 lg:w-52 lg:h-52 rounded-full flex items-center justify-center p-4 sm:p-6 bg-gradient-to-b from-[#18191d] via-[#111215] to-[#0a0a0d] border border-[#d4af37]/45 shadow-[0_12px_40px_rgba(0,0,0,0.85),inset_0_1px_1px_rgba(255,255,255,0.06)]"
             >
               {/* Restored delicate inner hairline accent ring */}
               <div className="absolute inset-2 sm:inset-2.5 rounded-full border border-[#d4af37]/20 pointer-events-none" />
@@ -360,9 +435,8 @@ export const SignatureDishes = () => {
 
           {/* ================================================================== */}
           {/* 3. Seven Animated Featured-Dish Images */}
-          {/* Staggered entrance, brief stay at stationary designated positions, */}
-          {/* and exit transition converging toward the central hub. */}
-          {/* NO cards, NO backgrounds, NO borders, NO captions, NO labels. */}
+          {/* Each wrapper is only a transform shell: no card surface, border, */}
+          {/* outline or shadow. The image and its shell move as one element. */}
           {/* ================================================================== */}
           {FEATURED_DISH_IMAGES.map((dish, index) => (
             <div
@@ -370,18 +444,18 @@ export const SignatureDishes = () => {
               ref={(el) => {
                 dishDomRefs.current[index] = el;
               }}
-              className="absolute top-1/2 left-1/2 will-change-transform pointer-events-auto select-none"
+              className="absolute top-1/2 left-1/2 will-change-transform pointer-events-none select-none border-0 bg-transparent shadow-none outline-none"
               style={{
                 transform: 'translate3d(-50%, -50%, 0) scale(0)',
                 opacity: 0,
               }}
             >
-              {/* Actual Dish Image only: Natural aspect ratio and visual quality preserved */}
+              {/* Actual dish only: natural aspect ratio, no card chrome. */}
               <img
                 src={dish.src}
                 alt={dish.alt || dish.name}
                 draggable={false}
-                className="w-24 sm:w-36 md:w-44 max-w-[190px] h-auto max-h-[130px] sm:max-h-[190px] md:max-h-[220px] object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,0.85)] filter contrast-[1.02] pointer-events-auto"
+                className="w-20 sm:w-32 lg:w-44 max-w-[190px] h-auto max-h-[110px] sm:max-h-[160px] lg:max-h-[220px] object-contain contrast-[1.02] pointer-events-none"
               />
             </div>
           ))}

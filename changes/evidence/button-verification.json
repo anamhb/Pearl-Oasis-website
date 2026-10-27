@@ -1,0 +1,672 @@
+{
+  "normal": {
+    "hero": {
+      "text": "Enter Restaurant",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+      "color": "rgb(14, 15, 18)",
+      "labelColor": "rgb(14, 15, 18)",
+      "labelTextFill": "rgb(14, 15, 18)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(14, 15, 18)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "3px none rgb(14, 15, 18) off 0px",
+      "rect": {
+        "x": 577,
+        "y": 569,
+        "w": 287,
+        "h": 52
+      },
+      "labelRect": {
+        "w": 287,
+        "h": 52
+      },
+      "disabled": false
+    },
+    "navbar": {
+      "text": "View Menu",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(243, 212, 125) 50%, rgb(170, 128, 16) 1",
+      "color": "rgb(18, 17, 13)",
+      "labelColor": "rgb(18, 17, 13)",
+      "labelTextFill": "rgb(18, 17, 13)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(18, 17, 13)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "3px none rgb(18, 17, 13) off 0px",
+      "rect": {
+        "x": 1186,
+        "y": 38,
+        "w": 134,
+        "h": 44
+      },
+      "labelRect": {
+        "w": 94,
+        "h": 16
+      },
+      "disabled": false
+    },
+    "menu": {
+      "text": "See Menu Sections",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+      "color": "rgb(10, 10, 11)",
+      "labelColor": "rgb(10, 10, 11)",
+      "labelTextFill": "rgb(10, 10, 11)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(10, 10, 11)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "3px none rgb(10, 10, 11) off 0px",
+      "rect": {
+        "x": 582,
+        "y": 742,
+        "w": 276,
+        "h": 44
+      },
+      "labelRect": {
+        "w": 168,
+        "h": 16
+      },
+      "disabled": false
+    },
+    "reservation": {
+      "error": "not found"
+    },
+    "modal": {
+      "text": "Call to Reserve",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(184, 134, 11) 100%)",
+      "color": "rgb(10, 10, 11)",
+      "labelColor": "rgb(10, 10, 11)",
+      "labelTextFill": "rgb(10, 10, 11)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(10, 10, 11)",
+      "boxShadow": "none",
+      "outline": "3px none rgb(10, 10, 11) off 0px",
+      "rect": {
+        "x": 973,
+        "y": 847,
+        "w": 162,
+        "h": 44
+      },
+      "labelRect": {
+        "w": 162,
+        "h": 44
+      },
+      "disabled": false
+    }
+  },
+  "fallback": {
+    "hero": {
+      "text": "Enter Restaurant",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "none",
+      "color": "rgb(14, 15, 18)",
+      "labelColor": "rgb(14, 15, 18)",
+      "labelTextFill": "rgb(14, 15, 18)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(14, 15, 18)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "3px none rgb(14, 15, 18) off 0px",
+      "rect": {
+        "x": 577,
+        "y": 569,
+        "w": 287,
+        "h": 52
+      },
+      "labelRect": {
+        "w": 287,
+        "h": 52
+      },
+      "disabled": false
+    },
+    "menu": {
+      "text": "See Menu Sections",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "none",
+      "color": "rgb(10, 10, 11)",
+      "labelColor": "rgb(10, 10, 11)",
+      "labelTextFill": "rgb(10, 10, 11)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(10, 10, 11)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "3px none rgb(10, 10, 11) off 0px",
+      "rect": {
+        "x": 582,
+        "y": 742,
+        "w": 276,
+        "h": 44
+      },
+      "labelRect": {
+        "w": 168,
+        "h": 16
+      },
+      "disabled": false
+    }
+  },
+  "focus": {
+    "hero": {
+      "nodeId": 34,
+      "text": "Enter Restaurant",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+      "color": "rgb(14, 15, 18)",
+      "labelColor": "rgb(14, 15, 18)",
+      "labelTextFill": "rgb(14, 15, 18)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(14, 15, 18)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "2px solid rgb(255, 216, 117) off 3px",
+      "rect": {
+        "x": 577,
+        "y": 569,
+        "w": 287,
+        "h": 52
+      },
+      "labelRect": {
+        "w": 287,
+        "h": 52
+      },
+      "disabled": false
+    },
+    "menu": {
+      "nodeId": 60,
+      "text": "See Menu Sections",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+      "color": "rgb(10, 10, 11)",
+      "labelColor": "rgb(10, 10, 11)",
+      "labelTextFill": "rgb(10, 10, 11)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(10, 10, 11)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "2px solid rgb(255, 216, 117) off 3px",
+      "rect": {
+        "x": 582,
+        "y": 742,
+        "w": 276,
+        "h": 44
+      },
+      "labelRect": {
+        "w": 168,
+        "h": 16
+      },
+      "disabled": false
+    }
+  },
+  "hover": {
+    "hero": {
+      "nodeId": 94,
+      "text": "Enter Restaurant",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+      "color": "rgb(14, 15, 18)",
+      "labelColor": "rgb(14, 15, 18)",
+      "labelTextFill": "rgb(14, 15, 18)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(14, 15, 18)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "3px none rgb(14, 15, 18) off 0px",
+      "rect": {
+        "x": 569,
+        "y": 568,
+        "w": 301,
+        "h": 55
+      },
+      "labelRect": {
+        "w": 301,
+        "h": 55
+      },
+      "disabled": false
+    },
+    "menu": {
+      "nodeId": 120,
+      "text": "See Menu Sections",
+      "bgColor": "rgb(212, 175, 55)",
+      "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+      "color": "rgb(10, 10, 11)",
+      "labelColor": "rgb(10, 10, 11)",
+      "labelTextFill": "rgb(10, 10, 11)",
+      "labelClipped": false,
+      "opacity": "1",
+      "visibility": "visible",
+      "display": "flex",
+      "filter": "none",
+      "blend": "normal",
+      "border": "0px solid rgb(10, 10, 11)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+      "outline": "3px none rgb(10, 10, 11) off 0px",
+      "rect": {
+        "x": 582,
+        "y": 742,
+        "w": 276,
+        "h": 44
+      },
+      "labelRect": {
+        "w": 168,
+        "h": 16
+      },
+      "disabled": false
+    }
+  },
+  "viewports": {
+    "320": {
+      "width": 320,
+      "hero": {
+        "text": "Enter Restaurant",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+        "color": "rgb(14, 15, 18)",
+        "labelColor": "rgb(14, 15, 18)",
+        "labelTextFill": "rgb(14, 15, 18)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(14, 15, 18)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(14, 15, 18) off 0px",
+        "rect": {
+          "x": 61,
+          "y": 401,
+          "w": 198,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 198,
+          "h": 44
+        },
+        "disabled": false
+      },
+      "menu": {
+        "text": "See Menu Sections",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+        "color": "rgb(10, 10, 11)",
+        "labelColor": "rgb(10, 10, 11)",
+        "labelTextFill": "rgb(10, 10, 11)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(10, 10, 11)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(10, 10, 11) off 0px",
+        "rect": {
+          "x": 22,
+          "y": 702,
+          "w": 276,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 168,
+          "h": 16
+        },
+        "disabled": false
+      },
+      "overflowX": false,
+      "scrollW": 320,
+      "innerW": 320
+    },
+    "390": {
+      "width": 390,
+      "hero": {
+        "text": "Enter Restaurant",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+        "color": "rgb(14, 15, 18)",
+        "labelColor": "rgb(14, 15, 18)",
+        "labelTextFill": "rgb(14, 15, 18)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(14, 15, 18)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(14, 15, 18) off 0px",
+        "rect": {
+          "x": 96,
+          "y": 452,
+          "w": 198,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 198,
+          "h": 44
+        },
+        "disabled": false
+      },
+      "menu": {
+        "text": "See Menu Sections",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+        "color": "rgb(10, 10, 11)",
+        "labelColor": "rgb(10, 10, 11)",
+        "labelTextFill": "rgb(10, 10, 11)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(10, 10, 11)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(10, 10, 11) off 0px",
+        "rect": {
+          "x": 57,
+          "y": 766,
+          "w": 276,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 168,
+          "h": 16
+        },
+        "disabled": false
+      },
+      "overflowX": false,
+      "scrollW": 390,
+      "innerW": 390
+    },
+    "430": {
+      "width": 430,
+      "hero": {
+        "text": "Enter Restaurant",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+        "color": "rgb(14, 15, 18)",
+        "labelColor": "rgb(14, 15, 18)",
+        "labelTextFill": "rgb(14, 15, 18)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(14, 15, 18)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(14, 15, 18) off 0px",
+        "rect": {
+          "x": 116,
+          "y": 496,
+          "w": 198,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 198,
+          "h": 44
+        },
+        "disabled": false
+      },
+      "menu": {
+        "text": "See Menu Sections",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+        "color": "rgb(10, 10, 11)",
+        "labelColor": "rgb(10, 10, 11)",
+        "labelTextFill": "rgb(10, 10, 11)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(10, 10, 11)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(10, 10, 11) off 0px",
+        "rect": {
+          "x": 77,
+          "y": 810,
+          "w": 276,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 168,
+          "h": 16
+        },
+        "disabled": false
+      },
+      "overflowX": false,
+      "scrollW": 430,
+      "innerW": 430
+    },
+    "768": {
+      "width": 768,
+      "hero": {
+        "text": "Enter Restaurant",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+        "color": "rgb(14, 15, 18)",
+        "labelColor": "rgb(14, 15, 18)",
+        "labelTextFill": "rgb(14, 15, 18)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(14, 15, 18)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(14, 15, 18) off 0px",
+        "rect": {
+          "x": 241,
+          "y": 574,
+          "w": 287,
+          "h": 52
+        },
+        "labelRect": {
+          "w": 287,
+          "h": 52
+        },
+        "disabled": false
+      },
+      "menu": {
+        "text": "See Menu Sections",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+        "color": "rgb(10, 10, 11)",
+        "labelColor": "rgb(10, 10, 11)",
+        "labelTextFill": "rgb(10, 10, 11)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(10, 10, 11)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(10, 10, 11) off 0px",
+        "rect": {
+          "x": 246,
+          "y": 816,
+          "w": 276,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 168,
+          "h": 16
+        },
+        "disabled": false
+      },
+      "overflowX": false,
+      "scrollW": 768,
+      "innerW": 768
+    },
+    "1024": {
+      "width": 1024,
+      "hero": {
+        "text": "Enter Restaurant",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+        "color": "rgb(14, 15, 18)",
+        "labelColor": "rgb(14, 15, 18)",
+        "labelTextFill": "rgb(14, 15, 18)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(14, 15, 18)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(14, 15, 18) off 0px",
+        "rect": {
+          "x": 369,
+          "y": 490,
+          "w": 287,
+          "h": 52
+        },
+        "labelRect": {
+          "w": 287,
+          "h": 52
+        },
+        "disabled": false
+      },
+      "menu": {
+        "text": "See Menu Sections",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+        "color": "rgb(10, 10, 11)",
+        "labelColor": "rgb(10, 10, 11)",
+        "labelTextFill": "rgb(10, 10, 11)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(10, 10, 11)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(10, 10, 11) off 0px",
+        "rect": {
+          "x": 374,
+          "y": 675,
+          "w": 276,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 168,
+          "h": 16
+        },
+        "disabled": false
+      },
+      "overflowX": false,
+      "scrollW": 1024,
+      "innerW": 1024
+    },
+    "1440": {
+      "width": 1440,
+      "hero": {
+        "text": "Enter Restaurant",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(245, 215, 142) 50%, rgb(170, 128, 16) 1",
+        "color": "rgb(14, 15, 18)",
+        "labelColor": "rgb(14, 15, 18)",
+        "labelTextFill": "rgb(14, 15, 18)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(14, 15, 18)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(14, 15, 18) off 0px",
+        "rect": {
+          "x": 577,
+          "y": 569,
+          "w": 287,
+          "h": 52
+        },
+        "labelRect": {
+          "w": 287,
+          "h": 52
+        },
+        "disabled": false
+      },
+      "menu": {
+        "text": "See Menu Sections",
+        "bgColor": "rgb(212, 175, 55)",
+        "bgImage": "linear-gradient(to right in oklab, rgb(212, 175, 55) 0%, rgb(255, 216, 117) 50%, rgb(184, 134, 11) 1",
+        "color": "rgb(10, 10, 11)",
+        "labelColor": "rgb(10, 10, 11)",
+        "labelTextFill": "rgb(10, 10, 11)",
+        "labelClipped": false,
+        "opacity": "1",
+        "visibility": "visible",
+        "display": "flex",
+        "filter": "none",
+        "blend": "normal",
+        "border": "0px solid rgb(10, 10, 11)",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0",
+        "outline": "3px none rgb(10, 10, 11) off 0px",
+        "rect": {
+          "x": 582,
+          "y": 742,
+          "w": 276,
+          "h": 44
+        },
+        "labelRect": {
+          "w": 168,
+          "h": 16
+        },
+        "disabled": false
+      },
+      "overflowX": false,
+      "scrollW": 1440,
+      "innerW": 1440
+    }
+  },
+  "interactions": {}
+}

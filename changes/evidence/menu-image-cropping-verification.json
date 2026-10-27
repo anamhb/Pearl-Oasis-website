@@ -1,0 +1,2304 @@
+﻿{
+    "generated":  "2026-10-26",
+    "browser":  "Chrome/156.0.8078.47 headless",
+    "app":  "http://127.0.0.1:3000/",
+    "method":  "DOM geometry, computed image styles, canvas alpha bounds for each affected PNG, and card screenshots",
+    "viewports":  {
+                      "320":  {
+                                  "viewport":  {
+                                                   "width":  320,
+                                                   "height":  844
+                                               },
+                                  "page":  {
+                                               "scrollY":  5541,
+                                               "documentScrollWidth":  320,
+                                               "bodyScrollWidth":  320,
+                                               "pageOverflowX":  false
+                                           },
+                                  "menuViewport":  {
+                                                       "clientWidth":  288,
+                                                       "scrollWidth":  2604
+                                                   },
+                                  "affectedCount":  6,
+                                  "fullBleedCount":  4,
+                                  "hover":  {
+                                                "inset":  1.42,
+                                                "full":  1
+                                            },
+                                  "cards":  [
+                                                {
+                                                    "index":  0,
+                                                    "step":  1,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10,
+                                                                     "top":  10,
+                                                                     "width":  227.594,
+                                                                     "height":  165.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10,
+                                                                        "top":  10,
+                                                                        "right":  9.999750000000006,
+                                                                        "bottom":  9.999500000000012
+                                                                    },
+                                                    "transformScale":  1.42,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  428,
+                                                                    "height":  582
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  29,
+                                                                        "y":  91,
+                                                                        "width":  394,
+                                                                        "height":  388
+                                                                    },
+                                                    "fitScale":  0.28468728522336767,
+                                                    "subject":  {
+                                                                    "x":  49.009650171821306,
+                                                                    "y":  11.992810996563577,
+                                                                    "width":  159.27684233676976,
+                                                                    "height":  156.85130666666663
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  49.009650171821306,
+                                                                           "top":  11.992810996563577,
+                                                                           "right":  39.30725749140893,
+                                                                           "bottom":  16.843382336769793
+                                                                       },
+                                                    "minVisibleMargin":  11.992810996563577,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6432991234098994,
+                                                                             "height":  0.8447057915404463
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  1,
+                                                    "step":  2,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10,
+                                                                     "top":  10,
+                                                                     "width":  227.594,
+                                                                     "height":  165.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10,
+                                                                        "top":  10,
+                                                                        "right":  9.999750000000006,
+                                                                        "bottom":  9.999500000000012
+                                                                    },
+                                                    "transformScale":  1.24,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  436,
+                                                                    "height":  573
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  9,
+                                                                        "y":  74,
+                                                                        "width":  427,
+                                                                        "height":  438
+                                                                    },
+                                                    "fitScale":  0.28915881326352527,
+                                                    "subject":  {
+                                                                    "x":  48.85860195462479,
+                                                                    "y":  16.650652705061077,
+                                                                    "width":  153.10380844677135,
+                                                                    "height":  157.04793465968584
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  48.85860195462479,
+                                                                           "top":  16.650652705061077,
+                                                                           "right":  45.63133959860386,
+                                                                           "bottom":  11.988912635253087
+                                                                       },
+                                                    "minVisibleMargin":  11.988912635253087,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6183670163191572,
+                                                                             "height":  0.8457647103853831
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  2,
+                                                    "step":  3,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  247.594,
+                                                                     "height":  185.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  -0.0002499999999940883,
+                                                                        "bottom":  -0.0004999999999881766
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  1200,
+                                                                    "height":  896
+                                                                }
+                                                },
+                                                {
+                                                    "index":  3,
+                                                    "step":  4,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10,
+                                                                     "top":  10,
+                                                                     "width":  227.594,
+                                                                     "height":  165.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10,
+                                                                        "top":  10,
+                                                                        "right":  9.999750000000006,
+                                                                        "bottom":  9.999500000000012
+                                                                    },
+                                                    "transformScale":  1.3,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  436,
+                                                                    "height":  573
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  23,
+                                                                        "y":  71,
+                                                                        "width":  401,
+                                                                        "height":  406
+                                                                    },
+                                                    "fitScale":  0.28915881326352527,
+                                                    "subject":  {
+                                                                    "x":  50.49524083769633,
+                                                                    "y":  11.836158464223388,
+                                                                    "width":  150.73848935427574,
+                                                                    "height":  152.61802164048865
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  50.49524083769633,
+                                                                           "top":  11.836158464223388,
+                                                                           "right":  46.360019808027914,
+                                                                           "bottom":  21.233319895287963
+                                                                       },
+                                                    "minVisibleMargin":  11.836158464223388,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6088137901472704,
+                                                                             "height":  0.821907891702396
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  4,
+                                                    "step":  5,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10,
+                                                                     "top":  10,
+                                                                     "width":  227.594,
+                                                                     "height":  165.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10,
+                                                                        "top":  10,
+                                                                        "right":  9.999750000000006,
+                                                                        "bottom":  9.999500000000012
+                                                                    },
+                                                    "transformScale":  1.36,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  432,
+                                                                    "height":  577
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  13,
+                                                                        "y":  88,
+                                                                        "width":  405,
+                                                                        "height":  408
+                                                                    },
+                                                    "fitScale":  0.2871542461005199,
+                                                    "subject":  {
+                                                                    "x":  44.519455736568446,
+                                                                    "y":  14.54278017331022,
+                                                                    "width":  158.16455875216639,
+                                                                    "height":  159.3361480762565
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  44.519455736568446,
+                                                                           "top":  14.54278017331022,
+                                                                           "right":  44.90973551126518,
+                                                                           "bottom":  11.80857175043326
+                                                                       },
+                                                    "minVisibleMargin":  11.80857175043326,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6388067499771961,
+                                                                             "height":  0.8580876368967029
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  5,
+                                                    "step":  6,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10,
+                                                                     "top":  10,
+                                                                     "width":  227.594,
+                                                                     "height":  165.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10,
+                                                                        "top":  10,
+                                                                        "right":  9.999750000000006,
+                                                                        "bottom":  9.999500000000012
+                                                                    },
+                                                    "transformScale":  1.21,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  439,
+                                                                    "height":  568
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  2,
+                                                                        "y":  55,
+                                                                        "width":  433,
+                                                                        "height":  434
+                                                                    },
+                                                    "fitScale":  0.29170422535211266,
+                                                    "subject":  {
+                                                                    "x":  47.02774049295775,
+                                                                    "y":  12.015676197183112,
+                                                                    "width":  152.83259478873237,
+                                                                    "height":  153.18555690140843
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  47.02774049295775,
+                                                                           "top":  12.015676197183112,
+                                                                           "right":  47.73341471830989,
+                                                                           "bottom":  20.48626690140844
+                                                                       },
+                                                    "minVisibleMargin":  12.015676197183112,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6172716184828266,
+                                                                             "height":  0.8249642916265685
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  6,
+                                                    "step":  7,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  247.594,
+                                                                     "height":  185.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  -0.0002499999999940883,
+                                                                        "bottom":  -0.0004999999999881766
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  0,
+                                                                    "height":  0
+                                                                }
+                                                },
+                                                {
+                                                    "index":  7,
+                                                    "step":  8,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10,
+                                                                     "top":  10,
+                                                                     "width":  227.594,
+                                                                     "height":  165.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10,
+                                                                        "top":  10,
+                                                                        "right":  9.999750000000006,
+                                                                        "bottom":  9.999500000000012
+                                                                    },
+                                                    "transformScale":  1.18,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  428,
+                                                                    "height":  582
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  79,
+                                                                        "y":  50,
+                                                                        "width":  282,
+                                                                        "height":  460
+                                                                    },
+                                                    "fitScale":  0.28468728522336767,
+                                                    "subject":  {
+                                                                    "x":  78.44631546391751,
+                                                                    "y":  11.884629828178689,
+                                                                    "width":  94.73254103092782,
+                                                                    "height":  154.52825841924397
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  78.44631546391751,
+                                                                           "top":  11.884629828178689,
+                                                                           "right":  74.41489350515468,
+                                                                           "bottom":  19.274611752577357
+                                                                       },
+                                                    "minVisibleMargin":  11.884629828178689,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.3826128124434798,
+                                                                             "height":  0.8321952658054202
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  8,
+                                                    "step":  9,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  247.594,
+                                                                     "height":  185.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  -0.0002499999999940883,
+                                                                        "bottom":  -0.0004999999999881766
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  555,
+                                                                    "height":  450
+                                                                }
+                                                },
+                                                {
+                                                    "index":  9,
+                                                    "step":  10,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  247.59375,
+                                                                  "height":  185.6875
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  247.594,
+                                                                     "height":  185.688
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  -0.0002499999999940883,
+                                                                        "bottom":  -0.0004999999999881766
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  249.59375,
+                                                                 "height":  323.6875,
+                                                                 "top":  169.671875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  356.359375,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  383.796875,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  0,
+                                                                    "height":  0
+                                                                }
+                                                }
+                                            ]
+                              },
+                      "390":  {
+                                  "viewport":  {
+                                                   "width":  390,
+                                                   "height":  844
+                                               },
+                                  "page":  {
+                                               "scrollY":  5459,
+                                               "documentScrollWidth":  390,
+                                               "bodyScrollWidth":  390,
+                                               "pageOverflowX":  false
+                                           },
+                                  "menuViewport":  {
+                                                       "clientWidth":  358,
+                                                       "scrollWidth":  3148
+                                                   },
+                                  "affectedCount":  6,
+                                  "fullBleedCount":  4,
+                                  "hover":  {
+                                                "inset":  1.42,
+                                                "full":  1
+                                            },
+                                  "cards":  [
+                                                {
+                                                    "index":  0,
+                                                    "step":  1,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10.92,
+                                                                     "top":  10.92,
+                                                                     "width":  280.156,
+                                                                     "height":  204.656
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10.92,
+                                                                        "top":  10.92,
+                                                                        "right":  10.923999999999978,
+                                                                        "bottom":  10.924000000000007
+                                                                    },
+                                                    "transformScale":  1.42,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  428,
+                                                                    "height":  582
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  29,
+                                                                        "y":  91,
+                                                                        "width":  394,
+                                                                        "height":  388
+                                                                    },
+                                                    "fitScale":  0.3516426116838488,
+                                                    "subject":  {
+                                                                    "x":  58.62148591065295,
+                                                                    "y":  13.381498281786946,
+                                                                    "width":  196.73700838487974,
+                                                                    "height":  193.7410133333333
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  58.62148591065295,
+                                                                           "top":  13.381498281786946,
+                                                                           "right":  46.641505704467306,
+                                                                           "bottom":  19.37748838487974
+                                                                       },
+                                                    "minVisibleMargin":  13.381498281786946,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6514470476320521,
+                                                                             "height":  0.8553687122884474
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  1,
+                                                    "step":  2,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10.92,
+                                                                     "top":  10.92,
+                                                                     "width":  280.156,
+                                                                     "height":  204.656
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10.92,
+                                                                        "top":  10.92,
+                                                                        "right":  10.923999999999978,
+                                                                        "bottom":  10.924000000000007
+                                                                    },
+                                                    "transformScale":  1.24,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  436,
+                                                                    "height":  573
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  9,
+                                                                        "y":  74,
+                                                                        "width":  427,
+                                                                        "height":  438
+                                                                    },
+                                                    "fitScale":  0.35716579406631765,
+                                                    "subject":  {
+                                                                    "x":  58.43491280977311,
+                                                                    "y":  19.134813263525302,
+                                                                    "width":  189.1121446422339,
+                                                                    "height":  193.98388607329844
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  58.43491280977311,
+                                                                           "top":  19.134813263525302,
+                                                                           "right":  54.45294254799302,
+                                                                           "bottom":  13.381300663176262
+                                                                       },
+                                                    "minVisibleMargin":  13.381300663176262,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.626199154444483,
+                                                                             "height":  0.8564409981161079
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  2,
+                                                    "step":  3,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  302,
+                                                                     "height":  226.5
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  0,
+                                                                        "bottom":  0
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  1200,
+                                                                    "height":  896
+                                                                }
+                                                },
+                                                {
+                                                    "index":  3,
+                                                    "step":  4,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10.92,
+                                                                     "top":  10.92,
+                                                                     "width":  280.156,
+                                                                     "height":  204.656
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10.92,
+                                                                        "top":  10.92,
+                                                                        "right":  10.923999999999978,
+                                                                        "bottom":  10.924000000000007
+                                                                    },
+                                                    "transformScale":  1.3,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  436,
+                                                                    "height":  573
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  23,
+                                                                        "y":  71,
+                                                                        "width":  401,
+                                                                        "height":  406
+                                                                    },
+                                                    "fitScale":  0.35716579406631765,
+                                                    "subject":  {
+                                                                    "x":  60.45647120418846,
+                                                                    "y":  13.188002792321114,
+                                                                    "width":  186.19052844677142,
+                                                                    "height":  188.5121061082025
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  60.45647120418846,
+                                                                           "top":  13.188002792321114,
+                                                                           "right":  55.353000349040116,
+                                                                           "bottom":  24.799891099476383
+                                                                       },
+                                                    "minVisibleMargin":  13.188002792321114,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6165249286316935,
+                                                                             "height":  0.832283029175287
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  4,
+                                                    "step":  5,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10.92,
+                                                                     "top":  10.92,
+                                                                     "width":  280.156,
+                                                                     "height":  204.656
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10.92,
+                                                                        "top":  10.92,
+                                                                        "right":  10.923999999999978,
+                                                                        "bottom":  10.924000000000007
+                                                                    },
+                                                    "transformScale":  1.36,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  432,
+                                                                    "height":  577
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  13,
+                                                                        "y":  88,
+                                                                        "width":  405,
+                                                                        "height":  408
+                                                                    },
+                                                    "fitScale":  0.3546897746967071,
+                                                    "subject":  {
+                                                                    "x":  53.07524700173312,
+                                                                    "y":  16.531192235701894,
+                                                                    "width":  195.3631279029463,
+                                                                    "height":  196.81026218370883
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  53.07524700173312,
+                                                                           "top":  16.531192235701894,
+                                                                           "right":  53.56162509532058,
+                                                                           "bottom":  13.158545580589276
+                                                                       },
+                                                    "minVisibleMargin":  13.158545580589276,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6468977745130672,
+                                                                             "height":  0.8689194798397741
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  5,
+                                                    "step":  6,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10.92,
+                                                                     "top":  10.92,
+                                                                     "width":  280.156,
+                                                                     "height":  204.656
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10.92,
+                                                                        "top":  10.92,
+                                                                        "right":  10.923999999999978,
+                                                                        "bottom":  10.924000000000007
+                                                                    },
+                                                    "transformScale":  1.21,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  439,
+                                                                    "height":  568
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  2,
+                                                                        "y":  55,
+                                                                        "width":  433,
+                                                                        "height":  434
+                                                                    },
+                                                    "fitScale":  0.3603098591549296,
+                                                    "subject":  {
+                                                                    "x":  56.17345281690143,
+                                                                    "y":  13.409741126760565,
+                                                                    "width":  188.77714450704224,
+                                                                    "height":  189.2131194366197
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  56.17345281690143,
+                                                                           "top":  13.409741126760565,
+                                                                           "right":  57.04940267605633,
+                                                                           "bottom":  23.87713943661973
+                                                                       },
+                                                    "minVisibleMargin":  13.409741126760565,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6250898824736498,
+                                                                             "height":  0.8353780107577029
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  6,
+                                                    "step":  7,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  302,
+                                                                     "height":  226.5
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  0,
+                                                                        "bottom":  0
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  0,
+                                                                    "height":  0
+                                                                }
+                                                },
+                                                {
+                                                    "index":  7,
+                                                    "step":  8,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  10.92,
+                                                                     "top":  10.92,
+                                                                     "width":  280.156,
+                                                                     "height":  204.656
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  10.92,
+                                                                        "top":  10.92,
+                                                                        "right":  10.923999999999978,
+                                                                        "bottom":  10.924000000000007
+                                                                    },
+                                                    "transformScale":  1.18,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  428,
+                                                                    "height":  582
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  79,
+                                                                        "y":  50,
+                                                                        "width":  282,
+                                                                        "height":  460
+                                                                    },
+                                                    "fitScale":  0.3516426116838488,
+                                                    "subject":  {
+                                                                    "x":  94.98133195876291,
+                                                                    "y":  13.247874089347093,
+                                                                    "width":  117.01259546391752,
+                                                                    "height":  190.87160962199312
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  94.98133195876291,
+                                                                           "top":  13.247874089347093,
+                                                                           "right":  90.00607257731957,
+                                                                           "bottom":  22.380516288659805
+                                                                       },
+                                                    "minVisibleMargin":  13.247874089347093,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.38745892537721033,
+                                                                             "height":  0.8427002632317577
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  8,
+                                                    "step":  9,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  302,
+                                                                     "height":  226.5
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  0,
+                                                                        "bottom":  0
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  555,
+                                                                    "height":  450
+                                                                }
+                                                },
+                                                {
+                                                    "index":  9,
+                                                    "step":  10,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  302,
+                                                                     "height":  226.5
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  0,
+                                                                        "bottom":  0
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  0,
+                                                                    "height":  0
+                                                                }
+                                                }
+                                            ]
+                              },
+                      "430":  {
+                                  "viewport":  {
+                                                   "width":  430,
+                                                   "height":  844
+                                               },
+                                  "page":  {
+                                               "scrollY":  5459,
+                                               "documentScrollWidth":  430,
+                                               "bodyScrollWidth":  430,
+                                               "pageOverflowX":  false
+                                           },
+                                  "menuViewport":  {
+                                                       "clientWidth":  398,
+                                                       "scrollWidth":  3148
+                                                   },
+                                  "affectedCount":  6,
+                                  "fullBleedCount":  4,
+                                  "hover":  {
+                                                "inset":  1.42,
+                                                "full":  1
+                                            },
+                                  "cards":  [
+                                                {
+                                                    "index":  0,
+                                                    "step":  1,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  12.04,
+                                                                     "top":  12.04,
+                                                                     "width":  277.906,
+                                                                     "height":  202.406
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  12.04,
+                                                                        "top":  12.04,
+                                                                        "right":  12.053999999999974,
+                                                                        "bottom":  12.054000000000002
+                                                                    },
+                                                    "transformScale":  1.42,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  428,
+                                                                    "height":  582
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  29,
+                                                                        "y":  91,
+                                                                        "width":  394,
+                                                                        "height":  388
+                                                                    },
+                                                    "fitScale":  0.3477766323024055,
+                                                    "subject":  {
+                                                                    "x":  59.632078694158096,
+                                                                    "y":  14.474436426116839,
+                                                                    "width":  194.57407024054984,
+                                                                    "height":  191.61101333333332
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  59.632078694158096,
+                                                                           "top":  14.474436426116839,
+                                                                           "right":  47.793851065292074,
+                                                                           "bottom":  20.41455024054983
+                                                                       },
+                                                    "minVisibleMargin":  14.474436426116839,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6442850007965226,
+                                                                             "height":  0.8459647387785135
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  1,
+                                                    "step":  2,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  12.04,
+                                                                     "top":  12.04,
+                                                                     "width":  277.906,
+                                                                     "height":  202.406
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  12.04,
+                                                                        "top":  12.04,
+                                                                        "right":  12.053999999999974,
+                                                                        "bottom":  12.054000000000002
+                                                                    },
+                                                    "transformScale":  1.24,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  436,
+                                                                    "height":  573
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  9,
+                                                                        "y":  74,
+                                                                        "width":  427,
+                                                                        "height":  438
+                                                                    },
+                                                    "fitScale":  0.353239092495637,
+                                                    "subject":  {
+                                                                    "x":  59.44755678883071,
+                                                                    "y":  20.16449912739965,
+                                                                    "width":  187.0330346945899,
+                                                                    "height":  191.8512159162304
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  59.44755678883071,
+                                                                           "top":  20.16449912739965,
+                                                                           "right":  55.519408516579404,
+                                                                           "bottom":  14.484284956369947
+                                                                       },
+                                                    "minVisibleMargin":  14.484284956369947,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6193146844191718,
+                                                                             "height":  0.8470252358332467
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  2,
+                                                    "step":  3,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  302,
+                                                                     "height":  226.5
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  0,
+                                                                        "bottom":  0
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  1200,
+                                                                    "height":  896
+                                                                }
+                                                },
+                                                {
+                                                    "index":  3,
+                                                    "step":  4,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  12.04,
+                                                                     "top":  12.04,
+                                                                     "width":  277.906,
+                                                                     "height":  202.406
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  12.04,
+                                                                        "top":  12.04,
+                                                                        "right":  12.053999999999974,
+                                                                        "bottom":  12.054000000000002
+                                                                    },
+                                                    "transformScale":  1.3,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  436,
+                                                                    "height":  573
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  23,
+                                                                        "y":  71,
+                                                                        "width":  401,
+                                                                        "height":  406
+                                                                    },
+                                                    "fitScale":  0.353239092495637,
+                                                    "subject":  {
+                                                                    "x":  61.44689005235601,
+                                                                    "y":  14.283068237347294,
+                                                                    "width":  184.1435389179756,
+                                                                    "height":  186.43959301919725
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  61.44689005235601,
+                                                                           "top":  14.283068237347294,
+                                                                           "right":  56.40957102966837,
+                                                                           "bottom":  25.77733874345546
+                                                                       },
+                                                    "minVisibleMargin":  14.283068237347294,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6097468176091907,
+                                                                             "height":  0.8231328610119084
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  4,
+                                                    "step":  5,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  12.04,
+                                                                     "top":  12.04,
+                                                                     "width":  277.906,
+                                                                     "height":  202.406
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  12.04,
+                                                                        "top":  12.04,
+                                                                        "right":  12.053999999999974,
+                                                                        "bottom":  12.054000000000002
+                                                                    },
+                                                    "transformScale":  1.36,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  432,
+                                                                    "height":  577
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  13,
+                                                                        "y":  88,
+                                                                        "width":  405,
+                                                                        "height":  408
+                                                                    },
+                                                    "fitScale":  0.35079029462738304,
+                                                    "subject":  {
+                                                                    "x":  54.14681545927209,
+                                                                    "y":  17.589502461005196,
+                                                                    "width":  193.2152942807626,
+                                                                    "height":  194.6465186828423
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  54.14681545927209,
+                                                                           "top":  17.589502461005196,
+                                                                           "right":  54.6378902599653,
+                                                                           "bottom":  14.263978856152505
+                                                                       },
+                                                    "minVisibleMargin":  14.263978856152505,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6397857426515318,
+                                                                             "height":  0.8593665284010698
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  5,
+                                                    "step":  6,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  12.04,
+                                                                     "top":  12.04,
+                                                                     "width":  277.906,
+                                                                     "height":  202.406
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  12.04,
+                                                                        "top":  12.04,
+                                                                        "right":  12.053999999999974,
+                                                                        "bottom":  12.054000000000002
+                                                                    },
+                                                    "transformScale":  1.21,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  439,
+                                                                    "height":  568
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  2,
+                                                                        "y":  55,
+                                                                        "width":  433,
+                                                                        "height":  434
+                                                                    },
+                                                    "fitScale":  0.35634859154929577,
+                                                    "subject":  {
+                                                                    "x":  57.2109594190141,
+                                                                    "y":  14.502368767605631,
+                                                                    "width":  186.70171757042252,
+                                                                    "height":  187.13289936619717
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  57.2109594190141,
+                                                                           "top":  14.502368767605631,
+                                                                           "right":  58.08732301056338,
+                                                                           "bottom":  24.86473186619719
+                                                                       },
+                                                    "minVisibleMargin":  14.502368767605631,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.6182176078490812,
+                                                                             "height":  0.8261938161863009
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  6,
+                                                    "step":  7,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  302,
+                                                                     "height":  226.5
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  0,
+                                                                        "bottom":  0
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  0,
+                                                                    "height":  0
+                                                                }
+                                                },
+                                                {
+                                                    "index":  7,
+                                                    "step":  8,
+                                                    "isInset":  true,
+                                                    "objectFit":  "contain",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  12.04,
+                                                                     "top":  12.04,
+                                                                     "width":  277.906,
+                                                                     "height":  202.406
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  12.04,
+                                                                        "top":  12.04,
+                                                                        "right":  12.053999999999974,
+                                                                        "bottom":  12.054000000000002
+                                                                    },
+                                                    "transformScale":  1.18,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  428,
+                                                                    "height":  582
+                                                                },
+                                                    "alphaBounds":  {
+                                                                        "x":  79,
+                                                                        "y":  50,
+                                                                        "width":  282,
+                                                                        "height":  460
+                                                                    },
+                                                    "fitScale":  0.3477766323024055,
+                                                    "subject":  {
+                                                                    "x":  95.59218247422683,
+                                                                    "y":  14.342281305841922,
+                                                                    "width":  115.72615216494846,
+                                                                    "height":  188.7731560137457
+                                                                },
+                                                    "visibleMargins":  {
+                                                                           "left":  95.59218247422683,
+                                                                           "top":  14.342281305841922,
+                                                                           "right":  90.6816653608247,
+                                                                           "bottom":  23.384562680412387
+                                                                       },
+                                                    "minVisibleMargin":  14.342281305841922,
+                                                    "subjectSizeRatio":  {
+                                                                             "width":  0.38319917935413395,
+                                                                             "height":  0.8334355673896058
+                                                                         },
+                                                    "fullSubjectVisible":  true
+                                                },
+                                                {
+                                                    "index":  8,
+                                                    "step":  9,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  302,
+                                                                     "height":  226.5
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  0,
+                                                                        "bottom":  0
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  555,
+                                                                    "height":  450
+                                                                }
+                                                },
+                                                {
+                                                    "index":  9,
+                                                    "step":  10,
+                                                    "isInset":  false,
+                                                    "objectFit":  "cover",
+                                                    "media":  {
+                                                                  "width":  302,
+                                                                  "height":  226.5
+                                                              },
+                                                    "imageBox":  {
+                                                                     "left":  0,
+                                                                     "top":  0,
+                                                                     "width":  302,
+                                                                     "height":  226.5
+                                                                 },
+                                                    "layoutInset":  {
+                                                                        "left":  0,
+                                                                        "top":  0,
+                                                                        "right":  0,
+                                                                        "bottom":  0
+                                                                    },
+                                                    "transformScale":  1,
+                                                    "card":  {
+                                                                 "width":  304,
+                                                                 "height":  364.5,
+                                                                 "top":  170.171875
+                                                             },
+                                                    "body":  {
+                                                                 "top":  397.671875,
+                                                                 "height":  136
+                                                             },
+                                                    "title":  {
+                                                                  "top":  425.109375,
+                                                                  "height":  20.390625
+                                                              },
+                                                    "natural":  {
+                                                                    "width":  0,
+                                                                    "height":  0
+                                                                }
+                                                }
+                                            ]
+                              },
+                      "1440":  {
+                                   "viewport":  {
+                                                    "width":  1440,
+                                                    "height":  900
+                                                },
+                                   "page":  {
+                                                "scrollY":  5909,
+                                                "documentScrollWidth":  1440,
+                                                "bodyScrollWidth":  1440,
+                                                "pageOverflowX":  false
+                                            },
+                                   "menuViewport":  {
+                                                        "clientWidth":  1176,
+                                                        "scrollWidth":  1969
+                                                    },
+                                   "affectedCount":  6,
+                                   "fullBleedCount":  4,
+                                   "hover":  {
+                                                 "inset":  1.4697,
+                                                 "full":  1.035
+                                             },
+                                   "cards":  [
+                                                 {
+                                                     "index":  0,
+                                                     "step":  1,
+                                                     "isInset":  true,
+                                                     "objectFit":  "contain",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  14,
+                                                                      "top":  14,
+                                                                      "width":  154.328,
+                                                                      "height":  110
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  14,
+                                                                         "top":  14,
+                                                                         "right":  14.000124999999997,
+                                                                         "bottom":  14
+                                                                     },
+                                                     "transformScale":  1.42,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  428,
+                                                                     "height":  582
+                                                                 },
+                                                     "alphaBounds":  {
+                                                                         "x":  29,
+                                                                         "y":  91,
+                                                                         "width":  394,
+                                                                         "height":  388
+                                                                     },
+                                                     "fitScale":  0.18900343642611683,
+                                                     "subject":  {
+                                                                     "x":  41.51279725085911,
+                                                                     "y":  15.323024054982817,
+                                                                     "width":  105.74364261168385,
+                                                                     "height":  104.13333333333331
+                                                                 },
+                                                     "visibleMargins":  {
+                                                                            "left":  41.51279725085911,
+                                                                            "top":  15.323024054982817,
+                                                                            "right":  35.07168513745705,
+                                                                            "bottom":  18.54364261168388
+                                                                        },
+                                                     "minVisibleMargin":  15.323024054982817,
+                                                     "subjectSizeRatio":  {
+                                                                              "width":  0.5799634182147371,
+                                                                              "height":  0.7545893719806762
+                                                                          },
+                                                     "fullSubjectVisible":  true
+                                                 },
+                                                 {
+                                                     "index":  1,
+                                                     "step":  2,
+                                                     "isInset":  true,
+                                                     "objectFit":  "contain",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  14,
+                                                                      "top":  14,
+                                                                      "width":  154.328,
+                                                                      "height":  110
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  14,
+                                                                         "top":  14,
+                                                                         "right":  14.000124999999997,
+                                                                         "bottom":  14
+                                                                     },
+                                                     "transformScale":  1.24,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  436,
+                                                                     "height":  573
+                                                                 },
+                                                     "alphaBounds":  {
+                                                                         "x":  9,
+                                                                         "y":  74,
+                                                                         "width":  427,
+                                                                         "height":  438
+                                                                     },
+                                                     "fitScale":  0.19197207678883071,
+                                                     "subject":  {
+                                                                     "x":  41.412516579406635,
+                                                                     "y":  18.415357766143103,
+                                                                     "width":  101.6453752181501,
+                                                                     "height":  104.26387434554974
+                                                                 },
+                                                     "visibleMargins":  {
+                                                                            "left":  41.412516579406635,
+                                                                            "top":  18.415357766143103,
+                                                                            "right":  39.27023320244328,
+                                                                            "bottom":  15.32076788830716
+                                                                        },
+                                                     "minVisibleMargin":  15.32076788830716,
+                                                     "subjectSizeRatio":  {
+                                                                              "width":  0.5574859897130522,
+                                                                              "height":  0.7555353213445634
+                                                                          },
+                                                     "fullSubjectVisible":  true
+                                                 },
+                                                 {
+                                                     "index":  2,
+                                                     "step":  3,
+                                                     "isInset":  false,
+                                                     "objectFit":  "cover",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  0,
+                                                                      "top":  0,
+                                                                      "width":  182.328,
+                                                                      "height":  138
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  0,
+                                                                         "top":  0,
+                                                                         "right":  0.00012499999999704414,
+                                                                         "bottom":  0
+                                                                     },
+                                                     "transformScale":  1,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  1200,
+                                                                     "height":  896
+                                                                 }
+                                                 },
+                                                 {
+                                                     "index":  3,
+                                                     "step":  4,
+                                                     "isInset":  true,
+                                                     "objectFit":  "contain",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  14,
+                                                                      "top":  14,
+                                                                      "width":  154.328,
+                                                                      "height":  110
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  14,
+                                                                         "top":  14,
+                                                                         "right":  14.000124999999997,
+                                                                         "bottom":  14
+                                                                     },
+                                                     "transformScale":  1.3,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  436,
+                                                                     "height":  573
+                                                                 },
+                                                     "alphaBounds":  {
+                                                                         "x":  23,
+                                                                         "y":  71,
+                                                                         "width":  401,
+                                                                         "height":  406
+                                                                     },
+                                                     "fitScale":  0.19197207678883071,
+                                                     "subject":  {
+                                                                     "x":  42.49907853403141,
+                                                                     "y":  15.219022687609076,
+                                                                     "width":  100.07504363001746,
+                                                                     "height":  101.32286212914487
+                                                                 },
+                                                     "visibleMargins":  {
+                                                                            "left":  42.49907853403141,
+                                                                            "top":  15.219022687609076,
+                                                                            "right":  39.75400283595113,
+                                                                            "bottom":  21.458115183246065
+                                                                        },
+                                                     "minVisibleMargin":  15.219022687609076,
+                                                     "subjectSizeRatio":  {
+                                                                              "width":  0.5488733218203031,
+                                                                              "height":  0.7342236386169918
+                                                                          },
+                                                     "fullSubjectVisible":  true
+                                                 },
+                                                 {
+                                                     "index":  4,
+                                                     "step":  5,
+                                                     "isInset":  true,
+                                                     "objectFit":  "contain",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  14,
+                                                                      "top":  14,
+                                                                      "width":  154.328,
+                                                                      "height":  110
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  14,
+                                                                         "top":  14,
+                                                                         "right":  14.000124999999997,
+                                                                         "bottom":  14
+                                                                     },
+                                                     "transformScale":  1.36,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  432,
+                                                                     "height":  577
+                                                                 },
+                                                     "alphaBounds":  {
+                                                                         "x":  13,
+                                                                         "y":  88,
+                                                                         "width":  405,
+                                                                         "height":  408
+                                                                     },
+                                                     "fitScale":  0.19064124783362218,
+                                                     "subject":  {
+                                                                     "x":  38.531764298093584,
+                                                                     "y":  17.0159445407279,
+                                                                     "width":  105.00519930675911,
+                                                                     "height":  105.78301559792028
+                                                                 },
+                                                     "visibleMargins":  {
+                                                                            "left":  38.531764298093584,
+                                                                            "top":  17.0159445407279,
+                                                                            "right":  38.7911613951473,
+                                                                            "bottom":  15.201039861351816
+                                                                        },
+                                                     "minVisibleMargin":  15.201039861351816,
+                                                     "subjectSizeRatio":  {
+                                                                              "width":  0.5759133392435155,
+                                                                              "height":  0.7665435912892774
+                                                                          },
+                                                     "fullSubjectVisible":  true
+                                                 },
+                                                 {
+                                                     "index":  5,
+                                                     "step":  6,
+                                                     "isInset":  true,
+                                                     "objectFit":  "contain",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  14,
+                                                                      "top":  14,
+                                                                      "width":  154.328,
+                                                                      "height":  110
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  14,
+                                                                         "top":  14,
+                                                                         "right":  14.000124999999997,
+                                                                         "bottom":  14
+                                                                     },
+                                                     "transformScale":  1.21,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  439,
+                                                                     "height":  568
+                                                                 },
+                                                     "alphaBounds":  {
+                                                                         "x":  2,
+                                                                         "y":  55,
+                                                                         "width":  433,
+                                                                         "height":  434
+                                                                     },
+                                                     "fitScale":  0.1936619718309859,
+                                                     "subject":  {
+                                                                     "x":  40.19701056338028,
+                                                                     "y":  15.338204225352115,
+                                                                     "width":  101.46531690140844,
+                                                                     "height":  101.69964788732393
+                                                                 },
+                                                     "visibleMargins":  {
+                                                                            "left":  40.19701056338028,
+                                                                            "top":  15.338204225352115,
+                                                                            "right":  40.66579753521128,
+                                                                            "bottom":  20.96214788732395
+                                                                        },
+                                                     "minVisibleMargin":  15.338204225352115,
+                                                     "subjectSizeRatio":  {
+                                                                              "width":  0.5564984387428349,
+                                                                              "height":  0.7369539701979996
+                                                                          },
+                                                     "fullSubjectVisible":  true
+                                                 },
+                                                 {
+                                                     "index":  6,
+                                                     "step":  7,
+                                                     "isInset":  false,
+                                                     "objectFit":  "cover",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  0,
+                                                                      "top":  0,
+                                                                      "width":  182.328,
+                                                                      "height":  138
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  0,
+                                                                         "top":  0,
+                                                                         "right":  0.00012499999999704414,
+                                                                         "bottom":  0
+                                                                     },
+                                                     "transformScale":  1,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  1200,
+                                                                     "height":  896
+                                                                 }
+                                                 },
+                                                 {
+                                                     "index":  7,
+                                                     "step":  8,
+                                                     "isInset":  true,
+                                                     "objectFit":  "contain",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  14,
+                                                                      "top":  14,
+                                                                      "width":  154.328,
+                                                                      "height":  110
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  14,
+                                                                         "top":  14,
+                                                                         "right":  14.000124999999997,
+                                                                         "bottom":  14
+                                                                     },
+                                                     "transformScale":  1.18,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  428,
+                                                                     "height":  582
+                                                                 },
+                                                     "alphaBounds":  {
+                                                                         "x":  79,
+                                                                         "y":  50,
+                                                                         "width":  282,
+                                                                         "height":  460
+                                                                     },
+                                                     "fitScale":  0.18900343642611683,
+                                                     "subject":  {
+                                                                     "x":  61.0557525773196,
+                                                                     "y":  15.251202749140901,
+                                                                     "width":  62.89278350515463,
+                                                                     "height":  102.5910652920962
+                                                                 },
+                                                     "visibleMargins":  {
+                                                                            "left":  61.0557525773196,
+                                                                            "top":  15.251202749140901,
+                                                                            "right":  58.379588917525766,
+                                                                            "bottom":  20.157731958762895
+                                                                        },
+                                                     "minVisibleMargin":  15.251202749140901,
+                                                     "subjectSizeRatio":  {
+                                                                              "width":  0.34494285237208816,
+                                                                              "height":  0.7434135166093928
+                                                                          },
+                                                     "fullSubjectVisible":  true
+                                                 },
+                                                 {
+                                                     "index":  8,
+                                                     "step":  9,
+                                                     "isInset":  false,
+                                                     "objectFit":  "cover",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  0,
+                                                                      "top":  0,
+                                                                      "width":  182.328,
+                                                                      "height":  138
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  0,
+                                                                         "top":  0,
+                                                                         "right":  0.00012499999999704414,
+                                                                         "bottom":  0
+                                                                     },
+                                                     "transformScale":  1,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  20.390625
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  555,
+                                                                     "height":  450
+                                                                 }
+                                                 },
+                                                 {
+                                                     "index":  9,
+                                                     "step":  10,
+                                                     "isInset":  false,
+                                                     "objectFit":  "cover",
+                                                     "media":  {
+                                                                   "width":  182.328125,
+                                                                   "height":  138
+                                                               },
+                                                     "imageBox":  {
+                                                                      "left":  0,
+                                                                      "top":  0,
+                                                                      "width":  182.328,
+                                                                      "height":  138
+                                                                  },
+                                                     "layoutInset":  {
+                                                                         "left":  0,
+                                                                         "top":  0,
+                                                                         "right":  0.00012499999999704414,
+                                                                         "bottom":  0
+                                                                     },
+                                                     "transformScale":  1,
+                                                     "card":  {
+                                                                  "width":  184.328125,
+                                                                  "height":  290,
+                                                                  "top":  170.09375
+                                                              },
+                                                     "body":  {
+                                                                  "top":  309.09375,
+                                                                  "height":  150
+                                                              },
+                                                     "title":  {
+                                                                   "top":  336.53125,
+                                                                   "height":  40.78125
+                                                               },
+                                                     "natural":  {
+                                                                     "width":  1200,
+                                                                     "height":  896
+                                                                 }
+                                                 }
+                                             ]
+                               }
+                  }
+}

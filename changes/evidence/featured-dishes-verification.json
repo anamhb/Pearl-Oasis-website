@@ -1,0 +1,213 @@
+{
+  "testedAt": "2026-10-26T18:36:58+05:00",
+  "browser": "Chrome 142 headless via CDP",
+  "component": "src/components/sections/SignatureDishes.jsx",
+  "animation": {
+    "cycleDurationSeconds": 8.4,
+    "staggerSeconds": 1.2,
+    "entrancePhase": "0.0-0.12",
+    "restPhase": "0.12-0.86",
+    "exitPhase": "0.86-1.0",
+    "exitPhaseSeconds": 1.176,
+    "angularStepDegrees": 51.428571,
+    "centerSamples": [
+      {
+        "dishIndex": 0,
+        "radiusPx": 0,
+        "opacity": 0.398,
+        "zIndex": 10
+      },
+      {
+        "dishIndex": 1,
+        "radiusPx": 0,
+        "opacity": 0.238,
+        "zIndex": 10
+      },
+      {
+        "dishIndex": 2,
+        "radiusPx": 0,
+        "opacity": 0.354,
+        "zIndex": 10
+      },
+      {
+        "dishIndex": 3,
+        "radiusPx": 0,
+        "opacity": 0.47,
+        "zIndex": 10
+      }
+    ],
+    "allSevenReachedCenter": true,
+    "centerArrivals": [
+      {
+        "dishIndex": 0,
+        "atMs": 5760,
+        "opacity": 0.423
+      },
+      {
+        "dishIndex": 1,
+        "atMs": 6938,
+        "opacity": 0.539
+      },
+      {
+        "dishIndex": 2,
+        "atMs": 8166,
+        "opacity": 0.379
+      },
+      {
+        "dishIndex": 3,
+        "atMs": 9345,
+        "opacity": 0.495
+      },
+      {
+        "dishIndex": 4,
+        "atMs": 10579,
+        "opacity": 0.335
+      },
+      {
+        "dishIndex": 5,
+        "atMs": 11770,
+        "opacity": 0.451
+      },
+      {
+        "dishIndex": 6,
+        "atMs": 12951,
+        "opacity": 0.567
+      }
+    ],
+    "minimumVisibleDishesAfterWarmup": 6,
+    "maximumGapBetweenCenterArrivalsMs": 1234,
+    "maxHiddenFramesAfterWarmup": 1,
+    "stuckHiddenAfterWarmup": false
+  },
+  "timingRefinement": {
+    "testedAt": "2026-10-26T18:56:07+05:00",
+    "change": "exit start moved from 0.88 to 0.86; entry timing, path, stagger, and total cycle unchanged",
+    "previousExitPhaseSeconds": 1.008,
+    "currentExitPhaseSeconds": 1.176,
+    "exitDurationIncreasePercent": 16.7,
+    "desktopCenterTravelMs": {
+      "before": [882, 941],
+      "after": [1043, 1074]
+    },
+    "mobileCenterTravelMs": [1004, 1053],
+    "maxConcurrentExits": 1,
+    "minimumVisibleDishesAfterWarmup": 6,
+    "centerArrivalCadenceSeconds": 1.2,
+    "centerArrivalGapMs": {
+      "min": 1177,
+      "max": 1229
+    },
+    "smoothnessTrace": {
+      "samples": 51,
+      "durationMs": 1062,
+      "maxFrameStepPx": 13.65,
+      "maxRadialStepPx": 11.87,
+      "radialReversals": 0,
+      "firstFadeRadiusPx": 6
+    },
+    "observedIssues": [],
+    "checks": {
+      "lint": "pass",
+      "build": "pass",
+      "buildWarning": "existing chunk-size warning only"
+    }
+  },
+  "viewports": [
+    {
+      "viewport": "1440x900",
+      "stage": "1280x620",
+      "hub": "208x208",
+      "dish": "176x220",
+      "minVisiblePlateGapPx": 25,
+      "visiblePlateOverlaps": [],
+      "minHubGapPx": 3,
+      "horizontalOverflow": false
+    },
+    {
+      "viewport": "1024x768",
+      "stage": "928x620",
+      "hub": "208x208",
+      "dish": "176x220",
+      "minVisiblePlateGapPx": 24,
+      "visiblePlateOverlaps": [],
+      "minHubGapPx": 3,
+      "horizontalOverflow": false
+    },
+    {
+      "viewport": "768x1024",
+      "stage": "704x560",
+      "hub": "176x176",
+      "dish": "128x160",
+      "minVisiblePlateGapPx": 24,
+      "visiblePlateOverlaps": [],
+      "minHubGapPx": 18,
+      "horizontalOverflow": false
+    },
+    {
+      "viewport": "640x900",
+      "stage": "576x560",
+      "hub": "176x176",
+      "dish": "128x160",
+      "minVisiblePlateGapPx": 7,
+      "visiblePlateOverlaps": [],
+      "minHubGapPx": 18,
+      "horizontalOverflow": false
+    },
+    {
+      "viewport": "390x844",
+      "stage": "358x540",
+      "hub": "112x112",
+      "dish": "80x104",
+      "minVisiblePlateGapPx": 23,
+      "visiblePlateOverlaps": [],
+      "minHubGapPx": 10,
+      "horizontalOverflow": false
+    },
+    {
+      "viewport": "320x800",
+      "stage": "288x540",
+      "hub": "112x112",
+      "dish": "80x104",
+      "minVisiblePlateGapPx": 7,
+      "visiblePlateOverlaps": [],
+      "minHubGapPx": 2,
+      "horizontalOverflow": false
+    }
+  ],
+  "cardChromeAudit": {
+    "stageBorderWidth": "0px",
+    "stageBoxShadow": "none",
+    "dishWrapperBorderWidth": "0px",
+    "dishWrapperBoxShadow": "transparent",
+    "dishWrapperOutline": "none",
+    "dishWrapperBackground": "rgba(0, 0, 0, 0)",
+    "centralHubBorder": "1px retained"
+  },
+  "lifecycle": {
+    "scrollAwaySeconds": 2.4,
+    "visibleAfterReturn": 7,
+    "stillAnimatingAfterReturn": true,
+    "resizeFrom": "1440x900",
+    "resizeTo": "390x844",
+    "stillAnimatingAfterResize": true,
+    "minimumVisibleAfterResize": 6,
+    "allBoxesInsideStageAfterResize": true,
+    "horizontalOverflowAfterResize": false
+  },
+  "reducedMotion": {
+    "mediaMatches": true,
+    "dishCount": 7,
+    "allVisible": true,
+    "allStatic": true
+  },
+  "checks": {
+    "lint": "pass",
+    "build": "pass"
+  },
+  "evidenceImages": [
+    "changes/evidence/dishes-before-1440b.png",
+    "changes/evidence/dishes-before-390b.png",
+    "changes/evidence/dishes-after-1440.png",
+    "changes/evidence/dishes-after-390.png"
+  ]
+}

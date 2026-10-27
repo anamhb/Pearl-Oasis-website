@@ -1,0 +1,18 @@
+{
+  "normal": {
+    "label": "normal",
+    "inViewCount": 0,
+    "inViewUnique": 0,
+    "inViewNonzero": 0,
+    "inViewSample": [],
+    "offViewCount": 0
+  },
+  "reduced": {
+    "label": "reduced",
+    "inViewCount": 0,
+    "inViewUnique": 0,
+    "inViewNonzero": 0,
+    "inViewSample": [],
+    "offViewCount": 0
+  }
+}

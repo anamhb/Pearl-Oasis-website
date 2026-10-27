@@ -49,7 +49,7 @@ const FILL_INTENSITY = 0.26;
  * DPR instead of every frame at 2×: the header is fixed, so this loop otherwise
  * runs for the entire scroll-driven hero on a phone.
  */
-export const Crest3D = ({ className = '', animate = true }) => {
+export const Crest3D = ({ className = '', animate = true, pauseWhenOffscreen = false }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -111,6 +111,9 @@ export const Crest3D = ({ className = '', animate = true }) => {
     let modelHeight = null;
     let disposed = false;
     let frameRequest = 0;
+    /* The footer crest sits below the fold, so it should not keep a WebGL loop
+       running for the whole page. The navbar leaves pauseWhenOffscreen off. */
+    let isVisible = !pauseWhenOffscreen;
     let lastWidth = 0;
     let lastHeight = 0;
     let lastDpr = 0;
@@ -169,8 +172,9 @@ export const Crest3D = ({ className = '', animate = true }) => {
         // Force the next resize() past the no-op guard: the model just arrived.
         lastWidth = 0;
         resize();
-        // Static variant: the single render performed by resize() is the frame.
-        if (animate && !prefersReducedMotion) startLoop();
+        // Decide now whether this crest animates or stays on the single frame
+        // that resize() just drew.
+        syncAnimation();
       },
       undefined,
       (error) => {
@@ -204,18 +208,45 @@ export const Crest3D = ({ className = '', animate = true }) => {
       frameRequest = requestAnimationFrame(tick);
     };
 
-    const syncMotion = () => {
-      prefersReducedMotion = motionQuery.matches;
-      if (prefersReducedMotion) {
-        if (frameRequest) cancelAnimationFrame(frameRequest);
-        frameRequest = 0;
-        if (model) renderer.render(scene, camera);
-      } else if (animate && model) {
+    const stopLoop = () => {
+      if (frameRequest) cancelAnimationFrame(frameRequest);
+      frameRequest = 0;
+    };
+
+    /* One place decides whether the loop runs: the animate flag, the motion
+       preference, and (for the footer) whether the crest is on screen. */
+    const syncAnimation = () => {
+      if (animate && !prefersReducedMotion && isVisible && model) {
         lastTime = performance.now();
         startLoop();
+      } else {
+        stopLoop();
+        if (model) renderer.render(scene, camera);
       }
     };
+
+    const syncMotion = () => {
+      prefersReducedMotion = motionQuery.matches;
+      syncAnimation();
+    };
     motionQuery.addEventListener?.('change', syncMotion);
+
+    /* Footer only: pause the loop while the crest is scrolled away, and resume
+       slightly before it returns so the turn never visibly restarts. */
+    let visibilityObserver = null;
+    if (pauseWhenOffscreen && typeof IntersectionObserver !== 'undefined') {
+      visibilityObserver = new IntersectionObserver(
+        (entries) => {
+          isVisible = entries.some((entry) => entry.isIntersecting);
+          syncAnimation();
+        },
+        { rootMargin: '80px' },
+      );
+      visibilityObserver.observe(canvas);
+    } else {
+      /* No IntersectionObserver: keep the crest moving rather than frozen. */
+      isVisible = true;
+    }
 
     const observer =
       typeof ResizeObserver !== 'undefined' ? new ResizeObserver(resize) : null;
@@ -238,6 +269,7 @@ export const Crest3D = ({ className = '', animate = true }) => {
       frameRequest = 0;
       window.clearInterval(interval);
       motionQuery.removeEventListener?.('change', syncMotion);
+      if (visibilityObserver) visibilityObserver.disconnect();
       if (observer) observer.disconnect();
       window.removeEventListener('resize', resize);
       gold.dispose();
@@ -248,7 +280,7 @@ export const Crest3D = ({ className = '', animate = true }) => {
       }
       renderer.dispose();
     };
-  }, [animate]);
+  }, [animate, pauseWhenOffscreen]);
 
   return <canvas ref={canvasRef} aria-hidden="true" className={`block w-full h-full ${className}`} />;
 };
@@ -257,11 +289,15 @@ export const Crest3D = ({ className = '', animate = true }) => {
  * The Pearl Oasis wordmark (logo-text.png) with the 3D crest sitting above the
  * "l" of "Pearl", as in the supplied reference artwork.
  *
- * `animate` is forwarded to the crest: the navbar keeps the rotating crest,
- * while the footer renders the exact same logo asset and wordmark with a
- * static (non-rotating) crest.
+ * `animate` is forwarded to the crest: the navbar and the footer both use the
+ * same rotating crest. `pauseWhenOffscreen` lets a crest that lives below the
+ * fold (the footer) stop its loop until it is back in view.
  */
-export const BrandWordmark = ({ imgClassName = 'h-16 sm:h-20', animate = true }) => (
+export const BrandWordmark = ({
+  imgClassName = 'h-16 sm:h-20',
+  animate = true,
+  pauseWhenOffscreen = false,
+}) => (
   <span className="relative inline-block align-middle">
     <img
       src={logoText}
@@ -270,7 +306,7 @@ export const BrandWordmark = ({ imgClassName = 'h-16 sm:h-20', animate = true })
       className={`block w-auto select-none ${imgClassName}`}
     />
     <span aria-hidden="true" className="absolute pointer-events-none" style={CREST_STYLE}>
-      <Crest3D animate={animate} />
+      <Crest3D animate={animate} pauseWhenOffscreen={pauseWhenOffscreen} />
     </span>
   </span>
 );

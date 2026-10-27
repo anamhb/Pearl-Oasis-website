@@ -1,0 +1,32 @@
+{
+  "heroHover": {
+    "transform": "none",
+    "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(212, 175, 55, 0.65) 0px 6px 32px 0px",
+    "rect": {
+      "x": 569.3582153320312,
+      "y": 567.8250122070312,
+      "width": 301.2679443359375,
+      "height": 54.60003662109375,
+      "top": 567.8250122070312,
+      "right": 870.6261596679688,
+      "bottom": 622.425048828125,
+      "left": 569.3582153320312
+    }
+  },
+  "menuHover": {
+    "transform": "none",
+    "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(212, 175, 55, 0.45) 0px 6px 28px 0px",
+    "rect": {
+      "x": 582.171875,
+      "y": 1277.09375,
+      "width": 275.65625,
+      "height": 44,
+      "top": 1277.09375,
+      "right": 857.828125,
+      "bottom": 1321.09375,
+      "left": 582.171875
+    }
+  },
+  "heroHoverHasGoldShadow": true,
+  "menuHoverHasGoldShadow": true
+}

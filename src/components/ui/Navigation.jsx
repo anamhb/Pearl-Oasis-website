@@ -6,13 +6,34 @@ export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuButtonRef = useRef(null);
+  const scrolledRef = useRef(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80);
+    let rafId = 0;
+
+    const syncScrolled = () => {
+      rafId = 0;
+      const nextScrolled = window.scrollY > 80;
+      /* Only cross the React state boundary when the threshold actually
+         changes. The previous handler called setIsScrolled on every scroll
+         event, even when the value was unchanged. */
+      if (nextScrolled === scrolledRef.current) return;
+      scrolledRef.current = nextScrolled;
+      setIsScrolled(nextScrolled);
     };
+
+    const handleScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(syncScrolled);
+    };
+
+    /* Sync once for restored/deep-linked scroll positions. */
+    syncScrolled();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   /* Escape closes the open panel and puts focus back on the control that
@@ -43,7 +64,7 @@ export const Navigation = () => {
           className="whitespace-nowrap shrink-0 group flex items-center gap-3 transition-opacity hover:opacity-90"
           aria-label="Pearl Oasis Homepage"
         >
-          <BrandWordmark />
+          <BrandWordmark pauseWhenOffscreen />
         </a>
 
         <nav className="hidden lg:flex items-center gap-8 text-xs font-cinzel tracking-[0.2em] text-[#d6d3cd] uppercase">
@@ -76,7 +97,7 @@ export const Navigation = () => {
         <div className="flex items-center gap-4 shrink-0">
           <a
             href="#menu"
-            className="hidden sm:inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#12110d] font-cinzel text-xs font-bold tracking-[0.18em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_20px_rgba(212,175,55,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap shrink-0"
+            className="hidden sm:inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#12110d] font-cinzel text-xs font-bold tracking-[0.18em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_20px_rgba(212,175,55,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap shrink-0"
           >
             <span>View Menu</span>
           </a>

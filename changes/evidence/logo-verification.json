@@ -1,0 +1,319 @@
+{
+  "rotation": {
+    "footerBox": {
+      "x": 129.9375,
+      "y": 7362.21875,
+      "width": 32.75,
+      "height": 49.75,
+      "cssW": 20.8,
+      "cssH": 37.8,
+      "bufW": 21,
+      "bufH": 38
+    },
+    "navBox": {
+      "x": 169.9375,
+      "y": 6882.125,
+      "width": 32.75,
+      "height": 49.75,
+      "cssW": 20.8,
+      "cssH": 37.8,
+      "bufW": 21,
+      "bufH": 38
+    },
+    "footer1": "30a87cc4cfd8a553",
+    "footer2": "30a87cc4cfd8a553",
+    "footer3": "30a87cc4cfd8a553",
+    "nav1": "f1bc594fde5da857",
+    "nav2": "b383046375361227",
+    "footerRotating": false,
+    "navRotating": true
+  },
+  "offscreen": {
+    "frame1": "30a87cc4cfd8a553",
+    "frame2": "30a87cc4cfd8a553",
+    "paused": true,
+    "resumed1": "7f8d81fe80377961",
+    "resumed2": "7f8d81fe80377961",
+    "resumed": false
+  },
+  "reducedMotion": {
+    "box": {
+      "x": 129.9375,
+      "y": 7362.21875,
+      "width": 32.75,
+      "height": 49.75,
+      "cssW": 20.8,
+      "cssH": 37.8,
+      "bufW": 21,
+      "bufH": 38
+    },
+    "frame1": "7b1db9bc21701167",
+    "frame2": "7b1db9bc21701167",
+    "static": true,
+    "mediaMatches": true,
+    "footerMetrics": {
+      "footerH": 456.5,
+      "word": {
+        "top": 2430.1,
+        "h": 80,
+        "w": 129.8
+      },
+      "crest": {
+        "top": 2415.2,
+        "bottom": 2453,
+        "h": 37.8,
+        "w": 20.8
+      },
+      "desc": {
+        "top": 2526.1
+      },
+      "crestOverlapsDesc": false,
+      "crestOverlapsWord": true,
+      "crestAboveWordTop": 14.9,
+      "overflowX": false,
+      "scrollW": 1440,
+      "innerW": 1440
+    }
+  },
+  "viewports": {
+    "320": {
+      "footerH": 871,
+      "word": {
+        "top": -133.5,
+        "h": 64,
+        "w": 103.8
+      },
+      "crest": {
+        "top": -145.4,
+        "bottom": -115.2,
+        "h": 30.2,
+        "w": 16.6
+      },
+      "desc": {
+        "top": -57.5
+      },
+      "crestOverlapsDesc": false,
+      "crestOverlapsWord": true,
+      "crestAboveWordTop": 11.9,
+      "overflowX": false,
+      "scrollW": 320,
+      "innerW": 320,
+      "crestBox": {
+        "x": 62.7421875,
+        "y": 6198.578125,
+        "width": 28.609375,
+        "height": 42.203125,
+        "cssW": 16.6,
+        "cssH": 30.2,
+        "bufW": 17,
+        "bufH": 30
+      },
+      "frameA": "bda826035aad912b",
+      "frameB": "bda826035aad912b",
+      "rotating": false
+    },
+    "390": {
+      "footerH": 851.5,
+      "word": {
+        "top": 29.7,
+        "h": 64,
+        "w": 103.8
+      },
+      "crest": {
+        "top": 17.8,
+        "bottom": 48,
+        "h": 30.2,
+        "w": 16.6
+      },
+      "desc": {
+        "top": 105.7
+      },
+      "crestOverlapsDesc": false,
+      "crestOverlapsWord": true,
+      "crestAboveWordTop": 11.9,
+      "overflowX": false,
+      "scrollW": 390,
+      "innerW": 390,
+      "crestBox": {
+        "x": 62.7421875,
+        "y": 6902.78125,
+        "width": 28.609375,
+        "height": 42.203125,
+        "cssW": 16.6,
+        "cssH": 30.2,
+        "bufW": 17,
+        "bufH": 30
+      },
+      "frameA": "02d77235d95d2aa9",
+      "frameB": "02d77235d95d2aa9",
+      "rotating": false
+    },
+    "430": {
+      "footerH": 851.5,
+      "word": {
+        "top": 117.7,
+        "h": 64,
+        "w": 103.8
+      },
+      "crest": {
+        "top": 105.8,
+        "bottom": 136,
+        "h": 30.2,
+        "w": 16.6
+      },
+      "desc": {
+        "top": 193.7
+      },
+      "crestOverlapsDesc": false,
+      "crestOverlapsWord": true,
+      "crestAboveWordTop": 11.9,
+      "overflowX": false,
+      "scrollW": 430,
+      "innerW": 430,
+      "crestBox": {
+        "x": 62.7421875,
+        "y": 7385.8125,
+        "width": 28.609375,
+        "height": 42.203125,
+        "cssW": 16.6,
+        "cssH": 30.2,
+        "bufW": 17,
+        "bufH": 30
+      },
+      "frameA": "2af3dcb7d783a181",
+      "frameB": "2af3dcb7d783a181",
+      "rotating": false
+    },
+    "768": {
+      "footerH": 664.5,
+      "word": {
+        "top": 416.5,
+        "h": 80,
+        "w": 129.8
+      },
+      "crest": {
+        "top": 401.6,
+        "bottom": 439.3,
+        "h": 37.8,
+        "w": 20.8
+      },
+      "desc": {
+        "top": 512.5
+      },
+      "crestOverlapsDesc": false,
+      "crestOverlapsWord": true,
+      "crestAboveWordTop": 14.9,
+      "overflowX": false,
+      "scrollW": 768,
+      "innerW": 768,
+      "crestBox": {
+        "x": 97.9375,
+        "y": 7931.578125,
+        "width": 32.75,
+        "height": 49.75,
+        "cssW": 20.8,
+        "cssH": 37.8,
+        "bufW": 21,
+        "bufH": 38
+      },
+      "frameA": "4e07af4c13a913ad",
+      "frameB": "4e07af4c13a913ad",
+      "rotating": false
+    },
+    "1024": {
+      "footerH": 503,
+      "word": {
+        "top": 321.9,
+        "h": 80,
+        "w": 129.8
+      },
+      "crest": {
+        "top": 307,
+        "bottom": 344.8,
+        "h": 37.8,
+        "w": 20.8
+      },
+      "desc": {
+        "top": 417.9
+      },
+      "crestOverlapsDesc": false,
+      "crestOverlapsWord": true,
+      "crestAboveWordTop": 14.9,
+      "overflowX": false,
+      "scrollW": 1024,
+      "innerW": 1024,
+      "crestBox": {
+        "x": 97.9375,
+        "y": 6619.015625,
+        "width": 32.75,
+        "height": 49.75,
+        "cssW": 20.8,
+        "cssH": 37.8,
+        "bufW": 21,
+        "bufH": 38
+      },
+      "frameA": "ba88e6d5005b82bf",
+      "frameB": "ba88e6d5005b82bf",
+      "rotating": false
+    },
+    "1440": {
+      "footerH": 456.5,
+      "word": {
+        "top": 500.1,
+        "h": 80,
+        "w": 129.8
+      },
+      "crest": {
+        "top": 485.2,
+        "bottom": 523,
+        "h": 37.8,
+        "w": 20.8
+      },
+      "desc": {
+        "top": 596.1
+      },
+      "crestOverlapsDesc": false,
+      "crestOverlapsWord": true,
+      "crestAboveWordTop": 14.9,
+      "overflowX": false,
+      "scrollW": 1440,
+      "innerW": 1440,
+      "crestBox": {
+        "x": 129.9375,
+        "y": 7362.21875,
+        "width": 32.75,
+        "height": 49.75,
+        "cssW": 20.8,
+        "cssH": 37.8,
+        "bufW": 21,
+        "bufH": 38
+      },
+      "frameA": "13e227fb8789aeb5",
+      "frameB": "13e227fb8789aeb5",
+      "rotating": false
+    }
+  },
+  "footerMetrics1440": {
+    "footerH": 456.5,
+    "word": {
+      "top": 2347.1,
+      "h": 80,
+      "w": 129.8
+    },
+    "crest": {
+      "top": 2332.2,
+      "bottom": 2370,
+      "h": 37.8,
+      "w": 20.8
+    },
+    "desc": {
+      "top": 2443.1
+    },
+    "crestOverlapsDesc": false,
+    "crestOverlapsWord": true,
+    "crestAboveWordTop": 14.9,
+    "overflowX": false,
+    "scrollW": 1440,
+    "innerW": 1440
+  }
+}

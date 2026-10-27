@@ -125,6 +125,21 @@ const MENU_GAP = 14;
 const MENU_MIN_TILE_WIDTH = 176;
 const MENU_MAX_VISIBLE = 6;
 const MENU_HOVER_GROWTH = 0.32;
+// These portraits sit tight against the card edge; the other tiles keep their
+// existing full-bleed treatment.
+const IMAGE_INSET_STEPS = new Set([1, 2, 4, 5, 6, 8]);
+
+// Each portrait asset has different transparent padding. These scales trim
+// that padding without cutting the dish, while keeping the visible subject
+// inside the inset media box.
+const IMAGE_FIT_SCALE = {
+  1: 1.42,
+  2: 1.24,
+  4: 1.3,
+  5: 1.36,
+  6: 1.21,
+  8: 1.18,
+};
 
 export const MenuExperience = () => {
   const viewportRef = useRef(null);
@@ -147,8 +162,19 @@ export const MenuExperience = () => {
   const modalOpenerRef = useRef(null);
 
   const maxIndex = Math.max(0, CATEGORY_COUNT - layout.visible);
-  const canGoBack = !isMobile && activeIndex > 0;
-  const canGoForward = !isMobile && activeIndex < maxIndex;
+  const navigationStep = isMobile ? 1 : MENU_STEP;
+  const canGoBack = activeIndex > 0;
+  const canGoForward = activeIndex < maxIndex;
+
+  const readScrollStep = () => {
+    const viewport = viewportRef.current;
+    const tile = viewport?.querySelector('.menu-tile');
+    if (!tile) return 0;
+
+    const track = tile.parentElement;
+    const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+    return tile.getBoundingClientRect().width + gap;
+  };
 
   const openFullMenu = (event) => {
     modalOpenerRef.current = event?.currentTarget ?? null;
@@ -225,6 +251,32 @@ export const MenuExperience = () => {
     };
   }, []);
 
+  /* Keep the mobile index in step with the native scroll position after the
+     responsive layout changes. This matters when a tablet/desktop window is
+     resized into the phone breakpoint while the row is scrolled. */
+  useEffect(() => {
+    if (!isMobile) return undefined;
+
+    const viewport = viewportRef.current;
+    if (!viewport) return undefined;
+
+    const frame = requestAnimationFrame(() => {
+      const step = readScrollStep();
+      if (!step) return;
+
+      const nextIndex = Math.min(
+        maxIndex,
+        Math.max(0, Math.round(viewport.scrollLeft / step)),
+      );
+      indexRef.current = nextIndex;
+      setActiveIndex((previousIndex) =>
+        previousIndex === nextIndex ? previousIndex : nextIndex,
+      );
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [isMobile, layout.visible, maxIndex]);
+
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport || isMobile || !layout.tileWidth) return;
@@ -288,12 +340,15 @@ export const MenuExperience = () => {
   }, [isFullMenuModalOpen]);
 
   const syncIndexFromScroll = () => {
-    if (isMobile || !layout.tileWidth || programmaticScrollRef.current) return;
-
     const viewport = viewportRef.current;
-    if (!viewport) return;
+    if (!viewport || programmaticScrollRef.current) return;
 
-    const rawIndex = viewport.scrollLeft / (layout.tileWidth + MENU_GAP);
+    const step = layout.tileWidth
+      ? layout.tileWidth + MENU_GAP
+      : readScrollStep();
+    if (!step) return;
+
+    const rawIndex = viewport.scrollLeft / step;
     const nextIndex = Math.min(maxIndex, Math.max(0, Math.round(rawIndex)));
     indexRef.current = nextIndex;
     setActiveIndex((previousIndex) =>
@@ -308,13 +363,18 @@ export const MenuExperience = () => {
     setActiveIndex(clampedIndex);
     setHoveredIndex(null);
 
-    if (!viewport || !layout.tileWidth) return;
+    if (!viewport) return;
+
+    const step = layout.tileWidth
+      ? layout.tileWidth + MENU_GAP
+      : readScrollStep();
+    if (!step) return;
 
     programmaticScrollRef.current = true;
     if (scrollTimerRef.current) window.clearTimeout(scrollTimerRef.current);
 
     viewport.scrollTo({
-      left: clampedIndex * (layout.tileWidth + MENU_GAP),
+      left: clampedIndex * step,
       behavior,
     });
 
@@ -324,11 +384,11 @@ export const MenuExperience = () => {
   };
 
   const goToPrevious = () => {
-    scrollToIndex(activeIndex - MENU_STEP, prefersReducedMotion ? 'auto' : 'smooth');
+    scrollToIndex(activeIndex - navigationStep, prefersReducedMotion ? 'auto' : 'smooth');
   };
 
   const goToNext = () => {
-    scrollToIndex(activeIndex + MENU_STEP, prefersReducedMotion ? 'auto' : 'smooth');
+    scrollToIndex(activeIndex + navigationStep, prefersReducedMotion ? 'auto' : 'smooth');
   };
 
   const hoverEnabled =
@@ -414,7 +474,7 @@ export const MenuExperience = () => {
               type="button"
               onClick={goToPrevious}
               disabled={!canGoBack}
-              aria-label="Previous menu categories"
+              aria-label="Previous menu item"
               aria-controls="menu-carousel-viewport"
               className="menu-carousel__arrow"
             >
@@ -424,7 +484,7 @@ export const MenuExperience = () => {
               type="button"
               onClick={goToNext}
               disabled={!canGoForward}
-              aria-label="Next menu categories"
+              aria-label="Next menu item"
               aria-controls="menu-carousel-viewport"
               className="menu-carousel__arrow"
             >
@@ -451,6 +511,7 @@ export const MenuExperience = () => {
                   index >= activeIndex && index < activeIndex + layout.visible;
                 const isHovered = hoveredIndex === index;
                 const isPeer = hoveredIndex !== null && isVisibleTile && !isHovered;
+                const hasImageInset = IMAGE_INSET_STEPS.has(card.step);
                 const tileClassName = [
                   'menu-tile',
                   isHovered ? 'menu-tile--hovered' : '',
@@ -470,7 +531,16 @@ export const MenuExperience = () => {
                     className={tileClassName}
                     aria-label={`Open full menu: ${card.title}`}
                   >
-                    <span className="menu-tile__media">
+                    <span
+                      className={`menu-tile__media${
+                        hasImageInset ? ' menu-tile__media--inset' : ''
+                      }`}
+                      style={
+                        hasImageInset
+                          ? { '--menu-image-fit-scale': IMAGE_FIT_SCALE[card.step] }
+                          : undefined
+                      }
+                    >
                       <img
                         src={card.image}
                         alt=""
@@ -494,7 +564,10 @@ export const MenuExperience = () => {
 
           <p className="sr-only" role="status" aria-live="polite">
             {isMobile
-              ? ''
+              ? `Showing ${Math.min(
+                  activeIndex + 1,
+                  CATEGORY_COUNT,
+                )} of ${CATEGORY_COUNT} menu categories`
               : `Showing ${Math.min(
                   activeIndex + 1,
                   CATEGORY_COUNT,
@@ -508,7 +581,7 @@ export const MenuExperience = () => {
             <button
               type="button"
               onClick={openFullMenu}
-              className="inline-flex items-center justify-center gap-2.5 min-h-11 px-7 py-3 rounded bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-[0.18em] shadow-[0_4px_20px_rgba(212,175,55,0.3)] transition-[transform,box-shadow] duration-300 hover:shadow-[0_6px_28px_rgba(212,175,55,0.45)] active:scale-[0.98] cursor-pointer"
+              className="gold-cta inline-flex items-center justify-center gap-2.5 min-h-11 px-7 py-3 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-[0.18em] shadow-[0_4px_20px_rgba(212,175,55,0.3)] transition-[transform,box-shadow] duration-300 hover:shadow-[0_6px_28px_rgba(212,175,55,0.45)] active:scale-[0.98] cursor-pointer"
             >
               <BookOpen className="w-4 h-4" aria-hidden="true" />
               <span>See Menu Sections</span>
@@ -600,7 +673,7 @@ export const MenuExperience = () => {
                 <a
                   href="tel:+923327515538"
                   onClick={closeFullMenu}
-                  className="inline-flex items-center justify-center min-h-11 px-5 py-2 rounded bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center min-h-11 px-5 py-2 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
                 >
                   Call to Reserve
                 </a>

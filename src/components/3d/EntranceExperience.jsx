@@ -1,119 +1,57 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-const BASE = import.meta.env.BASE_URL || '/';
-
 /**
  * One continuous, scroll-driven walkthrough.
  *
- * /public/video-frames-final holds the current 70-frame sequence
- * (ezgif-frame-001 ... -070, 1280x720, 70 contiguous files):
+ * The hero footage is one remote film. Scroll position, not elapsed time, is
+ * the source of truth: progress picks the video timestamp and drives the
+ * hand-over between the two content overlays.
  *
- *   frames 1 - 23   restaurant entrance  (hallway → glass doors)
- *   frames 24 - 70  the grand dining hall (inside → buffet → final dish)
- *
- * Every viewport, phone included, uses this one set. The superseded
- * 299-frame 640x1080 crop in /public/video-frames-final-phone belongs to the
- * previous footage; it is deliberately no longer selected. `object-cover`
- * keeps the portrait framing, and the current frames are already small
- * enough (and few enough) that a second phone set is not required.
- *
- * Scroll position - not elapsed time - is the only source of truth: it picks
- * the frame AND drives the hand-over between the two content overlays.
- *
- * NOTE: the count must match the folder exactly. Requesting one frame past
- * the end returns the dev server's index.html (200 text/html) instead of a
- * JPEG, which decodes to nothing and shows the stage's black background.
+ * The film is never played. Seeking a paused video gives the same frame for a
+ * given scroll position on the way down and on the way back up, and the last
+ * seek is held at the end. The original upload had a single sync sample at 0,
+ * so every paused seek decoded from the start. This derived Cloudinary URL
+ * re-encodes the same film with a 1 s keyframe interval (ki_1) and best
+ * automatic quality, so a seek starts no more than one second away. Requests
+ * are coalesced so only one seek is in flight at a time. The first-frame
+ * poster keeps the stage filled while metadata, data, or a seek is arriving.
  */
-const FRAME_COUNT = 70;
+const VIDEO_URL =
+  'https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4';
+const VIDEO_POSTER =
+  'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg';
 
 /**
- * Pinned scroll distance per frame, in vh.
- *
- * The walkthrough should keep the same total pinned travel as before (about
- * 229vh, so the Hero still releases at the same point on the page). The new
- * sequence has 70 frames instead of 299, so the per-frame distance grows:
- * 70 x 3.27vh ≈ 229vh. This keeps the section height at ≈329vh.
+ * Keep the same 329vh track as the previous 70-frame sequence (70 x 3.27vh
+ * plus one viewport), so the hero releases at the same point on the page.
  */
-const SCROLL_VH_PER_FRAME = 3.27;
-
-/** First dining-room frame, 1-based 24 → 0-based 23 (the hard cut). */
-const DINING_ROOM_FRAME = 23;
+const TRACK_HEIGHT_VH = 328.9;
 
 /**
- * Bump when the files in the frame folders are replaced in place. The public
- * folder is copied to the build without a content hash, so an unchanged
- * filename can otherwise keep serving the previous sequence from cache.
+ * The copy hand-over stays where it was in the frame sequence: frame 24 of 70,
+ * or the first third of the walk. The supplied film is one continuous shot, so
+ * this boundary now marks the same reading beat rather than a hard visual cut.
  */
-const ASSET_VERSION = '2026-10-23';
+const CONTENT_HANDOVER_PROGRESS = 23 / 69;
 
-/**
- * Half-width of the content dissolve, in scroll progress. The dissolve is
- * centred on the frame boundary, so it spans roughly one wheel notch and
- * hands over exactly as the doors give way to the dining room.
- */
+/** Half-width of the content dissolve, in scroll progress. */
 const TRANSITION_HALF_WIDTH = 0.04;
 
-/**
- * A small pool of decoded layers. One is visible; the others hold the next
- * predicted scroll positions so a fast scrub can hand over without waiting
- * for a single serial download. Five full-size frames is the memory ceiling.
- */
-const MAX_LAYERS = 5;
-const NARROW_LAYERS = 4;
-/**
- * Frame-index distances scale with the sequence: the old 299-frame figures
- * were 32 / 38 / 80 / 64 frames. At 70 frames the equivalent distances are
- * 8 / 9 / 19 / 15, so the end-of-sequence guards still describe a real
- * stretch of the walk instead of swallowing the whole set.
- */
-const MAX_PREDICT_STEP = 8;
-const DECODE_FALLBACK_MS = 300;
-/** A handful of evenly spaced fallback frames, fetched once at startup. */
-const LADDER_STEP = 9;
-/** Only this far behind the scrub is an in-flight frame worth abandoning. */
-const STALE_DISTANCE = 19;
-/**
- * Narrow screens only. A cold frame needs roughly 200-250 ms, and three lanes
- * started together finish together, so only one of the three can be shown per
- * round trip. Requesting the frame the scrub will be reading on arrival, and
- * starting the lanes a little apart, turns that batch into a steady stream.
- */
-const MAX_PREDICT_LEAD = 15;
-const LOAD_PACING_MS = 80;
-/** Observed round trip before the first frame reports back, in ms. */
-const INITIAL_LATENCY = 120;
+/** About one frame at 24 fps. Smaller changes are not worth a seek. */
+const SEEK_EPSILON = 1 / 30;
 
-const FRAME_FOLDER = 'video-frames-final';
-
-/** One asset set for every viewport. */
-const frameSrc = (index) =>
-  `${BASE}${FRAME_FOLDER}/ezgif-frame-${String(index + 1).padStart(3, '0')}.jpg?v=${ASSET_VERSION}`;
+/** Stop just before the end so the final frame stays visible. */
+const END_FRAME_OFFSET = 1 / 24;
 
 const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 
-/** 3u² - 2u³ — eases both ends of the content dissolve. */
+/** 3u² - 2u³: eases both ends of the content dissolve. */
 const smoothstep = (value) => value * value * (3 - 2 * value);
 
 export const EntranceExperience = () => {
   const trackRef = useRef(null);
-  const layersRef = useRef(
-    Array.from({ length: MAX_LAYERS }, () => ({
-      node: null,
-      index: null,
-      loading: false,
-      ready: false,
-      token: 0,
-      timer: 0,
-    })),
-  );
-  const activeLayerRef = useRef(0);
-  const visibleIndexRef = useRef(0);
-  const targetIndexRef = useRef(0);
-  const directionRef = useRef(1);
-  const stepRef = useRef(1);
-  const settleTimerRef = useRef(0);
-  const scheduleRef = useRef(null);
+  const videoRef = useRef(null);
   const entranceContentRef = useRef(null);
   const diningContentRef = useRef(null);
   const centerScrimRef = useRef(null);
@@ -125,6 +63,9 @@ export const EntranceExperience = () => {
   const styleCacheRef = useRef({});
   const rafRef = useRef(0);
   const reducedMotionRef = useRef(false);
+  const videoReadyRef = useRef(false);
+  const durationRef = useRef(0);
+  const progressRef = useRef(0);
   /**
    * False while the hero is far outside the viewport. The scroll listener is
    * global, so without this every scroll anywhere in the ~16 000 px document
@@ -137,21 +78,6 @@ export const EntranceExperience = () => {
    * have to read the track's height or bounding rect.
    */
   const metricsRef = useRef({ top: 0, scrollDistance: 0, viewport: 0, width: 0 });
-  /** Phones and touch tablets get a smaller decode pool. */
-  const narrowRef = useRef(false);
-  const poolSizeRef = useRef(NARROW_LAYERS);
-  /** Keep the last frame decoded while a fling can still reach it. */
-  const keepFinalRef = useRef(false);
-  /**
-   * Measured scroll speed in frames per ms and the measured request-to-decoded
-   * time. Narrow screens use them to ask for the frame the scrub will be on
-   * when the bytes land, instead of the frame it is already leaving.
-   */
-  const velocityRef = useRef(0);
-  const latencyRef = useRef(INITIAL_LATENCY);
-  const lastTargetAtRef = useRef(0);
-  const lastLoadAtRef = useRef(0);
-  const paceTimerRef = useRef(0);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -164,338 +90,50 @@ export const EntranceExperience = () => {
     };
   }, []);
 
-  const revealLayer = useCallback((layer) => {
-    const node = layer.node;
-    if (!node || layer.index === null || !layer.ready) return;
-    const active = layersRef.current[activeLayerRef.current];
-    if (active === layer) {
-      visibleIndexRef.current = layer.index;
-      return;
-    }
+  /**
+   * Apply the current progress to the film. Only one seek is allowed in
+   * flight: while it runs, newer positions wait for seeked, which then applies
+   * the latest value. This avoids cancelling and restarting seeks on every
+   * scroll event.
+   */
+  const applyVideoProgress = useCallback((nextProgress = progressRef.current) => {
+    const progress = clamp01(Number.isFinite(nextProgress) ? nextProgress : 0);
+    progressRef.current = progress;
 
-    node.style.opacity = '1';
-    if (active?.node) active.node.style.opacity = '0';
-    activeLayerRef.current = layersRef.current.indexOf(layer);
-    visibleIndexRef.current = layer.index;
+    const video = videoRef.current;
+    const duration = durationRef.current;
+    if (!video || !videoReadyRef.current) return;
+    if (!Number.isFinite(duration) || duration <= 0) return;
+    if (video.seeking) return;
+
+    const end = Math.max(0, duration - END_FRAME_OFFSET);
+    const target = progress * end;
+    if (Math.abs(video.currentTime - target) < SEEK_EPSILON) return;
+
+    try {
+      video.currentTime = target;
+    } catch {
+      // Keep the current frame and poster; the next scroll or seek retries.
+    }
   }, []);
 
-  /**
-   * Show the closest decoded frame instead of waiting for the exact target.
-   * The exact target still wins when it is ready; a nearby frame just keeps
-   * the stage moving while the next one decodes.
-   */
-  const showBest = useCallback(() => {
-    const target = targetIndexRef.current;
-    const direction = directionRef.current || 1;
-    /* Once the end artwork is up and the scrub is still moving forward, keep
-       it. Letting the nearest-ready rule pick a later-decoded middle frame
-       flipped the visible sequence 299 -> 262 -> 299 at the end of a drag. */
-    if (
-      visibleIndexRef.current === FRAME_COUNT - 1 &&
-      direction > 0 &&
-      target >= FRAME_COUNT - 1 - LADDER_STEP * 2
-    ) {
-      return;
-    }
-    const currentDistance = Math.abs(visibleIndexRef.current - target);
-    let best = null;
+  const handleVideoMetadata = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const duration = video.duration;
+    if (!Number.isFinite(duration) || duration <= 0) return;
+    durationRef.current = duration;
+    videoReadyRef.current = true;
+    applyVideoProgress();
+  }, [applyVideoProgress]);
 
-    for (const layer of layersRef.current) {
-      if (!layer.ready || layer.index === null) continue;
-      // A pre-decoded final frame is a fallback for the end of a fling, not
-      // for the middle of the artwork. Do not jump the whole sequence early
-      // just because that frame happens to be ready.
-      if (
-        layer.index === FRAME_COUNT - 1 &&
-        target < FRAME_COUNT - 1 - LADDER_STEP * 2
-      ) {
-        continue;
-      }
-      const delta = layer.index - target;
-      const ahead = delta * direction > 0;
-      // Prefer the frame at or just behind the scrub; a frame ahead is still
-      // better than a stale one, hence the small tie-breaker.
-      const score = Math.abs(delta) + (ahead ? 0.35 : 0);
-      if (!best || score < best.score) best = { layer, score };
-    }
+  const handleVideoSeeked = useCallback(() => {
+    applyVideoProgress();
+  }, [applyVideoProgress]);
 
-    if (!best) return;
-    if (best.layer === layersRef.current[activeLayerRef.current]) {
-      visibleIndexRef.current = best.layer.index;
-      return;
-    }
-    if (best.score >= currentDistance - 0.25) return;
-    revealLayer(best.layer);
-  }, [revealLayer]);
-
-  /**
-   * Load one frame into an inactive layer. Each layer has its own token, so
-   * replacing a stale request cannot let an older callback reveal the wrong
-   * bitmap. The frame is decoded before it joins the ready pool.
-   */
-  const loadLayer = useCallback(
-    (layer, index) => {
-      const node = layer.node;
-      if (!node) return;
-
-      const token = layer.token + 1;
-      layer.token = token;
-      layer.index = index;
-      layer.loading = true;
-      layer.ready = false;
-      window.clearTimeout(layer.timer);
-      const requestedAt = performance.now();
-
-      const src = frameSrc(index);
-      if ('fetchPriority' in node) node.fetchPriority = 'high';
-
-      const finish = () => {
-        if (layer.token !== token || !layer.loading) return;
-        if (node.getAttribute('src') !== src || node.naturalWidth === 0) {
-          layer.loading = false;
-          layer.ready = false;
-          return;
-        }
-        layer.loading = false;
-        layer.ready = true;
-        window.clearTimeout(layer.timer);
-        // Request to decoded bitmap, queueing included.
-        const elapsed = performance.now() - requestedAt;
-        latencyRef.current = Math.min(
-          1500,
-          Math.max(20, latencyRef.current * 0.7 + elapsed * 0.3),
-        );
-        showBest();
-        scheduleRef.current?.();
-      };
-
-      const fail = () => {
-        if (layer.token !== token) return;
-        window.clearTimeout(layer.timer);
-        layer.loading = false;
-        layer.ready = false;
-        layer.index = null;
-      };
-
-      node.onload = () => {
-        if (layer.token !== token) return;
-        layer.timer = window.setTimeout(finish, DECODE_FALLBACK_MS);
-        if (typeof node.decode === 'function') node.decode().then(finish, finish);
-        else finish();
-      };
-      node.onerror = fail;
-      node.src = src;
-
-      if (node.complete && node.naturalWidth > 0 && node.currentSrc.endsWith(src)) {
-        if (typeof node.decode === 'function') node.decode().then(finish, finish);
-        else finish();
-      }
-    },
-    [showBest],
-  );
-
-  /**
-   * Keep a small predictive buffer filled. The step is the last scroll jump,
-   * so a steady scrub preloads the exact frames the next few events will ask
-   * for; a slow scrub falls back to consecutive frames.
-   */
-  const schedule = useCallback(() => {
-    if (!visibleRef.current) return;
-    const target = targetIndexRef.current;
-    const active = layersRef.current[activeLayerRef.current];
-    const slots = Math.max(0, poolSizeRef.current - 1);
-    const direction = directionRef.current || 1;
-    const step = Math.max(1, Math.min(stepRef.current, MAX_PREDICT_STEP));
-    const narrow = narrowRef.current;
-
-    const push = (list, index) => {
-      const clamped = Math.min(FRAME_COUNT - 1, Math.max(0, index));
-      if (!list.includes(clamped)) list.push(clamped);
-    };
-
-    const desired = [];
-    if (narrow) {
-      /* The end of the walk is the one frame a fling cannot improvise, so it
-         is asked for before anything else while the last stretch is in reach. */
-      if (keepFinalRef.current) push(desired, FRAME_COUNT - 1);
-      /* Ask for the frame the scrub will be reading on arrival, not the one
-         it is already leaving. */
-      const lead = Math.max(
-        1,
-        Math.min(
-          MAX_PREDICT_LEAD,
-          Math.round(velocityRef.current * latencyRef.current),
-        ),
-      );
-      const gap = Math.max(1, Math.round(velocityRef.current * LOAD_PACING_MS));
-      push(desired, target + direction * lead);
-      const ladder = Math.min(
-        FRAME_COUNT - 1,
-        Math.max(0, Math.round(target / LADDER_STEP) * LADDER_STEP),
-      );
-      push(desired, ladder);
-      push(desired, target + direction * (lead + gap));
-      push(desired, target + direction * (lead + gap * 2));
-    } else {
-      push(desired, target);
-      for (let lane = 1; lane <= slots; lane += 1) {
-        push(desired, target + direction * step * lane);
-      }
-    }
-
-    /* Three lanes started together finish together, so only the nearest of
-       the batch can ever be shown. Space the starts instead. The end frame is
-       never made to wait for a lane slot. */
-    const endWaiting =
-      narrow &&
-      desired[0] === FRAME_COUNT - 1 &&
-      !layersRef.current.some(
-        (layer) =>
-          layer.index === FRAME_COUNT - 1 && (layer.loading || layer.ready),
-      );
-    if (narrow && !endWaiting) {
-      const now = performance.now();
-      const anyLoading = layersRef.current.some((layer) => layer.loading);
-      const wait = LOAD_PACING_MS - (now - lastLoadAtRef.current);
-      if (anyLoading && wait > 0) {
-        if (!paceTimerRef.current) {
-          paceTimerRef.current = window.setTimeout(() => {
-            paceTimerRef.current = 0;
-            scheduleRef.current?.();
-          }, wait);
-        }
-        return;
-      }
-    }
-
-    const desiredSet = new Set(desired);
-    for (const index of desired.slice(0, slots + 1)) {
-      const present = layersRef.current.some(
-        (layer) => layer.index === index && (layer.loading || layer.ready),
-      );
-      if (present) continue;
-
-      let layer = layersRef.current.find(
-        (candidate) => candidate !== active && !candidate.loading && !candidate.ready,
-      );
-
-      const candidates = layersRef.current.filter((candidate) => candidate !== active);
-      if (!candidates.length) break;
-
-      // A decoded frame that is outside the desired window can be replaced
-      // immediately. In-flight frames are left alone while they are near the
-      // scrub; only a frame that has fallen far behind is abandoned, so a
-      // sudden jump cannot leave the stage pinned to an old frame while four
-      // stale downloads finish.
-      if (!layer) {
-        const recyclable = candidates.filter(
-          (candidate) => candidate.ready && !desiredSet.has(candidate.index),
-        );
-        if (recyclable.length) {
-          recyclable.sort((a, b) => {
-            const aDistance = a.index === null ? Infinity : Math.abs(a.index - target);
-            const bDistance = b.index === null ? Infinity : Math.abs(b.index - target);
-            return bDistance - aDistance;
-          });
-          layer = recyclable[0];
-        }
-      }
-
-      if (!layer) {
-        const stale = candidates.filter(
-          (candidate) =>
-            candidate.loading &&
-            candidate.index !== null &&
-            (candidate.index - target) * direction < -STALE_DISTANCE,
-        );
-        if (stale.length) {
-          stale.sort((a, b) => {
-            const aDistance = a.index === null ? Infinity : Math.abs(a.index - target);
-            const bDistance = b.index === null ? Infinity : Math.abs(b.index - target);
-            return bDistance - aDistance;
-          });
-          layer = stale[0];
-        }
-      }
-
-      if (!layer) continue;
-      loadLayer(layer, index);
-      if (narrow) {
-        lastLoadAtRef.current = performance.now();
-        break;
-      }
-    }
-  }, [loadLayer]);
-
-  /**
-   * Drop decoded bitmaps for every inactive lane once the stage is far away.
-   * The active frame stays on screen; the prefetch pool is rebuilt on entry.
-   * Without this, four 1920x1080 Hero bitmaps stayed resident while Story was
-   * decoding its own pool, which is exactly where mobile memory pressure and
-   * image-cache eviction hurt most.
-   */
-  const releaseIdleLayers = useCallback(() => {
-    const active = layersRef.current[activeLayerRef.current];
-    for (const layer of layersRef.current) {
-      if (layer === active) continue;
-      window.clearTimeout(layer.timer);
-      layer.token += 1;
-      layer.loading = false;
-      layer.ready = false;
-      layer.index = null;
-      if (layer.node) {
-        layer.node.style.opacity = '0';
-        layer.node.removeAttribute('src');
-      }
-    }
-    window.clearTimeout(paceTimerRef.current);
-    paceTimerRef.current = 0;
-    window.clearTimeout(settleTimerRef.current);
-    stepRef.current = 1;
-    velocityRef.current = 0;
+  const handleVideoError = useCallback(() => {
+    videoReadyRef.current = false;
   }, []);
-
-  const showFrame = useCallback(
-    (index) => {
-      const safe = Math.min(Math.max(index, 0), FRAME_COUNT - 1);
-      const previous = targetIndexRef.current;
-
-      if (safe !== previous) {
-        const delta = safe - previous;
-        const now = performance.now();
-        const elapsed = lastTargetAtRef.current
-          ? Math.max(8, now - lastTargetAtRef.current)
-          : 16;
-        lastTargetAtRef.current = now;
-        velocityRef.current =
-          velocityRef.current * 0.6 + (Math.abs(delta) / elapsed) * 0.4;
-        const nextStep = Math.max(1, Math.min(Math.abs(delta), MAX_PREDICT_STEP));
-        directionRef.current = delta > 0 ? 1 : -1;
-        stepRef.current = nextStep;
-        targetIndexRef.current = safe;
-
-        if (narrowRef.current) {
-          keepFinalRef.current =
-            nextStep >= MAX_PREDICT_STEP ||
-            safe >= FRAME_COUNT - 1 - LADDER_STEP * 2;
-        }
-
-        window.clearTimeout(settleTimerRef.current);
-        settleTimerRef.current = window.setTimeout(() => {
-          stepRef.current = 1;
-          velocityRef.current = 0;
-          scheduleRef.current?.();
-        }, 180);
-
-        /* A scroll can fire several times inside one frame bucket. Only a new
-           target needs a lane lookup; the content hand-over below still runs
-           every time because its progress is continuous. */
-        schedule();
-        showBest();
-      }
-    },
-    [schedule, showBest],
-  );
 
   const update = useCallback(() => {
     const track = trackRef.current;
@@ -508,11 +146,11 @@ export const EntranceExperience = () => {
     const progress =
       scrollDistance > 0 ? clamp01((window.scrollY - top) / scrollDistance) : 0;
 
-    /* ---------------- frames ---------------- */
-    showFrame(Math.round(progress * (FRAME_COUNT - 1)));
+    /* -------------------------- film -------------------------- */
+    applyVideoProgress(progress);
 
-    /* -------------- content hand-over -------------- */
-    const boundary = DINING_ROOM_FRAME / (FRAME_COUNT - 1);
+    /* -------------------- content hand-over -------------------- */
+    const boundary = CONTENT_HANDOVER_PROGRESS;
     const reducedMotion = reducedMotionRef.current;
     const mix = reducedMotion
       ? progress >= boundary
@@ -587,8 +225,8 @@ export const EntranceExperience = () => {
     setStyle(bottomScrimRef.current, 'bottomScrim', 'opacity', String(mix));
 
     /* The entrance scroll cue sits exactly where the dining copy lands, so it
-       clears out over the first 20 % of the dissolve — long before the dining
-       heading is readable — and the two "continue" labels never overlap. */
+       clears out over the first 20 % of the dissolve, long before the dining
+       heading is readable, and the two "continue" labels never overlap. */
     setStyle(
       entranceCueRef.current,
       'cueOpacity',
@@ -601,75 +239,26 @@ export const EntranceExperience = () => {
     setInert(entranceContentRef.current, 'entranceInert', mix > 0.95);
     setInert(diningContentRef.current, 'diningInert', mix < 0.05);
     setInert(entranceCueRef.current, 'cueInert', mix >= 0.2);
-  }, [showFrame, measure]);
+  }, [applyVideoProgress, measure]);
 
   useEffect(() => {
     const track = trackRef.current;
+    const video = videoRef.current;
     if (!track) return;
 
-    narrowRef.current =
-      window.matchMedia('(max-width: 1023px)').matches ||
-      window.matchMedia('(pointer: coarse)').matches;
-    poolSizeRef.current = narrowRef.current ? NARROW_LAYERS : MAX_LAYERS;
-    keepFinalRef.current = narrowRef.current;
+    /* A cached film can already have metadata when the effect runs. */
+    if (
+      video &&
+      Number.isFinite(video.duration) &&
+      video.duration > 0
+    ) {
+      durationRef.current = video.duration;
+      videoReadyRef.current = true;
+    }
     measure();
 
-    /* Start from one visible frame and an empty prefetch pool. */
-    const layers = layersRef.current;
-    layers.forEach((layer, index) => {
-      window.clearTimeout(layer.timer);
-      layer.token += 1;
-      layer.loading = false;
-      layer.ready = index === 0;
-      layer.index = index === 0 ? 0 : null;
-      if (layer.node) {
-        layer.node.style.opacity = index === 0 ? '1' : '0';
-        if (index !== 0) layer.node.removeAttribute('src');
-      }
-    });
-    activeLayerRef.current = 0;
-    visibleIndexRef.current = 0;
-    targetIndexRef.current = 0;
-    directionRef.current = 1;
-    stepRef.current = 1;
-    velocityRef.current = 0;
-    latencyRef.current = INITIAL_LATENCY;
-    lastTargetAtRef.current = 0;
-    lastLoadAtRef.current = 0;
-    window.clearTimeout(paceTimerRef.current);
-    paceTimerRef.current = 0;
-    scheduleRef.current = schedule;
-    /* Seed the pool once at mount so the first notch already has the next
-       frame and, on narrow screens, the final artwork in flight. */
-    schedule();
-
-    /* One low-priority pass caches the final frame first, then seven evenly
-       spaced anchors (frame 0 is already visible). It stops when finished; it
-       is a fallback for a hard fling, not a background download. */
-    let ladderCancelled = false;
-    const warmLadder = async () => {
-      const ladderIndexes = [FRAME_COUNT - 1];
-      for (let index = LADDER_STEP; index < FRAME_COUNT - 1; index += LADDER_STEP) {
-        ladderIndexes.push(index);
-      }
-      for (const index of ladderIndexes) {
-        if (ladderCancelled) return;
-        try {
-          const response = await fetch(frameSrc(index), {
-            priority: 'low',
-          });
-          await response.arrayBuffer();
-        } catch {}
-      }
-    };
-    const ladderTimer = narrowRef.current
-      ? window.setTimeout(() => {
-          void warmLadder();
-        }, 400)
-      : 0;
-
-    /* Reduced motion: keep the frames (the user drives them) but swap the
-       copy abruptly instead of dissolving/sliding it. */
+    /* Reduced motion: keep the film user-driven, but swap the copy abruptly
+       instead of dissolving/sliding it. */
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const syncMotionPreference = () => {
       reducedMotionRef.current = motionQuery.matches;
@@ -689,12 +278,10 @@ export const EntranceExperience = () => {
       });
     };
 
-    /* Orientation changes only re-measure: every viewport shares the same
-       updated sequence, so there is no asset set to swap and no window in
-       which an old portrait crop can reappear. The track height is in vh, so
-       keep the same point of the walk after a width change instead of letting
-       an unchanged scrollY land near the final frame. A height-only resize
-       (mobile URL bar) is left alone. */
+    /* Orientation changes only re-measure. The track height is in vh, so keep
+       the same point of the walk after a width change instead of letting an
+       unchanged scrollY land near the final frame. A height-only resize (mobile
+       URL bar) is left alone. */
     const onResize = () => {
       const previous = metricsRef.current;
       const progress =
@@ -722,9 +309,6 @@ export const EntranceExperience = () => {
         if (near) {
           measure();
           update();
-          scheduleRef.current?.();
-        } else {
-          releaseIdleLayers();
         }
       },
       { rootMargin: '0px 0px' },
@@ -733,28 +317,16 @@ export const EntranceExperience = () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
-    schedule();
     update();
 
     return () => {
-      ladderCancelled = true;
-      window.clearTimeout(ladderTimer);
-      layers.forEach((layer) => {
-        window.clearTimeout(layer.timer);
-        layer.token += 1;
-        layer.loading = false;
-      });
-      scheduleRef.current = null;
-      window.clearTimeout(settleTimerRef.current);
-      window.clearTimeout(paceTimerRef.current);
-      paceTimerRef.current = 0;
       observer.disconnect();
       if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
       motionQuery.removeEventListener?.('change', syncMotionPreference);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
     };
-  }, [update, measure, schedule, releaseIdleLayers]);
+  }, [update, measure]);
 
   const handleEnterClick = () => {
     const secondSection = document.getElementById('story');
@@ -781,36 +353,34 @@ export const EntranceExperience = () => {
       id="entrance"
       ref={trackRef}
       className="relative w-full bg-[#090a0c]"
-      style={{ height: `${100 + FRAME_COUNT * SCROLL_VH_PER_FRAME}vh` }}
+      style={{ height: `${TRACK_HEIGHT_VH}vh` }}
       aria-label="Pearl Oasis walkthrough"
     >
-      {/* Pinned stage: the frame never leaves the viewport while the track
+      {/* Pinned stage: the film never leaves the viewport while the track
           scrolls past it, so the camera walk reads as one continuous take. */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none">
-        {/* The frame is swapped from scroll progress only, through a small
-            pool of stacked layers. One is visible, the others hold decoded
-            frames near the predicted scroll position. The last good frame
-            stays visible until a better one is ready, so the stage never goes
-            black. */}
-        {layersRef.current.map((layer, index) => (
-          <img
-            key={index}
-            ref={(node) => {
-              layer.node = node;
-            }}
-            src={index === 0 ? frameSrc(0) : undefined}
-            alt=""
-            aria-hidden="true"
-            draggable={false}
-            decoding="async"
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-            style={{ opacity: index === 0 ? 1 : 0 }}
-          />
-        ))}
+        {/* One video layer, never played. Scroll only seeks it; the poster is
+            the first frame, so the stage is not blank while data arrives or if
+            the film cannot load. */}
+        <video
+          ref={videoRef}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+          src={VIDEO_URL}
+          poster={VIDEO_POSTER}
+          preload="auto"
+          muted
+          playsInline
+          aria-hidden="true"
+          tabIndex={-1}
+          onLoadedMetadata={handleVideoMetadata}
+          onCanPlay={handleVideoMetadata}
+          onSeeked={handleVideoSeeked}
+          onError={handleVideoError}
+        />
 
         {/* Light cinematic tint. This used to be black/40, which flattened the
             footage into a near-black backdrop; 10% keeps the warm tones and
-            still lets the frames read as one graded sequence. */}
+            still lets the film read as one graded sequence. */}
         <div className="absolute inset-0 pointer-events-none bg-black/10" />
 
         {/* Entrance text scrim: contrast is bought locally, behind the centred
@@ -846,7 +416,7 @@ export const EntranceExperience = () => {
             than a solid 96px block of #090a0c over the top of the shot. */}
         <div className="absolute inset-x-0 top-0 h-32 pointer-events-none bg-[linear-gradient(to_bottom,rgba(9,10,12,0.92)_0%,rgba(9,10,12,0.5)_58%,transparent_100%)]" />
 
-        {/* Phase A — Restaurant Entrance content */}
+        {/* Phase A: Restaurant Entrance content */}
         <div
           ref={entranceContentRef}
           className="hero-copy absolute inset-0 z-20 flex flex-col items-center justify-center px-4 sm:px-6 pt-16 sm:pt-20 pb-20 sm:pb-24 text-center will-change-[opacity,transform]"
@@ -879,13 +449,13 @@ export const EntranceExperience = () => {
             {/* Enter Restaurant button with no icon, navigates to second section */}
             <button
               onClick={handleEnterClick}
-              className="hero-cta inline-flex items-center justify-center min-h-11 px-6 py-2.5 sm:px-8 sm:py-3.5 md:px-10 md:py-4 rounded bg-gradient-to-r from-[#d4af37] via-[#f5d78e] to-[#aa8010] text-[#0e0f12] font-cinzel text-[11px] sm:text-xs md:text-sm font-bold tracking-[0.18em] sm:tracking-[0.25em] uppercase shadow-[0_4px_24px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_32px_rgba(212,175,55,0.65)] hover:scale-105 active:scale-95 transition-all duration-300"
+              className="gold-cta hero-cta inline-flex items-center justify-center min-h-11 px-6 py-2.5 sm:px-8 sm:py-3.5 md:px-10 md:py-4 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#f5d78e] to-[#aa8010] text-[#0e0f12] font-cinzel text-[11px] sm:text-xs md:text-sm font-bold tracking-[0.18em] sm:tracking-[0.25em] uppercase shadow-[0_4px_24px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_32px_rgba(212,175,55,0.65)] hover:scale-105 active:scale-95 transition-all duration-300"
             >
               Enter Restaurant
             </button>
           </div>
 
-          {/* "UNFOLD THE STORY" scroll cue — travels with the entrance copy */}
+          {/* "UNFOLD THE STORY" scroll cue, travels with the entrance copy */}
           <div
             ref={entranceCueRef}
             className="hero-cue absolute bottom-4 sm:bottom-6 md:bottom-8 inset-x-0 flex flex-col items-center justify-center px-4"
@@ -906,12 +476,12 @@ export const EntranceExperience = () => {
           </div>
         </div>
 
-        {/* Phase B/C — The Grand Dining Hall content */}
+        {/* Phase B/C: The Grand Dining Hall content */}
         <div
           ref={diningContentRef}
           className="absolute inset-0 z-20 flex flex-col items-center justify-end px-4 sm:px-6 pb-10 sm:pb-12 md:pb-16 text-center will-change-[opacity,transform]"
           style={{ opacity: 0, transform: 'translateY(20px)', pointerEvents: 'none' }}
-          inert=""
+          inert
           aria-hidden="true"
         >
           <button

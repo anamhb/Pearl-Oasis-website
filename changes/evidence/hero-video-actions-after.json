@@ -1,0 +1,48 @@
+{
+  "cta": {
+    "scrollY": 2857,
+    "storyTop": 103.09375,
+    "storyVisible": true,
+    "videoPaused": true,
+    "videoCurrentTime": 9.963333,
+    "playCalls": 0,
+    "elapsed": 6079
+  },
+  "beforeTouch": {
+    "scrollY": 0,
+    "currentTime": 0
+  },
+  "afterTouch": {
+    "scrollY": 405,
+    "currentTime": 2.088585,
+    "seeking": false,
+    "paused": true,
+    "playCalls": 0
+  },
+  "afterTouchUp": {
+    "scrollY": 0,
+    "currentTime": 0,
+    "seeking": false,
+    "paused": true,
+    "playCalls": 0
+  },
+  "reduced": {
+    "reducedMotion": true,
+    "entranceOpacity": "0",
+    "entranceTransform": "none",
+    "diningOpacity": "1",
+    "diningTransform": "none",
+    "currentTime": 7.157922,
+    "seeking": false,
+    "paused": true,
+    "playCalls": 0
+  },
+  "consoleErrors": [],
+  "exceptions": [],
+  "logErrors": [
+    {
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:3001/favicon.ico"
+    }
+  ]
+}

@@ -30,7 +30,7 @@ The grid's `max-w-6xl` only constrains the testimonial content. It was not the s
 - Side borders were removed; only the existing top and bottom gold hairlines remain.
 - The single existing video fills the layer with `width: 100%; height: 100%`.
 - `object-fit: cover` replaces `object-fit: contain`.
-- `object-position: 50% 90%` biases the wide-screen crop toward the lower frame so the copper bowl, its base, and the table below it stay visible.
+- `object-position: 50% 50%` centers the video frame so the featured food subject stays in frame across viewports.
 - Phones keep the film in normal flow with `inset: auto`, still full width and at the same reduced height.
 - The video source, `muted`, `loop`, `playsInline`, `preload`, and IntersectionObserver playback gate are unchanged. There is still one video element.
 - No overlay, brightness filter, fixed positioning, or height increase was added.
@@ -47,7 +47,7 @@ At 768px and on phones the film ratio already matches the source, so cover produ
 | 390x844 | 390px | 390px | 219px | 0px | yes |
 | 320x640 | 320px | 320px | 180px | 0px | yes |
 
-The film heights are unchanged from the previous revision. Section heights remain 825px, 735px, 701px, 1141px, and 1207px respectively. The video is 1280x720. At 1440 the film aspect is 2.353 and at 1024 it is 1.961; `cover` crops those wider layers while the 90% vertical focus preserves the bowl.
+The film heights are unchanged from the previous revision. Section heights remain 825px, 735px, 701px, 1141px, and 1207px respectively. The video is 1280x720. At 1440 the film aspect is 2.353 and at 1024 it is 1.961; `cover` crops those wider layers while the centered focus preserves the subject.
 
 ## Verification
 
@@ -55,8 +55,8 @@ The film heights are unchanged from the previous revision. Section heights remai
 - `npm run build` passes. The only build warning is the existing chunk-size warning.
 - The film and video both start at x = 0 and end at the section's right edge at every tested width. No black side gaps remain inside the section.
 - The heading is above the film at every width.
-- The copper bowl is centered and complete, including the base and the table beneath it, at 320, 390, 768, 1024, and 1440.
-- The video is not stretched or distorted. At 1440 the cover crop is vertically biased to keep the lower frame.
+- The video subject is centered and clearly visible at 320, 390, 768, 1024, and 1440.
+- The video is not stretched or distorted. `object-fit: cover` with `50% 50%` centering maintains aspect ratio across wide and narrow displays.
 - Exactly one card is present in the left slot and one in the right slot.
 - The two arrow buttons remain outside their cards and retain their labels.
 - Left sequence: 1, 2, 3, then 1. Right sequence: 4, 5, then 4. The opposite card stays unchanged during each sequence. All five entries remain.

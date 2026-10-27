@@ -1,0 +1,419 @@
+{
+  "generatedAt": "2026-10-27T05:02:08.098Z",
+  "viewports": {
+    "mobile-320": {
+      "width": 320,
+      "height": 700,
+      "footerHeight": 871,
+      "footerTop": -170.5,
+      "paddingTop": "36px",
+      "paddingBottom": "32px",
+      "gridGap": "32px",
+      "gridMarginBottom": "40px",
+      "gridHeight": 664.5,
+      "bottomBarPaddingTop": "24px",
+      "bottomBarHeight": 97.5,
+      "columnGapPx": 32,
+      "beforeBottomBar": 40,
+      "columns": [
+        {
+          "i": 0,
+          "tag": "div",
+          "heading": null,
+          "top": -133.5,
+          "height": 186.5,
+          "spaceY": "normal"
+        },
+        {
+          "i": 1,
+          "tag": "div",
+          "heading": "Explore",
+          "top": 85,
+          "height": 118,
+          "spaceY": "normal"
+        },
+        {
+          "i": 2,
+          "tag": "div",
+          "heading": "Opening Hours",
+          "top": 235,
+          "height": 148,
+          "spaceY": "normal"
+        },
+        {
+          "i": 3,
+          "tag": "div",
+          "heading": "Sanctuary Location",
+          "top": 415,
+          "height": 116,
+          "spaceY": "normal"
+        }
+      ],
+      "exploreLinks": [
+        {
+          "text": "Our Story",
+          "h": 44,
+          "w": 54
+        },
+        {
+          "text": "Featured Dishes",
+          "h": 44,
+          "w": 91.9
+        },
+        {
+          "text": "Menu",
+          "h": 44,
+          "w": 44
+        },
+        {
+          "text": "Testimonials",
+          "h": 44,
+          "w": 70.3
+        }
+      ],
+      "telHeight": 44,
+      "docScrollWidth": 320,
+      "innerWidth": 320,
+      "overflowX": false,
+      "textPresent": {
+        "brand": true,
+        "description": true,
+        "explore": true,
+        "story": true,
+        "signature": true,
+        "menu": true,
+        "testimonials": true,
+        "hours": true,
+        "daily": true,
+        "lunch": true,
+        "dinner": true,
+        "location": true,
+        "phone": true,
+        "copyright": true,
+        "returnToTop": true
+      },
+      "fonts": {
+        "exploreHeading": {
+          "size": "12px",
+          "weight": "700"
+        },
+        "description": {
+          "size": "12px",
+          "lineHeight": "19.5px"
+        }
+      }
+    },
+    "mobile-390": {
+      "width": 390,
+      "height": 844,
+      "footerHeight": 851.5,
+      "footerTop": -7.3,
+      "paddingTop": "36px",
+      "paddingBottom": "32px",
+      "gridGap": "32px",
+      "gridMarginBottom": "40px",
+      "gridHeight": 645,
+      "bottomBarPaddingTop": "24px",
+      "bottomBarHeight": 97.5,
+      "columnGapPx": 32,
+      "beforeBottomBar": 40,
+      "columns": [
+        {
+          "i": 0,
+          "tag": "div",
+          "heading": null,
+          "top": 29.7,
+          "height": 167,
+          "spaceY": "normal"
+        },
+        {
+          "i": 1,
+          "tag": "div",
+          "heading": "Explore",
+          "top": 228.7,
+          "height": 118,
+          "spaceY": "normal"
+        },
+        {
+          "i": 2,
+          "tag": "div",
+          "heading": "Opening Hours",
+          "top": 378.7,
+          "height": 148,
+          "spaceY": "normal"
+        },
+        {
+          "i": 3,
+          "tag": "div",
+          "heading": "Sanctuary Location",
+          "top": 558.7,
+          "height": 116,
+          "spaceY": "normal"
+        }
+      ],
+      "exploreLinks": [
+        {
+          "text": "Our Story",
+          "h": 44,
+          "w": 54
+        },
+        {
+          "text": "Featured Dishes",
+          "h": 44,
+          "w": 91.9
+        },
+        {
+          "text": "Menu",
+          "h": 44,
+          "w": 44
+        },
+        {
+          "text": "Testimonials",
+          "h": 44,
+          "w": 70.3
+        }
+      ],
+      "telHeight": 44,
+      "docScrollWidth": 390,
+      "innerWidth": 390,
+      "overflowX": false,
+      "textPresent": {
+        "brand": true,
+        "description": true,
+        "explore": true,
+        "story": true,
+        "signature": true,
+        "menu": true,
+        "testimonials": true,
+        "hours": true,
+        "daily": true,
+        "lunch": true,
+        "dinner": true,
+        "location": true,
+        "phone": true,
+        "copyright": true,
+        "returnToTop": true
+      },
+      "fonts": {
+        "exploreHeading": {
+          "size": "12px",
+          "weight": "700"
+        },
+        "description": {
+          "size": "12px",
+          "lineHeight": "19.5px"
+        }
+      }
+    },
+    "mobile-430": {
+      "width": 430,
+      "height": 932,
+      "footerHeight": 851.5,
+      "footerTop": 80.7,
+      "paddingTop": "36px",
+      "paddingBottom": "32px",
+      "gridGap": "32px",
+      "gridMarginBottom": "40px",
+      "gridHeight": 645,
+      "bottomBarPaddingTop": "24px",
+      "bottomBarHeight": 97.5,
+      "columnGapPx": 32,
+      "beforeBottomBar": 40,
+      "columns": [
+        {
+          "i": 0,
+          "tag": "div",
+          "heading": null,
+          "top": 117.7,
+          "height": 167,
+          "spaceY": "normal"
+        },
+        {
+          "i": 1,
+          "tag": "div",
+          "heading": "Explore",
+          "top": 316.7,
+          "height": 118,
+          "spaceY": "normal"
+        },
+        {
+          "i": 2,
+          "tag": "div",
+          "heading": "Opening Hours",
+          "top": 466.7,
+          "height": 148,
+          "spaceY": "normal"
+        },
+        {
+          "i": 3,
+          "tag": "div",
+          "heading": "Sanctuary Location",
+          "top": 646.7,
+          "height": 116,
+          "spaceY": "normal"
+        }
+      ],
+      "exploreLinks": [
+        {
+          "text": "Our Story",
+          "h": 44,
+          "w": 54
+        },
+        {
+          "text": "Featured Dishes",
+          "h": 44,
+          "w": 91.9
+        },
+        {
+          "text": "Menu",
+          "h": 44,
+          "w": 44
+        },
+        {
+          "text": "Testimonials",
+          "h": 44,
+          "w": 70.3
+        }
+      ],
+      "telHeight": 44,
+      "docScrollWidth": 430,
+      "innerWidth": 430,
+      "overflowX": false,
+      "textPresent": {
+        "brand": true,
+        "description": true,
+        "explore": true,
+        "story": true,
+        "signature": true,
+        "menu": true,
+        "testimonials": true,
+        "hours": true,
+        "daily": true,
+        "lunch": true,
+        "dinner": true,
+        "location": true,
+        "phone": true,
+        "copyright": true,
+        "returnToTop": true
+      },
+      "fonts": {
+        "exploreHeading": {
+          "size": "12px",
+          "weight": "700"
+        },
+        "description": {
+          "size": "12px",
+          "lineHeight": "19.5px"
+        }
+      }
+    },
+    "desktop-1440": {
+      "width": 1440,
+      "height": 900,
+      "footerHeight": 456.5,
+      "footerTop": 443.1,
+      "paddingTop": "56px",
+      "paddingBottom": "40px",
+      "gridGap": "48px",
+      "gridMarginBottom": "64px",
+      "gridHeight": 218.5,
+      "bottomBarPaddingTop": "32px",
+      "bottomBarHeight": 77,
+      "columnGapPx": -218.5,
+      "beforeBottomBar": 64,
+      "columns": [
+        {
+          "i": 0,
+          "tag": "div",
+          "heading": null,
+          "top": 500.1,
+          "height": 218.5,
+          "spaceY": "normal"
+        },
+        {
+          "i": 1,
+          "tag": "div",
+          "heading": "Explore",
+          "top": 500.1,
+          "height": 218.5,
+          "spaceY": "normal"
+        },
+        {
+          "i": 2,
+          "tag": "div",
+          "heading": "Opening Hours",
+          "top": 500.1,
+          "height": 218.5,
+          "spaceY": "normal"
+        },
+        {
+          "i": 3,
+          "tag": "div",
+          "heading": "Sanctuary Location",
+          "top": 500.1,
+          "height": 218.5,
+          "spaceY": "normal"
+        }
+      ],
+      "exploreLinks": [
+        {
+          "text": "Our Story",
+          "h": 44,
+          "w": 54
+        },
+        {
+          "text": "Featured Dishes",
+          "h": 44,
+          "w": 91.9
+        },
+        {
+          "text": "Menu",
+          "h": 44,
+          "w": 44
+        },
+        {
+          "text": "Testimonials",
+          "h": 44,
+          "w": 70.3
+        }
+      ],
+      "telHeight": 44,
+      "docScrollWidth": 1440,
+      "innerWidth": 1440,
+      "overflowX": false,
+      "textPresent": {
+        "brand": true,
+        "description": true,
+        "explore": true,
+        "story": true,
+        "signature": true,
+        "menu": true,
+        "testimonials": true,
+        "hours": true,
+        "daily": true,
+        "lunch": true,
+        "dinner": true,
+        "location": true,
+        "phone": true,
+        "copyright": true,
+        "returnToTop": true
+      },
+      "fonts": {
+        "exploreHeading": {
+          "size": "12px",
+          "weight": "700"
+        },
+        "description": {
+          "size": "12px",
+          "lineHeight": "19.5px"
+        }
+      }
+    }
+  },
+  "badResponses": [
+    {
+      "url": "http://127.0.0.1:3000/favicon.ico",
+      "status": 404
+    }
+  ]
+}

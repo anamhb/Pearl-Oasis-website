@@ -134,39 +134,57 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Testimonials: one card per side, independent sequences
+   Testimonials: one looping arc
 
-   The heading stays in normal flow. Below it, the film is a full-width,
-   reduced-height layer, not an inset panel. The source is cropped with a
-   bottom-biased focal position so the copper bowl and its base stay in frame.
-   One glass card sits on each side of the open centre. Each side has its own
-   sequence and arrow. No tint, gradient, vignette or filter is applied.
-
-   From 768px the film is absolute inside the full-width stage and the cards
-   overlay its sides. Below 768px the film returns to normal flow and the two
-   cards stack, each with its own arrow.
+   The section is the positioning context. The film covers the whole section
+   behind the heading and carousel, so the burger is the section background
+   rather than a band under the heading. The stage paints above the film, and
+   the cards paint above the stage. Five cards share one arc whose centre sits
+   below the stage: the active card is centred and upright, neighbours drop,
+   lean outward and fade. The component writes the arc geometry and each card
+   transform; this block owns sizing, surfaces and controls.
 --------------------------------------------------------------------------- */
 .testimonial-stage {
-  --testimonial-arrow-size: 2.75rem;
-  --testimonial-film-height: min(68vh, calc(100vw * 9 / 16));
-  --testimonial-card-column: 13rem;
-  --testimonial-column-gap: 0.75rem;
   position: relative;
-  min-height: var(--testimonial-film-height);
+  z-index: 1;
   isolation: isolate;
 }
 
+/* A soft local scrim under the heading only. It keeps the copy readable when a
+   bright sauce frame passes behind it without dimming the card surfaces or the
+   burger's center. */
+.testimonial-header {
+  position: relative;
+  isolation: isolate;
+}
+
+.testimonial-header::before {
+  content: '';
+  position: absolute;
+  inset: -1rem -1rem -2.5rem;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 38%,
+    rgba(8, 9, 10, 0.52) 0%,
+    rgba(8, 9, 10, 0.28) 48%,
+    rgba(8, 9, 10, 0) 78%
+  );
+}
+
+/* Layer 0: full-section burger film. The absolute box is measured against the
+   section, not the stage, so the video remains behind the heading, cards and
+   controls without changing the document height. */
 .testimonial-film {
   position: absolute;
-  inset: 0 0 auto;
+  inset: 0;
   z-index: 0;
   width: 100%;
-  height: var(--testimonial-film-height);
+  height: 100%;
   overflow: hidden;
-  border-block: 1px solid rgba(212, 175, 55, 0.24);
-  border-inline: 0;
-  background: #0a0b0d;
+  background: #08090a;
   pointer-events: none;
+  transform: translateZ(0);
 }
 
 .testimonial-film__video {
@@ -176,62 +194,193 @@
   object-fit: cover;
   object-position: 50% 50%;
   filter: none;
+  pointer-events: none;
 }
 
-.testimonial-stage__grid {
+/* The carousel is the centred stage. The top padding is the actual heading-to-
+   card gap, not a leftover film offset. A small bottom padding gives the arrows
+   breathing room without restoring the old empty band. */
+.testimonial-carousel {
   position: relative;
   z-index: 10;
-  display: grid;
-  grid-template-columns:
-    var(--testimonial-card-column)
-    minmax(0, 1fr)
-    var(--testimonial-card-column);
-  grid-template-areas:
-    "left-card center right-card"
-    "left-nav center right-nav";
-  column-gap: var(--testimonial-column-gap);
-  row-gap: 0.75rem;
-  align-items: start;
-  padding-block: 1.5rem 3rem;
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-top: clamp(2.75rem, 8vh, 5.5rem);
+  padding-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
-.testimonial-stage__center {
-  grid-area: center;
-  min-width: 0;
+.testimonial-arc {
+  --tc-card-w: clamp(210px, 62vw, 240px);
+  --tc-card-min-h: 320px;
+  --tc-gap: 10px;
+  --tc-step: 10.5deg;
+  --tc-arc-drop: 0px;
+  position: relative;
+  width: 100%;
+  height: calc(
+    var(--tc-card-h, var(--tc-card-min-h)) + var(--tc-arc-drop) + 2.25rem
+  );
+  margin-inline: auto;
+  outline: none;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.testimonial-column {
-  min-width: 0;
+.testimonial-arc:active {
+  cursor: grabbing;
 }
 
-.testimonial-column--left {
-  grid-area: left-card;
+.testimonial-arc:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.9);
+  outline-offset: -2px;
+  border-radius: 1.5rem;
 }
 
-.testimonial-column--right {
-  grid-area: right-card;
-}
-
-.testimonial-nav {
+/* The active card keeps the warm near-black surface and gold border; side cards
+   override only the surface. Position, rotation, scale and opacity are written
+   by the carousel; hover only changes colour. */
+.testimonial-card {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
   display: flex;
-  min-width: 0;
+  width: var(--tc-card-w);
+  height: var(--tc-card-h, auto);
+  min-height: var(--tc-card-min-h);
+  margin-left: calc(var(--tc-card-w) / -2);
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1.05rem 1.1rem;
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 1.15rem;
+  background-color: #17130f;
+  background-image: linear-gradient(
+    180deg,
+    rgba(246, 239, 228, 0.035) 0%,
+    rgba(246, 239, 228, 0) 32%
+  );
+  box-shadow:
+    0 24px 54px -20px rgba(0, 0, 0, 0.85),
+    0 6px 16px -6px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(246, 239, 228, 0.08),
+    inset 0 -1px 0 rgba(212, 175, 55, 0.14);
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  outline: none;
+  /* The carousel writes transform and opacity every frame. Keep those two
+     properties out of the transition; only the border and shadow animate. */
+  transition:
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+/* Side cards use a deeper charcoal than the warm centre card. The nearly
+   opaque fill keeps the video from washing these cards toward grey while the
+   centre card keeps its original surface, border and shadow. */
+.testimonial-card--side {
+  background-color: #0c0e10;
+  background-image: linear-gradient(
+    180deg,
+    rgba(212, 175, 55, 0.045) 0%,
+    rgba(212, 175, 55, 0) 38%
+  );
+}
+
+@media (hover: hover) {
+  .testimonial-card:hover {
+    border-color: rgba(212, 175, 55, 0.62);
+    box-shadow:
+      0 28px 60px -18px rgba(0, 0, 0, 0.9),
+      0 8px 20px -4px rgba(0, 0, 0, 0.7),
+      inset 0 1px 0 rgba(246, 239, 228, 0.1),
+      inset 0 -1px 0 rgba(212, 175, 55, 0.22);
+  }
+}
+
+.testimonial-card__body {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  text-shadow: none;
+}
+
+.testimonial-card__quote {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: #f4ecdf;
+}
+
+.testimonial-card__footer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.testimonial-card__avatar {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 auto;
   align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(212, 175, 55, 0.46);
+  border-radius: 9999px;
+  background-color: #211a10;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #e8cf8a;
 }
 
-.testimonial-nav--left {
-  grid-area: left-nav;
-  justify-content: flex-start;
+.testimonial-card__publication {
+  font-family: var(--font-heading);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #efdfb9;
+  overflow-wrap: break-word;
 }
 
-.testimonial-nav--right {
-  grid-area: right-nav;
-  justify-content: flex-end;
+.testimonial-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.375rem;
+  margin-top: 0.15rem;
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  line-height: 1.4;
+  color: #b7a78f;
+}
+
+.testimonial-controls {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  margin-top: 0.25rem;
 }
 
 .testimonial-arrow {
   display: inline-flex;
-  width: var(--testimonial-arrow-size);
-  height: var(--testimonial-arrow-size);
+  width: 2.75rem;
+  height: 2.75rem;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(212, 175, 55, 0.42);
@@ -247,7 +396,8 @@
     background-color 220ms ease,
     border-color 220ms ease,
     color 220ms ease,
-    box-shadow 220ms ease;
+    box-shadow 220ms ease,
+    transform 160ms ease;
 }
 
 .testimonial-arrow:hover {
@@ -264,229 +414,87 @@
   outline-offset: 3px;
 }
 
-/* One glass treatment for all five cards. The panes are dark enough to keep
-   the placeholder copy readable over moving footage, while the 16px blur and
-   gold hairline keep the film present. The fallback replaces the transparent
-   pane with a solid charcoal surface when backdrop-filter is unavailable. */
-.testimonial-card {
-  position: relative;
-  width: 100%;
-  padding: 1.25rem;
-  border: 1px solid rgba(212, 175, 55, 0.32);
-  border-radius: 0.75rem;
-  background-color: transparent;
-  background-image:
-    linear-gradient(
-      150deg,
-      rgba(212, 175, 55, 0.07),
-      rgba(212, 175, 55, 0) 42%
-    ),
-    linear-gradient(
-      165deg,
-      rgba(10, 11, 13, 0.76) 0%,
-      rgba(10, 11, 13, 0.8) 52%,
-      rgba(10, 11, 13, 0.84) 100%
-    );
-  -webkit-backdrop-filter: blur(16px) saturate(118%);
-  backdrop-filter: blur(16px) saturate(118%);
-  box-shadow:
-    0 28px 64px -36px rgba(0, 0, 0, 0.98),
-    inset 0 1px 0 rgba(246, 239, 228, 0.08);
-  outline: none;
-  transform: perspective(1100px) rotateY(var(--testimonial-tilt, 0deg));
-  transform-origin: center;
-  transition:
-    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 300ms ease,
-    box-shadow 300ms ease;
+.testimonial-arrow:active {
+  transform: scale(0.95);
 }
 
-/* Inward-facing tilts: left cards turn their faces toward the centre, right
-   cards mirror them. The angle is intentionally small so the quote remains
-   easy to read and the transformed corners stay inside the column gap. */
-.testimonial-card--left {
-  --testimonial-tilt: 2.5deg;
+.testimonial-progress {
+  min-width: 4.75rem;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: rgba(234, 217, 172, 0.6);
+  text-shadow:
+    0 1px 10px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(0, 0, 0, 0.7);
+  font-variant-numeric: tabular-nums;
 }
 
-.testimonial-card--right {
-  --testimonial-tilt: -2.5deg;
+.testimonial-progress__current {
+  color: #f3e3b6;
 }
 
-@media (hover: hover) {
-  .testimonial-card--left:hover {
-    transform: perspective(1100px) rotateY(0.6deg) translateY(-2px);
-  }
-
-  .testimonial-card--right:hover {
-    transform: perspective(1100px) rotateY(-0.6deg) translateY(-2px);
-  }
-
-  .testimonial-card:hover {
-    border-color: rgba(212, 175, 55, 0.55);
-  }
-}
-
-.testimonial-card:focus-visible {
-  border-color: rgba(212, 175, 55, 0.7);
-  outline: 2px solid #d4af37;
-  outline-offset: 4px;
-  box-shadow:
-    0 30px 70px -34px rgba(0, 0, 0, 0.98),
-    inset 0 0 0 1px rgba(212, 175, 55, 0.35);
-}
-
-.testimonial-card--left:focus-visible {
-  transform: perspective(1100px) rotateY(0.6deg) translateY(-2px);
-}
-
-.testimonial-card--right:focus-visible {
-  transform: perspective(1100px) rotateY(-0.6deg) translateY(-2px);
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .testimonial-card {
-    background-color: #111216;
-    background-image: none;
-  }
-}
-
-/* The cards enter from their own side, away from the centre, so the small
-   entrance never travels across the bowl. */
-@keyframes testimonial-card-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-0.75rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes testimonial-card-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(0.75rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.testimonial-card__body {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
-  animation: testimonial-card-in-left 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.testimonial-card__body--right {
-  animation-name: testimonial-card-in-right;
+.testimonial-progress__divider {
+  color: rgba(234, 217, 172, 0.36);
 }
 
 @media (min-width: 768px) {
+  .testimonial-arc {
+    --tc-card-w: 240px;
+    --tc-gap: 10px;
+    --tc-step: 10.5deg;
+    --tc-card-min-h: 330px;
+  }
+
   .testimonial-card {
-    padding: 1rem;
+    padding: 1.15rem 1.2rem;
+  }
+
+  .testimonial-card__quote {
+    font-size: 0.95rem;
+    line-height: 1.58;
   }
 }
 
 @media (min-width: 1024px) {
-  .testimonial-stage {
-    --testimonial-card-column: 15rem;
-    --testimonial-column-gap: 0.75rem;
-  }
-
-  .testimonial-stage__grid {
-    grid-template-columns:
-      var(--testimonial-arrow-size)
-      var(--testimonial-card-column)
-      minmax(0, 1fr)
-      var(--testimonial-card-column)
-      var(--testimonial-arrow-size);
-    grid-template-areas: "left-nav left-card center right-card right-nav";
-    row-gap: 0;
-  }
-
-  .testimonial-nav {
-    align-self: center;
+  .testimonial-arc {
+    --tc-card-w: 252px;
+    --tc-card-min-h: 340px;
   }
 
   .testimonial-card {
     padding: 1.25rem;
+    border-radius: 1.25rem;
+  }
+
+  .testimonial-card__quote {
+    font-size: 0.96rem;
   }
 }
 
 @media (min-width: 1280px) {
-  .testimonial-stage {
-    --testimonial-card-column: 18rem;
-    --testimonial-column-gap: 1rem;
+  .testimonial-arc {
+    --tc-card-w: 260px;
+    --tc-card-min-h: 350px;
+  }
+
+  .testimonial-card__quote {
+    font-size: 0.98rem;
   }
 }
 
-/* Phones: the film returns to normal flow, then the two visible cards stack,
-   each with its own arrow. Tilts are removed so a full-width card never leans
-   against a phone edge. */
 @media (max-width: 767px) {
-  .testimonial-stage {
-    --testimonial-film-height: min(42vh, calc(100vw * 9 / 16));
-    min-height: 0;
-  }
-
-  .testimonial-film {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: var(--testimonial-film-height);
-  }
-
-  .testimonial-stage__grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-block: 1.5rem 3rem;
-  }
-
-  .testimonial-stage__center {
-    display: none;
-  }
-
-  .testimonial-nav {
-    width: 100%;
-  }
-
-  .testimonial-card,
-  .testimonial-card--left,
-  .testimonial-card--right {
-    --testimonial-tilt: 0deg;
-    transform: none;
-  }
-
-  .testimonial-card--left:hover,
-  .testimonial-card--right:hover,
-  .testimonial-card--left:focus-visible,
-  .testimonial-card--right:focus-visible {
-    transform: translateY(-2px);
+  .testimonial-card {
+    border-radius: 1rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .testimonial-card,
-  .testimonial-card--left,
-  .testimonial-card--right,
-  .testimonial-card--left:hover,
-  .testimonial-card--right:hover,
-  .testimonial-card--left:focus-visible,
-  .testimonial-card--right:focus-visible {
-    --testimonial-tilt: 0deg;
-    transform: none;
+  .testimonial-card {
+    will-change: auto;
     transition: none;
-  }
-
-  .testimonial-card__body {
-    animation: none;
   }
 
   .testimonial-arrow {
@@ -624,9 +632,15 @@ section[id],
   z-index: 2;
 }
 
+/* The media box is an explicit full-width block. It must not depend on the
+   button's cross-axis stretch: when a portrait image's intrinsic width shaped
+   the flex item, the image filled only that narrower box and left blank space
+   beside it. The image itself is then positioned against this definite box. */
 .menu-tile__media {
   position: relative;
   display: block;
+  align-self: stretch;
+  width: 100%;
   flex: 0 0 var(--menu-image-height, 9rem);
   height: var(--menu-image-height, 9rem);
   overflow: hidden;
@@ -642,14 +656,39 @@ section[id],
 }
 
 .menu-tile__media img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
+  max-width: none;
   height: 100%;
   object-fit: cover;
   object-position: center;
   transition:
     transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
     filter 350ms ease;
+}
+
+/* Some portrait PNG dishes visually crowd the card edge. Inset the image
+   inside the existing media box instead of padding the card, so the title,
+   description, card dimensions, and the other full-bleed tiles stay in place.
+
+   These six assets are portrait canvases with transparent padding above and
+   below the dish. Contain keeps the whole subject inside the media box. The
+   per-card scale trims only that empty padding, so each dish stays large
+   without cutting the top or bottom. The component supplies the scale for
+   each asset; 1.18 is the fallback, below the mint glass's 1.208 limit. */
+.menu-tile__media--inset {
+  --menu-image-inset: clamp(10px, 2.8vw, 14px);
+  --menu-image-fit-scale: 1.18;
+}
+
+.menu-tile__media--inset img {
+  inset: var(--menu-image-inset) auto auto var(--menu-image-inset);
+  width: calc(100% - (var(--menu-image-inset) * 2));
+  height: calc(100% - (var(--menu-image-inset) * 2));
+  object-fit: contain;
+  transform: scale(var(--menu-image-fit-scale));
 }
 
 .menu-tile__step {
@@ -731,7 +770,7 @@ section[id],
   }
 
   .menu-tile--hovered .menu-tile__media img {
-    transform: scale(1.035);
+    transform: scale(calc(var(--menu-image-fit-scale, 1) * 1.035));
   }
 
   .menu-tile--peer {
@@ -755,7 +794,10 @@ section[id],
   }
 
   .menu-carousel__controls {
-    display: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    padding-bottom: 0;
   }
 
   .menu-carousel__viewport {
@@ -799,6 +841,13 @@ section[id],
   .menu-tile__body {
     transition: none;
   }
+}
+
+/* Gold CTAs sit on a bright fill, so the browser default focus ring is easy to
+   lose. This matches the gold outline already used by the carousel controls. */
+.gold-cta:focus-visible {
+  outline: 2px solid #ffd875;
+  outline-offset: 3px;
 }
 
 /* ── Short viewports (landscape phones, ~390–560px tall) ─────────────────────

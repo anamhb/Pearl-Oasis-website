@@ -1,0 +1,32 @@
+{
+  "capturedAt": "2026-10-27",
+  "viewport": { "width": 1440, "height": 900 },
+  "method": "Headless Chrome via CDP. window.requestAnimationFrame was wrapped after load and callbacks were counted by function name: animate = SignatureDishes orbit loop, tick = BrandWordmark crest loop. Each window was 1500 ms. The page was scrolled instantly (scroll-behavior overridden to auto) and allowed to settle for 900 ms before each window.",
+  "results": {
+    "dishCount": 7,
+    "rafCounts": {
+      "windowMs": 1500,
+      "top": { "animate": 0, "tick": 60, "other": 0 },
+      "signature": { "animate": 59, "tick": 59, "other": 0 },
+      "topAgain": { "animate": 0, "tick": 60, "other": 18 }
+    },
+    "dishTransformsChangedWhileVisible": true,
+    "header": {
+      "top": { "scrollY": 0, "scrolled": false, "gradient": true, "borderTransparent": true },
+      "signature": { "scrollY": 4354, "scrolled": true, "gradient": false, "borderTransparent": false },
+      "at0": { "scrollY": 0, "scrolled": false, "gradient": true, "borderTransparent": true },
+      "at100": { "scrollY": 100, "scrolled": true, "gradient": false, "borderTransparent": false },
+      "at0Again": { "scrollY": 0, "scrolled": false, "gradient": true, "borderTransparent": true }
+    },
+    "navbarCanvas": {
+      "top": { "top": 5, "bottom": 43, "height": 38, "visible": true },
+      "signature": { "top": 5, "bottom": 43, "height": 38, "visible": true }
+    }
+  },
+  "notes": [
+    "The SignatureDishes orbit loop produced 0 callbacks while the stage was offscreen, 59 while it was visible, and 0 again after scrolling away. This confirms the pause/resume path, not an FPS improvement.",
+    "The navbar crest continued at ~60 callbacks per 1.5 s in every position. The header is fixed, so its canvas is always intersecting and pauseWhenOffscreen does not pause it in this layout.",
+    "The absolute callback rate is headless-Chrome-throttled; only the relative on/off counts are meaningful.",
+    "No FPS, CPU, memory, or network profile was captured."
+  ]
+}

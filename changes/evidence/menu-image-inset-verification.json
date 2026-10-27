@@ -1,0 +1,2773 @@
+{
+  "app": "http://localhost:3001/",
+  "capturedAt": "2026-10-26T15:38:14.899Z",
+  "viewports": [
+    {
+      "window": {
+        "width": 320,
+        "height": 800
+      },
+      "section": {
+        "x": 0,
+        "y": 87.4,
+        "w": 320,
+        "h": 817.9,
+        "right": 320,
+        "bottom": 905.4
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 87,
+        "right": 320,
+        "bottom": 87
+      },
+      "viewport": {
+        "rect": {
+          "x": 16,
+          "y": 433.7,
+          "w": 288,
+          "h": 339.7,
+          "right": 304,
+          "bottom": 773.4
+        },
+        "clientWidth": 288,
+        "scrollWidth": 2604,
+        "scrollLeft": 0,
+        "maxScrollLeft": 2316,
+        "scrollSnapType": "x mandatory"
+      },
+      "cards": [
+        {
+          "index": 1,
+          "step": "01",
+          "title": "Soup",
+          "hasInsetClass": true,
+          "card": {
+            "x": 16,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 265.6,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 17,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 264.6,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 27,
+            "y": 450.7,
+            "w": 227.6,
+            "h": 165.7,
+            "right": 254.6,
+            "bottom": 616.4
+          },
+          "body": {
+            "x": 17,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 264.6,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 30.6,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 251,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 0.919,
+          "imageHeightRatio": 0.892,
+          "inset": {
+            "top": 10,
+            "right": 10,
+            "bottom": 10,
+            "left": 10
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            428,
+            582
+          ],
+          "src": "Chicken_soup.png",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 2,
+          "step": "02",
+          "title": "Chinese Cuisine",
+          "hasInsetClass": true,
+          "card": {
+            "x": 277.6,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 527.2,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 278.6,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 526.2,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 288.6,
+            "y": 450.7,
+            "w": 227.6,
+            "h": 165.7,
+            "right": 516.2,
+            "bottom": 616.4
+          },
+          "body": {
+            "x": 278.6,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 526.2,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 292.2,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 512.6,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 0.919,
+          "imageHeightRatio": 0.892,
+          "inset": {
+            "top": 10,
+            "right": 10,
+            "bottom": 10,
+            "left": 10
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            436,
+            573
+          ],
+          "src": "Chowmen.png",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 3,
+          "step": "03",
+          "title": "Traditional Handi",
+          "hasInsetClass": false,
+          "card": {
+            "x": 539.2,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 788.8,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 540.2,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 787.8,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 540.2,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 787.8,
+            "bottom": 626.4
+          },
+          "body": {
+            "x": 540.2,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 787.8,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 553.8,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 774.2,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "royal_dum_biryani_1792250482066.jpg",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 4,
+          "step": "04",
+          "title": "Traditional BBQ",
+          "hasInsetClass": true,
+          "card": {
+            "x": 800.8,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 1050.4,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 801.8,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 1049.4,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 811.8,
+            "y": 450.7,
+            "w": 227.6,
+            "h": 165.7,
+            "right": 1039.4,
+            "bottom": 616.4
+          },
+          "body": {
+            "x": 801.8,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 1049.4,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 815.4,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 1035.8,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 0.919,
+          "imageHeightRatio": 0.892,
+          "inset": {
+            "top": 10,
+            "right": 10,
+            "bottom": 10,
+            "left": 10
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            436,
+            573
+          ],
+          "src": "Malai_Boti.png",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 5,
+          "step": "05",
+          "title": "BBQ Platters",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1062.4,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 1312,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 1063.4,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 1311,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 1073.4,
+            "y": 450.7,
+            "w": 227.6,
+            "h": 165.7,
+            "right": 1301,
+            "bottom": 616.4
+          },
+          "body": {
+            "x": 1063.4,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 1311,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 1077,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 1297.4,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 0.919,
+          "imageHeightRatio": 0.892,
+          "inset": {
+            "top": 10,
+            "right": 10,
+            "bottom": 10,
+            "left": 10
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            432,
+            577
+          ],
+          "src": "Seekh_Kabab-1.png",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 6,
+          "step": "06",
+          "title": "Oasis Rice",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1324,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 1573.6,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 1325,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 1572.6,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 1335,
+            "y": 450.7,
+            "w": 227.6,
+            "h": 165.7,
+            "right": 1562.6,
+            "bottom": 616.4
+          },
+          "body": {
+            "x": 1325,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 1572.6,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 1338.6,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 1559,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 0.919,
+          "imageHeightRatio": 0.892,
+          "inset": {
+            "top": 10,
+            "right": 10,
+            "bottom": 10,
+            "left": 10
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            439,
+            568
+          ],
+          "src": "Chicken_Fried_Rice.png",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 7,
+          "step": "07",
+          "title": "Pakistani Karahi",
+          "hasInsetClass": false,
+          "card": {
+            "x": 1585.6,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 1835.2,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 1586.6,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 1834.2,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 1586.6,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 1834.2,
+            "bottom": 626.4
+          },
+          "body": {
+            "x": 1586.6,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 1834.2,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 1600.2,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 1820.6,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "royal_shinwari_karahi_1792250528045.jpg",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 8,
+          "step": "08",
+          "title": "Traditional Tandoor",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1847.2,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 2096.8,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 1848.2,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 2095.8,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 1858.2,
+            "y": 450.7,
+            "w": 227.6,
+            "h": 165.7,
+            "right": 2085.8,
+            "bottom": 616.4
+          },
+          "body": {
+            "x": 1848.2,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 2095.8,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 1861.8,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 2082.2,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 0.919,
+          "imageHeightRatio": 0.892,
+          "inset": {
+            "top": 10,
+            "right": 10,
+            "bottom": 10,
+            "left": 10
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            428,
+            582
+          ],
+          "src": "mint.png",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 9,
+          "step": "09",
+          "title": "Fast Food",
+          "hasInsetClass": false,
+          "card": {
+            "x": 2108.8,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 2358.3,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 2109.8,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 2357.3,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 2109.8,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 2357.3,
+            "bottom": 626.4
+          },
+          "body": {
+            "x": 2109.8,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 2357.3,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 2123.3,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 2343.8,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            555,
+            450
+          ],
+          "src": "labenese_wrap.png",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 10,
+          "step": "10",
+          "title": "Chef's Special Pizza Section",
+          "hasInsetClass": false,
+          "card": {
+            "x": 2370.3,
+            "y": 439.7,
+            "w": 249.6,
+            "h": 323.7,
+            "right": 2619.9,
+            "bottom": 763.4
+          },
+          "media": {
+            "x": 2371.3,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 2618.9,
+            "bottom": 626.4
+          },
+          "image": {
+            "x": 2371.3,
+            "y": 440.7,
+            "w": 247.6,
+            "h": 185.7,
+            "right": 2618.9,
+            "bottom": 626.4
+          },
+          "body": {
+            "x": 2371.3,
+            "y": 626.4,
+            "w": 247.6,
+            "h": 136,
+            "right": 2618.9,
+            "bottom": 762.4
+          },
+          "titleRect": {
+            "x": 2384.9,
+            "y": 653.8,
+            "w": 220.4,
+            "h": 20.4,
+            "right": 2605.3,
+            "bottom": 674.2
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "truffle_artisan_burger_1792250513993.jpg",
+          "bodyTopOffset": 186.7,
+          "bodyGapBelowMedia": 0
+        }
+      ],
+      "pageOverflow": {
+        "innerWidth": 320,
+        "documentScrollWidth": 320,
+        "bodyScrollWidth": 320
+      },
+      "screenshots": [
+        "menu-image-inset-320-initial.png",
+        "menu-image-inset-320-card-01.png",
+        "menu-image-inset-320-card-02.png",
+        "menu-image-inset-320-card-04.png",
+        "menu-image-inset-320-card-05.png",
+        "menu-image-inset-320-card-06.png",
+        "menu-image-inset-320-card-08.png"
+      ]
+    },
+    {
+      "window": {
+        "width": 390,
+        "height": 844
+      },
+      "section": {
+        "x": 0,
+        "y": 86.7,
+        "w": 390,
+        "h": 800,
+        "right": 390,
+        "bottom": 886.7
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 87,
+        "right": 390,
+        "bottom": 87
+      },
+      "viewport": {
+        "rect": {
+          "x": 16,
+          "y": 374.2,
+          "w": 358,
+          "h": 380.5,
+          "right": 374,
+          "bottom": 754.7
+        },
+        "clientWidth": 358,
+        "scrollWidth": 3148,
+        "scrollLeft": 0,
+        "maxScrollLeft": 2790,
+        "scrollSnapType": "x mandatory"
+      },
+      "cards": [
+        {
+          "index": 1,
+          "step": "01",
+          "title": "Soup",
+          "hasInsetClass": true,
+          "card": {
+            "x": 16,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 320,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 17,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 319,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 27.9,
+            "y": 392.1,
+            "w": 280.2,
+            "h": 204.7,
+            "right": 308.1,
+            "bottom": 596.7
+          },
+          "body": {
+            "x": 17,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 319,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 30.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 305.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.928,
+          "imageHeightRatio": 0.904,
+          "inset": {
+            "top": 10.9,
+            "right": 10.9,
+            "bottom": 10.9,
+            "left": 10.9
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            428,
+            582
+          ],
+          "src": "Chicken_soup.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 2,
+          "step": "02",
+          "title": "Chinese Cuisine",
+          "hasInsetClass": true,
+          "card": {
+            "x": 332,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 636,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 333,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 635,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 343.9,
+            "y": 392.1,
+            "w": 280.2,
+            "h": 204.7,
+            "right": 624.1,
+            "bottom": 596.7
+          },
+          "body": {
+            "x": 333,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 635,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 346.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 621.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.928,
+          "imageHeightRatio": 0.904,
+          "inset": {
+            "top": 10.9,
+            "right": 10.9,
+            "bottom": 10.9,
+            "left": 10.9
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            436,
+            573
+          ],
+          "src": "Chowmen.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 3,
+          "step": "03",
+          "title": "Traditional Handi",
+          "hasInsetClass": false,
+          "card": {
+            "x": 648,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 952,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 649,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 951,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 649,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 951,
+            "bottom": 607.7
+          },
+          "body": {
+            "x": 649,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 951,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 662.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 937.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "royal_dum_biryani_1792250482066.jpg",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 4,
+          "step": "04",
+          "title": "Traditional BBQ",
+          "hasInsetClass": true,
+          "card": {
+            "x": 964,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 1268,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 965,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 1267,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 975.9,
+            "y": 392.1,
+            "w": 280.2,
+            "h": 204.7,
+            "right": 1256.1,
+            "bottom": 596.7
+          },
+          "body": {
+            "x": 965,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 1267,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 978.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 1253.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.928,
+          "imageHeightRatio": 0.904,
+          "inset": {
+            "top": 10.9,
+            "right": 10.9,
+            "bottom": 10.9,
+            "left": 10.9
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            436,
+            573
+          ],
+          "src": "Malai_Boti.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 5,
+          "step": "05",
+          "title": "BBQ Platters",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1280,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 1584,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 1281,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 1583,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 1291.9,
+            "y": 392.1,
+            "w": 280.2,
+            "h": 204.7,
+            "right": 1572.1,
+            "bottom": 596.7
+          },
+          "body": {
+            "x": 1281,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 1583,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 1294.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 1569.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.928,
+          "imageHeightRatio": 0.904,
+          "inset": {
+            "top": 10.9,
+            "right": 10.9,
+            "bottom": 10.9,
+            "left": 10.9
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            432,
+            577
+          ],
+          "src": "Seekh_Kabab-1.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 6,
+          "step": "06",
+          "title": "Oasis Rice",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1596,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 1900,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 1597,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 1899,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 1607.9,
+            "y": 392.1,
+            "w": 280.2,
+            "h": 204.7,
+            "right": 1888.1,
+            "bottom": 596.7
+          },
+          "body": {
+            "x": 1597,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 1899,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 1610.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 1885.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.928,
+          "imageHeightRatio": 0.904,
+          "inset": {
+            "top": 10.9,
+            "right": 10.9,
+            "bottom": 10.9,
+            "left": 10.9
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            439,
+            568
+          ],
+          "src": "Chicken_Fried_Rice.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 7,
+          "step": "07",
+          "title": "Pakistani Karahi",
+          "hasInsetClass": false,
+          "card": {
+            "x": 1912,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 2216,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 1913,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2215,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 1913,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2215,
+            "bottom": 607.7
+          },
+          "body": {
+            "x": 1913,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 2215,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 1926.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 2201.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "royal_shinwari_karahi_1792250528045.jpg",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 8,
+          "step": "08",
+          "title": "Traditional Tandoor",
+          "hasInsetClass": true,
+          "card": {
+            "x": 2228,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 2532,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 2229,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2531,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 2239.9,
+            "y": 392.1,
+            "w": 280.2,
+            "h": 204.7,
+            "right": 2520.1,
+            "bottom": 596.7
+          },
+          "body": {
+            "x": 2229,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 2531,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 2242.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 2517.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.928,
+          "imageHeightRatio": 0.904,
+          "inset": {
+            "top": 10.9,
+            "right": 10.9,
+            "bottom": 10.9,
+            "left": 10.9
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            428,
+            582
+          ],
+          "src": "mint.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 9,
+          "step": "09",
+          "title": "Fast Food",
+          "hasInsetClass": false,
+          "card": {
+            "x": 2544,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 2848,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 2545,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2847,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 2545,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2847,
+            "bottom": 607.7
+          },
+          "body": {
+            "x": 2545,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 2847,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 2558.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 2833.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            555,
+            450
+          ],
+          "src": "labenese_wrap.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 10,
+          "step": "10",
+          "title": "Chef's Special Pizza Section",
+          "hasInsetClass": false,
+          "card": {
+            "x": 2860,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 3164,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 2861,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 3163,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 2861,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 3163,
+            "bottom": 607.7
+          },
+          "body": {
+            "x": 2861,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 3163,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 2874.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 3149.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "truffle_artisan_burger_1792250513993.jpg",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        }
+      ],
+      "pageOverflow": {
+        "innerWidth": 390,
+        "documentScrollWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "screenshots": [
+        "menu-image-inset-390-initial.png",
+        "menu-image-inset-390-card-01.png",
+        "menu-image-inset-390-card-02.png",
+        "menu-image-inset-390-card-04.png",
+        "menu-image-inset-390-card-05.png",
+        "menu-image-inset-390-card-06.png",
+        "menu-image-inset-390-card-08.png"
+      ]
+    },
+    {
+      "window": {
+        "width": 430,
+        "height": 932
+      },
+      "section": {
+        "x": 0,
+        "y": 86.7,
+        "w": 430,
+        "h": 800,
+        "right": 430,
+        "bottom": 886.7
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 87,
+        "right": 430,
+        "bottom": 87
+      },
+      "viewport": {
+        "rect": {
+          "x": 16,
+          "y": 374.2,
+          "w": 398,
+          "h": 380.5,
+          "right": 414,
+          "bottom": 754.7
+        },
+        "clientWidth": 398,
+        "scrollWidth": 3148,
+        "scrollLeft": 0,
+        "maxScrollLeft": 2750,
+        "scrollSnapType": "x mandatory"
+      },
+      "cards": [
+        {
+          "index": 1,
+          "step": "01",
+          "title": "Soup",
+          "hasInsetClass": true,
+          "card": {
+            "x": 16,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 320,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 17,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 319,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 29,
+            "y": 393.2,
+            "w": 277.9,
+            "h": 202.4,
+            "right": 306.9,
+            "bottom": 595.6
+          },
+          "body": {
+            "x": 17,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 319,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 30.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 305.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.92,
+          "imageHeightRatio": 0.894,
+          "inset": {
+            "top": 12,
+            "right": 12.1,
+            "bottom": 12.1,
+            "left": 12
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            428,
+            582
+          ],
+          "src": "Chicken_soup.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 2,
+          "step": "02",
+          "title": "Chinese Cuisine",
+          "hasInsetClass": true,
+          "card": {
+            "x": 332,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 636,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 333,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 635,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 345,
+            "y": 393.2,
+            "w": 277.9,
+            "h": 202.4,
+            "right": 622.9,
+            "bottom": 595.6
+          },
+          "body": {
+            "x": 333,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 635,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 346.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 621.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.92,
+          "imageHeightRatio": 0.894,
+          "inset": {
+            "top": 12,
+            "right": 12.1,
+            "bottom": 12.1,
+            "left": 12
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            436,
+            573
+          ],
+          "src": "Chowmen.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 3,
+          "step": "03",
+          "title": "Traditional Handi",
+          "hasInsetClass": false,
+          "card": {
+            "x": 648,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 952,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 649,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 951,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 649,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 951,
+            "bottom": 607.7
+          },
+          "body": {
+            "x": 649,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 951,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 662.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 937.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "royal_dum_biryani_1792250482066.jpg",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 4,
+          "step": "04",
+          "title": "Traditional BBQ",
+          "hasInsetClass": true,
+          "card": {
+            "x": 964,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 1268,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 965,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 1267,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 977,
+            "y": 393.2,
+            "w": 277.9,
+            "h": 202.4,
+            "right": 1254.9,
+            "bottom": 595.6
+          },
+          "body": {
+            "x": 965,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 1267,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 978.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 1253.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.92,
+          "imageHeightRatio": 0.894,
+          "inset": {
+            "top": 12,
+            "right": 12.1,
+            "bottom": 12.1,
+            "left": 12
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            436,
+            573
+          ],
+          "src": "Malai_Boti.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 5,
+          "step": "05",
+          "title": "BBQ Platters",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1280,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 1584,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 1281,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 1583,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 1293,
+            "y": 393.2,
+            "w": 277.9,
+            "h": 202.4,
+            "right": 1570.9,
+            "bottom": 595.6
+          },
+          "body": {
+            "x": 1281,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 1583,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 1294.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 1569.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.92,
+          "imageHeightRatio": 0.894,
+          "inset": {
+            "top": 12,
+            "right": 12.1,
+            "bottom": 12.1,
+            "left": 12
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            432,
+            577
+          ],
+          "src": "Seekh_Kabab-1.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 6,
+          "step": "06",
+          "title": "Oasis Rice",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1596,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 1900,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 1597,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 1899,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 1609,
+            "y": 393.2,
+            "w": 277.9,
+            "h": 202.4,
+            "right": 1886.9,
+            "bottom": 595.6
+          },
+          "body": {
+            "x": 1597,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 1899,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 1610.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 1885.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.92,
+          "imageHeightRatio": 0.894,
+          "inset": {
+            "top": 12,
+            "right": 12.1,
+            "bottom": 12.1,
+            "left": 12
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            439,
+            568
+          ],
+          "src": "Chicken_Fried_Rice.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 7,
+          "step": "07",
+          "title": "Pakistani Karahi",
+          "hasInsetClass": false,
+          "card": {
+            "x": 1912,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 2216,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 1913,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2215,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 1913,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2215,
+            "bottom": 607.7
+          },
+          "body": {
+            "x": 1913,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 2215,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 1926.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 2201.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "royal_shinwari_karahi_1792250528045.jpg",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 8,
+          "step": "08",
+          "title": "Traditional Tandoor",
+          "hasInsetClass": true,
+          "card": {
+            "x": 2228,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 2532,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 2229,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2531,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 2241,
+            "y": 393.2,
+            "w": 277.9,
+            "h": 202.4,
+            "right": 2518.9,
+            "bottom": 595.6
+          },
+          "body": {
+            "x": 2229,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 2531,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 2242.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 2517.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 0.92,
+          "imageHeightRatio": 0.894,
+          "inset": {
+            "top": 12,
+            "right": 12.1,
+            "bottom": 12.1,
+            "left": 12
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            428,
+            582
+          ],
+          "src": "mint.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 9,
+          "step": "09",
+          "title": "Fast Food",
+          "hasInsetClass": false,
+          "card": {
+            "x": 2544,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 2848,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 2545,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2847,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 2545,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 2847,
+            "bottom": 607.7
+          },
+          "body": {
+            "x": 2545,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 2847,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 2558.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 2833.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            555,
+            450
+          ],
+          "src": "labenese_wrap.png",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 10,
+          "step": "10",
+          "title": "Chef's Special Pizza Section",
+          "hasInsetClass": false,
+          "card": {
+            "x": 2860,
+            "y": 380.2,
+            "w": 304,
+            "h": 364.5,
+            "right": 3164,
+            "bottom": 744.7
+          },
+          "media": {
+            "x": 2861,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 3163,
+            "bottom": 607.7
+          },
+          "image": {
+            "x": 2861,
+            "y": 381.2,
+            "w": 302,
+            "h": 226.5,
+            "right": 3163,
+            "bottom": 607.7
+          },
+          "body": {
+            "x": 2861,
+            "y": 607.7,
+            "w": 302,
+            "h": 136,
+            "right": 3163,
+            "bottom": 743.7
+          },
+          "titleRect": {
+            "x": 2874.6,
+            "y": 635.1,
+            "w": 274.8,
+            "h": 20.4,
+            "right": 3149.4,
+            "bottom": 655.5
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "truffle_artisan_burger_1792250513993.jpg",
+          "bodyTopOffset": 227.5,
+          "bodyGapBelowMedia": 0
+        }
+      ],
+      "pageOverflow": {
+        "innerWidth": 430,
+        "documentScrollWidth": 430,
+        "bodyScrollWidth": 430
+      },
+      "screenshots": [
+        "menu-image-inset-430-initial.png",
+        "menu-image-inset-430-card-01.png",
+        "menu-image-inset-430-card-02.png",
+        "menu-image-inset-430-card-04.png",
+        "menu-image-inset-430-card-05.png",
+        "menu-image-inset-430-card-06.png",
+        "menu-image-inset-430-card-08.png"
+      ]
+    },
+    {
+      "window": {
+        "width": 1440,
+        "height": 900
+      },
+      "section": {
+        "x": 0,
+        "y": 103.1,
+        "w": 1440,
+        "h": 728,
+        "right": 1440,
+        "bottom": 831.1
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 103,
+        "right": 1440,
+        "bottom": 103
+      },
+      "viewport": {
+        "rect": {
+          "x": 132,
+          "y": 379.1,
+          "w": 1176,
+          "h": 302,
+          "right": 1308,
+          "bottom": 681.1
+        },
+        "clientWidth": 1176,
+        "scrollWidth": 1969,
+        "scrollLeft": 0,
+        "maxScrollLeft": 793,
+        "scrollSnapType": "none"
+      },
+      "cards": [
+        {
+          "index": 1,
+          "step": "01",
+          "title": "Soup",
+          "hasInsetClass": true,
+          "card": {
+            "x": 132,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 316.3,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 133,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 315.3,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 147,
+            "y": 400.1,
+            "w": 154.3,
+            "h": 110,
+            "right": 301.3,
+            "bottom": 510.1
+          },
+          "body": {
+            "x": 133,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 315.3,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 146.6,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 301.7,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 0.846,
+          "imageHeightRatio": 0.797,
+          "inset": {
+            "top": 14,
+            "right": 14,
+            "bottom": 14,
+            "left": 14
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            428,
+            582
+          ],
+          "src": "Chicken_soup.png",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 2,
+          "step": "02",
+          "title": "Chinese Cuisine",
+          "hasInsetClass": true,
+          "card": {
+            "x": 330.3,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 514.7,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 331.3,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 513.7,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 345.3,
+            "y": 400.1,
+            "w": 154.3,
+            "h": 110,
+            "right": 499.7,
+            "bottom": 510.1
+          },
+          "body": {
+            "x": 331.3,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 513.7,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 344.9,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 500.1,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 0.846,
+          "imageHeightRatio": 0.797,
+          "inset": {
+            "top": 14,
+            "right": 14,
+            "bottom": 14,
+            "left": 14
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            436,
+            573
+          ],
+          "src": "Chowmen.png",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 3,
+          "step": "03",
+          "title": "Traditional Handi",
+          "hasInsetClass": false,
+          "card": {
+            "x": 528.7,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 713,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 529.7,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 712,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 529.7,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 712,
+            "bottom": 524.1
+          },
+          "body": {
+            "x": 529.7,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 712,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 543.3,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 698.4,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "royal_dum_biryani_1792250482066.jpg",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 4,
+          "step": "04",
+          "title": "Traditional BBQ",
+          "hasInsetClass": true,
+          "card": {
+            "x": 727,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 911.3,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 728,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 910.3,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 742,
+            "y": 400.1,
+            "w": 154.3,
+            "h": 110,
+            "right": 896.3,
+            "bottom": 510.1
+          },
+          "body": {
+            "x": 728,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 910.3,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 741.6,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 896.7,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 0.846,
+          "imageHeightRatio": 0.797,
+          "inset": {
+            "top": 14,
+            "right": 14,
+            "bottom": 14,
+            "left": 14
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            436,
+            573
+          ],
+          "src": "Malai_Boti.png",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 5,
+          "step": "05",
+          "title": "BBQ Platters",
+          "hasInsetClass": true,
+          "card": {
+            "x": 925.3,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 1109.6,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 926.3,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 1108.6,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 940.3,
+            "y": 400.1,
+            "w": 154.3,
+            "h": 110,
+            "right": 1094.6,
+            "bottom": 510.1
+          },
+          "body": {
+            "x": 926.3,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 1108.6,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 939.9,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 1095,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 0.846,
+          "imageHeightRatio": 0.797,
+          "inset": {
+            "top": 14,
+            "right": 14,
+            "bottom": 14,
+            "left": 14
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            432,
+            577
+          ],
+          "src": "Seekh_Kabab-1.png",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 6,
+          "step": "06",
+          "title": "Oasis Rice",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1123.6,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 1308,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 1124.6,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 1307,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 1138.6,
+            "y": 400.1,
+            "w": 154.3,
+            "h": 110,
+            "right": 1293,
+            "bottom": 510.1
+          },
+          "body": {
+            "x": 1124.6,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 1307,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 1138.2,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 1293.4,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 0.846,
+          "imageHeightRatio": 0.797,
+          "inset": {
+            "top": 14,
+            "right": 14,
+            "bottom": 14,
+            "left": 14
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            439,
+            568
+          ],
+          "src": "Chicken_Fried_Rice.png",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 7,
+          "step": "07",
+          "title": "Pakistani Karahi",
+          "hasInsetClass": false,
+          "card": {
+            "x": 1322,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 1506.3,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 1323,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 1505.3,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 1323,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 1505.3,
+            "bottom": 524.1
+          },
+          "body": {
+            "x": 1323,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 1505.3,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 1336.6,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 1491.7,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "royal_shinwari_karahi_1792250528045.jpg",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 8,
+          "step": "08",
+          "title": "Traditional Tandoor",
+          "hasInsetClass": true,
+          "card": {
+            "x": 1520.3,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 1704.6,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 1521.3,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 1703.6,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 1535.3,
+            "y": 400.1,
+            "w": 154.3,
+            "h": 110,
+            "right": 1689.6,
+            "bottom": 510.1
+          },
+          "body": {
+            "x": 1521.3,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 1703.6,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 1534.9,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 1690,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 0.846,
+          "imageHeightRatio": 0.797,
+          "inset": {
+            "top": 14,
+            "right": 14,
+            "bottom": 14,
+            "left": 14
+          },
+          "imageInsetVar": "clamp(10px, 2.8vw, 14px)",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            428,
+            582
+          ],
+          "src": "mint.png",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 9,
+          "step": "09",
+          "title": "Fast Food",
+          "hasInsetClass": false,
+          "card": {
+            "x": 1718.6,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 1903,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 1719.6,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 1902,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 1719.6,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 1902,
+            "bottom": 524.1
+          },
+          "body": {
+            "x": 1719.6,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 1902,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 1733.2,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 20.4,
+            "right": 1888.4,
+            "bottom": 571.9
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            555,
+            450
+          ],
+          "src": "labenese_wrap.png",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        },
+        {
+          "index": 10,
+          "step": "10",
+          "title": "Chef's Special Pizza Section",
+          "hasInsetClass": false,
+          "card": {
+            "x": 1917,
+            "y": 385.1,
+            "w": 184.3,
+            "h": 290,
+            "right": 2101.3,
+            "bottom": 675.1
+          },
+          "media": {
+            "x": 1918,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 2100.3,
+            "bottom": 524.1
+          },
+          "image": {
+            "x": 1918,
+            "y": 386.1,
+            "w": 182.3,
+            "h": 138,
+            "right": 2100.3,
+            "bottom": 524.1
+          },
+          "body": {
+            "x": 1918,
+            "y": 524.1,
+            "w": 182.3,
+            "h": 150,
+            "right": 2100.3,
+            "bottom": 674.1
+          },
+          "titleRect": {
+            "x": 1931.5,
+            "y": 551.5,
+            "w": 155.1,
+            "h": 40.8,
+            "right": 2086.7,
+            "bottom": 592.3
+          },
+          "imageWidthRatio": 1,
+          "imageHeightRatio": 1,
+          "inset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "imageInsetVar": "",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "natural": [
+            1200,
+            896
+          ],
+          "src": "truffle_artisan_burger_1792250513993.jpg",
+          "bodyTopOffset": 139,
+          "bodyGapBelowMedia": 0
+        }
+      ],
+      "pageOverflow": {
+        "innerWidth": 1440,
+        "documentScrollWidth": 1440,
+        "bodyScrollWidth": 1440
+      },
+      "screenshots": [
+        "menu-image-inset-1440-initial.png",
+        "menu-image-inset-1440-cards-05-08.png"
+      ]
+    }
+  ]
+}

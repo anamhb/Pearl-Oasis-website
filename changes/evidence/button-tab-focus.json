@@ -1,0 +1,11 @@
+{
+  "afterTab": {
+    "tag": "button",
+    "isHero": true,
+    "outline": "2px solid rgb(251, 213, 115) off 2px"
+  },
+  "settled": {
+    "active": true,
+    "outline": "2px solid rgb(255, 216, 117) off 3px"
+  }
+}

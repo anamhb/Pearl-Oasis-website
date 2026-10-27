@@ -1,0 +1,146 @@
+{
+  "testedAt": "2026-10-25",
+  "source": {
+    "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+    "bytes": 5099089,
+    "sha256": "63D928E2E1FA33109FB9015BE4023D7240067A408C20EF042D083898E3DD4F63",
+    "container": "MP4 (isom), moov before mdat",
+    "codec": "H.264 High profile, level 3.1, yuv420p, progressive",
+    "resolution": "1280x720",
+    "frameRate": 24,
+    "durationSeconds": 10.005,
+    "frames": 240,
+    "bitrateKbps": {
+      "overall": 4077,
+      "video": 3879,
+      "audio": 128
+    },
+    "syncSamples": 1,
+    "keyframeTimesSeconds": [0]
+  },
+  "cloudinaryTransformations": [
+    {
+      "transformation": "q_auto",
+      "bytes": 1798094,
+      "sha256": "6AA8106DB5F25B8CAC130B12EE3B0064AA7DFA34C4B67BD422CF68B2551E4604",
+      "durationSeconds": 10.05,
+      "bitrateKbps": { "overall": 1431, "video": 1290, "audio": 139 },
+      "syncSamples": 1,
+      "keyframeTimesSeconds": [0.041667],
+      "quality": {
+        "ssimAll": 0.981064,
+        "psnrAverageDb": 41.426867
+      },
+      "adopted": false,
+      "reason": "Smaller file, but the single sync sample remains. Long paused seeks still decode from the start."
+    },
+    {
+      "transformation": "q_auto,fl_progressive",
+      "bytes": 1798094,
+      "sha256": "6AA8106DB5F25B8CAC130B12EE3B0064AA7DFA34C4B67BD422CF68B2551E4604",
+      "syncSamples": 1,
+      "keyframeTimesSeconds": [0.041667],
+      "adopted": false,
+      "reason": "Same bytes as q_auto; streaming delivery does not add sync samples."
+    },
+    {
+      "transformation": "fl_progressive",
+      "bytes": 1796076,
+      "sha256": "5CB4818B16A5EB2D88548301FC80AD4D666DF6CA3F925C1592501485E6583589",
+      "durationSeconds": 10.01,
+      "syncSamples": 1,
+      "keyframeTimesSeconds": [0],
+      "adopted": false,
+      "reason": "Still one sync sample; bitrate reduction alone is not enough."
+    },
+    {
+      "transformation": "q_auto,vc_h264",
+      "bytes": 1798094,
+      "sha256": "6AA8106DB5F25B8CAC130B12EE3B0064AA7DFA34C4B67BD422CF68B2551E4604",
+      "syncSamples": 1,
+      "adopted": false,
+      "reason": "Explicit H.264 does not change the keyframe interval."
+    },
+    {
+      "transformation": "q_auto,ki_1",
+      "bytes": 1993625,
+      "sha256": "730F43C8D532F7208B029A3F8B7F418FC9EDB6C79EA3A6E7E6978876CA94A756",
+      "durationSeconds": 10.05,
+      "syncSamples": 10,
+      "keyframeTimesSeconds": [0.041667, 1.041667, 2.041667, 3.041667, 4.041667, 5.041667, 6.041667, 7.041667, 8.041667, 9.041667],
+      "quality": {
+        "ssimAll": 0.982114,
+        "psnrAverageDb": 41.650890
+      },
+      "adopted": false,
+      "reason": "Keyframes fixed and seekable, but lower quality than the q_auto:best option."
+    },
+    {
+      "transformation": "q_auto:best,ki_1",
+      "bytes": 3019838,
+      "sha256": "A21CD03A36701135C3E24708BAD767C3D95CB7C9D3163D952BE553EC5029727E",
+      "container": "Fragmented MP4 (moov/moof/mdat)",
+      "durationSeconds": 10.005,
+      "frames": 240,
+      "bitrateKbps": { "overall": 2414, "video": 2269, "audio": 139 },
+      "syncSamples": 10,
+      "keyframeTimesSeconds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "quality": {
+        "ssimAll": 0.987456,
+        "psnrAverageDb": 43.914390
+      },
+      "adopted": true,
+      "reason": "One-second sync samples, 40% smaller than the source, and no upload required."
+    }
+  ],
+  "selectedUrl": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+  "http": {
+    "head": "200",
+    "range": "206 Partial Content",
+    "acceptRanges": "bytes",
+    "contentRangeForMidFileRequest": "bytes 2000000-2001023/3019838",
+    "contentType": "video/mp4;codecs=avc1",
+    "cacheControl": "public, no-transform, immutable, max-age=2592000"
+  },
+  "localReencode": {
+    "bytes": 5129164,
+    "sha256": "3FB22FC6553F34C6791B4819A559166F9FED2DE4D38C91681C08D5ECFFC6AEC6",
+    "container": "MP4 (isom), moov before mdat",
+    "codec": "H.264 High profile, level 3.1, yuv420p, progressive",
+    "resolution": "1280x720",
+    "frameRate": 24,
+    "durationSeconds": 10.005,
+    "frames": 240,
+    "bitrateKbps": { "overall": 4101, "video": 3968, "audio": 128 },
+    "syncSamples": 10,
+    "keyframeTimesSeconds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "quality": {
+      "ssimAll": 0.992612,
+      "psnrAverageDb": 47.492583
+    },
+    "settings": [
+      "libx264",
+      "preset slow",
+      "crf 18",
+      "profile high",
+      "level 3.1",
+      "pix_fmt yuv420p",
+      "g 24",
+      "keyint_min 24",
+      "sc_threshold 0",
+      "closed GOP (+cgop)",
+      "movflags +faststart",
+      "audio copied"
+    ],
+    "deployed": false,
+    "note": "Verified fallback, but not uploaded. Cloudinary ki_1 delivers the seek fix without a new asset."
+  },
+  "seekBenchmark": {
+    "method": "Headless Microsoft Edge 146 at 1280x720, full buffered range 0-duration, video paused, direct currentTime seek. seeked is measured from assigning currentTime; display is the first requestVideoFrameCallback whose mediaTime is within 0.13 s of the target. Three rounds; medians in the report.",
+    "rawFiles": [
+      "hero-video-seek-bench-before.json",
+      "hero-video-seek-bench-after-local.json",
+      "hero-video-seek-bench-after-remote.json"
+    ]
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "viewports": {
+    "320": {
+      "width": 320,
+      "footerH": 871,
+      "crest": {
+        "top": -145.4,
+        "bottom": -115.2,
+        "w": 16.6,
+        "h": 30.2
+      },
+      "crestAboveWord": 11.9,
+      "crestOverlapsDesc": false,
+      "overflowX": false,
+      "scrollW": 320,
+      "innerW": 320,
+      "draws": {
+        "footer": 0,
+        "nav": 79
+      }
+    },
+    "390": {
+      "width": 390,
+      "footerH": 851.5,
+      "crest": {
+        "top": 17.8,
+        "bottom": 48,
+        "w": 16.6,
+        "h": 30.2
+      },
+      "crestAboveWord": 11.9,
+      "crestOverlapsDesc": false,
+      "overflowX": false,
+      "scrollW": 390,
+      "innerW": 390,
+      "draws": {
+        "footer": 76,
+        "nav": 76
+      }
+    },
+    "430": {
+      "width": 430,
+      "footerH": 851.5,
+      "crest": {
+        "top": 105.8,
+        "bottom": 136,
+        "w": 16.6,
+        "h": 30.2
+      },
+      "crestAboveWord": 11.9,
+      "crestOverlapsDesc": false,
+      "overflowX": false,
+      "scrollW": 430,
+      "innerW": 430,
+      "draws": {
+        "footer": 129,
+        "nav": 129
+      }
+    },
+    "768": {
+      "width": 768,
+      "footerH": 664.5,
+      "crest": {
+        "top": 401.6,
+        "bottom": 439.3,
+        "w": 20.8,
+        "h": 37.8
+      },
+      "crestAboveWord": 14.9,
+      "crestOverlapsDesc": false,
+      "overflowX": false,
+      "scrollW": 768,
+      "innerW": 768,
+      "draws": {
+        "footer": 65,
+        "nav": 65
+      }
+    },
+    "1024": {
+      "width": 1024,
+      "footerH": 503,
+      "crest": {
+        "top": 307,
+        "bottom": 344.8,
+        "w": 20.8,
+        "h": 37.8
+      },
+      "crestAboveWord": 14.9,
+      "crestOverlapsDesc": false,
+      "overflowX": false,
+      "scrollW": 1024,
+      "innerW": 1024,
+      "draws": {
+        "footer": 52,
+        "nav": 52
+      }
+    },
+    "1440": {
+      "width": 1440,
+      "footerH": 456.5,
+      "crest": {
+        "top": 485.2,
+        "bottom": 523,
+        "w": 20.8,
+        "h": 37.8
+      },
+      "crestAboveWord": 14.9,
+      "crestOverlapsDesc": false,
+      "overflowX": false,
+      "scrollW": 1440,
+      "innerW": 1440,
+      "draws": {
+        "footer": 59,
+        "nav": 59
+      }
+    }
+  },
+  "reducedMotion": {
+    "mediaMatches": true,
+    "footerH": 456.5,
+    "crest": {
+      "top": 485.2,
+      "bottom": 523,
+      "w": 20.8,
+      "h": 37.8
+    },
+    "crestAboveWord": 14.9,
+    "crestOverlapsDesc": false,
+    "overflowX": false,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "draws": {
+      "footer": 0,
+      "nav": 0
+    }
+  },
+  "offscreen": {
+    "inView": {
+      "footer": 50,
+      "nav": 50
+    },
+    "offView": {
+      "footer": 0,
+      "nav": 74
+    }
+  }
+}
