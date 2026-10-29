@@ -28,6 +28,10 @@ const TESTIMONIAL_VIDEO =
   'https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4';
 const TESTIMONIAL_VIDEO_MOBILE =
   'https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4';
+const TESTIMONIAL_VIDEO_WEBM =
+  'https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm';
+const TESTIMONIAL_VIDEO_WEBM_MOBILE =
+  'https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm';
 const TESTIMONIAL_POSTER =
   'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg';
 const TESTIMONIAL_POSTER_MOBILE =
@@ -730,11 +734,33 @@ export const Testimonials = () => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     let near = false;
 
+    const handleVideoError = () => {
+      const selection = video.currentSrc || video.src || 'unknown';
+      const errorCode = video.error?.code ?? null;
+      const errorMessage = video.error?.message ?? 'unknown';
+      console.warn('[Testimonials video] source failed or is unsupported', {
+        source: selection,
+        poster: video.poster || null,
+        readyState: video.readyState,
+        networkState: video.networkState,
+        errorCode,
+        errorMessage,
+      });
+    };
+
     const applyPlayback = () => {
       if (near && !motionQuery.matches) {
         const attempt = video.play();
         if (attempt && typeof attempt.catch === 'function') {
-          attempt.catch(() => {});
+          attempt.catch((error) => {
+            console.warn('[Testimonials video] playback rejected', {
+              currentSrc: video.currentSrc || '',
+              readyState: video.readyState,
+              networkState: video.networkState,
+              errorName: error?.name ?? 'UnknownError',
+              errorMessage: error?.message ?? 'Unknown playback error',
+            });
+          });
         }
       } else {
         video.pause();
@@ -745,6 +771,7 @@ export const Testimonials = () => {
        enough data for play(). Retry when the new source is ready. */
     video.addEventListener('canplay', applyPlayback);
     video.addEventListener('loadeddata', applyPlayback);
+    video.addEventListener('error', handleVideoError);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -768,10 +795,12 @@ export const Testimonials = () => {
       motionQuery.removeEventListener('change', applyPlayback);
       video.removeEventListener('canplay', applyPlayback);
       video.removeEventListener('loadeddata', applyPlayback);
+      video.removeEventListener('error', handleVideoError);
     };
   }, [mobileVideo]);
 
   const videoSource = mobileVideo ? TESTIMONIAL_VIDEO_MOBILE : TESTIMONIAL_VIDEO;
+  const videoWebmSource = mobileVideo ? TESTIMONIAL_VIDEO_WEBM_MOBILE : TESTIMONIAL_VIDEO_WEBM;
   const videoPoster = mobileVideo ? TESTIMONIAL_POSTER_MOBILE : TESTIMONIAL_POSTER;
 
   return (
@@ -789,7 +818,6 @@ export const Testimonials = () => {
         <video
           key={videoSource}
           ref={videoRef}
-          src={videoSource}
           poster={videoPoster}
           className="testimonial-film__video"
           muted
@@ -798,7 +826,21 @@ export const Testimonials = () => {
           preload="metadata"
           tabIndex={-1}
           disablePictureInPicture
-        />
+          onError={(event) => {
+            const source = event.currentTarget.currentSrc || event.currentTarget.src || 'unknown';
+            const error = event.currentTarget.error;
+            console.warn('[Testimonials video] source failed', {
+              source,
+              readyState: event.currentTarget.readyState,
+              networkState: event.currentTarget.networkState,
+              errorCode: error?.code ?? null,
+              errorMessage: error?.message ?? '',
+            });
+          }}
+        >
+          <source src={videoSource} type="video/mp4; codecs=avc1" />
+          <source src={videoWebmSource} type="video/webm; codecs=vp9" />
+        </video>
       </div>
 
       <div className="testimonial-header relative z-10 mx-auto max-w-3xl px-6 pt-10 pb-4 text-center sm:px-12 sm:pt-12 sm:pb-5">

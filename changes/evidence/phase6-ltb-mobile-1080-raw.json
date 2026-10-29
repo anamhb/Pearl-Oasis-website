@@ -1,0 +1,1422 @@
+{
+  "label": "ltb-mobile",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "HeadlessChrome/107.0.5304.110",
+    "revision": "@",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+    "jsVersion": "10.7.193.22"
+  },
+  "viewport": {
+    "width": 1080,
+    "height": 1920,
+    "mobile": true,
+    "dpr": 1
+  },
+  "setup": {
+    "measure": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 0,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "videos": [
+      {
+        "label": "hero",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "readyState": 0,
+        "networkState": 3,
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "ended": false,
+        "muted": true,
+        "defaultMuted": false,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": false,
+        "preload": "auto",
+        "crossOrigin": null,
+        "buffered": [],
+        "seekable": [],
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920,
+          "top": 0,
+          "bottom": 1920
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "centerStack": [
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "flex flex-col items-center max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto w-full"
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "hero-copy absolute inset-0 z-20 flex flex-col items-center justify-center px-4 sm:px-6 pt-"
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none"
+          },
+          {
+            "tag": "DIV",
+            "id": "entrance",
+            "className": "relative w-full bg-[#090a0c]"
+          },
+          {
+            "tag": "MAIN",
+            "id": "",
+            "className": "flex-1"
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "min-h-screen bg-[#08090a] text-[#e5e2db] flex flex-col font-sans selection:bg-[#d4af37]/30"
+          }
+        ],
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "",
+          "avc1Main": "",
+          "avc1High": "",
+          "webmVp9": "probably"
+        }
+      },
+      {
+        "label": "testimonial",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "readyState": 0,
+        "networkState": 3,
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "ended": false,
+        "muted": true,
+        "defaultMuted": false,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": true,
+        "preload": "metadata",
+        "crossOrigin": null,
+        "buffered": [],
+        "seekable": [],
+        "rect": {
+          "x": 0,
+          "y": 12049.265625,
+          "width": 1080,
+          "height": 800.1875,
+          "top": 12049.265625,
+          "bottom": 12849.453125
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "centerStack": [],
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "",
+          "avc1Main": "",
+          "avc1High": "",
+          "webmVp9": "probably"
+        }
+      }
+    ],
+    "resourceEntries": [
+      {
+        "name": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+        "initiatorType": "img",
+        "duration": 172.40000000596046,
+        "transferSize": 72325,
+        "encodedBodySize": 72025,
+        "decodedBodySize": 72025,
+        "startTime": 3307.4000000059605,
+        "responseEnd": 3479.800000011921
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+        "initiatorType": "video",
+        "duration": 328.69999998807907,
+        "transferSize": 65947,
+        "encodedBodySize": 65647,
+        "decodedBodySize": 65647,
+        "startTime": 3319.800000011921,
+        "responseEnd": 3648.5
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "initiatorType": "video",
+        "duration": 315.70000000298023,
+        "transferSize": 56591,
+        "encodedBodySize": 56291,
+        "decodedBodySize": 56291,
+        "startTime": 3320.2000000029802,
+        "responseEnd": 3635.9000000059605
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "initiatorType": "video",
+        "duration": 1438.8999999910593,
+        "transferSize": 3020138,
+        "encodedBodySize": 3019838,
+        "decodedBodySize": 3019838,
+        "startTime": 3342.6000000089407,
+        "responseEnd": 4781.5
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "initiatorType": "video",
+        "duration": 2016.4000000059605,
+        "transferSize": 299,
+        "encodedBodySize": 18446744073709552000,
+        "decodedBodySize": 0,
+        "startTime": 3346.9000000059605,
+        "responseEnd": 5363.300000011921
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "initiatorType": "video",
+        "duration": 470.20000000298023,
+        "transferSize": 35203,
+        "encodedBodySize": 34903,
+        "decodedBodySize": 34903,
+        "startTime": 5240.600000008941,
+        "responseEnd": 5710.800000011921
+      }
+    ]
+  },
+  "mediaCapabilities": {
+    "powerEfficient": false,
+    "smooth": false,
+    "supported": false,
+    "keySystemAccess": null
+  },
+  "heroMid": {
+    "state": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 2197,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "video": {
+      "label": "hero",
+      "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+      "error": {
+        "code": 4,
+        "message": ""
+      },
+      "readyState": 0,
+      "networkState": 3,
+      "duration": null,
+      "videoWidth": 0,
+      "videoHeight": 0,
+      "currentTime": 0,
+      "paused": true,
+      "seeking": false,
+      "ended": false,
+      "muted": true,
+      "defaultMuted": false,
+      "playsInline": true,
+      "autoplay": false,
+      "loop": false,
+      "preload": "auto",
+      "crossOrigin": null,
+      "buffered": [],
+      "seekable": [],
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1080,
+        "height": 1920,
+        "top": 0,
+        "bottom": 1920
+      },
+      "style": {
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "objectFit": "cover",
+        "objectPosition": "50% 50%",
+        "zIndex": "auto",
+        "filter": "none",
+        "transform": "none"
+      },
+      "centerStack": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "absolute inset-0 z-20 flex flex-col items-center justify-end px-4 sm:px-6 pb-10 sm:pb-12 m"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none"
+        },
+        {
+          "tag": "DIV",
+          "id": "entrance",
+          "className": "relative w-full bg-[#090a0c]"
+        },
+        {
+          "tag": "MAIN",
+          "id": "",
+          "className": "flex-1"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "min-h-screen bg-[#08090a] text-[#e5e2db] flex flex-col font-sans selection:bg-[#d4af37]/30"
+        },
+        {
+          "tag": "DIV",
+          "id": "root",
+          "className": ""
+        }
+      ],
+      "canPlayType": {
+        "mp4": "maybe",
+        "avc1Baseline": "",
+        "avc1Main": "",
+        "avc1High": "",
+        "webmVp9": "probably"
+      }
+    },
+    "events": [
+      {
+        "t": 5361.9000000059605,
+        "label": "hero",
+        "type": "error",
+        "currentTime": 0,
+        "duration": null,
+        "readyState": 0,
+        "networkState": 3,
+        "paused": true,
+        "seeking": false,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      }
+    ]
+  },
+  "heroEnd": {
+    "state": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 4395,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "video": {
+      "label": "hero",
+      "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+      "error": {
+        "code": 4,
+        "message": ""
+      },
+      "readyState": 0,
+      "networkState": 3,
+      "duration": null,
+      "videoWidth": 0,
+      "videoHeight": 0,
+      "currentTime": 0,
+      "paused": true,
+      "seeking": false,
+      "ended": false,
+      "muted": true,
+      "defaultMuted": false,
+      "playsInline": true,
+      "autoplay": false,
+      "loop": false,
+      "preload": "auto",
+      "crossOrigin": null,
+      "buffered": [],
+      "seekable": [],
+      "rect": {
+        "x": 0,
+        "y": -0.125,
+        "width": 1080,
+        "height": 1920,
+        "top": -0.125,
+        "bottom": 1919.875
+      },
+      "style": {
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "objectFit": "cover",
+        "objectPosition": "50% 50%",
+        "zIndex": "auto",
+        "filter": "none",
+        "transform": "none"
+      },
+      "centerStack": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "absolute inset-0 z-20 flex flex-col items-center justify-end px-4 sm:px-6 pb-10 sm:pb-12 m"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none"
+        },
+        {
+          "tag": "DIV",
+          "id": "entrance",
+          "className": "relative w-full bg-[#090a0c]"
+        },
+        {
+          "tag": "MAIN",
+          "id": "",
+          "className": "flex-1"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "min-h-screen bg-[#08090a] text-[#e5e2db] flex flex-col font-sans selection:bg-[#d4af37]/30"
+        },
+        {
+          "tag": "DIV",
+          "id": "root",
+          "className": ""
+        }
+      ],
+      "canPlayType": {
+        "mp4": "maybe",
+        "avc1Baseline": "",
+        "avc1Main": "",
+        "avc1High": "",
+        "webmVp9": "probably"
+      }
+    },
+    "events": [
+      {
+        "t": 5361.9000000059605,
+        "label": "hero",
+        "type": "error",
+        "currentTime": 0,
+        "duration": null,
+        "readyState": 0,
+        "networkState": 3,
+        "paused": true,
+        "seeking": false,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      }
+    ]
+  },
+  "testimonial": {
+    "state": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 11432,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "video": {
+      "label": "testimonial",
+      "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+      "error": {
+        "code": 4,
+        "message": ""
+      },
+      "readyState": 0,
+      "networkState": 3,
+      "duration": null,
+      "videoWidth": 0,
+      "videoHeight": 0,
+      "currentTime": 0,
+      "paused": true,
+      "seeking": false,
+      "ended": false,
+      "muted": true,
+      "defaultMuted": false,
+      "playsInline": true,
+      "autoplay": false,
+      "loop": true,
+      "preload": "metadata",
+      "crossOrigin": null,
+      "buffered": [],
+      "seekable": [],
+      "rect": {
+        "x": 0,
+        "y": 617.265625,
+        "width": 1080,
+        "height": 800.1875,
+        "top": 617.265625,
+        "bottom": 1417.453125
+      },
+      "style": {
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "objectFit": "cover",
+        "objectPosition": "50% 50%",
+        "zIndex": "auto",
+        "filter": "none",
+        "transform": "none"
+      },
+      "centerStack": [
+        {
+          "tag": "P",
+          "id": "",
+          "className": "testimonial-card__quote"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "testimonial-card__body"
+        },
+        {
+          "tag": "ARTICLE",
+          "id": "",
+          "className": "testimonial-card testimonial-card--side"
+        },
+        {
+          "tag": "P",
+          "id": "",
+          "className": "testimonial-card__quote"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": ""
+        }
+      ],
+      "canPlayType": {
+        "mp4": "maybe",
+        "avc1Baseline": "",
+        "avc1Main": "",
+        "avc1High": "",
+        "webmVp9": "probably"
+      }
+    },
+    "events": [
+      {
+        "t": 6098,
+        "label": "testimonial",
+        "type": "error",
+        "currentTime": 0,
+        "duration": null,
+        "readyState": 0,
+        "networkState": 3,
+        "paused": true,
+        "seeking": false,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      }
+    ],
+    "playErrors": [
+      {
+        "t": 18689.90000000596,
+        "label": "testimonial",
+        "error": "NotSupportedError: The element has no supported sources.",
+        "name": "NotSupportedError",
+        "message": "The element has no supported sources."
+      }
+    ]
+  },
+  "story": {
+    "state": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 7497,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "loads": [
+      {
+        "t": 4744.70000000298,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      },
+      {
+        "t": 25432.5,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      },
+      {
+        "t": 26025.60000000894,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      }
+    ],
+    "decodes": [
+      {
+        "t": 24838,
+        "end": 25068.80000001192,
+        "duration": 230.90000000596046,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-006.jpg",
+        "ok": true
+      },
+      {
+        "t": 24839.60000000894,
+        "end": 25150.30000001192,
+        "duration": 310.70000000298023,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-011.jpg",
+        "ok": true
+      },
+      {
+        "t": 24839.80000001192,
+        "end": 25337,
+        "duration": 497.19999998807907,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-016.jpg",
+        "ok": false,
+        "error": "EncodingError: The source image cannot be decoded."
+      },
+      {
+        "t": 24915.60000000894,
+        "end": 25340.90000000596,
+        "duration": 425.29999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-021.jpg",
+        "ok": true
+      },
+      {
+        "t": 25432.60000000894,
+        "end": 25630.90000000596,
+        "duration": 198.29999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+        "ok": true
+      },
+      {
+        "t": 25432.80000001192,
+        "end": 25705.20000000298,
+        "duration": 272.3999999910593,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+        "ok": true
+      },
+      {
+        "t": 25630.20000000298,
+        "end": 25795.60000000894,
+        "duration": 165.40000000596046,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+        "ok": true
+      },
+      {
+        "t": 25875.40000000596,
+        "end": 26114.20000000298,
+        "duration": 238.79999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+        "ok": true
+      },
+      {
+        "t": 26025.70000000298,
+        "end": 26199.40000000596,
+        "duration": 173.70000000298023,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "ok": true
+      },
+      {
+        "t": 26113.70000000298,
+        "end": 26350.5,
+        "duration": 236.79999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-047.jpg",
+        "ok": true
+      },
+      {
+        "t": 26114,
+        "end": 26350.80000001192,
+        "duration": 236.80000001192093,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+        "ok": true
+      },
+      {
+        "t": 26199.20000000298,
+        "end": 26508,
+        "duration": 308.79999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+        "ok": true
+      },
+      {
+        "t": 26504.30000001192,
+        "end": 26675.40000000596,
+        "duration": 171.19999998807907,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-033.jpg",
+        "ok": true
+      },
+      {
+        "t": 26593.20000000298,
+        "end": 26754.90000000596,
+        "duration": 161.70000000298023,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+        "ok": true
+      },
+      {
+        "t": 26593.40000000596,
+        "end": 26830.70000000298,
+        "duration": 237.29999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-035.jpg",
+        "ok": true
+      }
+    ],
+    "errors": []
+  },
+  "resources": [
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+      "initiatorType": "img",
+      "duration": 172.40000000596046,
+      "transferSize": 72325,
+      "encodedBodySize": 72025,
+      "decodedBodySize": 72025,
+      "startTime": 3307.4000000059605,
+      "responseEnd": 3479.800000011921
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+      "initiatorType": "video",
+      "duration": 328.69999998807907,
+      "transferSize": 65947,
+      "encodedBodySize": 65647,
+      "decodedBodySize": 65647,
+      "startTime": 3319.800000011921,
+      "responseEnd": 3648.5
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+      "initiatorType": "video",
+      "duration": 315.70000000298023,
+      "transferSize": 56591,
+      "encodedBodySize": 56291,
+      "decodedBodySize": 56291,
+      "startTime": 3320.2000000029802,
+      "responseEnd": 3635.9000000059605
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "initiatorType": "video",
+      "duration": 1438.8999999910593,
+      "transferSize": 3020138,
+      "encodedBodySize": 3019838,
+      "decodedBodySize": 3019838,
+      "startTime": 3342.6000000089407,
+      "responseEnd": 4781.5
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "initiatorType": "video",
+      "duration": 2016.4000000059605,
+      "transferSize": 299,
+      "encodedBodySize": 18446744073709552000,
+      "decodedBodySize": 0,
+      "startTime": 3346.9000000059605,
+      "responseEnd": 5363.300000011921
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "initiatorType": "video",
+      "duration": 470.20000000298023,
+      "transferSize": 35203,
+      "encodedBodySize": 34903,
+      "decodedBodySize": 34903,
+      "startTime": 5240.600000008941,
+      "responseEnd": 5710.800000011921
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-006.jpg",
+      "initiatorType": "img",
+      "duration": 194,
+      "transferSize": 63350,
+      "encodedBodySize": 63050,
+      "decodedBodySize": 63050,
+      "startTime": 24467.70000000298,
+      "responseEnd": 24661.70000000298
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-011.jpg",
+      "initiatorType": "img",
+      "duration": 255.6000000089407,
+      "transferSize": 35106,
+      "encodedBodySize": 34806,
+      "decodedBodySize": 34806,
+      "startTime": 24468.5,
+      "responseEnd": 24724.10000000894
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-016.jpg",
+      "initiatorType": "img",
+      "duration": 256.70000000298023,
+      "transferSize": 32943,
+      "encodedBodySize": 32643,
+      "decodedBodySize": 32643,
+      "startTime": 24469.10000000894,
+      "responseEnd": 24725.80000001192
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-021.jpg",
+      "initiatorType": "img",
+      "duration": 298.70000000298023,
+      "transferSize": 33617,
+      "encodedBodySize": 33317,
+      "decodedBodySize": 33317,
+      "startTime": 24469.60000000894,
+      "responseEnd": 24768.30000001192
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+      "initiatorType": "img",
+      "duration": 233.79999999701977,
+      "transferSize": 56554,
+      "encodedBodySize": 56254,
+      "decodedBodySize": 56254,
+      "startTime": 25070.10000000894,
+      "responseEnd": 25303.90000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+      "initiatorType": "img",
+      "duration": 153.79999999701977,
+      "transferSize": 48477,
+      "encodedBodySize": 48177,
+      "decodedBodySize": 48177,
+      "startTime": 25150.80000001192,
+      "responseEnd": 25304.60000000894
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+      "initiatorType": "img",
+      "duration": 97.59999999403954,
+      "transferSize": 42010,
+      "encodedBodySize": 41710,
+      "decodedBodySize": 41710,
+      "startTime": 25336.30000001192,
+      "responseEnd": 25433.90000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+      "initiatorType": "img",
+      "duration": 372.09999999403954,
+      "transferSize": 37942,
+      "encodedBodySize": 37642,
+      "decodedBodySize": 37642,
+      "startTime": 25341.40000000596,
+      "responseEnd": 25713.5
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+      "initiatorType": "img",
+      "duration": 85.5,
+      "transferSize": 30984,
+      "encodedBodySize": 30684,
+      "decodedBodySize": 30684,
+      "startTime": 25709.5,
+      "responseEnd": 25795
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-047.jpg",
+      "initiatorType": "img",
+      "duration": 173.5,
+      "transferSize": 27099,
+      "encodedBodySize": 26799,
+      "decodedBodySize": 26799,
+      "startTime": 25710,
+      "responseEnd": 25883.5
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+      "initiatorType": "img",
+      "duration": 165.70000000298023,
+      "transferSize": 26668,
+      "encodedBodySize": 26368,
+      "decodedBodySize": 26368,
+      "startTime": 25796.20000000298,
+      "responseEnd": 25961.90000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+      "initiatorType": "img",
+      "duration": 61.20000000298023,
+      "transferSize": 30617,
+      "encodedBodySize": 30317,
+      "decodedBodySize": 30317,
+      "startTime": 26114.90000000596,
+      "responseEnd": 26176.10000000894
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-033.jpg",
+      "initiatorType": "img",
+      "duration": 115.59999999403954,
+      "transferSize": 30314,
+      "encodedBodySize": 30014,
+      "decodedBodySize": 30014,
+      "startTime": 26199.80000001192,
+      "responseEnd": 26315.40000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+      "initiatorType": "img",
+      "duration": 106.70000000298023,
+      "transferSize": 30524,
+      "encodedBodySize": 30224,
+      "decodedBodySize": 30224,
+      "startTime": 26351.20000000298,
+      "responseEnd": 26457.90000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-035.jpg",
+      "initiatorType": "img",
+      "duration": 108,
+      "transferSize": 30415,
+      "encodedBodySize": 30115,
+      "decodedBodySize": 30115,
+      "startTime": 26352.60000000894,
+      "responseEnd": 26460.60000000894
+    }
+  ],
+  "page": {
+    "videoEvents": [
+      {
+        "t": 5361.9000000059605,
+        "label": "hero",
+        "type": "error",
+        "currentTime": 0,
+        "duration": null,
+        "readyState": 0,
+        "networkState": 3,
+        "paused": true,
+        "seeking": false,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      },
+      {
+        "t": 6098,
+        "label": "testimonial",
+        "type": "error",
+        "currentTime": 0,
+        "duration": null,
+        "readyState": 0,
+        "networkState": 3,
+        "paused": true,
+        "seeking": false,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      }
+    ],
+    "imageLoads": [
+      {
+        "t": 4744.70000000298,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      },
+      {
+        "t": 25432.5,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      },
+      {
+        "t": 26025.60000000894,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      }
+    ],
+    "imageDecodes": [
+      {
+        "t": 24838,
+        "end": 25068.80000001192,
+        "duration": 230.90000000596046,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-006.jpg",
+        "ok": true
+      },
+      {
+        "t": 24839.60000000894,
+        "end": 25150.30000001192,
+        "duration": 310.70000000298023,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-011.jpg",
+        "ok": true
+      },
+      {
+        "t": 24839.80000001192,
+        "end": 25337,
+        "duration": 497.19999998807907,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-016.jpg",
+        "ok": false,
+        "error": "EncodingError: The source image cannot be decoded."
+      },
+      {
+        "t": 24915.60000000894,
+        "end": 25340.90000000596,
+        "duration": 425.29999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-021.jpg",
+        "ok": true
+      },
+      {
+        "t": 25432.60000000894,
+        "end": 25630.90000000596,
+        "duration": 198.29999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+        "ok": true
+      },
+      {
+        "t": 25432.80000001192,
+        "end": 25705.20000000298,
+        "duration": 272.3999999910593,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+        "ok": true
+      },
+      {
+        "t": 25630.20000000298,
+        "end": 25795.60000000894,
+        "duration": 165.40000000596046,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+        "ok": true
+      },
+      {
+        "t": 25875.40000000596,
+        "end": 26114.20000000298,
+        "duration": 238.79999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+        "ok": true
+      },
+      {
+        "t": 26025.70000000298,
+        "end": 26199.40000000596,
+        "duration": 173.70000000298023,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "ok": true
+      },
+      {
+        "t": 26113.70000000298,
+        "end": 26350.5,
+        "duration": 236.79999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-047.jpg",
+        "ok": true
+      },
+      {
+        "t": 26114,
+        "end": 26350.80000001192,
+        "duration": 236.80000001192093,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+        "ok": true
+      },
+      {
+        "t": 26199.20000000298,
+        "end": 26508,
+        "duration": 308.79999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+        "ok": true
+      },
+      {
+        "t": 26504.30000001192,
+        "end": 26675.40000000596,
+        "duration": 171.19999998807907,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-033.jpg",
+        "ok": true
+      },
+      {
+        "t": 26593.20000000298,
+        "end": 26754.90000000596,
+        "duration": 161.70000000298023,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+        "ok": true
+      },
+      {
+        "t": 26593.40000000596,
+        "end": 26830.70000000298,
+        "duration": 237.29999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-035.jpg",
+        "ok": true
+      }
+    ],
+    "imageErrors": [],
+    "playErrors": [
+      {
+        "t": 18689.90000000596,
+        "label": "testimonial",
+        "error": "NotSupportedError: The element has no supported sources.",
+        "name": "NotSupportedError",
+        "message": "The element has no supported sources."
+      }
+    ],
+    "console": [],
+    "errors": [
+      {
+        "t": 5361.600000008941
+      },
+      {
+        "t": 6097.9000000059605
+      }
+    ],
+    "unhandled": []
+  },
+  "network": {
+    "responses": [
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "status": 206,
+        "mimeType": "video/mp4",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 311550,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "status": 206,
+        "mimeType": "video/mp4",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 97255,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 417,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 345,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "status": 206,
+        "mimeType": "video/mp4",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 35230,
+        "protocol": "h2"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-006.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-011.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-016.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-021.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-047.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-033.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-035.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      }
+    ],
+    "failures": [
+      {
+        "requestId": "22024.109",
+        "errorText": "net::ERR_ABORTED",
+        "canceled": true,
+        "type": "Image"
+      },
+      {
+        "requestId": "22024.203",
+        "errorText": "net::ERR_ABORTED",
+        "canceled": true,
+        "type": "Media"
+      }
+    ]
+  },
+  "cdpConsole": [],
+  "cdpExceptions": []
+}

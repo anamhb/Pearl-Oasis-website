@@ -1,0 +1,134 @@
+{
+  "label": "ltb-webm-testimonial-mobile2",
+  "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm",
+  "result": {
+    "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm",
+    "metadata": {
+      "ok": true,
+      "immediate": false
+    },
+    "canPlay": {
+      "webm": "maybe",
+      "vp9": "probably",
+      "mp4": "maybe",
+      "avc1": ""
+    },
+    "playError": null,
+    "afterPlay": {
+      "currentTime": 1.161017,
+      "paused": false,
+      "readyState": 4,
+      "networkState": 1,
+      "error": null
+    },
+    "seeked": {
+      "ok": true,
+      "immediate": false,
+      "target": 5,
+      "currentTime": 5,
+      "seeking": false,
+      "readyState": 4
+    },
+    "final": {
+      "readyState": 4,
+      "networkState": 1,
+      "duration": 8.003,
+      "videoWidth": 720,
+      "videoHeight": 404,
+      "currentTime": 5,
+      "paused": true,
+      "seeking": false,
+      "error": null
+    },
+    "events": [
+      {
+        "type": "loadedmetadata",
+        "t": 977.7999999970198,
+        "readyState": 1,
+        "networkState": 2,
+        "duration": 8.003,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "type": "play",
+        "t": 980,
+        "readyState": 1,
+        "networkState": 2,
+        "duration": 8.003,
+        "currentTime": 0,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "type": "loadeddata",
+        "t": 1021.2000000029802,
+        "readyState": 4,
+        "networkState": 2,
+        "duration": 8.003,
+        "currentTime": 0.000569,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "type": "canplay",
+        "t": 1021.2999999970198,
+        "readyState": 4,
+        "networkState": 2,
+        "duration": 8.003,
+        "currentTime": 0.000749,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "type": "playing",
+        "t": 1021.7999999970198,
+        "readyState": 4,
+        "networkState": 2,
+        "duration": 8.003,
+        "currentTime": 0.001216,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "type": "canplaythrough",
+        "t": 1022.1000000089407,
+        "readyState": 4,
+        "networkState": 2,
+        "duration": 8.003,
+        "currentTime": 0.001476,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "type": "seeking",
+        "t": 2224.2000000029802,
+        "readyState": 1,
+        "networkState": 1,
+        "duration": 8.003,
+        "currentTime": 5,
+        "paused": true,
+        "seeking": true,
+        "error": null
+      },
+      {
+        "type": "seeked",
+        "t": 2404.9000000059605,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 8.003,
+        "currentTime": 5,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      }
+    ]
+  }
+}

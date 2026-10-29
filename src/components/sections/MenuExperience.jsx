@@ -601,6 +601,7 @@ export const MenuExperience = () => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="full-menu-title"
+            data-lenis-prevent
             className="relative max-w-4xl w-full max-h-[90vh] bg-[#111317] border border-[#d4af37]/50 rounded-xl p-6 sm:p-8 text-[#e5e2db] shadow-[0_20px_60px_rgba(0,0,0,0.95)] overflow-y-auto"
             onClick={(event) => event.stopPropagation()}
           >

@@ -1,0 +1,85 @@
+{
+  "label": "chrome-duration",
+  "result": [
+    {
+      "id": "hero-mp4",
+      "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "reason": "loadedmetadata",
+      "duration": 10.005,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "readyState": 4,
+      "networkState": 2,
+      "error": null
+    },
+    {
+      "id": "hero-webm-ki1",
+      "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1,f_webm/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.webm",
+      "reason": "error",
+      "duration": null,
+      "videoWidth": 0,
+      "videoHeight": 0,
+      "readyState": 0,
+      "networkState": 3,
+      "error": {
+        "code": 4,
+        "message": "MEDIA_ELEMENT_ERROR: Format error"
+      }
+    },
+    {
+      "id": "hero-webm-plain",
+      "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,q_auto:best/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.webm",
+      "reason": "loadedmetadata",
+      "duration": null,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "readyState": 1,
+      "networkState": 2,
+      "error": null
+    },
+    {
+      "id": "hero-webm-vp9",
+      "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,vc_vp9,q_auto:best/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.webm",
+      "reason": "loadedmetadata",
+      "duration": null,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "readyState": 1,
+      "networkState": 2,
+      "error": null
+    },
+    {
+      "id": "hero-webm-only",
+      "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.webm",
+      "reason": "loadedmetadata",
+      "duration": null,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "readyState": 1,
+      "networkState": 2,
+      "error": null
+    },
+    {
+      "id": "testimonial-mp4",
+      "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "reason": "loadedmetadata",
+      "duration": 8,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "readyState": 4,
+      "networkState": 1,
+      "error": null
+    },
+    {
+      "id": "testimonial-webm",
+      "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm",
+      "reason": "loadedmetadata",
+      "duration": 8.003,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "readyState": 3,
+      "networkState": 2,
+      "error": null
+    }
+  ]
+}

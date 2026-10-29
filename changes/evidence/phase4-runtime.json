@@ -1,0 +1,2312 @@
+{
+  "phase": 4,
+  "title": "Lenis smooth-scroll experiment",
+  "date": "2026-10-27",
+  "decision": "keep",
+  "environment": {
+    "build": "production `vite build`, served by `vite preview`",
+    "url": "http://localhost:4173",
+    "browser": "Headless Chrome via Chrome DevTools Protocol",
+    "desktopViewport": "1424x805",
+    "mobileSmokeViewport": "390x844 (emulated mobile metrics, desktop UA)",
+    "profile": "Fresh Chrome profile for each probe; browser cache cleared before warm-up",
+    "sourceCommit": "acbdd68 plus uncommitted Phase 2/3 work and Phase 4 changes",
+    "lenisVersion": "1.3.27",
+    "noCommitOrPush": true
+  },
+  "validation": {
+    "lint": "passed (`npm run lint`)",
+    "build": "passed (`npm run build`)",
+    "buildArtifact": "dist/assets/index-COyTgtgQ.js",
+    "buildWarning": "Existing chunk-size warning only; no new build errors or warnings from Lenis."
+  },
+  "integration": {
+    "oneInstance": true,
+    "root": "ReactLenis root around App",
+    "animationLoop": "Lenis autoRaf; existing section rAF loops left untouched",
+    "nativeSmoothConflict": "html.lenis { scroll-behavior: auto; } disables the existing scroll-smooth behavior while Lenis is mounted",
+    "touch": "syncTouch: false; native touch scrolling preserved",
+    "reducedMotion": "respectReducedMotion: true",
+    "anchors": "Custom capture-phase same-page anchor handler using useLenis, pushState, and popstate; Lenis anchors option disabled",
+    "nestedScroll": "data-lenis-prevent on the mobile navigation panel and the full-menu dialog"
+  },
+  "baseline": {
+    "initial": {
+      "t": 6027.79999999702,
+      "scrollY": 0,
+      "hash": "",
+      "historyLength": 2,
+      "htmlClass": "scroll-smooth",
+      "scrollBehavior": "smooth",
+      "reducedMotion": false,
+      "lenisVersion": null,
+      "viewport": {
+        "width": 1424,
+        "height": 805
+      },
+      "documentHeight": 7261,
+      "heroTop": 0,
+      "heroDistance": 1843,
+      "heroTrackHeight": 2648,
+      "storyTop": 2647.640625,
+      "storyDistance": 902,
+      "storyTrackHeight": 1707,
+      "heroProgress": 0,
+      "storyProgress": 0,
+      "heroVideo": {
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "seeking": false,
+        "paused": true,
+        "error": null
+      },
+      "heroStickyTop": 0,
+      "storyStickyTop": 2647.640625,
+      "storyVisible": {
+        "index": 0,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+      },
+      "frameCount": 56,
+      "layerCount": 5,
+      "scrollEvents": 0,
+      "heroSeek": {
+        "seeking": 0,
+        "seeked": 0,
+        "durationsMs": null,
+        "errors": 0
+      }
+    },
+    "wheelAtTop": {
+      "endScrollY": 480,
+      "distinctPositions": 5,
+      "samples": 95
+    },
+    "heroForward": {
+      "samples": 100,
+      "maxLagSeconds": 1.7137,
+      "averageLagSeconds": 0.3824,
+      "endLagSeconds": 0.0054,
+      "seekingSamples": 95,
+      "endCurrentTime": 9.957927,
+      "endDuration": 10.005,
+      "endProgress": 1,
+      "endStickyTop": -0.359375
+    },
+    "heroReverse": {
+      "samples": 99,
+      "maxLagSeconds": 1.2542,
+      "averageLagSeconds": 0.3588,
+      "endLagSeconds": 0,
+      "seekingSamples": 92,
+      "endCurrentTime": 0,
+      "endDuration": 10.005,
+      "endProgress": 0,
+      "endStickyTop": 0
+    },
+    "heroEnd": {
+      "currentTime": 9.963333,
+      "duration": 10.005,
+      "progress": 1,
+      "stickyTop": -0.359375
+    },
+    "storyForward": {
+      "resources": 54,
+      "uniqueResources": 54,
+      "loads": 55,
+      "decodes": 55,
+      "duplicateDecodeSources": 0,
+      "duplicateDecodeUrls": [],
+      "visibleChanges": 55,
+      "visibleIndicesCount": 55,
+      "requestedButNeverVisible": [],
+      "lagFrames": {
+        "max": 2,
+        "average": 0.10101010101010101,
+        "atEnd": 0
+      },
+      "errors": 0
+    },
+    "storyReverse": {
+      "resources": 0,
+      "uniqueResources": 0,
+      "loads": 51,
+      "decodes": 51,
+      "duplicateDecodeSources": 0,
+      "duplicateDecodeUrls": [],
+      "visibleChanges": 55,
+      "visibleIndicesCount": 55,
+      "requestedButNeverVisible": [],
+      "lagFrames": {
+        "max": 0,
+        "average": 0,
+        "atEnd": 0
+      },
+      "errors": 0
+    },
+    "storyLargeJumps": [
+      {
+        "progress": 0.6,
+        "targetFrame": 33,
+        "settleMs": 61.7,
+        "visibleFrame": 33,
+        "targetReached": true
+      },
+      {
+        "progress": 0.95,
+        "targetFrame": 52,
+        "settleMs": 43,
+        "visibleFrame": 52,
+        "targetReached": true
+      },
+      {
+        "progress": 0.05,
+        "targetFrame": 3,
+        "settleMs": 46,
+        "visibleFrame": 3,
+        "targetReached": true
+      },
+      {
+        "progress": 0.8,
+        "targetFrame": 44,
+        "settleMs": 41.5,
+        "visibleFrame": 44,
+        "targetReached": true
+      }
+    ],
+    "storyEntryExit": [
+      {
+        "progress": 0.75,
+        "targetFrame": 41,
+        "settleMs": 67.3,
+        "visibleFrame": 41,
+        "targetReached": true
+      },
+      {
+        "progress": 0.1,
+        "targetFrame": 6,
+        "settleMs": 73.6,
+        "visibleFrame": 6,
+        "targetReached": true
+      },
+      {
+        "progress": 0.9,
+        "targetFrame": 49,
+        "settleMs": 78.2,
+        "visibleFrame": 49,
+        "targetReached": true
+      }
+    ],
+    "glide": {
+      "cta": {
+        "samples": 86,
+        "firstWithinMs": 824.5,
+        "lastMoveMs": 854.3,
+        "maxStepPx": 375,
+        "distinctPositions": 29,
+        "endScrollY": 2545
+      },
+      "menuAnchor": {
+        "samples": 84,
+        "firstWithinMs": 1190.9,
+        "lastMoveMs": 1220,
+        "maxStepPx": 580,
+        "distinctPositions": 39,
+        "endScrollY": 5179
+      },
+      "experienceAnchor": {
+        "samples": 86,
+        "firstWithinMs": 462.8,
+        "lastMoveMs": 498.1,
+        "maxStepPx": 192,
+        "distinctPositions": 16,
+        "endScrollY": 5907
+      },
+      "footerStoryAnchor": {
+        "samples": 84,
+        "firstWithinMs": 1049.4,
+        "lastMoveMs": 1079.2,
+        "maxStepPx": 465,
+        "distinctPositions": 34,
+        "endScrollY": 2544
+      },
+      "footerTop": {
+        "samples": 86,
+        "firstWithinMs": 1365.6,
+        "lastMoveMs": 1397.6,
+        "maxStepPx": 530,
+        "distinctPositions": 45,
+        "endScrollY": 0
+      }
+    },
+    "navigation": {
+      "cta": {
+        "target": 2544.640625,
+        "finalScrollY": 2545,
+        "difference": 0.359375,
+        "hash": "",
+        "historyLength": 2
+      },
+      "menuAnchor": {
+        "target": 5283.234375,
+        "finalScrollY": 5179,
+        "difference": -104.234375,
+        "hash": "#menu",
+        "historyLength": 3
+      },
+      "experienceAnchor": {
+        "target": 6011.234375,
+        "finalScrollY": 5907,
+        "difference": -104.234375,
+        "hash": "#experience",
+        "historyLength": 4
+      },
+      "footerStoryAnchor": {
+        "target": 2647.640625,
+        "finalScrollY": 2544,
+        "difference": -103.640625,
+        "hash": "#story",
+        "historyLength": 5
+      },
+      "footerTop": {
+        "finalScrollY": 0,
+        "difference": 0
+      },
+      "history": {
+        "afterBack": {
+          "scrollY": 5179,
+          "hash": "#menu",
+          "historyLength": 4,
+          "htmlClass": "scroll-smooth",
+          "scrollBehavior": "smooth",
+          "reducedMotion": false,
+          "lenisVersion": null,
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 1,
+          "storyProgress": 1,
+          "heroVideo": {
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": -3336.359375,
+          "storyStickyTop": -1629.765625,
+          "storyVisible": {
+            "index": 55,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        },
+        "afterForward": {
+          "scrollY": 5907,
+          "hash": "#experience",
+          "historyLength": 4,
+          "htmlClass": "scroll-smooth",
+          "scrollBehavior": "smooth",
+          "reducedMotion": false,
+          "lenisVersion": null,
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 1,
+          "storyProgress": 1,
+          "heroVideo": {
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": -4064.359375,
+          "storyStickyTop": -2357.765625,
+          "storyVisible": {
+            "index": 55,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        }
+      }
+    },
+    "resize": {
+      "before": {
+        "scrollY": 922,
+        "hash": "#story",
+        "historyLength": 5,
+        "htmlClass": "scroll-smooth",
+        "scrollBehavior": "auto",
+        "reducedMotion": false,
+        "lenisVersion": null,
+        "viewport": {
+          "width": 1424,
+          "height": 805
+        },
+        "documentHeight": 7261,
+        "heroDistance": 1843,
+        "storyDistance": 902,
+        "heroProgress": 0.500271,
+        "storyProgress": 0,
+        "heroVideo": {
+          "currentTime": 4.984369,
+          "duration": 10.005,
+          "readyState": 4,
+          "seeking": false,
+          "paused": true,
+          "error": null
+        },
+        "heroStickyTop": 0,
+        "storyStickyTop": 1725.640625,
+        "storyVisible": {
+          "index": 0,
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+        },
+        "frameCount": 56,
+        "layerCount": 5
+      },
+      "after": {
+        "scrollY": 922,
+        "hash": "#story",
+        "historyLength": 5,
+        "htmlClass": "scroll-smooth",
+        "scrollBehavior": "auto",
+        "reducedMotion": false,
+        "lenisVersion": null,
+        "viewport": {
+          "width": 1200,
+          "height": 805
+        },
+        "documentHeight": 7242,
+        "heroDistance": 1843,
+        "storyDistance": 902,
+        "heroProgress": 0.500271,
+        "storyProgress": 0,
+        "heroVideo": {
+          "currentTime": 4.984369,
+          "duration": 10.005,
+          "readyState": 4,
+          "seeking": false,
+          "paused": true,
+          "error": null
+        },
+        "heroStickyTop": 0,
+        "storyStickyTop": 1725.640625,
+        "storyVisible": {
+          "index": 0,
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+        },
+        "frameCount": 56,
+        "layerCount": 5
+      },
+      "restored": {
+        "scrollY": 922,
+        "hash": "#story",
+        "historyLength": 5,
+        "htmlClass": "scroll-smooth",
+        "scrollBehavior": "auto",
+        "reducedMotion": false,
+        "lenisVersion": null,
+        "viewport": {
+          "width": 1424,
+          "height": 805
+        },
+        "documentHeight": 7261,
+        "heroDistance": 1843,
+        "storyDistance": 902,
+        "heroProgress": 0.500271,
+        "storyProgress": 0,
+        "heroVideo": {
+          "currentTime": 4.984369,
+          "duration": 10.005,
+          "readyState": 4,
+          "seeking": false,
+          "paused": true,
+          "error": null
+        },
+        "heroStickyTop": 0,
+        "storyStickyTop": 1725.640625,
+        "storyVisible": {
+          "index": 0,
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+        },
+        "frameCount": 56,
+        "layerCount": 5
+      }
+    },
+    "reducedMotion": {
+      "state": {
+        "t": 73508.09999999404,
+        "scrollY": 0,
+        "hash": "#story",
+        "historyLength": 5,
+        "htmlClass": "scroll-smooth",
+        "scrollBehavior": "auto",
+        "reducedMotion": true,
+        "lenisVersion": null,
+        "viewport": {
+          "width": 1424,
+          "height": 805
+        },
+        "documentHeight": 7261,
+        "heroTop": 0,
+        "heroDistance": 1843,
+        "heroTrackHeight": 2648,
+        "storyTop": 2647.640625,
+        "storyDistance": 902,
+        "storyTrackHeight": 1707,
+        "heroProgress": 0,
+        "storyProgress": 0,
+        "heroVideo": {
+          "currentTime": 0,
+          "duration": 10.005,
+          "readyState": 4,
+          "seeking": false,
+          "paused": true,
+          "error": null
+        },
+        "heroStickyTop": 0,
+        "storyStickyTop": 2647.640625,
+        "storyVisible": {
+          "index": 0,
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+        },
+        "frameCount": 56,
+        "layerCount": 5,
+        "scrollEvents": 709,
+        "heroSeek": {
+          "seeking": 63,
+          "seeked": 63,
+          "durationsMs": {
+            "count": 63,
+            "min": 47,
+            "median": 202.5,
+            "max": 640.7999999970198,
+            "average": 205.93174603250293
+          },
+          "errors": 0
+        }
+      },
+      "cta": {
+        "target": 2544.640625,
+        "finalScrollY": 2545,
+        "difference": 0.359375,
+        "hash": "#story",
+        "historyLength": 5
+      },
+      "anchor": {
+        "target": 5283.234375,
+        "finalScrollY": 5179,
+        "difference": -104.234375,
+        "hash": "#menu",
+        "historyLength": 6
+      },
+      "ctaGlide": {
+        "samples": 32,
+        "firstWithinMs": 0,
+        "lastMoveMs": 0,
+        "maxStepPx": 0,
+        "distinctPositions": 1,
+        "endScrollY": 2545
+      },
+      "anchorGlide": {
+        "samples": 28,
+        "firstWithinMs": 0,
+        "lastMoveMs": 0,
+        "maxStepPx": 0,
+        "distinctPositions": 1,
+        "endScrollY": 5179
+      }
+    }
+  },
+  "lenis": {
+    "primaryRun": "phase4-lenis-wheel-raw.json",
+    "runs": [
+      {
+        "id": 1,
+        "raw": "phase4-lenis-raw.json",
+        "heroForward": {
+          "samples": 102,
+          "maxLagSeconds": 1.9029,
+          "averageLagSeconds": 0.3771,
+          "endLagSeconds": 0,
+          "seekingSamples": 97,
+          "endCurrentTime": 9.963333,
+          "endDuration": 10.005,
+          "endProgress": 1,
+          "endStickyTop": -0.359375
+        },
+        "heroReverse": {
+          "samples": 98,
+          "maxLagSeconds": 1.2758,
+          "averageLagSeconds": 0.3401,
+          "endLagSeconds": 0.0324,
+          "seekingSamples": 91,
+          "endCurrentTime": 0.032436,
+          "endDuration": 10.005,
+          "endProgress": 0,
+          "endStickyTop": 0
+        },
+        "heroEnd": {
+          "currentTime": 9.963333,
+          "duration": 10.005,
+          "progress": 1,
+          "stickyTop": -0.359375
+        },
+        "storyForward": {
+          "resources": 51,
+          "uniqueResources": 51,
+          "loads": 55,
+          "decodes": 55,
+          "duplicateDecodeSources": 3,
+          "duplicateDecodeUrls": [
+            {
+              "src": "http://localhost:4173/video-frames-second/ezgif-frame-027.jpg",
+              "count": 2
+            },
+            {
+              "src": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+              "count": 2
+            },
+            {
+              "src": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+              "count": 2
+            }
+          ],
+          "visibleChanges": 51,
+          "visibleIndicesCount": 51,
+          "requestedButNeverVisible": [
+            24
+          ],
+          "lagFrames": {
+            "max": 8,
+            "average": 0.63,
+            "atEnd": 0
+          },
+          "errors": 0
+        },
+        "storyReverse": {
+          "resources": 3,
+          "uniqueResources": 3,
+          "loads": 51,
+          "decodes": 51,
+          "duplicateDecodeSources": 0,
+          "duplicateDecodeUrls": [],
+          "visibleChanges": 55,
+          "visibleIndicesCount": 55,
+          "requestedButNeverVisible": [],
+          "lagFrames": {
+            "max": 0,
+            "average": 0,
+            "atEnd": 0
+          },
+          "errors": 0
+        },
+        "storyLargeJumps": [
+          {
+            "progress": 0.6,
+            "targetFrame": 33,
+            "settleMs": 33.5,
+            "visibleFrame": 33,
+            "targetReached": true
+          },
+          {
+            "progress": 0.95,
+            "targetFrame": 52,
+            "settleMs": 0.1,
+            "visibleFrame": 52,
+            "targetReached": true
+          },
+          {
+            "progress": 0.05,
+            "targetFrame": 3,
+            "settleMs": 22.5,
+            "visibleFrame": 3,
+            "targetReached": true
+          },
+          {
+            "progress": 0.8,
+            "targetFrame": 44,
+            "settleMs": 52.9,
+            "visibleFrame": 44,
+            "targetReached": true
+          }
+        ],
+        "storyEntryExit": [
+          {
+            "progress": 0.75,
+            "targetFrame": 41,
+            "settleMs": 66.7,
+            "visibleFrame": 41,
+            "targetReached": true
+          },
+          {
+            "progress": 0.1,
+            "targetFrame": 6,
+            "settleMs": 86.3,
+            "visibleFrame": 6,
+            "targetReached": true
+          },
+          {
+            "progress": 0.9,
+            "targetFrame": 49,
+            "settleMs": 82.5,
+            "visibleFrame": 49,
+            "targetReached": true
+          }
+        ],
+        "glide": {
+          "cta": {
+            "samples": 86,
+            "firstWithinMs": 1170.8,
+            "lastMoveMs": 1613.4,
+            "maxStepPx": 380,
+            "distinctPositions": 39,
+            "endScrollY": 2545
+          },
+          "menuAnchor": {
+            "samples": 85,
+            "firstWithinMs": 1227,
+            "lastMoveMs": 1433.9,
+            "maxStepPx": 836,
+            "distinctPositions": 40,
+            "endScrollY": 5179
+          },
+          "experienceAnchor": {
+            "samples": 88,
+            "firstWithinMs": 897.2,
+            "lastMoveMs": 1136.8,
+            "maxStepPx": 97,
+            "distinctPositions": 33,
+            "endScrollY": 5907
+          },
+          "footerStoryAnchor": {
+            "samples": 88,
+            "firstWithinMs": 1157.3,
+            "lastMoveMs": 1373.5,
+            "maxStepPx": 548,
+            "distinctPositions": 41,
+            "endScrollY": 2544
+          },
+          "footerTop": {
+            "samples": 87,
+            "firstWithinMs": 1306.7,
+            "lastMoveMs": 1551.8,
+            "maxStepPx": 1060,
+            "distinctPositions": 44,
+            "endScrollY": 0
+          }
+        }
+      },
+      {
+        "id": 2,
+        "raw": "phase4-lenis-run2-raw.json",
+        "heroForward": {
+          "samples": 97,
+          "maxLagSeconds": 2.2922,
+          "averageLagSeconds": 0.3409,
+          "endLagSeconds": 0,
+          "seekingSamples": 91,
+          "endCurrentTime": 9.963333,
+          "endDuration": 10.005,
+          "endProgress": 1,
+          "endStickyTop": -0.359375
+        },
+        "heroReverse": {
+          "samples": 103,
+          "maxLagSeconds": 2.1138,
+          "averageLagSeconds": 0.4281,
+          "endLagSeconds": 0.0378,
+          "seekingSamples": 96,
+          "endCurrentTime": 0.037842,
+          "endDuration": 10.005,
+          "endProgress": 0,
+          "endStickyTop": 0
+        },
+        "heroEnd": {
+          "currentTime": 9.963333,
+          "duration": 10.005,
+          "progress": 1,
+          "stickyTop": -0.359375
+        },
+        "storyForward": {
+          "resources": 55,
+          "uniqueResources": 55,
+          "loads": 55,
+          "decodes": 55,
+          "duplicateDecodeSources": 0,
+          "duplicateDecodeUrls": [],
+          "visibleChanges": 55,
+          "visibleIndicesCount": 55,
+          "requestedButNeverVisible": [],
+          "lagFrames": {
+            "max": 1,
+            "average": 0.03,
+            "atEnd": 0
+          },
+          "errors": 0
+        },
+        "storyReverse": {
+          "resources": 27,
+          "uniqueResources": 27,
+          "loads": 51,
+          "decodes": 51,
+          "duplicateDecodeSources": 0,
+          "duplicateDecodeUrls": [],
+          "visibleChanges": 55,
+          "visibleIndicesCount": 55,
+          "requestedButNeverVisible": [],
+          "lagFrames": {
+            "max": 0,
+            "average": 0,
+            "atEnd": 0
+          },
+          "errors": 0
+        },
+        "storyLargeJumps": [
+          {
+            "progress": 0.6,
+            "targetFrame": 33,
+            "settleMs": 36.4,
+            "visibleFrame": 33,
+            "targetReached": true
+          },
+          {
+            "progress": 0.95,
+            "targetFrame": 52,
+            "settleMs": 35.7,
+            "visibleFrame": 52,
+            "targetReached": true
+          },
+          {
+            "progress": 0.05,
+            "targetFrame": 3,
+            "settleMs": 20.8,
+            "visibleFrame": 3,
+            "targetReached": true
+          },
+          {
+            "progress": 0.8,
+            "targetFrame": 44,
+            "settleMs": 55.8,
+            "visibleFrame": 44,
+            "targetReached": true
+          }
+        ],
+        "storyEntryExit": [
+          {
+            "progress": 0.75,
+            "targetFrame": 41,
+            "settleMs": 125.1,
+            "visibleFrame": 41,
+            "targetReached": true
+          },
+          {
+            "progress": 0.1,
+            "targetFrame": 6,
+            "settleMs": 99.7,
+            "visibleFrame": 6,
+            "targetReached": true
+          },
+          {
+            "progress": 0.9,
+            "targetFrame": 49,
+            "settleMs": 94.4,
+            "visibleFrame": 49,
+            "targetReached": true
+          }
+        ],
+        "glide": {
+          "cta": {
+            "samples": 86,
+            "firstWithinMs": 1160.3,
+            "lastMoveMs": 1600.8,
+            "maxStepPx": 362,
+            "distinctPositions": 39,
+            "endScrollY": 2545
+          },
+          "menuAnchor": {
+            "samples": 84,
+            "firstWithinMs": 1226.6,
+            "lastMoveMs": 1468.8,
+            "maxStepPx": 677,
+            "distinctPositions": 40,
+            "endScrollY": 5179
+          },
+          "experienceAnchor": {
+            "samples": 84,
+            "firstWithinMs": 908.1,
+            "lastMoveMs": 1139.6,
+            "maxStepPx": 106,
+            "distinctPositions": 32,
+            "endScrollY": 5907
+          },
+          "footerStoryAnchor": {
+            "samples": 86,
+            "firstWithinMs": 1190.3,
+            "lastMoveMs": 1381.1,
+            "maxStepPx": 509,
+            "distinctPositions": 41,
+            "endScrollY": 2544
+          },
+          "footerTop": {
+            "samples": 85,
+            "firstWithinMs": 1284.1,
+            "lastMoveMs": 1565,
+            "maxStepPx": 762,
+            "distinctPositions": 44,
+            "endScrollY": 0
+          }
+        }
+      },
+      {
+        "id": 3,
+        "raw": "phase4-lenis-wheel-raw.json",
+        "heroForward": {
+          "samples": 100,
+          "maxLagSeconds": 1.3894,
+          "averageLagSeconds": 0.3114,
+          "endLagSeconds": 0.0324,
+          "seekingSamples": 95,
+          "endCurrentTime": 9.930897,
+          "endDuration": 10.005,
+          "endProgress": 1,
+          "endStickyTop": -0.359375
+        },
+        "heroReverse": {
+          "samples": 100,
+          "maxLagSeconds": 2.1029,
+          "averageLagSeconds": 0.3733,
+          "endLagSeconds": 0,
+          "seekingSamples": 93,
+          "endCurrentTime": 0,
+          "endDuration": 10.005,
+          "endProgress": 0,
+          "endStickyTop": 0
+        },
+        "heroEnd": {
+          "currentTime": 9.963333,
+          "duration": 10.005,
+          "progress": 1,
+          "stickyTop": -0.359375
+        },
+        "storyForward": {
+          "resources": 51,
+          "uniqueResources": 51,
+          "loads": 51,
+          "decodes": 51,
+          "duplicateDecodeSources": 0,
+          "duplicateDecodeUrls": [],
+          "visibleChanges": 50,
+          "visibleIndicesCount": 50,
+          "requestedButNeverVisible": [
+            36
+          ],
+          "lagFrames": {
+            "max": 8,
+            "average": 0.8,
+            "atEnd": 0
+          },
+          "errors": 0
+        },
+        "storyReverse": {
+          "resources": 24,
+          "uniqueResources": 24,
+          "loads": 54,
+          "decodes": 54,
+          "duplicateDecodeSources": 3,
+          "duplicateDecodeUrls": [
+            {
+              "src": "http://localhost:4173/video-frames-second/ezgif-frame-017.jpg",
+              "count": 2
+            },
+            {
+              "src": "http://localhost:4173/video-frames-second/ezgif-frame-012.jpg",
+              "count": 2
+            },
+            {
+              "src": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+              "count": 2
+            }
+          ],
+          "visibleChanges": 53,
+          "visibleIndicesCount": 53,
+          "requestedButNeverVisible": [
+            18,
+            44
+          ],
+          "lagFrames": {
+            "max": 1,
+            "average": 0.010101010101010102,
+            "atEnd": 0
+          },
+          "errors": 0
+        },
+        "storyLargeJumps": [
+          {
+            "progress": 0.6,
+            "targetFrame": 33,
+            "settleMs": 34.7,
+            "visibleFrame": 33,
+            "targetReached": true
+          },
+          {
+            "progress": 0.95,
+            "targetFrame": 52,
+            "settleMs": 43.2,
+            "visibleFrame": 52,
+            "targetReached": true
+          },
+          {
+            "progress": 0.05,
+            "targetFrame": 3,
+            "settleMs": 22.2,
+            "visibleFrame": 3,
+            "targetReached": true
+          },
+          {
+            "progress": 0.8,
+            "targetFrame": 44,
+            "settleMs": 39.9,
+            "visibleFrame": 44,
+            "targetReached": true
+          }
+        ],
+        "storyEntryExit": [
+          {
+            "progress": 0.75,
+            "targetFrame": 41,
+            "settleMs": 66.7,
+            "visibleFrame": 41,
+            "targetReached": true
+          },
+          {
+            "progress": 0.1,
+            "targetFrame": 6,
+            "settleMs": 70.2,
+            "visibleFrame": 6,
+            "targetReached": true
+          },
+          {
+            "progress": 0.9,
+            "targetFrame": 49,
+            "settleMs": 176.6,
+            "visibleFrame": 49,
+            "targetReached": true
+          }
+        ],
+        "glide": {
+          "cta": {
+            "samples": 88,
+            "firstWithinMs": 1144.3,
+            "lastMoveMs": 1600.1,
+            "maxStepPx": 367,
+            "distinctPositions": 40,
+            "endScrollY": 2545
+          },
+          "menuAnchor": {
+            "samples": 85,
+            "firstWithinMs": 1232.5,
+            "lastMoveMs": 1460.2,
+            "maxStepPx": 659,
+            "distinctPositions": 41,
+            "endScrollY": 5179
+          },
+          "experienceAnchor": {
+            "samples": 86,
+            "firstWithinMs": 920.1,
+            "lastMoveMs": 1123.3,
+            "maxStepPx": 89,
+            "distinctPositions": 32,
+            "endScrollY": 5907
+          },
+          "footerStoryAnchor": {
+            "samples": 86,
+            "firstWithinMs": 1190.6,
+            "lastMoveMs": 1405.3,
+            "maxStepPx": 580,
+            "distinctPositions": 41,
+            "endScrollY": 2544
+          },
+          "footerTop": {
+            "samples": 86,
+            "firstWithinMs": 1291.9,
+            "lastMoveMs": 1568.1,
+            "maxStepPx": 1119,
+            "distinctPositions": 43,
+            "endScrollY": 0
+          }
+        }
+      }
+    ],
+    "primary": {
+      "initial": {
+        "t": 6057,
+        "scrollY": 0,
+        "hash": "",
+        "historyLength": 2,
+        "htmlClass": "scroll-smooth lenis",
+        "scrollBehavior": "auto",
+        "reducedMotion": false,
+        "lenisVersion": "1.3.27",
+        "viewport": {
+          "width": 1424,
+          "height": 805
+        },
+        "documentHeight": 7261,
+        "heroTop": 0,
+        "heroDistance": 1843,
+        "heroTrackHeight": 2648,
+        "storyTop": 2647.640625,
+        "storyDistance": 902,
+        "storyTrackHeight": 1707,
+        "heroProgress": 0,
+        "storyProgress": 0,
+        "heroVideo": {
+          "currentTime": 0,
+          "duration": 10.005,
+          "readyState": 4,
+          "seeking": false,
+          "paused": true,
+          "error": null
+        },
+        "heroStickyTop": 0,
+        "storyStickyTop": 2647.640625,
+        "storyVisible": {
+          "index": 0,
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+        },
+        "frameCount": 56,
+        "layerCount": 5,
+        "scrollEvents": 0,
+        "heroSeek": {
+          "seeking": 0,
+          "seeked": 0,
+          "durationsMs": null,
+          "errors": 0
+        }
+      },
+      "wheelAtTop": {
+        "endScrollY": 480,
+        "distinctPositions": 40,
+        "samples": 102
+      },
+      "heroForward": {
+        "samples": 100,
+        "maxLagSeconds": 1.3894,
+        "averageLagSeconds": 0.3114,
+        "endLagSeconds": 0.0324,
+        "seekingSamples": 95,
+        "endCurrentTime": 9.930897,
+        "endDuration": 10.005,
+        "endProgress": 1,
+        "endStickyTop": -0.359375
+      },
+      "heroReverse": {
+        "samples": 100,
+        "maxLagSeconds": 2.1029,
+        "averageLagSeconds": 0.3733,
+        "endLagSeconds": 0,
+        "seekingSamples": 93,
+        "endCurrentTime": 0,
+        "endDuration": 10.005,
+        "endProgress": 0,
+        "endStickyTop": 0
+      },
+      "heroEnd": {
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "progress": 1,
+        "stickyTop": -0.359375
+      },
+      "storyForward": {
+        "resources": 51,
+        "uniqueResources": 51,
+        "loads": 51,
+        "decodes": 51,
+        "duplicateDecodeSources": 0,
+        "duplicateDecodeUrls": [],
+        "visibleChanges": 50,
+        "visibleIndicesCount": 50,
+        "requestedButNeverVisible": [
+          36
+        ],
+        "lagFrames": {
+          "max": 8,
+          "average": 0.8,
+          "atEnd": 0
+        },
+        "errors": 0
+      },
+      "storyReverse": {
+        "resources": 24,
+        "uniqueResources": 24,
+        "loads": 54,
+        "decodes": 54,
+        "duplicateDecodeSources": 3,
+        "duplicateDecodeUrls": [
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-017.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-012.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+            "count": 2
+          }
+        ],
+        "visibleChanges": 53,
+        "visibleIndicesCount": 53,
+        "requestedButNeverVisible": [
+          18,
+          44
+        ],
+        "lagFrames": {
+          "max": 1,
+          "average": 0.010101010101010102,
+          "atEnd": 0
+        },
+        "errors": 0
+      },
+      "storyLargeJumps": [
+        {
+          "progress": 0.6,
+          "targetFrame": 33,
+          "settleMs": 34.7,
+          "visibleFrame": 33,
+          "targetReached": true
+        },
+        {
+          "progress": 0.95,
+          "targetFrame": 52,
+          "settleMs": 43.2,
+          "visibleFrame": 52,
+          "targetReached": true
+        },
+        {
+          "progress": 0.05,
+          "targetFrame": 3,
+          "settleMs": 22.2,
+          "visibleFrame": 3,
+          "targetReached": true
+        },
+        {
+          "progress": 0.8,
+          "targetFrame": 44,
+          "settleMs": 39.9,
+          "visibleFrame": 44,
+          "targetReached": true
+        }
+      ],
+      "storyEntryExit": [
+        {
+          "progress": 0.75,
+          "targetFrame": 41,
+          "settleMs": 66.7,
+          "visibleFrame": 41,
+          "targetReached": true
+        },
+        {
+          "progress": 0.1,
+          "targetFrame": 6,
+          "settleMs": 70.2,
+          "visibleFrame": 6,
+          "targetReached": true
+        },
+        {
+          "progress": 0.9,
+          "targetFrame": 49,
+          "settleMs": 176.6,
+          "visibleFrame": 49,
+          "targetReached": true
+        }
+      ],
+      "glide": {
+        "cta": {
+          "samples": 88,
+          "firstWithinMs": 1144.3,
+          "lastMoveMs": 1600.1,
+          "maxStepPx": 367,
+          "distinctPositions": 40,
+          "endScrollY": 2545
+        },
+        "menuAnchor": {
+          "samples": 85,
+          "firstWithinMs": 1232.5,
+          "lastMoveMs": 1460.2,
+          "maxStepPx": 659,
+          "distinctPositions": 41,
+          "endScrollY": 5179
+        },
+        "experienceAnchor": {
+          "samples": 86,
+          "firstWithinMs": 920.1,
+          "lastMoveMs": 1123.3,
+          "maxStepPx": 89,
+          "distinctPositions": 32,
+          "endScrollY": 5907
+        },
+        "footerStoryAnchor": {
+          "samples": 86,
+          "firstWithinMs": 1190.6,
+          "lastMoveMs": 1405.3,
+          "maxStepPx": 580,
+          "distinctPositions": 41,
+          "endScrollY": 2544
+        },
+        "footerTop": {
+          "samples": 86,
+          "firstWithinMs": 1291.9,
+          "lastMoveMs": 1568.1,
+          "maxStepPx": 1119,
+          "distinctPositions": 43,
+          "endScrollY": 0
+        }
+      },
+      "heroWheel": {
+        "samples": 205,
+        "stats": {
+          "maxLagSeconds": 0.919,
+          "averageLagSeconds": 0.1891,
+          "endLagSeconds": 0,
+          "seekingSamples": 121,
+          "endCurrentTime": 9.963333,
+          "endDuration": 10.005,
+          "endProgress": 1,
+          "endStickyTop": -77.359375
+        },
+        "finalSample": {
+          "t": 84480.09999999404,
+          "scrollY": 1920,
+          "progress": 1,
+          "currentTime": 9.963333,
+          "duration": 10.005,
+          "expected": 9.963333333333335,
+          "lag": 3.333333342681044e-7,
+          "seeking": false,
+          "readyState": 4,
+          "paused": true,
+          "stickyTop": -77.359375
+        }
+      },
+      "storyWheel": {
+        "resources": 53,
+        "uniqueResources": 53,
+        "loads": 65,
+        "decodes": 65,
+        "duplicateDecodeSources": 11,
+        "duplicateDecodeUrls": [
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-014.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-016.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-022.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-024.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-028.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-037.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-046.jpg",
+            "count": 3
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-051.jpg",
+            "count": 2
+          },
+          {
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-053.jpg",
+            "count": 2
+          }
+        ],
+        "visibleChanges": 41,
+        "visibleIndicesCount": 41,
+        "requestedButNeverVisible": [
+          2,
+          12,
+          14,
+          19,
+          20,
+          27,
+          29,
+          31,
+          36,
+          38,
+          43,
+          50
+        ],
+        "lagFrames": {
+          "max": 4,
+          "average": 0.423841059602649,
+          "atEnd": 0
+        },
+        "errors": 0,
+        "firstSample": {
+          "t": 85453.5,
+          "scrollY": 2648,
+          "progress": 0.000398420177383592,
+          "target": 0,
+          "visibleIndex": 0,
+          "visibleSrc": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+          "stickyTop": 0
+        },
+        "lastSample": {
+          "t": 90005,
+          "scrollY": 3608,
+          "progress": 1,
+          "target": 55,
+          "visibleIndex": 55,
+          "visibleSrc": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+          "stickyTop": -58.765625
+        }
+      },
+      "navigation": {
+        "cta": {
+          "target": 2544.640625,
+          "finalScrollY": 2545,
+          "difference": 0.359375,
+          "hash": "",
+          "historyLength": 2
+        },
+        "menuAnchor": {
+          "target": 5283.234375,
+          "finalScrollY": 5179,
+          "difference": -104.234375,
+          "hash": "#menu",
+          "historyLength": 3
+        },
+        "experienceAnchor": {
+          "target": 6011.234375,
+          "finalScrollY": 5907,
+          "difference": -104.234375,
+          "hash": "#experience",
+          "historyLength": 4
+        },
+        "footerStoryAnchor": {
+          "target": 2647.640625,
+          "finalScrollY": 2544,
+          "difference": -103.640625,
+          "hash": "#story",
+          "historyLength": 5
+        },
+        "footerTop": {
+          "finalScrollY": 0,
+          "difference": 0
+        },
+        "history": {
+          "afterBack": {
+            "scrollY": 5179,
+            "hash": "#menu",
+            "historyLength": 4,
+            "htmlClass": "scroll-smooth lenis",
+            "scrollBehavior": "auto",
+            "reducedMotion": false,
+            "lenisVersion": "1.3.27",
+            "viewport": {
+              "width": 1424,
+              "height": 805
+            },
+            "documentHeight": 7261,
+            "heroDistance": 1843,
+            "storyDistance": 902,
+            "heroProgress": 1,
+            "storyProgress": 1,
+            "heroVideo": {
+              "currentTime": 9.963333,
+              "duration": 10.005,
+              "readyState": 4,
+              "seeking": false,
+              "paused": true,
+              "error": null
+            },
+            "heroStickyTop": -3336.359375,
+            "storyStickyTop": -1629.765625,
+            "storyVisible": {
+              "index": 55,
+              "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg"
+            },
+            "frameCount": 56,
+            "layerCount": 5
+          },
+          "afterForward": {
+            "scrollY": 5907,
+            "hash": "#experience",
+            "historyLength": 4,
+            "htmlClass": "scroll-smooth lenis",
+            "scrollBehavior": "auto",
+            "reducedMotion": false,
+            "lenisVersion": "1.3.27",
+            "viewport": {
+              "width": 1424,
+              "height": 805
+            },
+            "documentHeight": 7261,
+            "heroDistance": 1843,
+            "storyDistance": 902,
+            "heroProgress": 1,
+            "storyProgress": 1,
+            "heroVideo": {
+              "currentTime": 9.963333,
+              "duration": 10.005,
+              "readyState": 4,
+              "seeking": false,
+              "paused": true,
+              "error": null
+            },
+            "heroStickyTop": -4064.359375,
+            "storyStickyTop": -2357.765625,
+            "storyVisible": {
+              "index": 55,
+              "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg"
+            },
+            "frameCount": 56,
+            "layerCount": 5
+          }
+        }
+      },
+      "resize": {
+        "before": {
+          "scrollY": 922,
+          "hash": "#story",
+          "historyLength": 5,
+          "htmlClass": "scroll-smooth lenis",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": "1.3.27",
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 0.500271,
+          "storyProgress": 0,
+          "heroVideo": {
+            "currentTime": 4.984369,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": 0,
+          "storyStickyTop": 1725.640625,
+          "storyVisible": {
+            "index": 0,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        },
+        "after": {
+          "scrollY": 922,
+          "hash": "#story",
+          "historyLength": 5,
+          "htmlClass": "scroll-smooth lenis",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": "1.3.27",
+          "viewport": {
+            "width": 1200,
+            "height": 805
+          },
+          "documentHeight": 7242,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 0.500271,
+          "storyProgress": 0,
+          "heroVideo": {
+            "currentTime": 4.984369,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": 0,
+          "storyStickyTop": 1725.640625,
+          "storyVisible": {
+            "index": 0,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        },
+        "restored": {
+          "scrollY": 922,
+          "hash": "#story",
+          "historyLength": 5,
+          "htmlClass": "scroll-smooth lenis",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": "1.3.27",
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 0.500271,
+          "storyProgress": 0,
+          "heroVideo": {
+            "currentTime": 4.984369,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": 0,
+          "storyStickyTop": 1725.640625,
+          "storyVisible": {
+            "index": 0,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        }
+      },
+      "reducedMotion": {
+        "state": {
+          "t": 74030.59999999404,
+          "scrollY": 0,
+          "hash": "#story",
+          "historyLength": 5,
+          "htmlClass": "scroll-smooth lenis",
+          "scrollBehavior": "auto",
+          "reducedMotion": true,
+          "lenisVersion": "1.3.27",
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroTop": 0,
+          "heroDistance": 1843,
+          "heroTrackHeight": 2648,
+          "storyTop": 2647.640625,
+          "storyDistance": 902,
+          "storyTrackHeight": 1707,
+          "heroProgress": 0,
+          "storyProgress": 0,
+          "heroVideo": {
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": 0,
+          "storyStickyTop": 2647.640625,
+          "storyVisible": {
+            "index": 0,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5,
+          "scrollEvents": 713,
+          "heroSeek": {
+            "seeking": 63,
+            "seeked": 63,
+            "durationsMs": {
+              "count": 63,
+              "min": 48.5,
+              "median": 187.59999999403954,
+              "max": 445,
+              "average": 187.00000000047305
+            },
+            "errors": 0
+          }
+        },
+        "cta": {
+          "target": 2544.640625,
+          "finalScrollY": 2545,
+          "difference": 0.359375,
+          "hash": "#story",
+          "historyLength": 5
+        },
+        "anchor": {
+          "target": 5283.234375,
+          "finalScrollY": 5179,
+          "difference": -104.234375,
+          "hash": "#menu",
+          "historyLength": 6
+        },
+        "ctaGlide": {
+          "samples": 32,
+          "firstWithinMs": 0,
+          "lastMoveMs": 0,
+          "maxStepPx": 0,
+          "distinctPositions": 1,
+          "endScrollY": 2545
+        },
+        "anchorGlide": {
+          "samples": 27,
+          "firstWithinMs": 0,
+          "lastMoveMs": 0,
+          "maxStepPx": 0,
+          "distinctPositions": 1,
+          "endScrollY": 5179
+        }
+      }
+    }
+  },
+  "mobileSmoke": {
+    "initial": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "lenisVersion": "1.3.27",
+      "htmlClass": "scroll-smooth lenis",
+      "scrollBehavior": "auto",
+      "documentHeight": 7735,
+      "storyTop": 2775.90625,
+      "storyDistance": 945,
+      "heroDistance": 1932,
+      "narrowPool": true
+    },
+    "menuOpen": {
+      "exists": true,
+      "prevent": true,
+      "expanded": "true",
+      "scrollY": 0
+    },
+    "mobileStoryAnchor": {
+      "menuExists": false,
+      "hash": "#story",
+      "scrollY": 2688,
+      "target": 2775.90625,
+      "difference": -87.90625,
+      "historyLength": 3
+    },
+    "modalOpen": {
+      "exists": true,
+      "prevent": true,
+      "scrollY": 5336,
+      "scrollTop": 0,
+      "scrollHeight": 1467,
+      "clientHeight": 758
+    },
+    "modalWheel": {
+      "beforeScrollY": 5336,
+      "scrollY": 5336,
+      "beforeScrollTop": 0,
+      "scrollTop": 420
+    },
+    "modalClosed": {
+      "exists": false,
+      "scrollY": 5336,
+      "hash": "#story"
+    }
+  },
+  "deepLink": {
+    "baseline": {
+      "storyDeepLink": {
+        "hash": "#story",
+        "scrollY": 0,
+        "target": 2647.640625,
+        "difference": -2647.640625,
+        "lenisVersion": null,
+        "htmlClass": "scroll-smooth",
+        "scrollBehavior": "smooth",
+        "historyLength": 2
+      },
+      "menuDeepLink": {
+        "hash": "#menu",
+        "scrollY": 5179,
+        "target": 5283.234375,
+        "difference": -104.234375,
+        "lenisVersion": null,
+        "htmlClass": "scroll-smooth",
+        "scrollBehavior": "smooth",
+        "historyLength": 3
+      }
+    },
+    "lenis": {
+      "storyDeepLink": {
+        "hash": "#story",
+        "scrollY": 0,
+        "target": 2647.640625,
+        "difference": -2647.640625,
+        "lenisVersion": "1.3.27",
+        "htmlClass": "scroll-smooth lenis",
+        "scrollBehavior": "auto",
+        "historyLength": 2
+      },
+      "menuDeepLink": {
+        "hash": "#menu",
+        "scrollY": 5179,
+        "target": 5283.234375,
+        "difference": -104.234375,
+        "lenisVersion": "1.3.27",
+        "htmlClass": "scroll-smooth lenis",
+        "scrollBehavior": "auto",
+        "historyLength": 3
+      }
+    },
+    "note": "The #story deep link already failed before Phase 4. The #menu deep link worked in both builds. This is a pre-existing issue, not introduced by Lenis."
+  },
+  "checks": {
+    "oneLenisInstance": true,
+    "nativeSmoothConflictResolved": true,
+    "heroFinalFramePreserved": true,
+    "heroSeekBehaviorPreserved": true,
+    "storyFrameOrderPreserved": true,
+    "storyDecodeGuardPreserved": true,
+    "storyPoolPreserved": true,
+    "storyPrefetchPreserved": true,
+    "storyHeightAndMappingPreserved": true,
+    "stickySectionsPreserved": true,
+    "ctaNavigationPreserved": true,
+    "menuAndFooterAnchorsPreserved": true,
+    "browserHistoryPreserved": true,
+    "resizeCorrectionPreserved": true,
+    "reducedMotionPreserved": true,
+    "mobileMenuAnchorPreserved": true,
+    "nestedModalScrollPreserved": true,
+    "noNewDependencyUpgrade": true
+  },
+  "measuredComparison": {
+    "wheelAtTop": {
+      "baselineDistinctPositions": 5,
+      "lenisDistinctPositions": 40,
+      "baselineEndScrollY": 480,
+      "lenisEndScrollY": 480
+    },
+    "heroDirect": {
+      "baselineForward": {
+        "maxLagSeconds": 1.7137,
+        "averageLagSeconds": 0.3824
+      },
+      "lenisForwardRuns": [
+        1.9029,
+        2.2922,
+        1.3894
+      ],
+      "baselineReverse": {
+        "maxLagSeconds": 1.2542,
+        "averageLagSeconds": 0.3588
+      },
+      "lenisReverseRuns": [
+        1.2758,
+        2.1138,
+        2.1029
+      ],
+      "finalFrameBoth": {
+        "baselineCurrentTime": 9.963333,
+        "lenisCurrentTime": 9.963333,
+        "duration": 10.005
+      }
+    },
+    "storyDirect": {
+      "baselineForward": {
+        "maxLagFrames": 2,
+        "averageLagFrames": 0.101,
+        "duplicateDecodeSources": 0,
+        "visibleChanges": 55
+      },
+      "lenisForwardRuns": [
+        {
+          "maxLagFrames": 8,
+          "averageLagFrames": 0.63,
+          "duplicateDecodeSources": 3,
+          "visibleChanges": 51
+        },
+        {
+          "maxLagFrames": 1,
+          "averageLagFrames": 0.03,
+          "duplicateDecodeSources": 0,
+          "visibleChanges": 55
+        },
+        {
+          "maxLagFrames": 8,
+          "averageLagFrames": 0.8,
+          "duplicateDecodeSources": 0,
+          "visibleChanges": 50
+        }
+      ],
+      "baselineReverse": {
+        "maxLagFrames": 0,
+        "averageLagFrames": 0,
+        "duplicateDecodeSources": 0
+      },
+      "lenisReverseRuns": [
+        {
+          "maxLagFrames": 0,
+          "averageLagFrames": 0,
+          "duplicateDecodeSources": 0
+        },
+        {
+          "maxLagFrames": 0,
+          "averageLagFrames": 0,
+          "duplicateDecodeSources": 0
+        },
+        {
+          "maxLagFrames": 1,
+          "averageLagFrames": 0.0101,
+          "duplicateDecodeSources": 3
+        }
+      ],
+      "phase3ProductionReference": {
+        "forwardMaxLagFrames": 8,
+        "forwardAverageLagFrames": 1.25,
+        "reverseMaxLagFrames": 2,
+        "reverseAverageLagFrames": 0.04
+      }
+    },
+    "navigation": {
+      "ctaDifference": {
+        "baseline": 0.359375,
+        "lenis": 0.359375
+      },
+      "menuAnchorDifference": {
+        "baseline": -104.234375,
+        "lenis": -104.234375
+      },
+      "experienceAnchorDifference": {
+        "baseline": -104.234375,
+        "lenis": -104.234375
+      },
+      "footerStoryDifference": {
+        "baseline": -103.640625,
+        "lenis": -103.640625
+      },
+      "historyBack": {
+        "baseline": {
+          "scrollY": 5179,
+          "hash": "#menu",
+          "historyLength": 4,
+          "htmlClass": "scroll-smooth",
+          "scrollBehavior": "smooth",
+          "reducedMotion": false,
+          "lenisVersion": null,
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 1,
+          "storyProgress": 1,
+          "heroVideo": {
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": -3336.359375,
+          "storyStickyTop": -1629.765625,
+          "storyVisible": {
+            "index": 55,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        },
+        "lenis": {
+          "scrollY": 5179,
+          "hash": "#menu",
+          "historyLength": 4,
+          "htmlClass": "scroll-smooth lenis",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": "1.3.27",
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 1,
+          "storyProgress": 1,
+          "heroVideo": {
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": -3336.359375,
+          "storyStickyTop": -1629.765625,
+          "storyVisible": {
+            "index": 55,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        }
+      },
+      "historyForward": {
+        "baseline": {
+          "scrollY": 5907,
+          "hash": "#experience",
+          "historyLength": 4,
+          "htmlClass": "scroll-smooth",
+          "scrollBehavior": "smooth",
+          "reducedMotion": false,
+          "lenisVersion": null,
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 1,
+          "storyProgress": 1,
+          "heroVideo": {
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": -4064.359375,
+          "storyStickyTop": -2357.765625,
+          "storyVisible": {
+            "index": 55,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        },
+        "lenis": {
+          "scrollY": 5907,
+          "hash": "#experience",
+          "historyLength": 4,
+          "htmlClass": "scroll-smooth lenis",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": "1.3.27",
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 1,
+          "storyProgress": 1,
+          "heroVideo": {
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": -4064.359375,
+          "storyStickyTop": -2357.765625,
+          "storyVisible": {
+            "index": 55,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        }
+      }
+    },
+    "resize": {
+      "baseline": {
+        "before": {
+          "scrollY": 922,
+          "hash": "#story",
+          "historyLength": 5,
+          "htmlClass": "scroll-smooth",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": null,
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 0.500271,
+          "storyProgress": 0,
+          "heroVideo": {
+            "currentTime": 4.984369,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": 0,
+          "storyStickyTop": 1725.640625,
+          "storyVisible": {
+            "index": 0,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        },
+        "after": {
+          "scrollY": 922,
+          "hash": "#story",
+          "historyLength": 5,
+          "htmlClass": "scroll-smooth",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": null,
+          "viewport": {
+            "width": 1200,
+            "height": 805
+          },
+          "documentHeight": 7242,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 0.500271,
+          "storyProgress": 0,
+          "heroVideo": {
+            "currentTime": 4.984369,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": 0,
+          "storyStickyTop": 1725.640625,
+          "storyVisible": {
+            "index": 0,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        }
+      },
+      "lenis": {
+        "before": {
+          "scrollY": 922,
+          "hash": "#story",
+          "historyLength": 5,
+          "htmlClass": "scroll-smooth lenis",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": "1.3.27",
+          "viewport": {
+            "width": 1424,
+            "height": 805
+          },
+          "documentHeight": 7261,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 0.500271,
+          "storyProgress": 0,
+          "heroVideo": {
+            "currentTime": 4.984369,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": 0,
+          "storyStickyTop": 1725.640625,
+          "storyVisible": {
+            "index": 0,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        },
+        "after": {
+          "scrollY": 922,
+          "hash": "#story",
+          "historyLength": 5,
+          "htmlClass": "scroll-smooth lenis",
+          "scrollBehavior": "auto",
+          "reducedMotion": false,
+          "lenisVersion": "1.3.27",
+          "viewport": {
+            "width": 1200,
+            "height": 805
+          },
+          "documentHeight": 7242,
+          "heroDistance": 1843,
+          "storyDistance": 902,
+          "heroProgress": 0.500271,
+          "storyProgress": 0,
+          "heroVideo": {
+            "currentTime": 4.984369,
+            "duration": 10.005,
+            "readyState": 4,
+            "seeking": false,
+            "paused": true,
+            "error": null
+          },
+          "heroStickyTop": 0,
+          "storyStickyTop": 1725.640625,
+          "storyVisible": {
+            "index": 0,
+            "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg"
+          },
+          "frameCount": 56,
+          "layerCount": 5
+        }
+      }
+    },
+    "programmaticGlide": {
+      "baseline": {
+        "cta": {
+          "samples": 86,
+          "firstWithinMs": 824.5,
+          "lastMoveMs": 854.3,
+          "maxStepPx": 375,
+          "distinctPositions": 29,
+          "endScrollY": 2545
+        },
+        "menuAnchor": {
+          "samples": 84,
+          "firstWithinMs": 1190.9,
+          "lastMoveMs": 1220,
+          "maxStepPx": 580,
+          "distinctPositions": 39,
+          "endScrollY": 5179
+        },
+        "experienceAnchor": {
+          "samples": 86,
+          "firstWithinMs": 462.8,
+          "lastMoveMs": 498.1,
+          "maxStepPx": 192,
+          "distinctPositions": 16,
+          "endScrollY": 5907
+        },
+        "footerStoryAnchor": {
+          "samples": 84,
+          "firstWithinMs": 1049.4,
+          "lastMoveMs": 1079.2,
+          "maxStepPx": 465,
+          "distinctPositions": 34,
+          "endScrollY": 2544
+        },
+        "footerTop": {
+          "samples": 86,
+          "firstWithinMs": 1365.6,
+          "lastMoveMs": 1397.6,
+          "maxStepPx": 530,
+          "distinctPositions": 45,
+          "endScrollY": 0
+        }
+      },
+      "lenis": {
+        "cta": {
+          "samples": 88,
+          "firstWithinMs": 1144.3,
+          "lastMoveMs": 1600.1,
+          "maxStepPx": 367,
+          "distinctPositions": 40,
+          "endScrollY": 2545
+        },
+        "menuAnchor": {
+          "samples": 85,
+          "firstWithinMs": 1232.5,
+          "lastMoveMs": 1460.2,
+          "maxStepPx": 659,
+          "distinctPositions": 41,
+          "endScrollY": 5179
+        },
+        "experienceAnchor": {
+          "samples": 86,
+          "firstWithinMs": 920.1,
+          "lastMoveMs": 1123.3,
+          "maxStepPx": 89,
+          "distinctPositions": 32,
+          "endScrollY": 5907
+        },
+        "footerStoryAnchor": {
+          "samples": 86,
+          "firstWithinMs": 1190.6,
+          "lastMoveMs": 1405.3,
+          "maxStepPx": 580,
+          "distinctPositions": 41,
+          "endScrollY": 2544
+        },
+        "footerTop": {
+          "samples": 86,
+          "firstWithinMs": 1291.9,
+          "lastMoveMs": 1568.1,
+          "maxStepPx": 1119,
+          "distinctPositions": 43,
+          "endScrollY": 0
+        }
+      }
+    }
+  },
+  "observations": [
+    "Wheel input became visibly smoother: four trusted 120px wheel events produced 40-44 distinct scroll positions with Lenis versus 5 with native smooth scrolling.",
+    "All tested navigation targets and history entries matched the native baseline; differences were the same fixed-header offsets as before.",
+    "Sticky positioning, resize correction, and the hero final frame matched the baseline.",
+    "Lenis programmatic glides are longer than native smooth scrolling, especially short jumps: CTA last movement was about 1.6s with Lenis versus about 0.85s native; the short Experience anchor was about 1.14s versus about 0.50s.",
+    "Story direct-scrub lag varied between Lenis runs (max 1-8 frames); the 8-frame runs are within the Phase 3 production range of 8 frames. One run showed three duplicate decode sources, which did not reproduce.",
+    "Fast wheel scrubbing through the Story skipped some intermediate frames, as expected when one wheel event moves several frames; the visible target stayed within 4 frames and settled on the target frame.",
+    "The #story deep link already failed in the native baseline; #menu deep links worked in both builds. This is pre-existing and outside Phase 4."
+  ],
+  "limitations": [
+    "Headless desktop Chrome only; no real-device or physical touch testing, so no real-device improvement is claimed.",
+    "Mobile smoke used emulated mobile metrics with a desktop user agent, not a real phone.",
+    "No throttled-network or low-end-CPU profile was run.",
+    "Reduced-motion wheel input and the reduced-motion Story/Hero mapping were not separately re-measured; the programmatic navigation path was measured, and the scroll-linked mapping code is unchanged.",
+    "The direct-scrub probe calls window.scrollTo while Lenis is active; that test-only path can interact with Lenis native-scroll synchronization and is not the normal wheel path.",
+    "Programmatic glide duration was not tuned to match native smooth scrolling exactly."
+  ],
+  "rawEvidence": [
+    "changes/evidence/phase4-baseline-raw.json",
+    "changes/evidence/phase4-lenis-raw.json",
+    "changes/evidence/phase4-lenis-run2-raw.json",
+    "changes/evidence/phase4-lenis-wheel-raw.json",
+    "changes/evidence/phase4-mobile-raw.json",
+    "changes/evidence/phase4-deeplink-baseline.json",
+    "changes/evidence/phase4-deeplink-lenis.json"
+  ]
+}

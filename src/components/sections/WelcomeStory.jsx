@@ -162,18 +162,24 @@ export const WelcomeStory = () => {
         layer.index = null;
       };
 
-      node.onload = () => {
-        if (layer.token !== token) return;
+      let decodeStarted = false;
+      const startDecode = () => {
+        if (decodeStarted) return;
+        decodeStarted = true;
         layer.timer = window.setTimeout(finish, DECODE_FALLBACK_MS);
         if (typeof node.decode === 'function') node.decode().then(finish, finish);
         else finish();
+      };
+
+      node.onload = () => {
+        if (layer.token !== token) return;
+        startDecode();
       };
       node.onerror = fail;
       node.src = src;
 
       if (node.complete && node.naturalWidth > 0 && node.currentSrc.endsWith(src)) {
-        if (typeof node.decode === 'function') node.decode().then(finish, finish);
-        else finish();
+        startDecode();
       }
     },
     [showBest],

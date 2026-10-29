@@ -1,0 +1,49 @@
+{
+  "initial": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "lenisVersion": "1.3.27",
+    "htmlClass": "scroll-smooth lenis",
+    "scrollBehavior": "auto",
+    "documentHeight": 7735,
+    "storyTop": 2775.90625,
+    "storyDistance": 945,
+    "heroDistance": 1932,
+    "narrowPool": true
+  },
+  "menuOpen": {
+    "exists": true,
+    "prevent": true,
+    "expanded": "true",
+    "scrollY": 0
+  },
+  "mobileStoryAnchor": {
+    "menuExists": false,
+    "hash": "#story",
+    "scrollY": 2688,
+    "target": 2775.90625,
+    "difference": -87.90625,
+    "historyLength": 3
+  },
+  "modalOpen": {
+    "exists": true,
+    "prevent": true,
+    "scrollY": 5336,
+    "scrollTop": 0,
+    "scrollHeight": 1467,
+    "clientHeight": 758
+  },
+  "modalWheel": {
+    "beforeScrollY": 5336,
+    "scrollY": 5336,
+    "beforeScrollTop": 0,
+    "scrollTop": 420
+  },
+  "modalClosed": {
+    "exists": false,
+    "scrollY": 5336,
+    "hash": "#story"
+  }
+}

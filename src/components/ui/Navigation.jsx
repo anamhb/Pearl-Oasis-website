@@ -118,6 +118,7 @@ export const Navigation = () => {
       {isMobileMenuOpen && (
         <div
           id="mobile-navigation"
+          data-lenis-prevent
           className="lg:hidden bg-[#0e0f12] border-b border-[#2b271d] px-6 py-6 transition-all max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain"
         >
           <nav className="flex flex-col gap-4 text-sm font-cinzel tracking-[0.2em] text-[#d6d3cd] uppercase">

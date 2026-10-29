@@ -1,0 +1,2533 @@
+{
+  "label": "chrome-mobile",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.47",
+    "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.19"
+  },
+  "viewport": {
+    "width": 1080,
+    "height": 1920,
+    "mobile": true,
+    "dpr": 1
+  },
+  "setup": {
+    "measure": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 0,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "videos": [
+      {
+        "label": "hero",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+        "error": null,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 10.005,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "ended": false,
+        "muted": true,
+        "defaultMuted": false,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": false,
+        "preload": "auto",
+        "crossOrigin": null,
+        "buffered": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "seekable": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920,
+          "top": 0,
+          "bottom": 1920
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "centerStack": [
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "flex flex-col items-center max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto w-full"
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "hero-copy absolute inset-0 z-20 flex flex-col items-center justify-center px-4 sm:px-6 pt-"
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none"
+          },
+          {
+            "tag": "DIV",
+            "id": "entrance",
+            "className": "relative w-full bg-[#090a0c]"
+          },
+          {
+            "tag": "MAIN",
+            "id": "",
+            "className": "flex-1"
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "min-h-screen bg-[#08090a] text-[#e5e2db] flex flex-col font-sans selection:bg-[#d4af37]/30"
+          }
+        ],
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "probably",
+          "avc1Main": "probably",
+          "avc1High": "probably",
+          "webmVp9": "probably"
+        }
+      },
+      {
+        "label": "testimonial",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "error": null,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 8,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "ended": false,
+        "muted": true,
+        "defaultMuted": false,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": true,
+        "preload": "metadata",
+        "crossOrigin": null,
+        "buffered": [
+          [
+            0,
+            0.714
+          ]
+        ],
+        "seekable": [
+          [
+            0,
+            8
+          ]
+        ],
+        "rect": {
+          "x": 0,
+          "y": 12049.265625,
+          "width": 1080,
+          "height": 800.1875,
+          "top": 12049.265625,
+          "bottom": 12849.453125
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "centerStack": [],
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "probably",
+          "avc1Main": "probably",
+          "avc1High": "probably",
+          "webmVp9": "probably"
+        }
+      }
+    ],
+    "resourceEntries": [
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+        "initiatorType": "video",
+        "duration": 915.1000000089407,
+        "transferSize": 65947,
+        "encodedBodySize": 65647,
+        "decodedBodySize": 65647,
+        "startTime": 6975.20000000298,
+        "responseEnd": 7890.300000011921
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "initiatorType": "video",
+        "duration": 612.7999999970198,
+        "transferSize": 56591,
+        "encodedBodySize": 56291,
+        "decodedBodySize": 56291,
+        "startTime": 6975.600000008941,
+        "responseEnd": 7588.4000000059605
+      },
+      {
+        "name": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+        "initiatorType": "img",
+        "duration": 61.5,
+        "transferSize": 72325,
+        "encodedBodySize": 72025,
+        "decodedBodySize": 72025,
+        "startTime": 6976.800000011921,
+        "responseEnd": 7038.300000011921
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "initiatorType": "video",
+        "duration": 3998.8999999910593,
+        "transferSize": 3020138,
+        "encodedBodySize": 3019838,
+        "decodedBodySize": 3019838,
+        "startTime": 7008.600000008941,
+        "responseEnd": 11007.5
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "initiatorType": "video",
+        "duration": 1633.9000000059605,
+        "transferSize": 300,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0,
+        "startTime": 7012.4000000059605,
+        "responseEnd": 8646.300000011921
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "initiatorType": "video",
+        "duration": 610,
+        "transferSize": 35203,
+        "encodedBodySize": 34903,
+        "decodedBodySize": 34903,
+        "startTime": 8645.800000011921,
+        "responseEnd": 9255.800000011921
+      },
+      {
+        "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "initiatorType": "video",
+        "duration": 1155,
+        "transferSize": 300,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0,
+        "startTime": 9258.90000000596,
+        "responseEnd": 10413.90000000596
+      }
+    ]
+  },
+  "mediaCapabilities": {
+    "powerEfficient": false,
+    "smooth": true,
+    "supported": true,
+    "keySystemAccess": null
+  },
+  "heroMid": {
+    "state": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 2198,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "video": {
+      "label": "hero",
+      "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+      "error": null,
+      "readyState": 4,
+      "networkState": 1,
+      "duration": 10.005,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "currentTime": 4.9828,
+      "paused": true,
+      "seeking": false,
+      "ended": false,
+      "muted": true,
+      "defaultMuted": false,
+      "playsInline": true,
+      "autoplay": false,
+      "loop": false,
+      "preload": "auto",
+      "crossOrigin": null,
+      "buffered": [
+        [
+          0,
+          10.005
+        ]
+      ],
+      "seekable": [
+        [
+          0,
+          10.005
+        ]
+      ],
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1080,
+        "height": 1920,
+        "top": 0,
+        "bottom": 1920
+      },
+      "style": {
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "objectFit": "cover",
+        "objectPosition": "50% 50%",
+        "zIndex": "auto",
+        "filter": "none",
+        "transform": "none"
+      },
+      "centerStack": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "absolute inset-0 z-20 flex flex-col items-center justify-end px-4 sm:px-6 pb-10 sm:pb-12 m"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none"
+        },
+        {
+          "tag": "DIV",
+          "id": "entrance",
+          "className": "relative w-full bg-[#090a0c]"
+        },
+        {
+          "tag": "MAIN",
+          "id": "",
+          "className": "flex-1"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "min-h-screen bg-[#08090a] text-[#e5e2db] flex flex-col font-sans selection:bg-[#d4af37]/30"
+        },
+        {
+          "tag": "DIV",
+          "id": "root",
+          "className": ""
+        }
+      ],
+      "canPlayType": {
+        "mp4": "maybe",
+        "avc1Baseline": "probably",
+        "avc1Main": "probably",
+        "avc1High": "probably",
+        "webmVp9": "probably"
+      }
+    },
+    "events": [
+      {
+        "t": 8233.20000000298,
+        "label": "hero",
+        "type": "durationchange",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8233.800000011921,
+        "label": "hero",
+        "type": "loadedmetadata",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8309.40000000596,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438,
+        "label": "hero",
+        "type": "loadeddata",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438.300000011921,
+        "label": "hero",
+        "type": "canplay",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438.70000000298,
+        "label": "hero",
+        "type": "canplaythrough",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8677.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9057.300000011921,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9422.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9792.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10153.90000000596,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10519.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10872.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 11032.5,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 11032.60000000894,
+        "label": "hero",
+        "type": "suspend",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 15199.10000000894,
+        "label": "hero",
+        "type": "seeking",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 1,
+        "paused": true,
+        "seeking": true,
+        "error": null
+      },
+      {
+        "t": 16592.30000001192,
+        "label": "hero",
+        "type": "seeked",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 16593.10000000894,
+        "label": "hero",
+        "type": "canplay",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 16593.20000000298,
+        "label": "hero",
+        "type": "canplaythrough",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      }
+    ]
+  },
+  "heroEnd": {
+    "state": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 4395,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "video": {
+      "label": "hero",
+      "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+      "error": null,
+      "readyState": 4,
+      "networkState": 1,
+      "duration": 10.005,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "currentTime": 9.963333,
+      "paused": true,
+      "seeking": false,
+      "ended": false,
+      "muted": true,
+      "defaultMuted": false,
+      "playsInline": true,
+      "autoplay": false,
+      "loop": false,
+      "preload": "auto",
+      "crossOrigin": null,
+      "buffered": [
+        [
+          0,
+          10.005
+        ]
+      ],
+      "seekable": [
+        [
+          0,
+          10.005
+        ]
+      ],
+      "rect": {
+        "x": 0,
+        "y": -0.125,
+        "width": 1080,
+        "height": 1920,
+        "top": -0.125,
+        "bottom": 1919.875
+      },
+      "style": {
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "objectFit": "cover",
+        "objectPosition": "50% 50%",
+        "zIndex": "auto",
+        "filter": "none",
+        "transform": "none"
+      },
+      "centerStack": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "absolute inset-0 z-20 flex flex-col items-center justify-end px-4 sm:px-6 pb-10 sm:pb-12 m"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none"
+        },
+        {
+          "tag": "DIV",
+          "id": "entrance",
+          "className": "relative w-full bg-[#090a0c]"
+        },
+        {
+          "tag": "MAIN",
+          "id": "",
+          "className": "flex-1"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "min-h-screen bg-[#08090a] text-[#e5e2db] flex flex-col font-sans selection:bg-[#d4af37]/30"
+        },
+        {
+          "tag": "DIV",
+          "id": "root",
+          "className": ""
+        }
+      ],
+      "canPlayType": {
+        "mp4": "maybe",
+        "avc1Baseline": "probably",
+        "avc1Main": "probably",
+        "avc1High": "probably",
+        "webmVp9": "probably"
+      }
+    },
+    "events": [
+      {
+        "t": 8233.20000000298,
+        "label": "hero",
+        "type": "durationchange",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8233.800000011921,
+        "label": "hero",
+        "type": "loadedmetadata",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8309.40000000596,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438,
+        "label": "hero",
+        "type": "loadeddata",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438.300000011921,
+        "label": "hero",
+        "type": "canplay",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438.70000000298,
+        "label": "hero",
+        "type": "canplaythrough",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8677.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9057.300000011921,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9422.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9792.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10153.90000000596,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10519.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10872.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 11032.5,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 11032.60000000894,
+        "label": "hero",
+        "type": "suspend",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 15199.10000000894,
+        "label": "hero",
+        "type": "seeking",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 1,
+        "paused": true,
+        "seeking": true,
+        "error": null
+      },
+      {
+        "t": 16592.30000001192,
+        "label": "hero",
+        "type": "seeked",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 16593.10000000894,
+        "label": "hero",
+        "type": "canplay",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 16593.20000000298,
+        "label": "hero",
+        "type": "canplaythrough",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 18402,
+        "label": "hero",
+        "type": "seeking",
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 1,
+        "paused": true,
+        "seeking": true,
+        "error": null
+      },
+      {
+        "t": 19304.10000000894,
+        "label": "hero",
+        "type": "seeked",
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 19304.20000000298,
+        "label": "hero",
+        "type": "canplay",
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 19304.40000000596,
+        "label": "hero",
+        "type": "canplaythrough",
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      }
+    ]
+  },
+  "testimonial": {
+    "state": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 11432,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "video": {
+      "label": "testimonial",
+      "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "poster": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+      "error": null,
+      "readyState": 3,
+      "networkState": 2,
+      "duration": 8,
+      "videoWidth": 1280,
+      "videoHeight": 720,
+      "currentTime": 0.028415,
+      "paused": false,
+      "seeking": false,
+      "ended": false,
+      "muted": true,
+      "defaultMuted": false,
+      "playsInline": true,
+      "autoplay": false,
+      "loop": true,
+      "preload": "metadata",
+      "crossOrigin": null,
+      "buffered": [
+        [
+          0,
+          0.888
+        ]
+      ],
+      "seekable": [
+        [
+          0,
+          8
+        ]
+      ],
+      "rect": {
+        "x": 0,
+        "y": 617.265625,
+        "width": 1080,
+        "height": 800.1875,
+        "top": 617.265625,
+        "bottom": 1417.453125
+      },
+      "style": {
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "objectFit": "cover",
+        "objectPosition": "50% 50%",
+        "zIndex": "auto",
+        "filter": "none",
+        "transform": "none"
+      },
+      "centerStack": [
+        {
+          "tag": "P",
+          "id": "",
+          "className": "testimonial-card__quote"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "testimonial-card__body"
+        },
+        {
+          "tag": "ARTICLE",
+          "id": "",
+          "className": "testimonial-card testimonial-card--active"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "testimonial-arc"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "testimonial-carousel"
+        }
+      ],
+      "canPlayType": {
+        "mp4": "maybe",
+        "avc1Baseline": "probably",
+        "avc1Main": "probably",
+        "avc1High": "probably",
+        "webmVp9": "probably"
+      }
+    },
+    "events": [
+      {
+        "t": 10182.40000000596,
+        "label": "testimonial",
+        "type": "durationchange",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10182.800000011921,
+        "label": "testimonial",
+        "type": "loadedmetadata",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10183.10000000894,
+        "label": "testimonial",
+        "type": "loadeddata",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10183.20000000298,
+        "label": "testimonial",
+        "type": "canplay",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10414.10000000894,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10414.20000000298,
+        "label": "testimonial",
+        "type": "suspend",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10414.20000000298,
+        "label": "testimonial",
+        "type": "canplaythrough",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 21499.10000000894,
+        "label": "testimonial",
+        "type": "play",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 21499.40000000596,
+        "label": "testimonial",
+        "type": "playing",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 26024.80000001192,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 26387.10000000894,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0.02,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 26478,
+        "label": "testimonial",
+        "type": "canplaythrough",
+        "currentTime": 0.04,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      }
+    ],
+    "playErrors": []
+  },
+  "story": {
+    "state": {
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "devicePixelRatio": 1
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "documentHeight": 13352,
+      "scrollY": 7497,
+      "visibilityState": "visible",
+      "reducedMotion": false,
+      "hero": {
+        "top": 0,
+        "height": 6315,
+        "distance": 4395
+      },
+      "experience": {
+        "top": 12048.265625,
+        "height": 801
+      },
+      "story": {
+        "top": 6314.875,
+        "height": 4070,
+        "distance": 2150
+      },
+      "storyVisibleIndex": 0,
+      "videoCount": 2
+    },
+    "loads": [
+      {
+        "t": 7953.70000000298,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      },
+      {
+        "t": 27234.5,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      },
+      {
+        "t": 28289.10000000894,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      }
+    ],
+    "decodes": [
+      {
+        "t": 26892,
+        "end": 26912.70000000298,
+        "duration": 20.80000001192093,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+        "ok": true
+      },
+      {
+        "t": 27108.5,
+        "end": 27118.90000000596,
+        "duration": 10.400000005960464,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-013.jpg",
+        "ok": true
+      },
+      {
+        "t": 27109,
+        "end": 27140.60000000894,
+        "duration": 31.600000008940697,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-025.jpg",
+        "ok": true
+      },
+      {
+        "t": 27110.30000001192,
+        "end": 27167.10000000894,
+        "duration": 56.79999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-019.jpg",
+        "ok": true
+      },
+      {
+        "t": 27234.40000000596,
+        "end": 27240.80000001192,
+        "duration": 6.4000000059604645,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+        "ok": true
+      },
+      {
+        "t": 27234.60000000894,
+        "end": 27263.40000000596,
+        "duration": 28.799999997019768,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+        "ok": true
+      },
+      {
+        "t": 27234.70000000298,
+        "end": 27269.70000000298,
+        "duration": 35,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+        "ok": true
+      },
+      {
+        "t": 27234.90000000596,
+        "end": 27279.30000001192,
+        "duration": 44.400000005960464,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-011.jpg",
+        "ok": true
+      },
+      {
+        "t": 28289.20000000298,
+        "end": 28293.5,
+        "duration": 4.299999997019768,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "ok": true
+      },
+      {
+        "t": 28289.5,
+        "end": 28298.5,
+        "duration": 9,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-047.jpg",
+        "ok": true
+      },
+      {
+        "t": 28292.5,
+        "end": 28311.40000000596,
+        "duration": 18.900000005960464,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+        "ok": true
+      },
+      {
+        "t": 28345.5,
+        "end": 28364.20000000298,
+        "duration": 18.700000002980232,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+        "ok": true
+      },
+      {
+        "t": 28346,
+        "end": 28376,
+        "duration": 30,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-033.jpg",
+        "ok": true
+      },
+      {
+        "t": 28361.80000001192,
+        "end": 28387.80000001192,
+        "duration": 26,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-035.jpg",
+        "ok": true
+      },
+      {
+        "t": 28367.5,
+        "end": 28398.20000000298,
+        "duration": 30.700000002980232,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+        "ok": true
+      }
+    ],
+    "errors": []
+  },
+  "resources": [
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+      "initiatorType": "video",
+      "duration": 915.1000000089407,
+      "transferSize": 65947,
+      "encodedBodySize": 65647,
+      "decodedBodySize": 65647,
+      "startTime": 6975.20000000298,
+      "responseEnd": 7890.300000011921
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+      "initiatorType": "video",
+      "duration": 612.7999999970198,
+      "transferSize": 56591,
+      "encodedBodySize": 56291,
+      "decodedBodySize": 56291,
+      "startTime": 6975.600000008941,
+      "responseEnd": 7588.4000000059605
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+      "initiatorType": "img",
+      "duration": 61.5,
+      "transferSize": 72325,
+      "encodedBodySize": 72025,
+      "decodedBodySize": 72025,
+      "startTime": 6976.800000011921,
+      "responseEnd": 7038.300000011921
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+      "initiatorType": "video",
+      "duration": 3998.8999999910593,
+      "transferSize": 3020138,
+      "encodedBodySize": 3019838,
+      "decodedBodySize": 3019838,
+      "startTime": 7008.600000008941,
+      "responseEnd": 11007.5
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "initiatorType": "video",
+      "duration": 1633.9000000059605,
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "decodedBodySize": 0,
+      "startTime": 7012.4000000059605,
+      "responseEnd": 8646.300000011921
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "initiatorType": "video",
+      "duration": 610,
+      "transferSize": 35203,
+      "encodedBodySize": 34903,
+      "decodedBodySize": 34903,
+      "startTime": 8645.800000011921,
+      "responseEnd": 9255.800000011921
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "initiatorType": "video",
+      "duration": 1155,
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "decodedBodySize": 0,
+      "startTime": 9258.90000000596,
+      "responseEnd": 10413.90000000596
+    },
+    {
+      "name": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+      "initiatorType": "video",
+      "duration": 2755.0999999940395,
+      "transferSize": 3606915,
+      "encodedBodySize": 3606615,
+      "decodedBodySize": 3606615,
+      "startTime": 24539.80000001192,
+      "responseEnd": 27294.90000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+      "initiatorType": "img",
+      "duration": 325.40000000596046,
+      "transferSize": 56554,
+      "encodedBodySize": 56254,
+      "decodedBodySize": 56254,
+      "startTime": 26555.90000000596,
+      "responseEnd": 26881.30000001192
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-013.jpg",
+      "initiatorType": "img",
+      "duration": 486.79999999701977,
+      "transferSize": 32969,
+      "encodedBodySize": 32669,
+      "decodedBodySize": 32669,
+      "startTime": 26556.10000000894,
+      "responseEnd": 27042.90000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-019.jpg",
+      "initiatorType": "img",
+      "duration": 499.79999999701977,
+      "transferSize": 32988,
+      "encodedBodySize": 32688,
+      "decodedBodySize": 32688,
+      "startTime": 26556.20000000298,
+      "responseEnd": 27056
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-025.jpg",
+      "initiatorType": "img",
+      "duration": 488.40000000596046,
+      "transferSize": 33452,
+      "encodedBodySize": 33152,
+      "decodedBodySize": 33152,
+      "startTime": 26556.5,
+      "responseEnd": 27044.90000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+      "initiatorType": "img",
+      "duration": 317.29999999701977,
+      "transferSize": 48477,
+      "encodedBodySize": 48177,
+      "decodedBodySize": 48177,
+      "startTime": 26913.40000000596,
+      "responseEnd": 27230.70000000298
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+      "initiatorType": "img",
+      "duration": 110.69999998807907,
+      "transferSize": 42010,
+      "encodedBodySize": 41710,
+      "decodedBodySize": 41710,
+      "startTime": 27119.30000001192,
+      "responseEnd": 27230
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+      "initiatorType": "img",
+      "duration": 90.40000000596046,
+      "transferSize": 37942,
+      "encodedBodySize": 37642,
+      "decodedBodySize": 37642,
+      "startTime": 27141,
+      "responseEnd": 27231.40000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-011.jpg",
+      "initiatorType": "img",
+      "duration": 64.20000000298023,
+      "transferSize": 35106,
+      "encodedBodySize": 34806,
+      "decodedBodySize": 34806,
+      "startTime": 27167.5,
+      "responseEnd": 27231.70000000298
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+      "initiatorType": "img",
+      "duration": 155.09999999403954,
+      "transferSize": 30984,
+      "encodedBodySize": 30684,
+      "decodedBodySize": 30684,
+      "startTime": 28131.10000000894,
+      "responseEnd": 28286.20000000298
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-047.jpg",
+      "initiatorType": "img",
+      "duration": 155.1000000089407,
+      "transferSize": 27099,
+      "encodedBodySize": 26799,
+      "decodedBodySize": 26799,
+      "startTime": 28131.5,
+      "responseEnd": 28286.60000000894
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+      "initiatorType": "img",
+      "duration": 159.70000000298023,
+      "transferSize": 26668,
+      "encodedBodySize": 26368,
+      "decodedBodySize": 26368,
+      "startTime": 28131.90000000596,
+      "responseEnd": 28291.60000000894
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+      "initiatorType": "img",
+      "duration": 30.200000002980232,
+      "transferSize": 30617,
+      "encodedBodySize": 30317,
+      "decodedBodySize": 30317,
+      "startTime": 28310.70000000298,
+      "responseEnd": 28340.90000000596
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-033.jpg",
+      "initiatorType": "img",
+      "duration": 33.400000005960464,
+      "transferSize": 30314,
+      "encodedBodySize": 30014,
+      "decodedBodySize": 30014,
+      "startTime": 28310.90000000596,
+      "responseEnd": 28344.30000001192
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+      "initiatorType": "img",
+      "duration": 55.1000000089407,
+      "transferSize": 30524,
+      "encodedBodySize": 30224,
+      "decodedBodySize": 30224,
+      "startTime": 28311,
+      "responseEnd": 28366.10000000894
+    },
+    {
+      "name": "http://localhost:4173/video-frames-second/ezgif-frame-035.jpg",
+      "initiatorType": "img",
+      "duration": 39.099999994039536,
+      "transferSize": 30415,
+      "encodedBodySize": 30115,
+      "decodedBodySize": 30115,
+      "startTime": 28311.80000001192,
+      "responseEnd": 28350.90000000596
+    }
+  ],
+  "page": {
+    "videoEvents": [
+      {
+        "t": 8233.20000000298,
+        "label": "hero",
+        "type": "durationchange",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8233.800000011921,
+        "label": "hero",
+        "type": "loadedmetadata",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8309.40000000596,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438,
+        "label": "hero",
+        "type": "loadeddata",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438.300000011921,
+        "label": "hero",
+        "type": "canplay",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8438.70000000298,
+        "label": "hero",
+        "type": "canplaythrough",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 8677.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9057.300000011921,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9422.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 9792.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10153.90000000596,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10182.40000000596,
+        "label": "testimonial",
+        "type": "durationchange",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10182.800000011921,
+        "label": "testimonial",
+        "type": "loadedmetadata",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10183.10000000894,
+        "label": "testimonial",
+        "type": "loadeddata",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10183.20000000298,
+        "label": "testimonial",
+        "type": "canplay",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10414.10000000894,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10414.20000000298,
+        "label": "testimonial",
+        "type": "suspend",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10414.20000000298,
+        "label": "testimonial",
+        "type": "canplaythrough",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10519.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 10872.20000000298,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 11032.5,
+        "label": "hero",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 11032.60000000894,
+        "label": "hero",
+        "type": "suspend",
+        "currentTime": 0,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 15199.10000000894,
+        "label": "hero",
+        "type": "seeking",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 1,
+        "paused": true,
+        "seeking": true,
+        "error": null
+      },
+      {
+        "t": 16592.30000001192,
+        "label": "hero",
+        "type": "seeked",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 16593.10000000894,
+        "label": "hero",
+        "type": "canplay",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 16593.20000000298,
+        "label": "hero",
+        "type": "canplaythrough",
+        "currentTime": 4.9828,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 18402,
+        "label": "hero",
+        "type": "seeking",
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "readyState": 1,
+        "networkState": 1,
+        "paused": true,
+        "seeking": true,
+        "error": null
+      },
+      {
+        "t": 19304.10000000894,
+        "label": "hero",
+        "type": "seeked",
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 19304.20000000298,
+        "label": "hero",
+        "type": "canplay",
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 19304.40000000596,
+        "label": "hero",
+        "type": "canplaythrough",
+        "currentTime": 9.963333,
+        "duration": 10.005,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 21499.10000000894,
+        "label": "testimonial",
+        "type": "play",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 21499.40000000596,
+        "label": "testimonial",
+        "type": "playing",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 26024.80000001192,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 26387.10000000894,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0.02,
+        "duration": 8,
+        "readyState": 3,
+        "networkState": 2,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 26478,
+        "label": "testimonial",
+        "type": "canplaythrough",
+        "currentTime": 0.04,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": false,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 26557.20000000298,
+        "label": "testimonial",
+        "type": "pause",
+        "currentTime": 0.050042,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 26753.5,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0.050042,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 27107.70000000298,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0.050042,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 2,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 27335.60000000894,
+        "label": "testimonial",
+        "type": "progress",
+        "currentTime": 0.050042,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      {
+        "t": 27335.60000000894,
+        "label": "testimonial",
+        "type": "suspend",
+        "currentTime": 0.050042,
+        "duration": 8,
+        "readyState": 4,
+        "networkState": 1,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      }
+    ],
+    "imageLoads": [
+      {
+        "t": 7953.70000000298,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      },
+      {
+        "t": 27234.5,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      },
+      {
+        "t": 28289.10000000894,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "naturalWidth": 1280,
+        "naturalHeight": 720
+      }
+    ],
+    "imageDecodes": [
+      {
+        "t": 26892,
+        "end": 26912.70000000298,
+        "duration": 20.80000001192093,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+        "ok": true
+      },
+      {
+        "t": 27108.5,
+        "end": 27118.90000000596,
+        "duration": 10.400000005960464,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-013.jpg",
+        "ok": true
+      },
+      {
+        "t": 27109,
+        "end": 27140.60000000894,
+        "duration": 31.600000008940697,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-025.jpg",
+        "ok": true
+      },
+      {
+        "t": 27110.30000001192,
+        "end": 27167.10000000894,
+        "duration": 56.79999999701977,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-019.jpg",
+        "ok": true
+      },
+      {
+        "t": 27234.40000000596,
+        "end": 27240.80000001192,
+        "duration": 6.4000000059604645,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+        "ok": true
+      },
+      {
+        "t": 27234.60000000894,
+        "end": 27263.40000000596,
+        "duration": 28.799999997019768,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+        "ok": true
+      },
+      {
+        "t": 27234.70000000298,
+        "end": 27269.70000000298,
+        "duration": 35,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+        "ok": true
+      },
+      {
+        "t": 27234.90000000596,
+        "end": 27279.30000001192,
+        "duration": 44.400000005960464,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-011.jpg",
+        "ok": true
+      },
+      {
+        "t": 28289.20000000298,
+        "end": 28293.5,
+        "duration": 4.299999997019768,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "ok": true
+      },
+      {
+        "t": 28289.5,
+        "end": 28298.5,
+        "duration": 9,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-047.jpg",
+        "ok": true
+      },
+      {
+        "t": 28292.5,
+        "end": 28311.40000000596,
+        "duration": 18.900000005960464,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+        "ok": true
+      },
+      {
+        "t": 28345.5,
+        "end": 28364.20000000298,
+        "duration": 18.700000002980232,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+        "ok": true
+      },
+      {
+        "t": 28346,
+        "end": 28376,
+        "duration": 30,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-033.jpg",
+        "ok": true
+      },
+      {
+        "t": 28361.80000001192,
+        "end": 28387.80000001192,
+        "duration": 26,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-035.jpg",
+        "ok": true
+      },
+      {
+        "t": 28367.5,
+        "end": 28398.20000000298,
+        "duration": 30.700000002980232,
+        "src": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+        "ok": true
+      }
+    ],
+    "imageErrors": [],
+    "playErrors": [],
+    "console": [],
+    "errors": [],
+    "unhandled": []
+  },
+  "network": {
+    "responses": [
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-001.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 4646,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "status": 206,
+        "mimeType": "video/mp4",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 414,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "status": 206,
+        "mimeType": "video/mp4",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 390,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 50615,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "status": 206,
+        "mimeType": "video/mp4",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 35202,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "status": 206,
+        "mimeType": "video/mp4",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 19487,
+        "protocol": "h2"
+      },
+      {
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "status": 206,
+        "mimeType": "video/mp4",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 171464,
+        "protocol": "h2"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-007.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-013.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-025.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-019.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-009.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-008.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-011.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-031.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-047.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-056.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-033.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-035.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+        "status": 200,
+        "mimeType": "image/jpeg",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "encodedDataLength": 268,
+        "protocol": "http/1.1"
+      }
+    ],
+    "failures": [
+      {
+        "requestId": "20248.94",
+        "errorText": "net::ERR_ABORTED",
+        "canceled": true,
+        "type": "Media"
+      },
+      {
+        "requestId": "20248.97",
+        "errorText": "net::ERR_ABORTED",
+        "canceled": true,
+        "type": "Media"
+      }
+    ]
+  },
+  "cdpConsole": [],
+  "cdpExceptions": []
+}

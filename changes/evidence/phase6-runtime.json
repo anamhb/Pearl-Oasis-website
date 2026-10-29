@@ -1,0 +1,3145 @@
+{
+  "phase": 6,
+  "date": "2026-10-27",
+  "scope": "Cross-device-profile video diagnostics for the hero and testimonials films, plus a separate Story frame-lag check. No source changes.",
+  "build": {
+    "preview": "http://localhost:4173",
+    "productionAsset": "dist/assets/index-DdC-1IOQ.js",
+    "latestCommit": "acbdd68",
+    "sourceChanged": false,
+    "cacheCondition": "cold; Network.setCacheDisabled=true for each browser profile",
+    "scrollPath": "load; hero at 50% then 100%; testimonials section top + 120px; Story at 10% then 55%",
+    "autoplayPolicy": "--autoplay-policy=no-user-gesture-required for both browsers"
+  },
+  "browsers": {
+    "ltbrowser": {
+      "product": "HeadlessChrome/107.0.5304.110",
+      "executable": "%LOCALAPPDATA%/Lambdatest/LT Browser/Application/LTBrowser.exe",
+      "note": "Headless automation of the installed LT Browser Chromium build. The user report came from the LT Browser UI; the codec finding is a build-level media capability, not a viewport effect."
+    },
+    "chrome": {
+      "product": "Chrome/156.0.8078.47",
+      "executable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "note": "Current Chrome used as the working control."
+    }
+  },
+  "profiles": {
+    "ltbrowser-1792x1120": {
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "HeadlessChrome/107.0.5304.110",
+        "revision": "@",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+        "jsVersion": "10.7.193.22"
+      },
+      "viewport": {
+        "width": 1792,
+        "height": 1120,
+        "mobile": false,
+        "dpr": 1
+      },
+      "mediaCapabilities": {
+        "powerEfficient": false,
+        "smooth": false,
+        "supported": false,
+        "keySystemAccess": null
+      },
+      "layout": {
+        "documentHeight": 8989,
+        "hero": {
+          "top": 0,
+          "height": 3684,
+          "distance": 2564
+        },
+        "experience": {
+          "top": 7715.0625,
+          "height": 817
+        },
+        "story": {
+          "top": 3683.671875,
+          "height": 2374,
+          "distance": 1254
+        },
+        "storyVisibleIndex": 0
+      },
+      "hero": {
+        "label": "hero",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "readyState": 0,
+        "networkState": 3,
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": false,
+        "preload": "auto",
+        "buffered": [],
+        "seekable": [],
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1786,
+          "height": 1120,
+          "top": 0,
+          "bottom": 1120
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "",
+          "avc1Main": "",
+          "avc1High": "",
+          "webmVp9": "probably"
+        }
+      },
+      "testimonial": {
+        "label": "testimonial",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "readyState": 0,
+        "networkState": 3,
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": true,
+        "preload": "metadata",
+        "buffered": [],
+        "seekable": [],
+        "rect": {
+          "x": 0,
+          "y": 7716.0625,
+          "width": 1786,
+          "height": 816,
+          "top": 7716.0625,
+          "bottom": 8532.0625
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "",
+          "avc1Main": "",
+          "avc1High": "",
+          "webmVp9": "probably"
+        }
+      },
+      "heroMid": {
+        "scrollY": 1282,
+        "currentTime": 0,
+        "seeking": false,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      },
+      "heroEnd": {
+        "scrollY": 2564,
+        "currentTime": 0,
+        "seeking": false,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      },
+      "testimonialRun": {
+        "currentTime": 0,
+        "paused": true,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "playErrors": [
+          {
+            "t": 18082.90000000596,
+            "label": "testimonial",
+            "error": "NotSupportedError: The element has no supported sources.",
+            "name": "NotSupportedError",
+            "message": "The element has no supported sources."
+          }
+        ]
+      },
+      "story": {
+        "visibleIndex": 1,
+        "decodeMs": {
+          "count": 13,
+          "min": 158.5,
+          "median": 227,
+          "p90": 459.2,
+          "max": 547.1,
+          "sum": 3540.8
+        },
+        "loads": 3,
+        "decodes": 13,
+        "errors": 0,
+        "frameRequests": {
+          "count": 14,
+          "cacheHits": 0,
+          "requestMs": {
+            "count": 14,
+            "min": 48.6,
+            "median": 594.3,
+            "p90": 1189.3,
+            "max": 1195.4,
+            "sum": 8269.8
+          },
+          "transferBytes": {
+            "count": 14,
+            "min": 27099,
+            "median": 33617,
+            "p90": 63350,
+            "max": 72325,
+            "sum": 564335
+          },
+          "frames": [
+            {
+              "name": "ezgif-frame-001.jpg",
+              "duration": 48.6,
+              "transferSize": 72325,
+              "startTime": 5367.7
+            },
+            {
+              "name": "ezgif-frame-006.jpg",
+              "duration": 161,
+              "transferSize": 63350,
+              "startTime": 28696.3
+            },
+            {
+              "name": "ezgif-frame-011.jpg",
+              "duration": 138.1,
+              "transferSize": 35106,
+              "startTime": 28697
+            },
+            {
+              "name": "ezgif-frame-016.jpg",
+              "duration": 799.8,
+              "transferSize": 32943,
+              "startTime": 28697.4
+            },
+            {
+              "name": "ezgif-frame-021.jpg",
+              "duration": 665.9,
+              "transferSize": 33617,
+              "startTime": 28697.8
+            },
+            {
+              "name": "ezgif-frame-007.jpg",
+              "duration": 404.4,
+              "transferSize": 56554,
+              "startTime": 29172.4
+            },
+            {
+              "name": "ezgif-frame-008.jpg",
+              "duration": 414.6,
+              "transferSize": 48477,
+              "startTime": 29172.8
+            },
+            {
+              "name": "ezgif-frame-009.jpg",
+              "duration": 594.3,
+              "transferSize": 42010,
+              "startTime": 29696.9
+            },
+            {
+              "name": "ezgif-frame-031.jpg",
+              "duration": 1189.3,
+              "transferSize": 30984,
+              "startTime": 29894.1
+            },
+            {
+              "name": "ezgif-frame-047.jpg",
+              "duration": 1195.4,
+              "transferSize": 27099,
+              "startTime": 29894.5
+            },
+            {
+              "name": "ezgif-frame-032.jpg",
+              "duration": 1005.2,
+              "transferSize": 30617,
+              "startTime": 30120.3
+            },
+            {
+              "name": "ezgif-frame-033.jpg",
+              "duration": 1149,
+              "transferSize": 30314,
+              "startTime": 30605.2
+            },
+            {
+              "name": "ezgif-frame-034.jpg",
+              "duration": 250.2,
+              "transferSize": 30524,
+              "startTime": 31509.5
+            },
+            {
+              "name": "ezgif-frame-035.jpg",
+              "duration": 254,
+              "transferSize": 30415,
+              "startTime": 31509.9
+            }
+          ]
+        }
+      },
+      "network": {
+        "videoResponses": [
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 631,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 298,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 35193,
+            "protocol": "h2"
+          }
+        ],
+        "mediaFailures": [
+          {
+            "requestId": "22024.93",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          },
+          {
+            "requestId": "22024.94",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          }
+        ]
+      },
+      "eventExcerpts": {
+        "hero": [
+          {
+            "t": 7621.5,
+            "label": "hero",
+            "type": "error",
+            "currentTime": 0,
+            "duration": null,
+            "readyState": 0,
+            "networkState": 3,
+            "paused": true,
+            "seeking": false,
+            "error": {
+              "code": 4,
+              "message": ""
+            }
+          }
+        ],
+        "testimonial": [
+          {
+            "t": 8643.10000000894,
+            "label": "testimonial",
+            "type": "error",
+            "currentTime": 0,
+            "duration": null,
+            "readyState": 0,
+            "networkState": 3,
+            "paused": true,
+            "seeking": false,
+            "error": {
+              "code": 4,
+              "message": ""
+            }
+          }
+        ]
+      },
+      "pageErrors": [
+        {
+          "t": 7621.100000008941
+        },
+        {
+          "t": 8643
+        }
+      ],
+      "pageConsole": [],
+      "pageUnhandled": []
+    },
+    "ltbrowser-1080x1920-raw": {
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "HeadlessChrome/107.0.5304.110",
+        "revision": "@",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+        "jsVersion": "10.7.193.22"
+      },
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "mobile": true,
+        "dpr": 1
+      },
+      "mediaCapabilities": {
+        "powerEfficient": false,
+        "smooth": false,
+        "supported": false,
+        "keySystemAccess": null
+      },
+      "layout": {
+        "documentHeight": 13352,
+        "hero": {
+          "top": 0,
+          "height": 6315,
+          "distance": 4395
+        },
+        "experience": {
+          "top": 12048.265625,
+          "height": 801
+        },
+        "story": {
+          "top": 6314.875,
+          "height": 4070,
+          "distance": 2150
+        },
+        "storyVisibleIndex": 0
+      },
+      "hero": {
+        "label": "hero",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "readyState": 0,
+        "networkState": 3,
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": false,
+        "preload": "auto",
+        "buffered": [],
+        "seekable": [],
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920,
+          "top": 0,
+          "bottom": 1920
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "",
+          "avc1Main": "",
+          "avc1High": "",
+          "webmVp9": "probably"
+        }
+      },
+      "testimonial": {
+        "label": "testimonial",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "readyState": 0,
+        "networkState": 3,
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": true,
+        "preload": "metadata",
+        "buffered": [],
+        "seekable": [],
+        "rect": {
+          "x": 0,
+          "y": 12049.265625,
+          "width": 1080,
+          "height": 800.1875,
+          "top": 12049.265625,
+          "bottom": 12849.453125
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "",
+          "avc1Main": "",
+          "avc1High": "",
+          "webmVp9": "probably"
+        }
+      },
+      "heroMid": {
+        "scrollY": 2197,
+        "currentTime": 0,
+        "seeking": false,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      },
+      "heroEnd": {
+        "scrollY": 4395,
+        "currentTime": 0,
+        "seeking": false,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      },
+      "testimonialRun": {
+        "currentTime": 0,
+        "paused": true,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "playErrors": [
+          {
+            "t": 18689.90000000596,
+            "label": "testimonial",
+            "error": "NotSupportedError: The element has no supported sources.",
+            "name": "NotSupportedError",
+            "message": "The element has no supported sources."
+          }
+        ]
+      },
+      "story": {
+        "visibleIndex": 0,
+        "decodeMs": {
+          "count": 15,
+          "min": 161.7,
+          "median": 236.8,
+          "p90": 425.3,
+          "max": 497.2,
+          "sum": 3865.3
+        },
+        "loads": 3,
+        "decodes": 15,
+        "errors": 0,
+        "frameRequests": {
+          "count": 16,
+          "cacheHits": 0,
+          "requestMs": {
+            "count": 16,
+            "min": 61.2,
+            "median": 172.4,
+            "p90": 298.7,
+            "max": 372.1,
+            "sum": 2850.9
+          },
+          "transferBytes": {
+            "count": 16,
+            "min": 26668,
+            "median": 33617,
+            "p90": 63350,
+            "max": 72325,
+            "sum": 628945
+          },
+          "frames": [
+            {
+              "name": "ezgif-frame-001.jpg",
+              "duration": 172.4,
+              "transferSize": 72325,
+              "startTime": 3307.4
+            },
+            {
+              "name": "ezgif-frame-006.jpg",
+              "duration": 194,
+              "transferSize": 63350,
+              "startTime": 24467.7
+            },
+            {
+              "name": "ezgif-frame-011.jpg",
+              "duration": 255.6,
+              "transferSize": 35106,
+              "startTime": 24468.5
+            },
+            {
+              "name": "ezgif-frame-016.jpg",
+              "duration": 256.7,
+              "transferSize": 32943,
+              "startTime": 24469.1
+            },
+            {
+              "name": "ezgif-frame-021.jpg",
+              "duration": 298.7,
+              "transferSize": 33617,
+              "startTime": 24469.6
+            },
+            {
+              "name": "ezgif-frame-007.jpg",
+              "duration": 233.8,
+              "transferSize": 56554,
+              "startTime": 25070.1
+            },
+            {
+              "name": "ezgif-frame-008.jpg",
+              "duration": 153.8,
+              "transferSize": 48477,
+              "startTime": 25150.8
+            },
+            {
+              "name": "ezgif-frame-009.jpg",
+              "duration": 97.6,
+              "transferSize": 42010,
+              "startTime": 25336.3
+            },
+            {
+              "name": "ezgif-frame-010.jpg",
+              "duration": 372.1,
+              "transferSize": 37942,
+              "startTime": 25341.4
+            },
+            {
+              "name": "ezgif-frame-031.jpg",
+              "duration": 85.5,
+              "transferSize": 30984,
+              "startTime": 25709.5
+            },
+            {
+              "name": "ezgif-frame-047.jpg",
+              "duration": 173.5,
+              "transferSize": 27099,
+              "startTime": 25710
+            },
+            {
+              "name": "ezgif-frame-056.jpg",
+              "duration": 165.7,
+              "transferSize": 26668,
+              "startTime": 25796.2
+            },
+            {
+              "name": "ezgif-frame-032.jpg",
+              "duration": 61.2,
+              "transferSize": 30617,
+              "startTime": 26114.9
+            },
+            {
+              "name": "ezgif-frame-033.jpg",
+              "duration": 115.6,
+              "transferSize": 30314,
+              "startTime": 26199.8
+            },
+            {
+              "name": "ezgif-frame-034.jpg",
+              "duration": 106.7,
+              "transferSize": 30524,
+              "startTime": 26351.2
+            },
+            {
+              "name": "ezgif-frame-035.jpg",
+              "duration": 108,
+              "transferSize": 30415,
+              "startTime": 26352.6
+            }
+          ]
+        }
+      },
+      "network": {
+        "videoResponses": [
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 311550,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 97255,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 35230,
+            "protocol": "h2"
+          }
+        ],
+        "mediaFailures": [
+          {
+            "requestId": "22024.203",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          }
+        ]
+      },
+      "eventExcerpts": {
+        "hero": [
+          {
+            "t": 5361.9000000059605,
+            "label": "hero",
+            "type": "error",
+            "currentTime": 0,
+            "duration": null,
+            "readyState": 0,
+            "networkState": 3,
+            "paused": true,
+            "seeking": false,
+            "error": {
+              "code": 4,
+              "message": ""
+            }
+          }
+        ],
+        "testimonial": [
+          {
+            "t": 6098,
+            "label": "testimonial",
+            "type": "error",
+            "currentTime": 0,
+            "duration": null,
+            "readyState": 0,
+            "networkState": 3,
+            "paused": true,
+            "seeking": false,
+            "error": {
+              "code": 4,
+              "message": ""
+            }
+          }
+        ]
+      },
+      "pageErrors": [
+        {
+          "t": 5361.600000008941
+        },
+        {
+          "t": 6097.9000000059605
+        }
+      ],
+      "pageConsole": [],
+      "pageUnhandled": []
+    },
+    "ltbrowser-360x640-dpr3": {
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "HeadlessChrome/107.0.5304.110",
+        "revision": "@",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/107.0.5304.110 Safari/537.36",
+        "jsVersion": "10.7.193.22"
+      },
+      "viewport": {
+        "width": 360,
+        "height": 640,
+        "mobile": true,
+        "dpr": 3
+      },
+      "mediaCapabilities": {
+        "powerEfficient": false,
+        "smooth": false,
+        "supported": false,
+        "keySystemAccess": null
+      },
+      "layout": {
+        "documentHeight": 6651,
+        "hero": {
+          "top": 0,
+          "height": 2105,
+          "distance": 1465
+        },
+        "experience": {
+          "top": 5037.59375,
+          "height": 742
+        },
+        "story": {
+          "top": 2104.953125,
+          "height": 1357,
+          "distance": 717
+        },
+        "storyVisibleIndex": 0
+      },
+      "hero": {
+        "label": "hero",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "readyState": 0,
+        "networkState": 3,
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": false,
+        "preload": "auto",
+        "buffered": [],
+        "seekable": [],
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 640,
+          "top": 0,
+          "bottom": 640
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "",
+          "avc1Main": "",
+          "avc1High": "",
+          "webmVp9": "probably"
+        }
+      },
+      "testimonial": {
+        "label": "testimonial",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "readyState": 0,
+        "networkState": 3,
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": true,
+        "preload": "metadata",
+        "buffered": [],
+        "seekable": [],
+        "rect": {
+          "x": 0,
+          "y": 5038.59375,
+          "width": 360,
+          "height": 741.1875,
+          "top": 5038.59375,
+          "bottom": 5779.78125
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "",
+          "avc1Main": "",
+          "avc1High": "",
+          "webmVp9": "probably"
+        }
+      },
+      "heroMid": {
+        "scrollY": 732,
+        "currentTime": 0,
+        "seeking": false,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      },
+      "heroEnd": {
+        "scrollY": 1465,
+        "currentTime": 0,
+        "seeking": false,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        }
+      },
+      "testimonialRun": {
+        "currentTime": 0,
+        "paused": true,
+        "readyState": 0,
+        "error": {
+          "code": 4,
+          "message": ""
+        },
+        "playErrors": [
+          {
+            "t": 29213.59999999404,
+            "label": "testimonial",
+            "error": "NotSupportedError: The element has no supported sources.",
+            "name": "NotSupportedError",
+            "message": "The element has no supported sources."
+          }
+        ]
+      },
+      "story": {
+        "visibleIndex": 4,
+        "decodeMs": {
+          "count": 4,
+          "min": 229.5,
+          "median": 308.7,
+          "p90": 336.8,
+          "max": 336.8,
+          "sum": 1129.8
+        },
+        "loads": 1,
+        "decodes": 4,
+        "errors": 0,
+        "frameRequests": {
+          "count": 5,
+          "cacheHits": 0,
+          "requestMs": {
+            "count": 5,
+            "min": 102.3,
+            "median": 2659.5,
+            "p90": 5482.9,
+            "max": 5482.9,
+            "sum": 16386.6
+          },
+          "transferBytes": {
+            "count": 5,
+            "min": 32943,
+            "median": 35106,
+            "p90": 72325,
+            "max": 72325,
+            "sum": 237341
+          },
+          "frames": [
+            {
+              "name": "ezgif-frame-001.jpg",
+              "duration": 102.3,
+              "transferSize": 72325,
+              "startTime": 5784.3
+            },
+            {
+              "name": "ezgif-frame-006.jpg",
+              "duration": 2659.3,
+              "transferSize": 63350,
+              "startTime": 36464
+            },
+            {
+              "name": "ezgif-frame-011.jpg",
+              "duration": 2659.5,
+              "transferSize": 35106,
+              "startTime": 36464.8
+            },
+            {
+              "name": "ezgif-frame-016.jpg",
+              "duration": 5482.9,
+              "transferSize": 32943,
+              "startTime": 36465.4
+            },
+            {
+              "name": "ezgif-frame-021.jpg",
+              "duration": 5482.6,
+              "transferSize": 33617,
+              "startTime": 36466.1
+            }
+          ]
+        }
+      },
+      "network": {
+        "videoResponses": [
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 25112,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 447,
+            "protocol": "h2"
+          }
+        ],
+        "mediaFailures": [
+          {
+            "requestId": "16576.94",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          },
+          {
+            "requestId": "16576.93",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          }
+        ]
+      },
+      "eventExcerpts": {
+        "hero": [
+          {
+            "t": 8966.89999999106,
+            "label": "hero",
+            "type": "error",
+            "currentTime": 0,
+            "duration": null,
+            "readyState": 0,
+            "networkState": 3,
+            "paused": true,
+            "seeking": false,
+            "error": {
+              "code": 4,
+              "message": ""
+            }
+          }
+        ],
+        "testimonial": [
+          {
+            "t": 8013.199999988079,
+            "label": "testimonial",
+            "type": "error",
+            "currentTime": 0,
+            "duration": null,
+            "readyState": 0,
+            "networkState": 3,
+            "paused": true,
+            "seeking": false,
+            "error": {
+              "code": 4,
+              "message": ""
+            }
+          }
+        ]
+      },
+      "pageErrors": [
+        {
+          "t": 8012.899999991059
+        },
+        {
+          "t": 8966.699999988079
+        }
+      ],
+      "pageConsole": [],
+      "pageUnhandled": []
+    },
+    "chrome-1792x1120": {
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "viewport": {
+        "width": 1792,
+        "height": 1120,
+        "mobile": false,
+        "dpr": 1
+      },
+      "mediaCapabilities": {
+        "powerEfficient": false,
+        "smooth": true,
+        "supported": true,
+        "keySystemAccess": null
+      },
+      "layout": {
+        "documentHeight": 8989,
+        "hero": {
+          "top": 0,
+          "height": 3684,
+          "distance": 2564
+        },
+        "experience": {
+          "top": 7715.0625,
+          "height": 817
+        },
+        "story": {
+          "top": 3683.671875,
+          "height": 2374,
+          "distance": 1254
+        },
+        "storyVisibleIndex": 0
+      },
+      "hero": {
+        "label": "hero",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "error": null,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 10.005,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": false,
+        "preload": "auto",
+        "buffered": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "seekable": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1786,
+          "height": 1120,
+          "top": 0,
+          "bottom": 1120
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "probably",
+          "avc1Main": "probably",
+          "avc1High": "probably",
+          "webmVp9": "probably"
+        }
+      },
+      "testimonial": {
+        "label": "testimonial",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "error": null,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 8,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": true,
+        "preload": "metadata",
+        "buffered": [
+          [
+            0,
+            0.956
+          ]
+        ],
+        "seekable": [
+          [
+            0,
+            8
+          ]
+        ],
+        "rect": {
+          "x": 0,
+          "y": 7716.0625,
+          "width": 1786,
+          "height": 816,
+          "top": 7716.0625,
+          "bottom": 8532.0625
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "probably",
+          "avc1Main": "probably",
+          "avc1High": "probably",
+          "webmVp9": "probably"
+        }
+      },
+      "heroMid": {
+        "scrollY": 1282,
+        "currentTime": 4.981666,
+        "seeking": false,
+        "readyState": 4,
+        "error": null
+      },
+      "heroEnd": {
+        "scrollY": 2564,
+        "currentTime": 9.963333,
+        "seeking": false,
+        "readyState": 4,
+        "error": null
+      },
+      "testimonialRun": {
+        "currentTime": 4.202196,
+        "paused": false,
+        "readyState": 4,
+        "error": null,
+        "playErrors": []
+      },
+      "story": {
+        "visibleIndex": 1,
+        "decodeMs": {
+          "count": 12,
+          "min": 3.7,
+          "median": 10.6,
+          "p90": 15.5,
+          "max": 17.9,
+          "sum": 115.3
+        },
+        "loads": 3,
+        "decodes": 12,
+        "errors": 0,
+        "frameRequests": {
+          "count": 13,
+          "cacheHits": 0,
+          "requestMs": {
+            "count": 13,
+            "min": 98.4,
+            "median": 915.4,
+            "p90": 2176.6,
+            "max": 3178.4,
+            "sum": 13600.1
+          },
+          "transferBytes": {
+            "count": 13,
+            "min": 30314,
+            "median": 32943,
+            "p90": 63350,
+            "max": 72325,
+            "sum": 527974
+          },
+          "frames": [
+            {
+              "name": "ezgif-frame-001.jpg",
+              "duration": 198.6,
+              "transferSize": 72325,
+              "startTime": 3946.4
+            },
+            {
+              "name": "ezgif-frame-006.jpg",
+              "duration": 98.4,
+              "transferSize": 63350,
+              "startTime": 20950.1
+            },
+            {
+              "name": "ezgif-frame-011.jpg",
+              "duration": 98.7,
+              "transferSize": 35106,
+              "startTime": 20950.2
+            },
+            {
+              "name": "ezgif-frame-016.jpg",
+              "duration": 99.3,
+              "transferSize": 32943,
+              "startTime": 20950.3
+            },
+            {
+              "name": "ezgif-frame-021.jpg",
+              "duration": 1907.1,
+              "transferSize": 33617,
+              "startTime": 20950.5
+            },
+            {
+              "name": "ezgif-frame-026.jpg",
+              "duration": 3178.4,
+              "transferSize": 32748,
+              "startTime": 21060.3
+            },
+            {
+              "name": "ezgif-frame-007.jpg",
+              "duration": 2176.5,
+              "transferSize": 56554,
+              "startTime": 21137.2
+            },
+            {
+              "name": "ezgif-frame-008.jpg",
+              "duration": 2176.6,
+              "transferSize": 48477,
+              "startTime": 21137.6
+            },
+            {
+              "name": "ezgif-frame-031.jpg",
+              "duration": 1090.4,
+              "transferSize": 30984,
+              "startTime": 22865.3
+            },
+            {
+              "name": "ezgif-frame-032.jpg",
+              "duration": 915.4,
+              "transferSize": 30617,
+              "startTime": 23324.1
+            },
+            {
+              "name": "ezgif-frame-033.jpg",
+              "duration": 1064.5,
+              "transferSize": 30314,
+              "startTime": 23329.9
+            },
+            {
+              "name": "ezgif-frame-034.jpg",
+              "duration": 433,
+              "transferSize": 30524,
+              "startTime": 23962.1
+            },
+            {
+              "name": "ezgif-frame-035.jpg",
+              "duration": 163.2,
+              "transferSize": 30415,
+              "startTime": 24245.9
+            }
+          ]
+        }
+      },
+      "network": {
+        "videoResponses": [
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 378,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 389,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 35210,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 274,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 315,
+            "protocol": "h2"
+          }
+        ],
+        "mediaFailures": [
+          {
+            "requestId": "16704.94",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          },
+          {
+            "requestId": "16704.97",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          },
+          {
+            "requestId": "16704.102",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          }
+        ]
+      },
+      "eventExcerpts": {
+        "hero": [
+          {
+            "t": 5223.4000000059605,
+            "label": "hero",
+            "type": "loadedmetadata",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 5875.5,
+            "label": "hero",
+            "type": "loadeddata",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 5875.600000008941,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 11418.20000000298,
+            "label": "hero",
+            "type": "seeking",
+            "currentTime": 4.981666,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 1,
+            "paused": true,
+            "seeking": true,
+            "error": null
+          },
+          {
+            "t": 11728.40000000596,
+            "label": "hero",
+            "type": "seeked",
+            "currentTime": 4.981666,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 11728.60000000894,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 4.981666,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 13923.20000000298,
+            "label": "hero",
+            "type": "seeking",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 1,
+            "paused": true,
+            "seeking": true,
+            "error": null
+          },
+          {
+            "t": 14103.5,
+            "label": "hero",
+            "type": "seeked",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 14103.60000000894,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          }
+        ],
+        "testimonial": [
+          {
+            "t": 6075.100000008941,
+            "label": "testimonial",
+            "type": "loadedmetadata",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 6075.70000000298,
+            "label": "testimonial",
+            "type": "loadeddata",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 6075.800000011921,
+            "label": "testimonial",
+            "type": "canplay",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 16438.5,
+            "label": "testimonial",
+            "type": "play",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": false,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 16438.70000000298,
+            "label": "testimonial",
+            "type": "playing",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": false,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 20951,
+            "label": "testimonial",
+            "type": "pause",
+            "currentTime": 4.223726,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          }
+        ]
+      },
+      "pageErrors": [],
+      "pageConsole": [],
+      "pageUnhandled": []
+    },
+    "chrome-1080x1920-raw": {
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "viewport": {
+        "width": 1080,
+        "height": 1920,
+        "mobile": true,
+        "dpr": 1
+      },
+      "mediaCapabilities": {
+        "powerEfficient": false,
+        "smooth": true,
+        "supported": true,
+        "keySystemAccess": null
+      },
+      "layout": {
+        "documentHeight": 13352,
+        "hero": {
+          "top": 0,
+          "height": 6315,
+          "distance": 4395
+        },
+        "experience": {
+          "top": 12048.265625,
+          "height": 801
+        },
+        "story": {
+          "top": 6314.875,
+          "height": 4070,
+          "distance": 2150
+        },
+        "storyVisibleIndex": 0
+      },
+      "hero": {
+        "label": "hero",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "error": null,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 10.005,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": false,
+        "preload": "auto",
+        "buffered": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "seekable": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920,
+          "top": 0,
+          "bottom": 1920
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "probably",
+          "avc1Main": "probably",
+          "avc1High": "probably",
+          "webmVp9": "probably"
+        }
+      },
+      "testimonial": {
+        "label": "testimonial",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "error": null,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 8,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": true,
+        "preload": "metadata",
+        "buffered": [
+          [
+            0,
+            0.714
+          ]
+        ],
+        "seekable": [
+          [
+            0,
+            8
+          ]
+        ],
+        "rect": {
+          "x": 0,
+          "y": 12049.265625,
+          "width": 1080,
+          "height": 800.1875,
+          "top": 12049.265625,
+          "bottom": 12849.453125
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "probably",
+          "avc1Main": "probably",
+          "avc1High": "probably",
+          "webmVp9": "probably"
+        }
+      },
+      "heroMid": {
+        "scrollY": 2198,
+        "currentTime": 4.9828,
+        "seeking": false,
+        "readyState": 4,
+        "error": null
+      },
+      "heroEnd": {
+        "scrollY": 4395,
+        "currentTime": 9.963333,
+        "seeking": false,
+        "readyState": 4,
+        "error": null
+      },
+      "testimonialRun": {
+        "currentTime": 0.028415,
+        "paused": false,
+        "readyState": 3,
+        "error": null,
+        "playErrors": []
+      },
+      "story": {
+        "visibleIndex": 0,
+        "decodeMs": {
+          "count": 15,
+          "min": 4.3,
+          "median": 26,
+          "p90": 44.4,
+          "max": 56.8,
+          "sum": 371.8
+        },
+        "loads": 3,
+        "decodes": 15,
+        "errors": 0,
+        "frameRequests": {
+          "count": 16,
+          "cacheHits": 0,
+          "requestMs": {
+            "count": 16,
+            "min": 30.2,
+            "median": 155.1,
+            "p90": 488.4,
+            "max": 499.8,
+            "sum": 3072.2
+          },
+          "transferBytes": {
+            "count": 16,
+            "min": 26668,
+            "median": 32988,
+            "p90": 56554,
+            "max": 72325,
+            "sum": 598444
+          },
+          "frames": [
+            {
+              "name": "ezgif-frame-001.jpg",
+              "duration": 61.5,
+              "transferSize": 72325,
+              "startTime": 6976.8
+            },
+            {
+              "name": "ezgif-frame-007.jpg",
+              "duration": 325.4,
+              "transferSize": 56554,
+              "startTime": 26555.9
+            },
+            {
+              "name": "ezgif-frame-013.jpg",
+              "duration": 486.8,
+              "transferSize": 32969,
+              "startTime": 26556.1
+            },
+            {
+              "name": "ezgif-frame-019.jpg",
+              "duration": 499.8,
+              "transferSize": 32988,
+              "startTime": 26556.2
+            },
+            {
+              "name": "ezgif-frame-025.jpg",
+              "duration": 488.4,
+              "transferSize": 33452,
+              "startTime": 26556.5
+            },
+            {
+              "name": "ezgif-frame-008.jpg",
+              "duration": 317.3,
+              "transferSize": 48477,
+              "startTime": 26913.4
+            },
+            {
+              "name": "ezgif-frame-009.jpg",
+              "duration": 110.7,
+              "transferSize": 42010,
+              "startTime": 27119.3
+            },
+            {
+              "name": "ezgif-frame-010.jpg",
+              "duration": 90.4,
+              "transferSize": 37942,
+              "startTime": 27141
+            },
+            {
+              "name": "ezgif-frame-011.jpg",
+              "duration": 64.2,
+              "transferSize": 35106,
+              "startTime": 27167.5
+            },
+            {
+              "name": "ezgif-frame-031.jpg",
+              "duration": 155.1,
+              "transferSize": 30984,
+              "startTime": 28131.1
+            },
+            {
+              "name": "ezgif-frame-047.jpg",
+              "duration": 155.1,
+              "transferSize": 27099,
+              "startTime": 28131.5
+            },
+            {
+              "name": "ezgif-frame-056.jpg",
+              "duration": 159.7,
+              "transferSize": 26668,
+              "startTime": 28131.9
+            },
+            {
+              "name": "ezgif-frame-032.jpg",
+              "duration": 30.2,
+              "transferSize": 30617,
+              "startTime": 28310.7
+            },
+            {
+              "name": "ezgif-frame-033.jpg",
+              "duration": 33.4,
+              "transferSize": 30314,
+              "startTime": 28310.9
+            },
+            {
+              "name": "ezgif-frame-034.jpg",
+              "duration": 55.1,
+              "transferSize": 30524,
+              "startTime": 28311
+            },
+            {
+              "name": "ezgif-frame-035.jpg",
+              "duration": 39.1,
+              "transferSize": 30415,
+              "startTime": 28311.8
+            }
+          ]
+        }
+      },
+      "network": {
+        "videoResponses": [
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 414,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 390,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 35202,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 19487,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 171464,
+            "protocol": "h2"
+          }
+        ],
+        "mediaFailures": [
+          {
+            "requestId": "20248.94",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          },
+          {
+            "requestId": "20248.97",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          }
+        ]
+      },
+      "eventExcerpts": {
+        "hero": [
+          {
+            "t": 8233.800000011921,
+            "label": "hero",
+            "type": "loadedmetadata",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 8438,
+            "label": "hero",
+            "type": "loadeddata",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 8438.300000011921,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 15199.10000000894,
+            "label": "hero",
+            "type": "seeking",
+            "currentTime": 4.9828,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 1,
+            "paused": true,
+            "seeking": true,
+            "error": null
+          },
+          {
+            "t": 16592.30000001192,
+            "label": "hero",
+            "type": "seeked",
+            "currentTime": 4.9828,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 16593.10000000894,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 4.9828,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 18402,
+            "label": "hero",
+            "type": "seeking",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 1,
+            "paused": true,
+            "seeking": true,
+            "error": null
+          },
+          {
+            "t": 19304.10000000894,
+            "label": "hero",
+            "type": "seeked",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 19304.20000000298,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          }
+        ],
+        "testimonial": [
+          {
+            "t": 10182.800000011921,
+            "label": "testimonial",
+            "type": "loadedmetadata",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 3,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 10183.10000000894,
+            "label": "testimonial",
+            "type": "loadeddata",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 3,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 10183.20000000298,
+            "label": "testimonial",
+            "type": "canplay",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 3,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 21499.10000000894,
+            "label": "testimonial",
+            "type": "play",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": false,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 21499.40000000596,
+            "label": "testimonial",
+            "type": "playing",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": false,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 26557.20000000298,
+            "label": "testimonial",
+            "type": "pause",
+            "currentTime": 0.050042,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          }
+        ]
+      },
+      "pageErrors": [],
+      "pageConsole": [],
+      "pageUnhandled": []
+    },
+    "chrome-360x640-dpr3": {
+      "browser": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/156.0.8078.47",
+        "revision": "@1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "jsVersion": "15.6.75.19"
+      },
+      "viewport": {
+        "width": 360,
+        "height": 640,
+        "mobile": true,
+        "dpr": 3
+      },
+      "mediaCapabilities": {
+        "powerEfficient": false,
+        "smooth": true,
+        "supported": true,
+        "keySystemAccess": null
+      },
+      "layout": {
+        "documentHeight": 6651,
+        "hero": {
+          "top": 0,
+          "height": 2105,
+          "distance": 1465
+        },
+        "experience": {
+          "top": 5037.59375,
+          "height": 742
+        },
+        "story": {
+          "top": 2104.953125,
+          "height": 1357,
+          "distance": 717
+        },
+        "storyVisibleIndex": 0
+      },
+      "hero": {
+        "label": "hero",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "error": null,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 10.005,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": false,
+        "preload": "auto",
+        "buffered": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "seekable": [
+          [
+            0,
+            10.005
+          ]
+        ],
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 640,
+          "top": 0,
+          "bottom": 640
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "probably",
+          "avc1Main": "probably",
+          "avc1High": "probably",
+          "webmVp9": "probably"
+        }
+      },
+      "testimonial": {
+        "label": "testimonial",
+        "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "currentSrc": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "error": null,
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 8,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "currentTime": 0,
+        "paused": true,
+        "seeking": false,
+        "muted": true,
+        "playsInline": true,
+        "autoplay": false,
+        "loop": true,
+        "preload": "metadata",
+        "buffered": [
+          [
+            0,
+            2.315
+          ]
+        ],
+        "seekable": [
+          [
+            0,
+            8
+          ]
+        ],
+        "rect": {
+          "x": 0,
+          "y": 5038.59375,
+          "width": 360,
+          "height": 741.1875,
+          "top": 5038.59375,
+          "bottom": 5779.78125
+        },
+        "style": {
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "zIndex": "auto",
+          "filter": "none",
+          "transform": "none"
+        },
+        "canPlayType": {
+          "mp4": "maybe",
+          "avc1Baseline": "probably",
+          "avc1Main": "probably",
+          "avc1High": "probably",
+          "webmVp9": "probably"
+        }
+      },
+      "heroMid": {
+        "scrollY": 733,
+        "currentTime": 4.985067,
+        "seeking": false,
+        "readyState": 4,
+        "error": null
+      },
+      "heroEnd": {
+        "scrollY": 1465,
+        "currentTime": 9.963333,
+        "seeking": false,
+        "readyState": 4,
+        "error": null
+      },
+      "testimonialRun": {
+        "currentTime": 4.348511,
+        "paused": false,
+        "readyState": 4,
+        "error": null,
+        "playErrors": []
+      },
+      "story": {
+        "visibleIndex": 0,
+        "decodeMs": {
+          "count": 13,
+          "min": 4.7,
+          "median": 9.6,
+          "p90": 18.3,
+          "max": 21,
+          "sum": 141.1
+        },
+        "loads": 3,
+        "decodes": 13,
+        "errors": 0,
+        "frameRequests": {
+          "count": 14,
+          "cacheHits": 0,
+          "requestMs": {
+            "count": 14,
+            "min": 33.8,
+            "median": 164.5,
+            "p90": 468.9,
+            "max": 474.2,
+            "sum": 2720.9
+          },
+          "transferBytes": {
+            "count": 14,
+            "min": 26668,
+            "median": 32988,
+            "p90": 56554,
+            "max": 72325,
+            "sum": 532923
+          },
+          "frames": [
+            {
+              "name": "ezgif-frame-001.jpg",
+              "duration": 75,
+              "transferSize": 72325,
+              "startTime": 5107.2
+            },
+            {
+              "name": "ezgif-frame-007.jpg",
+              "duration": 158.3,
+              "transferSize": 56554,
+              "startTime": 22637.6
+            },
+            {
+              "name": "ezgif-frame-013.jpg",
+              "duration": 154.6,
+              "transferSize": 32969,
+              "startTime": 22637.8
+            },
+            {
+              "name": "ezgif-frame-019.jpg",
+              "duration": 164.5,
+              "transferSize": 32988,
+              "startTime": 22637.9
+            },
+            {
+              "name": "ezgif-frame-025.jpg",
+              "duration": 165.1,
+              "transferSize": 33452,
+              "startTime": 22638.1
+            },
+            {
+              "name": "ezgif-frame-008.jpg",
+              "duration": 33.8,
+              "transferSize": 48477,
+              "startTime": 22817.1
+            },
+            {
+              "name": "ezgif-frame-009.jpg",
+              "duration": 474.2,
+              "transferSize": 42010,
+              "startTime": 22817.3
+            },
+            {
+              "name": "ezgif-frame-010.jpg",
+              "duration": 468.9,
+              "transferSize": 37942,
+              "startTime": 22823.1
+            },
+            {
+              "name": "ezgif-frame-031.jpg",
+              "duration": 69.5,
+              "transferSize": 30984,
+              "startTime": 23862.3
+            },
+            {
+              "name": "ezgif-frame-047.jpg",
+              "duration": 93.3,
+              "transferSize": 27099,
+              "startTime": 23862.5
+            },
+            {
+              "name": "ezgif-frame-056.jpg",
+              "duration": 143.6,
+              "transferSize": 26668,
+              "startTime": 23862.8
+            },
+            {
+              "name": "ezgif-frame-032.jpg",
+              "duration": 238.7,
+              "transferSize": 30617,
+              "startTime": 24043.3
+            },
+            {
+              "name": "ezgif-frame-033.jpg",
+              "duration": 239.5,
+              "transferSize": 30314,
+              "startTime": 24043.5
+            },
+            {
+              "name": "ezgif-frame-034.jpg",
+              "duration": 241.9,
+              "transferSize": 30524,
+              "startTime": 24043.7
+            }
+          ]
+        }
+      },
+      "network": {
+        "videoResponses": [
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 26374,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 448,
+            "protocol": "h2"
+          },
+          {
+            "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+            "status": 206,
+            "mimeType": "video/mp4",
+            "fromDiskCache": false,
+            "fromServiceWorker": false,
+            "encodedDataLength": 2017,
+            "protocol": "h2"
+          }
+        ],
+        "mediaFailures": [
+          {
+            "requestId": "15504.94",
+            "errorText": "net::ERR_ABORTED",
+            "canceled": true,
+            "type": "Media"
+          }
+        ]
+      },
+      "eventExcerpts": {
+        "hero": [
+          {
+            "t": 6513.0999999940395,
+            "label": "hero",
+            "type": "loadedmetadata",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 6746.399999991059,
+            "label": "hero",
+            "type": "loadeddata",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 6746.399999991059,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 0,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 2,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 13086.09999999404,
+            "label": "hero",
+            "type": "seeking",
+            "currentTime": 4.985067,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 1,
+            "paused": true,
+            "seeking": true,
+            "error": null
+          },
+          {
+            "t": 13564.29999999702,
+            "label": "hero",
+            "type": "seeked",
+            "currentTime": 4.985067,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 13564.5,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 4.985067,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 15611.79999999702,
+            "label": "hero",
+            "type": "seeking",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 1,
+            "networkState": 1,
+            "paused": true,
+            "seeking": true,
+            "error": null
+          },
+          {
+            "t": 15870.89999999106,
+            "label": "hero",
+            "type": "seeked",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 15871.29999999702,
+            "label": "hero",
+            "type": "canplay",
+            "currentTime": 9.963333,
+            "duration": 10.005,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          }
+        ],
+        "testimonial": [
+          {
+            "t": 6331.899999991059,
+            "label": "testimonial",
+            "type": "loadedmetadata",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 6332.79999999702,
+            "label": "testimonial",
+            "type": "loadeddata",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 6332.899999991059,
+            "label": "testimonial",
+            "type": "canplay",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 18122,
+            "label": "testimonial",
+            "type": "play",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": false,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 18122.20000000298,
+            "label": "testimonial",
+            "type": "playing",
+            "currentTime": 0,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": false,
+            "seeking": false,
+            "error": null
+          },
+          {
+            "t": 22639.29999999702,
+            "label": "testimonial",
+            "type": "pause",
+            "currentTime": 4.366075,
+            "duration": 8,
+            "readyState": 4,
+            "networkState": 1,
+            "paused": true,
+            "seeking": false,
+            "error": null
+          }
+        ]
+      },
+      "pageErrors": [],
+      "pageConsole": [],
+      "pageUnhandled": []
+    }
+  },
+  "webmFallback": {
+    "note": "Isolated video-element tests against Cloudinary renditions. These validate media support; they are not full-site integration tests.",
+    "ltbrowserTestimonialDesktop": {
+      "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm",
+      "metadata": {
+        "ok": true,
+        "immediate": false
+      },
+      "canPlay": {
+        "webm": "maybe",
+        "vp9": "probably",
+        "mp4": "maybe",
+        "avc1": ""
+      },
+      "playError": null,
+      "afterPlay": {
+        "currentTime": 1.162672,
+        "paused": false,
+        "readyState": 4,
+        "networkState": 1,
+        "error": null
+      },
+      "seeked": {
+        "ok": true,
+        "immediate": false,
+        "target": 5,
+        "currentTime": 5,
+        "seeking": false,
+        "readyState": 4
+      },
+      "final": {
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 8.003,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "currentTime": 5,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      "events": [
+        {
+          "type": "loadedmetadata",
+          "t": 1873.2999999970198,
+          "readyState": 1,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0,
+          "paused": true,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "play",
+          "t": 1875.9000000059605,
+          "readyState": 1,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "loadeddata",
+          "t": 2111.7000000029802,
+          "readyState": 4,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0.001447,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "canplay",
+          "t": 2111.7999999970198,
+          "readyState": 4,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0.001577,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "playing",
+          "t": 2112.9000000059605,
+          "readyState": 4,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0.002702,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "canplaythrough",
+          "t": 2113.2000000029802,
+          "readyState": 4,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0.003004,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "seeking",
+          "t": 3315.2000000029802,
+          "readyState": 1,
+          "networkState": 1,
+          "duration": 8.003,
+          "currentTime": 5,
+          "paused": true,
+          "seeking": true,
+          "error": null
+        },
+        {
+          "type": "seeked",
+          "t": 3663.2000000029802,
+          "readyState": 4,
+          "networkState": 1,
+          "duration": 8.003,
+          "currentTime": 5,
+          "paused": true,
+          "seeking": false,
+          "error": null
+        }
+      ]
+    },
+    "ltbrowserTestimonialMobile720": {
+      "src": "https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm",
+      "metadata": {
+        "ok": true,
+        "immediate": false
+      },
+      "canPlay": {
+        "webm": "maybe",
+        "vp9": "probably",
+        "mp4": "maybe",
+        "avc1": ""
+      },
+      "playError": null,
+      "afterPlay": {
+        "currentTime": 1.161017,
+        "paused": false,
+        "readyState": 4,
+        "networkState": 1,
+        "error": null
+      },
+      "seeked": {
+        "ok": true,
+        "immediate": false,
+        "target": 5,
+        "currentTime": 5,
+        "seeking": false,
+        "readyState": 4
+      },
+      "final": {
+        "readyState": 4,
+        "networkState": 1,
+        "duration": 8.003,
+        "videoWidth": 720,
+        "videoHeight": 404,
+        "currentTime": 5,
+        "paused": true,
+        "seeking": false,
+        "error": null
+      },
+      "events": [
+        {
+          "type": "loadedmetadata",
+          "t": 977.7999999970198,
+          "readyState": 1,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0,
+          "paused": true,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "play",
+          "t": 980,
+          "readyState": 1,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "loadeddata",
+          "t": 1021.2000000029802,
+          "readyState": 4,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0.000569,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "canplay",
+          "t": 1021.2999999970198,
+          "readyState": 4,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0.000749,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "playing",
+          "t": 1021.7999999970198,
+          "readyState": 4,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0.001216,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "canplaythrough",
+          "t": 1022.1000000089407,
+          "readyState": 4,
+          "networkState": 2,
+          "duration": 8.003,
+          "currentTime": 0.001476,
+          "paused": false,
+          "seeking": false,
+          "error": null
+        },
+        {
+          "type": "seeking",
+          "t": 2224.2000000029802,
+          "readyState": 1,
+          "networkState": 1,
+          "duration": 8.003,
+          "currentTime": 5,
+          "paused": true,
+          "seeking": true,
+          "error": null
+        },
+        {
+          "type": "seeked",
+          "t": 2404.9000000059605,
+          "readyState": 4,
+          "networkState": 1,
+          "duration": 8.003,
+          "currentTime": 5,
+          "paused": true,
+          "seeking": false,
+          "error": null
+        }
+      ]
+    },
+    "chromeRenditionDurations": [
+      {
+        "id": "hero-mp4",
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+        "reason": "loadedmetadata",
+        "duration": 10.005,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "readyState": 4,
+        "networkState": 2,
+        "error": null
+      },
+      {
+        "id": "hero-webm-ki1",
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1,f_webm/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.webm",
+        "reason": "error",
+        "duration": null,
+        "videoWidth": 0,
+        "videoHeight": 0,
+        "readyState": 0,
+        "networkState": 3,
+        "error": {
+          "code": 4,
+          "message": "MEDIA_ELEMENT_ERROR: Format error"
+        }
+      },
+      {
+        "id": "hero-webm-plain",
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,q_auto:best/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.webm",
+        "reason": "loadedmetadata",
+        "duration": null,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "readyState": 1,
+        "networkState": 2,
+        "error": null
+      },
+      {
+        "id": "hero-webm-vp9",
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,vc_vp9,q_auto:best/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.webm",
+        "reason": "loadedmetadata",
+        "duration": null,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "readyState": 1,
+        "networkState": 2,
+        "error": null
+      },
+      {
+        "id": "hero-webm-only",
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.webm",
+        "reason": "loadedmetadata",
+        "duration": null,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "readyState": 1,
+        "networkState": 2,
+        "error": null
+      },
+      {
+        "id": "testimonial-mp4",
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4",
+        "reason": "loadedmetadata",
+        "duration": 8,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "readyState": 4,
+        "networkState": 1,
+        "error": null
+      },
+      {
+        "id": "testimonial-webm",
+        "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm",
+        "reason": "loadedmetadata",
+        "duration": 8.003,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "readyState": 3,
+        "networkState": 2,
+        "error": null
+      }
+    ],
+    "findings": [
+      "LT Browser 107 plays and seeks the VP9 WebM testimonial rendition at 1280x720 and 720x404.",
+      "The Cloudinary hero WebM with q_auto:best,ki_1,f_webm fails with MEDIA_ELEMENT_ERROR: Format error in Chrome too.",
+      "The Cloudinary hero WebM without ki_1 loads but exposes no finite duration in Chrome, so the hero scroll mapping cannot use it as a drop-in fallback.",
+      "A production hero fallback needs a validated WebM/VP9 rendition with finite duration, cues, and seek support."
+    ]
+  },
+  "sourceReferences": [
+    "src/components/3d/EntranceExperience.jsx:114-151 (seek queue and media error handling)",
+    "src/components/3d/EntranceExperience.jsx:404-417 (hero video element)",
+    "src/components/sections/Testimonials.jsx:725-772 (intersection autoplay and play rejection handling)",
+    "src/components/sections/Testimonials.jsx:789-801 (testimonial video element)",
+    "src/components/sections/WelcomeStory.jsx:30-31, 128-186 (decode fallback and frame loader)",
+    "src/components/sections/WelcomeStory.jsx:449-474 (56 image layers, decoding=\"async\")",
+    "src/index.css:186-206 (testimonial film layering)",
+    "src/components/ui/SmoothScroll.jsx:15-22 (Lenis options; unrelated to media)"
+  ],
+  "summary": {
+    "confirmed": [
+      "LT Browser 107 reports no H.264/AVC1 support: canPlayType(\"video/mp4; codecs=avc1.42E01E\") is empty and MediaCapabilities supported is false.",
+      "Both the hero and testimonial MP4 elements fail with MediaError code 4 (MEDIA_ERR_SRC_NOT_SUPPORTED), readyState 0, networkState 3, duration null, videoWidth/videoHeight 0.",
+      "The MP4 requests return HTTP 206 with video/mp4; the network path is not the blocker. The same URLs work in Chrome 156.",
+      "The hero failure happens before seeking: there are no seeking/seeked events, currentTime stays 0, and video.seeking stays false. The serialized seek queue is not stuck in this failure.",
+      "The testimonial failure is not an autoplay-policy or user-gesture issue: play() rejects with NotSupportedError \"The element has no supported sources.\" even with autoplay explicitly allowed.",
+      "The video elements are mounted, visible, opacity 1, and have nonzero layout boxes. CSS, sticky positioning, and section layering are not hiding them.",
+      "In Chrome 156, the hero seeks to 4.98s at 50% and 9.96s at 100%; the testimonial plays and advances. The same production build works in the control browser.",
+      "Story frames still load and the visible frame advances in LT Browser, but img.decode() is much slower: median 227ms at 1792x1120 and 309ms at 360x640/DPR3, versus 10.6ms and 9.6ms in Chrome."
+    ],
+    "hypotheses": [
+      "The Story lag is primarily decode cost in the old LT Browser Chromium build; frame request timing was noisy and not consistently worse than Chrome.",
+      "The 300ms DECODE_FALLBACK_MS is close to the LT Browser median decode time and may fire before decode completes on the mobile profile. This is a hypothesis, not a confirmed cause of the visible lag.",
+      "LT Browser headless may use a slower software decode path than its normal window, so the absolute Story decode times may be pessimistic; the H.264 capability gap is independent of headless mode."
+    ],
+    "unknowns": [
+      "The physical 16-inch MacBook Pro and Galaxy J7 Max were not tested; all device-profile results are emulation results.",
+      "The normal LT Browser UI could not be fully automated through CDP in this pass; the installed build was tested headless. The user report supplies the UI-level reproduction.",
+      "The exact GPU/decode path used by LT Browser in normal windowed mode is unknown.",
+      "No validated hero WebM fallback was found among the Cloudinary transformations tested."
+    ],
+    "recommendations": {
+      "hero": "Do not add a naive Cloudinary f_webm fallback. Either require an H.264-capable browser or supply a validated WebM/VP9 rendition with finite duration, cues, and byte-range seeking, then retest the scroll mapping. The existing seek queue does not need a change for this failure.",
+      "testimonials": "Smallest product fix if LT Browser support is required: use <source> elements with the existing MP4 first and the verified VP9 WebM rendition second. Keep the MP4 for browsers with H.264. This was verified in isolation at both 1280x720 and 720x404, but not integrated into the site in this pass.",
+      "story": "No frame-pipeline change is justified by LT Browser alone. If the lag reproduces on a real target device, investigate smaller frame renditions or a decode budget while preserving the 56-frame order, mapping, and section height. Do not change DECODE_FALLBACK_MS without a controlled A/B test.",
+      "queue": "Residual risk only: a future failure that leaves video.seeking=true with no seeked event would stall the queue. No evidence of that occurred here; add a timeout/retry only if reproduced."
+    },
+    "limitations": [
+      "LT Browser 107 headless was used for automation; this is not a physical-device test.",
+      "The 1080x1920 Galaxy J7 Max profile was tested both as a raw CSS viewport and as 360x640 CSS at DPR 3; the exact LT Browser profile mapping is not exposed by the app.",
+      "Cold-cache runs and localhost preview conditions are not identical to a user network.",
+      "The WebM fallback tests used isolated video elements, not the integrated site."
+    ]
+  }
+}

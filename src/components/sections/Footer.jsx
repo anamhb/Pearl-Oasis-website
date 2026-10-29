@@ -1,12 +1,23 @@
 import React from 'react';
 import { BrandWordmark } from '../brand/BrandWordmark.jsx';
 import { MapPin, Phone, Clock, Instagram, Facebook, Twitter, ArrowUp } from 'lucide-react';
+import { useLenis } from 'lenis/react';
+import { PROGRAMMATIC_SCROLL_DURATION } from '../ui/scroll.js';
 
 export const Footer = () => {
+  const lenis = useLenis();
+
   const scrollToTop = () => {
     /* Reduced-motion users jump; everyone else keeps the existing glide. */
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (lenis) {
+      lenis.scrollTo(0, {
+        duration: PROGRAMMATIC_SCROLL_DURATION,
+        immediate: reduceMotion,
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
   };
 
   return (

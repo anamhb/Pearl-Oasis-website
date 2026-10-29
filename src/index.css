@@ -23,6 +23,14 @@
   }
 }
 
+/* Lenis writes the page scroll itself. Leaving `scroll-smooth` active would
+   animate those writes a second time, so the native smooth behavior is
+   disabled only while a Lenis instance is mounted. Reduced-motion users keep
+   the stronger `scroll-behavior: auto !important` rule below. */
+html.lenis {
+  scroll-behavior: auto;
+}
+
 .font-serif-luxury {
   font-family: 'Cormorant Garamond', Georgia, serif;
 }

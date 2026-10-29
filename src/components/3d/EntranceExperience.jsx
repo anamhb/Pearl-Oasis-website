@@ -1,5 +1,7 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useLenis } from 'lenis/react';
+import { PROGRAMMATIC_SCROLL_DURATION } from '../ui/scroll.js';
 
 /**
  * One continuous, scroll-driven walkthrough.
@@ -16,11 +18,34 @@ import { ChevronDown } from 'lucide-react';
  * automatic quality, so a seek starts no more than one second away. Requests
  * are coalesced so only one seek is in flight at a time. The first-frame
  * poster keeps the stage filled while metadata, data, or a seek is arriving.
+ *
+ * The H.264 MP4 is the primary source. Browsers without H.264 get the
+ * validated VP9 WebM before the first load. If the MP4 reports support but
+ * then fails with a decode or source error, one controlled switch to WebM is
+ * allowed. Seek cancellations and aborted range requests do not switch.
  */
-const VIDEO_URL =
+const VIDEO_MP4_URL =
   'https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4';
+const VIDEO_WEBM_URL =
+  'https://res.cloudinary.com/z8nlnc6b/video/upload/v1793251281/hero-lobby-20261029-vp9-6148df8e.webm';
 const VIDEO_POSTER =
   'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg';
+const VIDEO_MP4_TYPE = 'video/mp4; codecs="avc1.42E01E"';
+const VIDEO_WEBM_TYPE = 'video/webm; codecs="vp9"';
+const MEDIA_ERR_DECODE = 3;
+const MEDIA_ERR_SRC_NOT_SUPPORTED = 4;
+
+const canPlayVideoType = (type) => {
+  if (typeof document === 'undefined') return false;
+  const probe = document.createElement('video');
+  return typeof probe.canPlayType === 'function' && Boolean(probe.canPlayType(type));
+};
+
+const getInitialVideoSource = () => {
+  if (canPlayVideoType(VIDEO_MP4_TYPE)) return VIDEO_MP4_URL;
+  if (canPlayVideoType(VIDEO_WEBM_TYPE)) return VIDEO_WEBM_URL;
+  return VIDEO_MP4_URL;
+};
 
 /**
  * Keep the same 329vh track as the previous 70-frame sequence (70 x 3.27vh
@@ -38,11 +63,16 @@ const CONTENT_HANDOVER_PROGRESS = 23 / 69;
 /** Half-width of the content dissolve, in scroll progress. */
 const TRANSITION_HALF_WIDTH = 0.04;
 
-/** About one frame at 24 fps. Smaller changes are not worth a seek. */
-const SEEK_EPSILON = 1 / 30;
+/**
+ * The supplied film is 24 fps (measured: 0.041667 s between frames), so one
+ * source frame is 1/24 s. A target change smaller than a frame stays on the
+ * same displayed image and is not worth a seek.
+ */
+const SOURCE_FRAME_DURATION = 1 / 24;
+const SEEK_EPSILON = SOURCE_FRAME_DURATION;
 
 /** Stop just before the end so the final frame stays visible. */
-const END_FRAME_OFFSET = 1 / 24;
+const END_FRAME_OFFSET = SOURCE_FRAME_DURATION;
 
 const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 
@@ -50,8 +80,12 @@ const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 const smoothstep = (value) => value * value * (3 - 2 * value);
 
 export const EntranceExperience = () => {
+  const [videoSource, setVideoSource] = useState(getInitialVideoSource);
   const trackRef = useRef(null);
   const videoRef = useRef(null);
+  const videoSourceRef = useRef(videoSource);
+  const previousVideoSourceRef = useRef(videoSource);
+  const fallbackAttemptedRef = useRef(videoSource === VIDEO_WEBM_URL);
   const entranceContentRef = useRef(null);
   const diningContentRef = useRef(null);
   const centerScrimRef = useRef(null);
@@ -78,6 +112,25 @@ export const EntranceExperience = () => {
    * have to read the track's height or bounding rect.
    */
   const metricsRef = useRef({ top: 0, scrollDistance: 0, viewport: 0, width: 0 });
+  const lenis = useLenis();
+  const lenisRef = useRef(null);
+
+  /* Keep the resize correction on the same scroll controller as the rest of
+     the page without making the main effect restart when Lenis mounts. */
+  useEffect(() => {
+    lenisRef.current = lenis;
+  }, [lenis]);
+
+  /* A source swap must not inherit the old film's metadata or pending seek.
+     Progress stays put; the new source resumes at the same scroll position. */
+  useEffect(() => {
+    videoSourceRef.current = videoSource;
+    if (previousVideoSourceRef.current === videoSource) return;
+    previousVideoSourceRef.current = videoSource;
+    videoReadyRef.current = false;
+    durationRef.current = 0;
+    videoRef.current?.load();
+  }, [videoSource]);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -120,6 +173,8 @@ export const EntranceExperience = () => {
   const handleVideoMetadata = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
+    const currentSource = video.currentSrc || video.src;
+    if (currentSource && currentSource !== videoSourceRef.current) return;
     const duration = video.duration;
     if (!Number.isFinite(duration) || duration <= 0) return;
     durationRef.current = duration;
@@ -132,8 +187,36 @@ export const EntranceExperience = () => {
   }, [applyVideoProgress]);
 
   const handleVideoError = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
     videoReadyRef.current = false;
-  }, []);
+    durationRef.current = 0;
+
+    const error = video.error;
+    if (!error) return;
+
+    const source = video.currentSrc || video.src || videoSource;
+    const errorCode = error.code;
+    const canUseFallback =
+      videoSource === VIDEO_MP4_URL &&
+      !fallbackAttemptedRef.current &&
+      (errorCode === MEDIA_ERR_DECODE || errorCode === MEDIA_ERR_SRC_NOT_SUPPORTED) &&
+      canPlayVideoType(VIDEO_WEBM_TYPE);
+
+    console.warn('[Hero video] media failure', {
+      source,
+      errorCode,
+      errorMessage: error.message || '',
+      readyState: video.readyState,
+      networkState: video.networkState,
+      fallback: canUseFallback ? VIDEO_WEBM_URL : null,
+    });
+
+    if (!canUseFallback) return;
+
+    fallbackAttemptedRef.current = true;
+    setVideoSource(VIDEO_WEBM_URL);
+  }, [videoSource]);
 
   const update = useCallback(() => {
     const track = trackRef.current;
@@ -293,7 +376,23 @@ export const EntranceExperience = () => {
       measure();
       if (widthChanged && visibleRef.current) {
         const { top, scrollDistance } = metricsRef.current;
-        window.scrollTo(0, top + progress * scrollDistance);
+        /* Force this correction to land in one step. The document uses smooth
+           scrolling for user-facing jumps; animating this correction would
+           scrub the film through every intermediate frame on an orientation
+           change. */
+        const activeLenis = lenisRef.current;
+        if (activeLenis) {
+          activeLenis.resize();
+          activeLenis.scrollTo(top + progress * scrollDistance, {
+            immediate: true,
+          });
+        } else {
+          const root = document.documentElement;
+          const previousBehavior = root.style.scrollBehavior;
+          root.style.scrollBehavior = 'auto';
+          window.scrollTo(0, top + progress * scrollDistance);
+          root.style.scrollBehavior = previousBehavior;
+        }
       }
       onScroll();
     };
@@ -342,10 +441,18 @@ export const EntranceExperience = () => {
     /* Reduced-motion users jump straight there; everyone else keeps the
        existing glide. The scroll target and header offset are unchanged. */
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({
-      top: Math.max(targetY, 0),
-      behavior: reduceMotion ? 'auto' : 'smooth',
-    });
+    const scrollTarget = Math.max(targetY, 0);
+    if (lenis) {
+      lenis.scrollTo(scrollTarget, {
+        duration: PROGRAMMATIC_SCROLL_DURATION,
+        immediate: reduceMotion,
+      });
+    } else {
+      window.scrollTo({
+        top: scrollTarget,
+        behavior: reduceMotion ? 'auto' : 'smooth',
+      });
+    }
   };
 
   return (
@@ -365,7 +472,7 @@ export const EntranceExperience = () => {
         <video
           ref={videoRef}
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-          src={VIDEO_URL}
+          src={videoSource}
           poster={VIDEO_POSTER}
           preload="auto"
           muted

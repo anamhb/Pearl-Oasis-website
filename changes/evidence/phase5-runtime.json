@@ -1,0 +1,1105 @@
+{
+  "phase": 5,
+  "date": "2026-10-27",
+  "title": "Lenis programmatic glide tuning and deep-link repair",
+  "environment": {
+    "build": "vite production build served by vite preview at http://localhost:4173",
+    "browser": "Headless Chrome through the Chrome DevTools Protocol",
+    "desktopViewport": {
+      "width": 1424,
+      "height": 805
+    },
+    "mobileViewport": {
+      "width": 390,
+      "height": 844
+    },
+    "mobileNote": "Emulated mobile metrics with a desktop user agent, as in Phase 4",
+    "cache": "Fresh Chrome profile; browser cache cleared before the measured runs",
+    "lenisVersion": "1.3.27"
+  },
+  "lenis": {
+    "version": "1.3.27",
+    "options": {
+      "duration": null,
+      "lerp": 0.1,
+      "smoothWheel": true,
+      "syncTouch": false,
+      "anchors": false,
+      "respectReducedMotion": true,
+      "autoRaf": true,
+      "autoResize": true
+    },
+    "programmaticDurationBefore": null,
+    "programmaticDurationAfter": 0.9,
+    "configuration": "No duration was set in LENIS_OPTIONS. Programmatic scrollTo calls inherited the 0.1 lerp. Phase 5 adds a per-call duration so wheel smoothing keeps the lerp path."
+  },
+  "decision": {
+    "keepLenis": true,
+    "keepTunedDuration": true,
+    "changeDecoder": false,
+    "fixInitialHash": true,
+    "reason": "The shorter programmatic glide is measurably closer to native smooth scrolling and preserves final targets, history, reduced motion, sticky sections, Story mapping, and wheel smoothing. The Phase 4 duplicate decode-source anomaly did not reproduce; the decoder was left unchanged. Fresh-load #story and #menu deep links both failed because the browser tried to resolve the fragment before React mounted. A post-mount immediate hash scroll fixes both."
+  },
+  "programmaticGlide": {
+    "baseline": {
+      "cta": {
+        "target": 2544.640625,
+        "expectedFinalScrollY": 2544.640625,
+        "finalScrollY": 2545,
+        "difference": 0.359375,
+        "firstWithinMs": 1277.6,
+        "lastMoveMs": 1626.5,
+        "distinctPositions": 32,
+        "maxStepPx": 1225,
+        "hash": "",
+        "historyLength": 2
+      },
+      "menu": {
+        "target": 5283.234375,
+        "expectedFinalScrollY": 5179.234375,
+        "finalScrollY": 5179,
+        "difference": -0.234375,
+        "firstWithinMs": null,
+        "lastMoveMs": 1478.1,
+        "distinctPositions": 13,
+        "maxStepPx": 503,
+        "hash": "#menu",
+        "historyLength": 3
+      },
+      "experience": {
+        "target": 6011.234375,
+        "expectedFinalScrollY": 5907.234375,
+        "finalScrollY": 5907,
+        "difference": -0.234375,
+        "firstWithinMs": null,
+        "lastMoveMs": 1116.9,
+        "distinctPositions": 38,
+        "maxStepPx": 88,
+        "hash": "#experience",
+        "historyLength": 4
+      },
+      "footerStory": {
+        "target": 2647.640625,
+        "expectedFinalScrollY": 2543.640625,
+        "finalScrollY": 2544,
+        "difference": 0.359375,
+        "firstWithinMs": null,
+        "lastMoveMs": 1380.7,
+        "distinctPositions": 49,
+        "maxStepPx": 472,
+        "hash": "#story",
+        "historyLength": 5
+      },
+      "footerTop": {
+        "expectedFinalScrollY": 0,
+        "finalScrollY": 0,
+        "difference": 0,
+        "firstWithinMs": 1377.1,
+        "lastMoveMs": 1555.5,
+        "distinctPositions": 52,
+        "maxStepPx": 777,
+        "hash": "#story",
+        "historyLength": 5
+      }
+    },
+    "after": {
+      "cta": {
+        "target": 2544.640625,
+        "expectedFinalScrollY": 2544.640625,
+        "finalScrollY": 2545,
+        "difference": 0.359375,
+        "firstWithinMs": 826.9,
+        "lastMoveMs": 879.1,
+        "distinctPositions": 33,
+        "maxStepPx": 368,
+        "hash": "",
+        "historyLength": 2
+      },
+      "menu": {
+        "target": 5283.234375,
+        "expectedFinalScrollY": 5179.234375,
+        "finalScrollY": 5179,
+        "difference": -0.234375,
+        "firstWithinMs": null,
+        "lastMoveMs": 1268.4,
+        "distinctPositions": 12,
+        "maxStepPx": 561,
+        "hash": "#menu",
+        "historyLength": 3
+      },
+      "experience": {
+        "target": 6011.234375,
+        "expectedFinalScrollY": 5907.234375,
+        "finalScrollY": 5907,
+        "difference": -0.234375,
+        "firstWithinMs": null,
+        "lastMoveMs": 790.4,
+        "distinctPositions": 30,
+        "maxStepPx": 105,
+        "hash": "#experience",
+        "historyLength": 4
+      },
+      "footerStory": {
+        "target": 2647.640625,
+        "expectedFinalScrollY": 2543.640625,
+        "finalScrollY": 2544,
+        "difference": 0.359375,
+        "firstWithinMs": null,
+        "lastMoveMs": 842.1,
+        "distinctPositions": 35,
+        "maxStepPx": 561,
+        "hash": "#story",
+        "historyLength": 5
+      },
+      "footerTop": {
+        "expectedFinalScrollY": 0,
+        "finalScrollY": 0,
+        "difference": 0,
+        "firstWithinMs": 852,
+        "lastMoveMs": 878,
+        "distinctPositions": 35,
+        "maxStepPx": 936,
+        "hash": "#story",
+        "historyLength": 5
+      }
+    },
+    "controlledAb": {
+      "cta": {
+        "inheritedLerp": {
+          "requestedDuration": null,
+          "completionMs": 1637.8,
+          "expectedFinalScrollY": 2544.640625,
+          "finalScrollY": 2545,
+          "difference": 0.359375,
+          "firstWithinMs": 1277.3,
+          "lastMoveMs": 1629.8,
+          "distinctPositions": 27,
+          "maxStepPx": 1268,
+          "maxHeroLag": 6.384534,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4
+        },
+        "duration09": {
+          "requestedDuration": 0.9,
+          "completionMs": 887.7,
+          "expectedFinalScrollY": 2544.640625,
+          "finalScrollY": 2545,
+          "difference": 0.359375,
+          "firstWithinMs": 827.2,
+          "lastMoveMs": 881.9,
+          "distinctPositions": 35,
+          "maxStepPx": 367,
+          "maxHeroLag": 7.530615,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4
+        },
+        "duration10": {
+          "requestedDuration": 1,
+          "completionMs": 991.9,
+          "expectedFinalScrollY": 2544.640625,
+          "finalScrollY": 2545,
+          "difference": 0.359375,
+          "firstWithinMs": 927.6,
+          "lastMoveMs": 978.5,
+          "distinctPositions": 39,
+          "maxStepPx": 341,
+          "maxHeroLag": 7.752263,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4
+        },
+        "duration11": {
+          "requestedDuration": 1.1,
+          "completionMs": 1099.3,
+          "expectedFinalScrollY": 2544.640625,
+          "finalScrollY": 2545,
+          "difference": 0.359375,
+          "firstWithinMs": 1028.9,
+          "lastMoveMs": 1079.6,
+          "distinctPositions": 42,
+          "maxStepPx": 318,
+          "maxHeroLag": 5.206017,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4
+        },
+        "duration12": {
+          "requestedDuration": 1.2,
+          "completionMs": 1184.5,
+          "expectedFinalScrollY": 2544.640625,
+          "finalScrollY": 2545,
+          "difference": 0.359375,
+          "firstWithinMs": 1127.9,
+          "lastMoveMs": 1178.5,
+          "distinctPositions": 46,
+          "maxStepPx": 297,
+          "maxHeroLag": 8.098249,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4
+        },
+        "nativeSmooth": {
+          "requestedDuration": null,
+          "completionMs": null,
+          "expectedFinalScrollY": 2544.640625,
+          "finalScrollY": 2545,
+          "difference": 0.359375,
+          "firstWithinMs": 851.9,
+          "lastMoveMs": 851.9,
+          "distinctPositions": 33,
+          "maxStepPx": 535,
+          "maxHeroLag": 9.963333,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4
+        }
+      },
+      "menu": {
+        "inheritedLerp": {
+          "requestedDuration": null,
+          "completionMs": 1505.9,
+          "expectedFinalScrollY": 5179.234375,
+          "finalScrollY": 5179,
+          "difference": -0.234375,
+          "firstWithinMs": null,
+          "lastMoveMs": 1499.1,
+          "distinctPositions": 16,
+          "maxStepPx": 702,
+          "maxHeroLag": 6.065578,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4
+        },
+        "duration09": {
+          "requestedDuration": 0.9,
+          "completionMs": 890.4,
+          "expectedFinalScrollY": 5179.234375,
+          "finalScrollY": 5179,
+          "difference": -0.234375,
+          "firstWithinMs": null,
+          "lastMoveMs": 878,
+          "distinctPositions": 36,
+          "maxStepPx": 750,
+          "maxHeroLag": 5.0114,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4
+        }
+      },
+      "clickPath": {
+        "menu": {
+          "requestedDuration": 0.9,
+          "completionMs": 897.2,
+          "expectedFinalScrollY": 5179.234375,
+          "finalScrollY": 5179,
+          "difference": -0.234375,
+          "firstWithinMs": null,
+          "lastMoveMs": 875.3,
+          "distinctPositions": 36,
+          "maxStepPx": 750,
+          "maxHeroLag": 5.0114,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4,
+          "hash": "#menu",
+          "historyLength": 3
+        },
+        "experience": {
+          "requestedDuration": 0.9,
+          "completionMs": 923.4,
+          "expectedFinalScrollY": 5907.234375,
+          "finalScrollY": 5907,
+          "difference": -0.234375,
+          "firstWithinMs": null,
+          "lastMoveMs": 784.7,
+          "distinctPositions": 29,
+          "maxStepPx": 193,
+          "maxHeroLag": 0,
+          "finalHeroTime": 9.963333,
+          "finalHeroExpected": 9.963333,
+          "finalHeroLag": 0,
+          "finalHeroProgress": 1,
+          "finalSeeking": false,
+          "finalReadyState": 4,
+          "hash": "#experience",
+          "historyLength": 4
+        }
+      }
+    },
+    "targets": {
+      "cta": {
+        "rawTarget": 2544.640625,
+        "expectedFinalScrollY": 2544.640625
+      },
+      "menu": {
+        "rawTarget": 5283.234375,
+        "scrollMarginTop": 104,
+        "expectedFinalScrollY": 5179.234375
+      },
+      "experience": {
+        "rawTarget": 6011.234375,
+        "scrollMarginTop": 104,
+        "expectedFinalScrollY": 5907.234375
+      }
+    }
+  },
+  "wheel": {
+    "baseline": {
+      "samples": 120,
+      "distinctPositions": 46,
+      "finalScrollY": 480
+    },
+    "after": {
+      "samples": 127,
+      "distinctPositions": 50,
+      "finalScrollY": 480
+    },
+    "note": "The same four trusted 120px wheel events reached 480px in both builds. Lenis still produced many intermediate positions; only the programmatic calls received an explicit duration."
+  },
+  "hero": {
+    "ctaInheritedLerp": {
+      "requestedDuration": null,
+      "completionMs": 1637.8,
+      "expectedFinalScrollY": 2544.640625,
+      "finalScrollY": 2545,
+      "difference": 0.359375,
+      "firstWithinMs": 1277.3,
+      "lastMoveMs": 1629.8,
+      "distinctPositions": 27,
+      "maxStepPx": 1268,
+      "maxHeroLag": 6.384534,
+      "finalHeroTime": 9.963333,
+      "finalHeroExpected": 9.963333,
+      "finalHeroLag": 0,
+      "finalHeroProgress": 1,
+      "finalSeeking": false,
+      "finalReadyState": 4
+    },
+    "ctaDuration09": {
+      "requestedDuration": 0.9,
+      "completionMs": 887.7,
+      "expectedFinalScrollY": 2544.640625,
+      "finalScrollY": 2545,
+      "difference": 0.359375,
+      "firstWithinMs": 827.2,
+      "lastMoveMs": 881.9,
+      "distinctPositions": 35,
+      "maxStepPx": 367,
+      "maxHeroLag": 7.530615,
+      "finalHeroTime": 9.963333,
+      "finalHeroExpected": 9.963333,
+      "finalHeroLag": 0,
+      "finalHeroProgress": 1,
+      "finalSeeking": false,
+      "finalReadyState": 4
+    },
+    "ctaNativeSmooth": {
+      "requestedDuration": null,
+      "completionMs": null,
+      "expectedFinalScrollY": 2544.640625,
+      "finalScrollY": 2545,
+      "difference": 0.359375,
+      "firstWithinMs": 851.9,
+      "lastMoveMs": 851.9,
+      "distinctPositions": 33,
+      "maxStepPx": 535,
+      "maxHeroLag": 9.963333,
+      "finalHeroTime": 9.963333,
+      "finalHeroExpected": 9.963333,
+      "finalHeroLag": 0,
+      "finalHeroProgress": 1,
+      "finalSeeking": false,
+      "finalReadyState": 4
+    },
+    "note": "All three paths ended at the same final frame, currentTime 9.963333s of 10.005s, progress 1, end lag about 0s. The transient max lag is noisy and was highest on the native smooth path. The hero mapping and seek coalescing were not changed."
+  },
+  "story": {
+    "baselineRuns": [
+      {
+        "decodes": 51,
+        "completed": 51,
+        "failed": 0,
+        "decodeDurationsMs": {
+          "count": 51,
+          "min": 3.2000000029802322,
+          "median": 4.600000008940697,
+          "max": 17.899999991059303,
+          "average": 5.731372549545531
+        },
+        "duplicateDecodeSources": [],
+        "loads": 51,
+        "duplicateLoadSources": [],
+        "errors": 0,
+        "visibleChanges": 55,
+        "lagFrames": {
+          "max": 0,
+          "average": 0,
+          "atEnd": 0
+        }
+      },
+      {
+        "decodes": 55,
+        "completed": 55,
+        "failed": 0,
+        "decodeDurationsMs": {
+          "count": 55,
+          "min": 0.3999999910593033,
+          "median": 5.299999997019768,
+          "max": 10.299999997019768,
+          "average": 5.4818181818181815
+        },
+        "duplicateDecodeSources": [],
+        "loads": 55,
+        "duplicateLoadSources": [],
+        "errors": 0,
+        "visibleChanges": 55,
+        "lagFrames": {
+          "max": 0,
+          "average": 0,
+          "atEnd": 0
+        }
+      },
+      {
+        "decodes": 55,
+        "completed": 55,
+        "failed": 0,
+        "decodeDurationsMs": {
+          "count": 55,
+          "min": 3.4000000059604645,
+          "median": 5.700000002980232,
+          "max": 28.299999997019768,
+          "average": 8.00727272819389
+        },
+        "duplicateDecodeSources": [],
+        "loads": 55,
+        "duplicateLoadSources": [],
+        "errors": 0,
+        "visibleChanges": 55,
+        "lagFrames": {
+          "max": 1,
+          "average": 0.00819672131147541,
+          "atEnd": 0
+        }
+      }
+    ],
+    "afterRuns": [
+      {
+        "decodes": 51,
+        "completed": 51,
+        "failed": 0,
+        "decodeDurationsMs": {
+          "count": 51,
+          "min": 3.3999999910593033,
+          "median": 5.0999999940395355,
+          "max": 21.099999994039536,
+          "average": 6.188235292539877
+        },
+        "duplicateDecodeSources": [],
+        "loads": 51,
+        "duplicateLoadSources": [],
+        "errors": 0,
+        "visibleChanges": 55,
+        "lagFrames": {
+          "max": 1,
+          "average": 0.00819672131147541,
+          "atEnd": 0
+        }
+      },
+      {
+        "decodes": 55,
+        "completed": 55,
+        "failed": 0,
+        "decodeDurationsMs": {
+          "count": 55,
+          "min": 3.2000000029802322,
+          "median": 5.700000002980232,
+          "max": 25.19999998807907,
+          "average": 7.818181816285307
+        },
+        "duplicateDecodeSources": [],
+        "loads": 55,
+        "duplicateLoadSources": [],
+        "errors": 0,
+        "visibleChanges": 55,
+        "lagFrames": {
+          "max": 1,
+          "average": 0.008264462809917356,
+          "atEnd": 0
+        }
+      },
+      {
+        "decodes": 55,
+        "completed": 55,
+        "failed": 0,
+        "decodeDurationsMs": {
+          "count": 55,
+          "min": 0.20000000298023224,
+          "median": 4.9000000059604645,
+          "max": 37.79999999701977,
+          "average": 7.112727271697738
+        },
+        "duplicateDecodeSources": [],
+        "loads": 55,
+        "duplicateLoadSources": [],
+        "errors": 0,
+        "visibleChanges": 55,
+        "lagFrames": {
+          "max": 1,
+          "average": 0.024793388429752067,
+          "atEnd": 0
+        }
+      }
+    ],
+    "duplicateDecodeInvestigation": {
+      "phase4ForwardRun1": [
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-027.jpg",
+          "count": 2
+        },
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+          "count": 2
+        },
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+          "count": 2
+        }
+      ],
+      "phase4ForwardLoadsRun1": [
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-027.jpg",
+          "count": 2
+        },
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-032.jpg",
+          "count": 2
+        },
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-034.jpg",
+          "count": 2
+        }
+      ],
+      "phase4ReverseRun3": [
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-017.jpg",
+          "count": 2
+        },
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-012.jpg",
+          "count": 2
+        },
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+          "count": 2
+        }
+      ],
+      "phase4ReverseLoadsRun3": [
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-017.jpg",
+          "count": 2
+        },
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-012.jpg",
+          "count": 2
+        },
+        {
+          "src": "http://localhost:4173/video-frames-second/ezgif-frame-010.jpg",
+          "count": 2
+        }
+      ],
+      "phase5Reproduced": false,
+      "conclusion": "The Phase 4 duplicate sources were frames 027, 032 and 034 in one forward run, and frames 017, 012 and 010 in one reverse run. Six Phase 5 runs (three baseline, three after) showed zero duplicate decode or load sources. The Phase 3 per-layer token guard remains in place. The probe counts duplicate sources across a whole run, so a recycled pool layer can load the same frame again later; that is not evidence that the guard failed. No decoder change was made without a reproducible root cause."
+    },
+    "note": "After runs reached 55 visible frame changes with a maximum target lag of 1 frame; the shorter programmatic duration did not touch the Story scheduler or decode guard."
+  },
+  "history": {
+    "beforeBack": {
+      "hash": "#experience",
+      "scrollY": 5907,
+      "historyLength": 4,
+      "progress": 1,
+      "currentTime": 9.963333,
+      "heroStickyTop": -4064.359375,
+      "storyStickyTop": -2357.765625
+    },
+    "afterBack": {
+      "hash": "#menu",
+      "scrollY": 5179,
+      "historyLength": 4,
+      "progress": 1,
+      "currentTime": 9.963333,
+      "heroStickyTop": -3336.359375,
+      "storyStickyTop": -1629.765625
+    },
+    "afterForward": {
+      "hash": "#experience",
+      "scrollY": 5907,
+      "historyLength": 4,
+      "progress": 1,
+      "currentTime": 9.963333,
+      "heroStickyTop": -4064.359375,
+      "storyStickyTop": -2357.765625
+    },
+    "note": "Back returned to #menu at 5179; forward returned to #experience at 5907. History length stayed 4."
+  },
+  "reducedMotion": {
+    "enabled": true,
+    "cta": {
+      "requestedDuration": 0.9,
+      "completionMs": 0.3,
+      "expectedFinalScrollY": 2544.640625,
+      "finalScrollY": 2545,
+      "difference": 0.359375,
+      "firstWithinMs": 0,
+      "lastMoveMs": null,
+      "distinctPositions": 1,
+      "maxStepPx": 0,
+      "maxHeroLag": 0,
+      "finalHeroTime": 9.963333,
+      "finalHeroExpected": 9.963333,
+      "finalHeroLag": 0,
+      "finalHeroProgress": 1,
+      "finalSeeking": false,
+      "finalReadyState": 4,
+      "hash": "#experience",
+      "historyLength": 4
+    },
+    "menu": {
+      "requestedDuration": 0.9,
+      "completionMs": 0.3,
+      "expectedFinalScrollY": 5179.234375,
+      "finalScrollY": 5179,
+      "difference": -0.234375,
+      "firstWithinMs": null,
+      "lastMoveMs": null,
+      "distinctPositions": 1,
+      "maxStepPx": 0,
+      "maxHeroLag": 0,
+      "finalHeroTime": 9.963333,
+      "finalHeroExpected": 9.963333,
+      "finalHeroLag": 0,
+      "finalHeroProgress": 1,
+      "finalSeeking": false,
+      "finalReadyState": 4,
+      "hash": "#menu",
+      "historyLength": 5
+    },
+    "note": "Both jumps reached the target on the first sample with one distinct scroll position. The explicit duration is ignored when immediate is true."
+  },
+  "mobile": {
+    "setup": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "headerHeight": 87,
+      "storyTop": 2775.90625,
+      "storyDistance": 945,
+      "storyScrollMarginTop": 88,
+      "menuScrollMarginTop": 88
+    },
+    "cta": {
+      "requestedDuration": 0.9,
+      "completionMs": 900.5,
+      "expectedFinalScrollY": 2688.90625,
+      "finalScrollY": 2689,
+      "difference": 0.09375,
+      "firstWithinMs": 822.9,
+      "lastMoveMs": 874.4,
+      "distinctPositions": 31,
+      "maxStepPx": 662,
+      "maxHeroLag": 6.116208,
+      "finalHeroTime": 9.963333,
+      "finalHeroExpected": 9.963333,
+      "finalHeroLag": 0,
+      "finalHeroProgress": 1,
+      "finalSeeking": false,
+      "finalReadyState": 4,
+      "target": 2688.90625
+    },
+    "menu": {
+      "requestedDuration": 0.9,
+      "completionMs": 897.5,
+      "expectedFinalScrollY": 5247.671875,
+      "finalScrollY": 5248,
+      "difference": 0.328125,
+      "firstWithinMs": 826.4,
+      "lastMoveMs": 878.3,
+      "distinctPositions": 35,
+      "maxStepPx": 369,
+      "maxHeroLag": 0,
+      "finalHeroTime": 9.963333,
+      "finalHeroExpected": 9.963333,
+      "finalHeroLag": 0,
+      "finalHeroProgress": 1,
+      "finalSeeking": false,
+      "finalReadyState": 4,
+      "target": 5247.671875
+    },
+    "deepLinks": {
+      "story": {
+        "url": "http://localhost:4173/?phase5t=mstory#story",
+        "hash": "#story",
+        "scrollY": 2688,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "headerHeight": 87,
+        "storyTop": 2775.90625,
+        "menuTop": 5335.671875,
+        "storyExpected": 2687.90625,
+        "menuExpected": 5247.671875,
+        "storyMargin": 88,
+        "menuMargin": 88,
+        "reducedMotion": false,
+        "historyLength": 6,
+        "lenisVersion": "1.3.27"
+      },
+      "menu": {
+        "url": "http://localhost:4173/?phase5t=mmenu#menu",
+        "hash": "#menu",
+        "scrollY": 5248,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "headerHeight": 87,
+        "storyTop": 2775.90625,
+        "menuTop": 5335.671875,
+        "storyExpected": 2687.90625,
+        "menuExpected": 5247.671875,
+        "storyMargin": 88,
+        "menuMargin": 88,
+        "reducedMotion": false,
+        "historyLength": 7,
+        "lenisVersion": "1.3.27"
+      }
+    },
+    "note": "Emulated 390x844 only. No real-device result is claimed."
+  },
+  "deepLinks": {
+    "baselineFresh": {
+      "story": {
+        "hash": "#story",
+        "scrollY": 0,
+        "expectedFinalScrollY": 2543.640625,
+        "difference": -2543.640625,
+        "historyLength": 6,
+        "events": [
+          {
+            "type": "DOMContentLoaded",
+            "t": 201,
+            "hash": "#story",
+            "readyState": "interactive",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "domcontentloaded-observer",
+            "t": 201.09999999403954,
+            "hash": "#story",
+            "readyState": "interactive",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "load",
+            "t": 201.5,
+            "hash": "#story",
+            "readyState": "complete",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "story-appeared",
+            "t": 392.79999999701977,
+            "hash": "#story",
+            "readyState": "complete",
+            "scrollY": 0,
+            "hasStory": true,
+            "hasMenu": true
+          },
+          {
+            "type": "menu-appeared",
+            "t": 393.3999999910593,
+            "hash": "#story",
+            "readyState": "complete",
+            "scrollY": 0,
+            "hasStory": true,
+            "hasMenu": true
+          }
+        ],
+        "scrollLog": []
+      },
+      "menu": {
+        "hash": "#menu",
+        "scrollY": 0,
+        "expectedFinalScrollY": 5179.234375,
+        "difference": -5179.234375,
+        "historyLength": 7,
+        "events": [
+          {
+            "type": "DOMContentLoaded",
+            "t": 247.80000001192093,
+            "hash": "#menu",
+            "readyState": "interactive",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "domcontentloaded-observer",
+            "t": 248.1000000089407,
+            "hash": "#menu",
+            "readyState": "interactive",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "load",
+            "t": 248.5,
+            "hash": "#menu",
+            "readyState": "complete",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "story-appeared",
+            "t": 480.5,
+            "hash": "#menu",
+            "readyState": "complete",
+            "scrollY": 0,
+            "hasStory": true,
+            "hasMenu": true
+          },
+          {
+            "type": "menu-appeared",
+            "t": 481.5,
+            "hash": "#menu",
+            "readyState": "complete",
+            "scrollY": 0,
+            "hasStory": true,
+            "hasMenu": true
+          }
+        ],
+        "scrollLog": []
+      }
+    },
+    "afterFresh": {
+      "story": {
+        "hash": "#story",
+        "scrollY": 2544,
+        "expectedFinalScrollY": 2543.640625,
+        "difference": 0.359375,
+        "historyLength": 6,
+        "events": [
+          {
+            "type": "DOMContentLoaded",
+            "t": 182.59999999403954,
+            "hash": "#story",
+            "readyState": "interactive",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "domcontentloaded-observer",
+            "t": 182.79999999701977,
+            "hash": "#story",
+            "readyState": "interactive",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "load",
+            "t": 183,
+            "hash": "#story",
+            "readyState": "complete",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "story-appeared",
+            "t": 370.79999999701977,
+            "hash": "#story",
+            "readyState": "complete",
+            "scrollY": 2544,
+            "hasStory": true,
+            "hasMenu": true
+          },
+          {
+            "type": "menu-appeared",
+            "t": 371.29999999701977,
+            "hash": "#story",
+            "readyState": "complete",
+            "scrollY": 2544,
+            "hasStory": true,
+            "hasMenu": true
+          }
+        ],
+        "scrollLog": [
+          {
+            "t": 378.09999999403954,
+            "hash": "#story",
+            "scrollY": 2544,
+            "hasStory": true,
+            "hasMenu": true
+          }
+        ]
+      },
+      "menu": {
+        "hash": "#menu",
+        "scrollY": 5179,
+        "expectedFinalScrollY": 5179.234375,
+        "difference": -0.234375,
+        "historyLength": 7,
+        "events": [
+          {
+            "type": "DOMContentLoaded",
+            "t": 190.20000000298023,
+            "hash": "#menu",
+            "readyState": "interactive",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "domcontentloaded-observer",
+            "t": 190.40000000596046,
+            "hash": "#menu",
+            "readyState": "interactive",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "load",
+            "t": 190.70000000298023,
+            "hash": "#menu",
+            "readyState": "complete",
+            "scrollY": 0,
+            "hasStory": false,
+            "hasMenu": false
+          },
+          {
+            "type": "story-appeared",
+            "t": 419,
+            "hash": "#menu",
+            "readyState": "complete",
+            "scrollY": 5179,
+            "hasStory": true,
+            "hasMenu": true
+          },
+          {
+            "type": "menu-appeared",
+            "t": 419.90000000596046,
+            "hash": "#menu",
+            "readyState": "complete",
+            "scrollY": 5179,
+            "hasStory": true,
+            "hasMenu": true
+          }
+        ],
+        "scrollLog": [
+          {
+            "t": 427.5,
+            "hash": "#menu",
+            "scrollY": 5179,
+            "hasStory": true,
+            "hasMenu": true
+          }
+        ]
+      }
+    },
+    "phase4SameDocument": {
+      "story": {
+        "hash": "#story",
+        "scrollY": 0,
+        "target": 2647.640625,
+        "difference": -2647.640625,
+        "lenisVersion": "1.3.27",
+        "htmlClass": "scroll-smooth lenis",
+        "scrollBehavior": "auto",
+        "historyLength": 2
+      },
+      "menu": {
+        "hash": "#menu",
+        "scrollY": 5179,
+        "target": 5283.234375,
+        "difference": -104.234375,
+        "lenisVersion": "1.3.27",
+        "htmlClass": "scroll-smooth lenis",
+        "scrollBehavior": "auto",
+        "historyLength": 3
+      },
+      "note": "Phase 4 navigated to #story and then #menu in the same document. The #menu result was a same-document hash change, not a fresh load. Fresh loads of both hashes failed in Phase 4 because the browser resolved the fragment before React created the target."
+    },
+    "rootCause": "The correct Story target is section id=\"story\" in WelcomeStory.jsx. On a fresh load the browser attempts fragment scrolling during DOMContentLoaded/load, while #story and #menu do not exist yet. React creates them about 190ms later, but the browser does not retry. The post-mount effect now reads the initial hash and calls lenis.scrollTo(target, { immediate: true })."
+  },
+  "validation": {
+    "lint": "passed",
+    "build": "passed",
+    "buildAsset": "dist/assets/index-DdC-1IOQ.js",
+    "buildWarning": "existing chunk-size warning only",
+    "console": [],
+    "sourceChanges": [
+      "src/components/ui/scroll.js",
+      "src/components/ui/SmoothScroll.jsx",
+      "src/components/3d/EntranceExperience.jsx",
+      "src/components/sections/Footer.jsx"
+    ],
+    "unchanged": [
+      "src/components/sections/WelcomeStory.jsx",
+      "Lenis options and version",
+      "src/index.css Lenis and reduced-motion rules",
+      "package.json and package-lock.json",
+      "hero scroll-to-video mapping",
+      "Story frame count, scheduler, decode guard, sticky sections, section heights"
+    ]
+  },
+  "limitations": [
+    "Headless desktop Chrome only; no real-device or physical touch testing.",
+    "Mobile results use emulated 390x844 metrics with a desktop user agent.",
+    "No throttled-network or low-end-CPU profile.",
+    "The initial-hash repair lands after React mounts, about 190-430ms after load, because the SPA has no target at the browser fragment-scroll moment. It is not an SSR or pre-paint fix.",
+    "The hero transient max lag is noisy across runs and was highest on the native smooth path; final frame mapping is identical.",
+    "The duplicate decode-source anomaly was not reproduced in Phase 5, so no decoder change was attempted."
+  ]
+}

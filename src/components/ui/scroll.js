@@ -1,0 +1,1 @@
+export const PROGRAMMATIC_SCROLL_DURATION = 0.9;

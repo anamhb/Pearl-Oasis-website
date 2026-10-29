@@ -1,0 +1,279 @@
+{
+  "date": "2026-10-27",
+  "environment": {
+    "browser": "Chrome headless=new, Chrome DevTools Protocol",
+    "viewport": "1440x900",
+    "devServer": "http://localhost:3000",
+    "notes": "Headless Chrome may use software video decode. Absolute seek latency is not a GPU-backed desktop or phone measurement."
+  },
+  "videoSource": {
+    "url": "https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4",
+    "transformations": [
+      "q_auto:best",
+      "ki_1"
+    ],
+    "posterUrl": "https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg",
+    "posterTransformations": [
+      "so_0",
+      "w_1280",
+      "h_720",
+      "c_fill"
+    ],
+    "headers": {
+      "contentLength": 3019838,
+      "contentType": "video/mp4;codecs=avc1",
+      "acceptRanges": "bytes",
+      "timingAllowOrigin": "*",
+      "cacheControl": "public, no-transform, immutable, max-age=2592000"
+    }
+  },
+  "video": {
+    "durationSeconds": 10.005,
+    "width": 1280,
+    "height": 720,
+    "fps": 23.999808001536046,
+    "frameIntervalSeconds": 0.041667,
+    "preload": "auto",
+    "readyState": 4,
+    "networkState": 1,
+    "buffered": [
+      [
+        0,
+        10.005
+      ]
+    ],
+    "seekable": [
+      [
+        0,
+        10.005
+      ]
+    ],
+    "encodedBodySize": 3019838,
+    "posterEncodedBodySize": 65647
+  },
+  "normalScroll": {
+    "scrollDistancePx": 1843,
+    "scrollDurationMs": 3000,
+    "coldRun": {
+      "codeVariant": "SEEK_EPSILON=1/30; old smooth resize correction",
+      "resource": {
+        "startTimeMs": 3451.9,
+        "responseEndMs": 5448.7,
+        "durationMs": 1996.8,
+        "transferSize": 3020138
+      },
+      "forward": {
+        "scrollEvents": 110,
+        "seekingCount": 16,
+        "seekedCount": 16,
+        "seekLatencyMs": {
+          "count": 16,
+          "min": 100.2,
+          "median": 209.4,
+          "average": 209.4875,
+          "max": 379.9
+        },
+        "targetSeconds": 9.963333333333335,
+        "currentTimeSeconds": 9.947115,
+        "lagSeconds": 0.01621833333333463
+      },
+      "reverse": {
+        "scrollEvents": 118,
+        "seekingCount": 11,
+        "seekedCount": 11,
+        "seekLatencyMs": {
+          "count": 11,
+          "min": 109.7,
+          "median": 276.9,
+          "average": 274.22727272727275,
+          "max": 350.0
+        },
+        "targetSeconds": 0,
+        "currentTimeSeconds": 0.016218,
+        "lagSeconds": -0.016218
+      }
+    },
+    "warmRunBeforeResizeFix": {
+      "codeVariant": "SEEK_EPSILON=1/24; old smooth resize correction",
+      "resource": {
+        "startTimeMs": 777.4,
+        "responseEndMs": 816.5,
+        "durationMs": 39.1,
+        "transferSize": 0
+      },
+      "forward": {
+        "scrollEvents": 118,
+        "seekingCount": 21,
+        "seekedCount": 21,
+        "seekLatencyMs": {
+          "count": 21,
+          "min": 59.3,
+          "median": 136.1,
+          "average": 140.10476190348467,
+          "max": 300.3
+        },
+        "targetSeconds": 9.963333333333335,
+        "currentTimeSeconds": 9.952521,
+        "lagSeconds": 0.010812333333333868
+      },
+      "reverse": {
+        "scrollEvents": 118,
+        "seekingCount": 21,
+        "seekedCount": 21,
+        "seekLatencyMs": {
+          "count": 21,
+          "min": 48.8,
+          "median": 128.9,
+          "average": 136.0095238103753,
+          "max": 351.8
+        },
+        "targetSeconds": 0,
+        "currentTimeSeconds": 0.005406,
+        "lagSeconds": -0.005406
+      }
+    },
+    "finalWarmRun": {
+      "codeVariant": "SEEK_EPSILON=1/24; instant resize correction",
+      "resource": {
+        "startTimeMs": 831.4,
+        "responseEndMs": 911.2,
+        "durationMs": 79.8,
+        "transferSize": 0
+      },
+      "forward": {
+        "scrollEvents": 119,
+        "seekingCount": 26,
+        "seekedCount": 26,
+        "seekLatencyMs": {
+          "count": 26,
+          "min": 50.4,
+          "median": 108.9,
+          "average": 111.28846153903466,
+          "max": 180.2
+        },
+        "targetSeconds": 9.963333333333335,
+        "currentTimeSeconds": 9.925491,
+        "lagSeconds": 0.03784233333333553
+      },
+      "reverse": {
+        "scrollEvents": 118,
+        "seekingCount": 28,
+        "seekedCount": 28,
+        "seekLatencyMs": {
+          "count": 28,
+          "min": 40.1,
+          "median": 92.8,
+          "average": 100.28928571513721,
+          "max": 193.3
+        },
+        "targetSeconds": 0,
+        "currentTimeSeconds": 0.016218,
+        "lagSeconds": -0.016218
+      }
+    },
+    "comparisonNote": "The cold and warm runs are not a controlled A/B. The cold run transferred 3.02 MB; later runs were cache-served. Higher warm seek counts reflect lower decode latency, not the threshold change."
+  },
+  "frameRate": {
+    "frames": 55,
+    "medianFrameIntervalSeconds": 0.041667,
+    "fps": 23.999808001536046,
+    "minIntervalSeconds": 0.041666,
+    "maxIntervalSeconds": 0.083333
+  },
+  "finalFrame": {
+    "endFrameOffsetSeconds": 0.041666666666666664,
+    "targetAtProgressOneSeconds": 9.963333333333335,
+    "targetIsInsideLastFrame": true,
+    "observedCurrentTimeSeconds": [
+      9.947115,
+      9.952521,
+      9.925491
+    ],
+    "maxObservedDistanceFromTargetSeconds": 0.03784233333333553,
+    "reverseEndCurrentTimeSeconds": [
+      0.005406,
+      0.016218
+    ],
+    "conclusion": "At progress 1 the target is the start of the final 24 fps frame; observed currentTime stayed within one frame of it. The final frame is reached for this asset."
+  },
+  "resize": {
+    "method": "Emulation.setDeviceMetricsOverride from 1440x900 to 900x1440 at hero progress 0.5",
+    "before": {
+      "scrollY": 1030,
+      "maxScroll": 2060,
+      "progress": 0.5,
+      "currentTimeSeconds": 4.981666,
+      "innerWidth": 1440,
+      "innerHeight": 900,
+      "trackHeight": 2960,
+      "scrollBehavior": "smooth"
+    },
+    "oldSmoothCorrection": {
+      "scrollY": 1648,
+      "maxScroll": 3296,
+      "progress": 0.5,
+      "targetSeconds": 4.981666666666667,
+      "currentTimeSeconds": 4.981666,
+      "lagSeconds": 0.0000006666666676480304,
+      "seekingCount": 5,
+      "seekedCount": 5,
+      "seekEventCount": 10,
+      "seekLatencyMs": {
+        "count": 5,
+        "min": 43.6,
+        "median": 109.2,
+        "max": 138.0
+      },
+      "scrollEvents": 15,
+      "innerWidth": 900,
+      "innerHeight": 1440,
+      "trackHeight": 4736,
+      "scrollBehavior": "smooth"
+    },
+    "instantCorrection": {
+      "scrollY": 1648,
+      "maxScroll": 3296,
+      "progress": 0.5,
+      "targetSeconds": 4.981666666666667,
+      "currentTimeSeconds": 4.981666,
+      "lagSeconds": 0.0000006666666676480304,
+      "seekingCount": 0,
+      "seekedCount": 0,
+      "seekEventCount": 0,
+      "seekLatencyMs": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "max": null
+      },
+      "scrollEvents": 1,
+      "innerWidth": 900,
+      "innerHeight": 1440,
+      "trackHeight": 4736,
+      "scrollBehavior": "smooth"
+    },
+    "comparisonNote": "Both resize runs used SEEK_EPSILON=1/24. Only the instant resize correction differed."
+  },
+  "preloadAssessment": {
+    "policy": "auto",
+    "changed": false,
+    "videoBytes": 3019838,
+    "posterBytes": 65647,
+    "fullyBuffered": true,
+    "bufferedRangeSeconds": [
+      0,
+      10.005
+    ],
+    "reason": "The first-section scroll-scrubbed film was fully buffered; the poster covers the stage during load. preload=metadata would make the first scrubs network-bound on top of decode latency. A cold mobile network comparison was not run, so the policy was left unchanged."
+  },
+  "limitations": [
+    "No physical device, Safari, Firefox, GPU-backed Chrome, slow-network, CPU, memory, or long-task profile was captured.",
+    "Headless Chrome may use software video decode; absolute seek latency is not a real-device measurement.",
+    "The video was not judged smooth on a real device.",
+    "The 1 s keyframe interval and 1280x720 source were not changed; a denser-keyframe or lower-resolution encode would need a separate quality and file-size test.",
+    "The one-in-flight design intentionally drops intermediate scroll positions; fast scrubs update at the achievable seek rate.",
+    "Initial media failure is covered by the poster; a later failure leaves the last frame, and there is no retry.",
+    "The resize fix only covers width changes while the hero is visible; height-only changes are intentionally ignored.",
+    "The cold/warm seek-count comparison is confounded by cache; the resize A/B is the only controlled comparison."
+  ]
+}

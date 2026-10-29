@@ -1,0 +1,22 @@
+{
+  "storyDeepLink": {
+    "hash": "#story",
+    "scrollY": 0,
+    "target": 2647.640625,
+    "difference": -2647.640625,
+    "lenisVersion": "1.3.27",
+    "htmlClass": "scroll-smooth lenis",
+    "scrollBehavior": "auto",
+    "historyLength": 2
+  },
+  "menuDeepLink": {
+    "hash": "#menu",
+    "scrollY": 5179,
+    "target": 5283.234375,
+    "difference": -104.234375,
+    "lenisVersion": "1.3.27",
+    "htmlClass": "scroll-smooth lenis",
+    "scrollBehavior": "auto",
+    "historyLength": 3
+  }
+}
