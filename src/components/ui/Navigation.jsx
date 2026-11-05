@@ -92,14 +92,27 @@ export const Navigation = () => {
           >
             Testimonial
           </a>
+          <a
+            href="#booking"
+            className="hover:text-[#d4af37] transition-colors whitespace-nowrap shrink-0 py-1 border-b border-transparent hover:border-[#d4af37]"
+          >
+            Table Booking
+          </a>
         </nav>
 
-        <div className="flex items-center gap-4 shrink-0">
+        <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <a
             href="#menu"
-            className="hidden sm:inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#12110d] font-cinzel text-xs font-bold tracking-[0.18em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_20px_rgba(212,175,55,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap shrink-0"
+            className="hidden xl:inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded border border-[#d4af37]/40 text-[#f5efe6] hover:border-[#d4af37] hover:text-[#d4af37] font-cinzel text-xs font-bold tracking-[0.18em] uppercase transition-all whitespace-nowrap shrink-0"
           >
             <span>View Menu</span>
+          </a>
+
+          <a
+            href="#booking"
+            className="hidden min-[480px]:inline-flex items-center justify-center gap-2 min-h-11 px-4 sm:px-5 py-2.5 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#12110d] font-cinzel text-xs font-bold tracking-[0.18em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_20px_rgba(212,175,55,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap shrink-0 cursor-pointer"
+          >
+            <span>Book a Table</span>
           </a>
 
           <button
@@ -151,12 +164,28 @@ export const Navigation = () => {
               Testimonial
             </a>
             <a
-              href="#menu"
+              href="#booking"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-2 inline-flex items-center justify-center min-h-11 py-3 rounded bg-[#d4af37] text-[#0d0e10] font-bold text-xs tracking-[0.2em]"
+              className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
-              <span>View Menu</span>
+              Table Booking
             </a>
+            <div className="pt-2 flex flex-col gap-3">
+              <a
+                href="#booking"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center min-h-11 py-3 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#0d0e10] font-cinzel font-bold text-xs tracking-[0.2em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)]"
+              >
+                <span>Book a Table</span>
+              </a>
+              <a
+                href="#menu"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center min-h-11 py-3 rounded border border-[#d4af37]/40 text-[#f5efe6] font-cinzel font-bold text-xs tracking-[0.2em] uppercase hover:border-[#d4af37] hover:text-[#d4af37] transition-all"
+              >
+                <span>View Menu</span>
+              </a>
+            </div>
           </nav>
         </div>
       )}

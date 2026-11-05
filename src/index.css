@@ -180,8 +180,8 @@ html.lenis {
   );
 }
 
-/* Layer 0: full-section burger film. The absolute box is measured against the
-   section, not the stage, so the video remains behind the heading, cards and
+/* Layer 0: full-section burger still. The absolute box is measured against the
+   section, not the stage, so the image remains behind the heading, cards and
    controls without changing the document height. */
 .testimonial-film {
   position: absolute;
@@ -526,327 +526,201 @@ section[id],
   }
 }
 
-/* ── Menu: expanding-tile carousel ──────────────────────────────────────────
-   The header stays in normal flow. The track is clipped by its own viewport,
-   so the page never gains horizontal overflow. Desktop tile widths, track
-   width and scroll offsets are calculated from the measured viewport and the
-   shared gap in MenuExperience.jsx. On phones the same track becomes a native
-   scroll-snap row with the next tile peeking into view. */
-.menu-carousel__header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 2.25rem;
+/* ── Menu: two-column zigzag image grid ─────────────────────────────────────
+   The stage is a 12-column grid at desktop width: a row runs large (7 cols)
+   then small (5 cols) and the next row flips, so the widths zigzag down the
+   section. Between 768px and 1023px it is two equal columns; below 768px it
+   is one centred column capped at 480px, so a portrait dish never sits in an
+   over-wide card. The image fills the card, a scrim over the lower part keeps
+   the dish name and description readable on any photo, and the category tag
+   carries its own dark plate for the same reason. */
+.menu-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  max-width: 30rem;
+  margin-inline: auto;
 }
 
-.menu-carousel__controls {
-  display: flex;
-  flex-shrink: 0;
-  gap: 0.625rem;
-  padding-bottom: 0.25rem;
+@media (min-width: 768px) {
+  .menu-grid {
+    max-width: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
 }
 
-.menu-carousel__arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 1px solid rgba(212, 175, 55, 0.42);
-  border-radius: 9999px;
-  background: rgba(15, 16, 18, 0.82);
-  color: #ffd875;
-  cursor: pointer;
-  transition:
-    border-color 250ms ease,
-    background-color 250ms ease,
-    color 250ms ease,
-    box-shadow 250ms ease;
+@media (min-width: 1024px) {
+  .menu-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .menu-card--large {
+    grid-column: span 7;
+  }
+
+  .menu-card--small {
+    grid-column: span 5;
+  }
 }
 
-.menu-carousel__arrow:hover:not(:disabled) {
-  border-color: rgba(255, 216, 117, 0.8);
-  background: rgba(212, 175, 55, 0.14);
-  box-shadow: 0 0 22px rgba(212, 175, 55, 0.16);
-}
-
-.menu-carousel__arrow:focus-visible {
-  outline: 2px solid #ffd875;
-  outline-offset: 3px;
-}
-
-.menu-carousel__arrow:disabled {
-  opacity: 0.34;
-  cursor: not-allowed;
-}
-
-.menu-carousel__viewport {
+.menu-card {
   position: relative;
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  overscroll-behavior-inline: contain;
-  scroll-behavior: smooth;
-  /* Room for the focus ring without changing the track's visual rhythm. */
-  padding-block: 6px;
-  margin-block: -6px;
-}
-
-.menu-carousel__viewport::-webkit-scrollbar {
-  display: none;
-}
-
-.menu-carousel__track {
   display: flex;
-  align-items: stretch;
-  gap: 14px;
-  width: var(--menu-track-width, max-content);
-}
-
-.menu-tile {
-  display: flex;
-  flex: 0 0 var(--menu-tile-width, 12rem);
   flex-direction: column;
-  min-width: 0;
-  /* A minimum, not a fixed height: normal-size content sits inside it, and
-     enlarged text can still grow the row instead of being clipped. */
-  min-height: calc(var(--menu-image-height, 9rem) + 9.5rem);
-  padding: 0;
+  justify-content: space-between;
+  gap: 1.5rem;
+  /* A minimum, not a fixed height: normal-size content sits inside it and
+     enlarged text grows the card instead of being clipped. */
+  min-height: 20rem;
+  padding: 1.2rem 1.25rem 1.35rem;
   overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 0.9rem;
-  background:
-    linear-gradient(180deg, rgba(26, 24, 20, 0.98), rgba(13, 14, 16, 0.98));
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 1.1rem;
+  background: #0b0c0e;
   color: inherit;
   text-align: left;
   cursor: pointer;
   appearance: none;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.3);
+  isolation: isolate;
   transition:
-    flex-basis 550ms cubic-bezier(0.22, 1, 0.36, 1),
     border-color 300ms ease,
     box-shadow 300ms ease;
 }
 
-.menu-tile:focus-visible {
-  outline: 2px solid #ffd875;
-  /* Drawn inside the card so the viewport's horizontal clip cannot cut it
-     when a focused tile sits at either edge of the carousel. */
-  outline-offset: -2px;
-  border-color: rgba(255, 216, 117, 0.78);
-  z-index: 2;
+@media (min-width: 640px) {
+  .menu-card {
+    min-height: 23.75rem;
+  }
 }
 
-/* The media box is an explicit full-width block. It must not depend on the
-   button's cross-axis stretch: when a portrait image's intrinsic width shaped
-   the flex item, the image filled only that narrower box and left blank space
-   beside it. The image itself is then positioned against this definite box. */
-.menu-tile__media {
-  position: relative;
-  display: block;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 var(--menu-image-height, 9rem);
-  height: var(--menu-image-height, 9rem);
+@media (min-width: 1024px) {
+  .menu-card {
+    min-height: 25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .menu-card {
+    min-height: 27.5rem;
+  }
+}
+
+.menu-card:focus-visible {
+  outline: 2px solid #ffd875;
+  /* Drawn outside the card: the grid gaps always have room for it, and no
+     ancestor clips it. */
+  outline-offset: 3px;
+  border-color: rgba(255, 216, 117, 0.78);
+}
+
+.menu-card__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   overflow: hidden;
   background: #0b0c0e;
 }
 
-.menu-tile__media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 58%, rgba(8, 9, 10, 0.34));
-  pointer-events: none;
-}
-
-.menu-tile__media img {
-  position: absolute;
-  inset: 0;
+.menu-card__media img {
   display: block;
   width: 100%;
-  max-width: none;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition:
-    transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 350ms ease;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Some portrait PNG dishes visually crowd the card edge. Inset the image
-   inside the existing media box instead of padding the card, so the title,
-   description, card dimensions, and the other full-bleed tiles stay in place.
-
-   These six assets are portrait canvases with transparent padding above and
-   below the dish. Contain keeps the whole subject inside the media box. The
-   per-card scale trims only that empty padding, so each dish stays large
-   without cutting the top or bottom. The component supplies the scale for
-   each asset; 1.18 is the fallback, below the mint glass's 1.208 limit. */
-.menu-tile__media--inset {
-  --menu-image-inset: clamp(10px, 2.8vw, 14px);
-  --menu-image-fit-scale: 1.18;
-}
-
-.menu-tile__media--inset img {
-  inset: var(--menu-image-inset) auto auto var(--menu-image-inset);
-  width: calc(100% - (var(--menu-image-inset) * 2));
-  height: calc(100% - (var(--menu-image-inset) * 2));
-  object-fit: contain;
-  transform: scale(var(--menu-image-fit-scale));
-}
-
-.menu-tile__step {
+/* The scrim is what makes overlaid text readable on an unknown photo: the
+   bottom third sits above 0.86 alpha, so the dish name and description stay
+   legible even over a white plate. */
+.menu-card__scrim {
   position: absolute;
-  top: 0.55rem;
-  left: 0.55rem;
+  inset: 0;
   z-index: 1;
-  padding: 0.18rem 0.34rem;
-  border: 1px solid rgba(212, 175, 55, 0.34);
-  border-radius: 0.28rem;
-  background: rgba(6, 7, 8, 0.86);
-  color: #ffd875;
-  font-family: var(--font-heading);
-  font-size: 0.56rem;
-  line-height: 1;
-  letter-spacing: 0.08em;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 9, 10, 0) 28%,
+    rgba(8, 9, 10, 0.45) 50%,
+    rgba(8, 9, 10, 0.86) 72%,
+    rgba(8, 9, 10, 0.97) 100%
+  );
 }
 
-.menu-tile__body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 0;
-  gap: 0.22rem;
-  padding: 0.8rem 0.85rem 0.9rem;
-  transition: opacity 300ms ease;
-}
-
-.menu-tile__tag {
-  display: block;
-  overflow: hidden;
+/* Its own dark plate: the tag sits over the un-scrimmed top of the photo, so
+   the background is guaranteed rather than dependent on the image. */
+.menu-card__tag {
+  position: relative;
+  z-index: 2;
+  align-self: flex-start;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  border-radius: 0.3rem;
+  background: rgba(8, 9, 10, 0.78);
   color: #ffd875;
   font-family: var(--font-heading);
-  font-size: 0.58rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.13em;
+  line-height: 1.3;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.menu-tile__title {
-  display: block;
+.menu-card__body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.menu-card__title {
   color: #fcf9f2;
   font-family: var(--font-serif);
-  font-size: 1.08rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  line-height: 1.18;
+  line-height: 1.2;
 }
 
-.menu-tile__description {
-  display: block;
-  margin-top: 0.08rem;
-  color: #b5ada0;
+.menu-card__description {
+  color: #cfc7b8;
   font-family: var(--font-sans);
-  font-size: 0.73rem;
-  line-height: 1.45;
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
-.menu-carousel__footer {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-/* Expansion and the restrained dimming of the other tiles are pointer-only.
-   The visible group is exactly balanced: the hovered tile gains 32% of a
-   tile width, and the other visible tiles give up that same total width
-   between them. Offscreen tiles keep their base width. The track itself never
-   changes width, so the carousel viewport and section stay still. */
-@media (hover: hover) and (pointer: fine) and (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-  .menu-tile--hovered {
-    flex-basis: var(--menu-hover-width, var(--menu-tile-width, 12rem));
-    border-color: rgba(255, 216, 117, 0.66);
-    box-shadow:
-      0 12px 34px rgba(0, 0, 0, 0.44),
-      0 0 24px rgba(212, 175, 55, 0.12);
+@media (min-width: 768px) {
+  .menu-card__title {
+    font-size: 1.4rem;
   }
 
-  .menu-tile--hovered .menu-tile__media img {
-    transform: scale(calc(var(--menu-image-fit-scale, 1) * 1.035));
-  }
-
-  .menu-tile--peer {
-    flex-basis: var(--menu-peer-width, var(--menu-tile-width, 12rem));
-    border-color: rgba(212, 175, 55, 0.18);
-  }
-
-  .menu-tile--peer .menu-tile__media img {
-    filter: brightness(0.68) saturate(0.9);
-  }
-
-  .menu-tile--peer .menu-tile__body {
-    opacity: 0.78;
+  .menu-card__description {
+    font-size: 0.86rem;
   }
 }
 
-@media (max-width: 767px) {
-  .menu-carousel__header {
-    display: block;
-    margin-bottom: 1.5rem;
+/* Zoom and border feedback are pointer-only. The zoom is a movement, so it is
+   gated on motion being welcome; the border colour is a state, not motion, so
+   reduced-motion users still get it instantly, because the transition is
+   removed below. The card itself never moves, so the grid stays still. */
+@media (hover: hover) and (pointer: fine) {
+  .menu-card:hover {
+    border-color: rgba(255, 216, 117, 0.62);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.44);
   }
+}
 
-  .menu-carousel__controls {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem;
-    padding-bottom: 0;
-  }
-
-  .menu-carousel__viewport {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 0;
-    padding-block: 6px 10px;
-    margin-block: 0;
-  }
-
-  .menu-carousel__track {
-    width: max-content;
-    gap: 12px;
-  }
-
-  .menu-tile {
-    flex: 0 0 min(78vw, 19rem);
-    min-height: 0;
-    scroll-snap-align: start;
-  }
-
-  .menu-tile__media {
-    flex: 0 0 auto;
-    height: auto;
-    aspect-ratio: 4 / 3;
-  }
-
-  .menu-tile__body {
-    min-height: 8.5rem;
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .menu-card:hover .menu-card__media img {
+    transform: scale(1.03);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .menu-carousel__viewport {
-    scroll-behavior: auto;
-  }
-
-  .menu-tile,
-  .menu-tile__media img,
-  .menu-tile__body {
+  .menu-card,
+  .menu-card__media img {
     transition: none;
   }
 }

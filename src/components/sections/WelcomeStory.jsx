@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
  * Our Story — scroll-scrubbed kitchen sequence.
  *
  * The section is a tall track with a pinned full-bleed stage, exactly like the
- * hero walkthrough: scrolling does not move the stage, it scrubs the 56-frame
+ * hero walkthrough: scrolling does not move the stage, it scrubs the 70-frame
  * kitchen sequence underneath the copy. The pin releases on its own once the
  * last frame is reached, and the page continues into the menu.
  *
@@ -20,8 +20,8 @@ import React, { useCallback, useEffect, useRef } from 'react';
  * replacement has decoded, so a scrub never shows a blank stage.
  */
 
-const FRAME_COUNT = 56;
-/** 56 × 2 vh = 112 vh of pinned travel (the track is 212 vh tall). */
+const FRAME_COUNT = 70;
+/** 70 × 2 vh = 140 vh of pinned travel (the track is 240 vh tall). */
 const SCROLL_VH_PER_FRAME = 2;
 
 /** Visible layer plus a small decoded buffer, as in the hero walkthrough. */

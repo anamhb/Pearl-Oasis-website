@@ -10,6 +10,7 @@ import { WelcomeStory } from './components/sections/WelcomeStory.jsx';
 import { SignatureDishes } from './components/sections/SignatureDishes.jsx';
 import { MenuExperience } from './components/sections/MenuExperience.jsx';
 import { Testimonials } from './components/sections/Testimonials.jsx';
+import { TableBooking } from './components/sections/TableBooking.jsx';
 import { Footer } from './components/sections/Footer.jsx';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
         <SignatureDishes />
         <MenuExperience />
         <Testimonials />
+        <TableBooking />
       </main>
 
       <Footer />

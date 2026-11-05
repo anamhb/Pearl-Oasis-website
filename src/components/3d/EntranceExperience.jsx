@@ -22,12 +22,15 @@ import { PROGRAMMATIC_SCROLL_DURATION } from '../ui/scroll.js';
  * The H.264 MP4 is the primary source. Browsers without H.264 get the
  * validated VP9 WebM before the first load. If the MP4 reports support but
  * then fails with a decode or source error, one controlled switch to WebM is
- * allowed. Seek cancellations and aborted range requests do not switch.
+ * allowed. If the WebM itself fails with a decode or source error, one reload
+ * of the same WebM URL with a cache-busting query is allowed. Seek
+ * cancellations and aborted range requests do not switch or retry.
  */
 const VIDEO_MP4_URL =
   'https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4';
 const VIDEO_WEBM_URL =
   'https://res.cloudinary.com/z8nlnc6b/video/upload/v1793251281/hero-lobby-20261029-vp9-6148df8e.webm';
+const VIDEO_WEBM_RECOVERY_URL = `${VIDEO_WEBM_URL}?recovery=1`;
 const VIDEO_POSTER =
   'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg';
 const VIDEO_MP4_TYPE = 'video/mp4; codecs="avc1.42E01E"';
@@ -86,6 +89,7 @@ export const EntranceExperience = () => {
   const videoSourceRef = useRef(videoSource);
   const previousVideoSourceRef = useRef(videoSource);
   const fallbackAttemptedRef = useRef(videoSource === VIDEO_WEBM_URL);
+  const webmRecoveryAttemptedRef = useRef(false);
   const entranceContentRef = useRef(null);
   const diningContentRef = useRef(null);
   const centerScrimRef = useRef(null);
@@ -101,6 +105,17 @@ export const EntranceExperience = () => {
   const durationRef = useRef(0);
   const progressRef = useRef(0);
   /**
+   * `video.seeking` is unreliable in Chromium 107: it can read false while the
+   * previous seek is still decoding, so the next assignment cancels and
+   * restarts the seek. This ref is set synchronously before the assignment
+   * and released by the matching `seeked`.
+   */
+  const seekInFlightRef = useRef(false);
+  const pendingSeekTargetRef = useRef(null);
+  const seekGenerationRef = useRef(0);
+  const activeSeekGenerationRef = useRef(0);
+  const metadataAtRef = useRef(0);
+  /**
    * False while the hero is far outside the viewport. The scroll listener is
    * global, so without this every scroll anywhere in the ~16 000 px document
    * still measured this track and wrote six styles, even with the stage 10
@@ -114,6 +129,15 @@ export const EntranceExperience = () => {
   const metricsRef = useRef({ top: 0, scrollDistance: 0, viewport: 0, width: 0 });
   const lenis = useLenis();
   const lenisRef = useRef(null);
+
+  /* Any source change, media reset, error or unmount invalidates the seek that
+     was in flight for the previous media state. */
+  const resetSeekState = useCallback(() => {
+    seekInFlightRef.current = false;
+    pendingSeekTargetRef.current = null;
+    seekGenerationRef.current += 1;
+    metadataAtRef.current = 0;
+  }, []);
 
   /* Keep the resize correction on the same scroll controller as the rest of
      the page without making the main effect restart when Lenis mounts. */
@@ -129,8 +153,9 @@ export const EntranceExperience = () => {
     previousVideoSourceRef.current = videoSource;
     videoReadyRef.current = false;
     durationRef.current = 0;
+    resetSeekState();
     videoRef.current?.load();
-  }, [videoSource]);
+  }, [videoSource, resetSeekState]);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -144,51 +169,145 @@ export const EntranceExperience = () => {
   }, []);
 
   /**
-   * Apply the current progress to the film. Only one seek is allowed in
-   * flight: while it runs, newer positions wait for seeked, which then applies
-   * the latest value. This avoids cancelling and restarting seeks on every
-   * scroll event.
+   * Start one seek and hold the guard until its `seeked`. The pending target is
+   * cleared because the caller either has no newer target or has just taken
+   * the latest one.
    */
-  const applyVideoProgress = useCallback((nextProgress = progressRef.current) => {
-    const progress = clamp01(Number.isFinite(nextProgress) ? nextProgress : 0);
-    progressRef.current = progress;
-
+  const startSeek = useCallback((target) => {
     const video = videoRef.current;
     const duration = durationRef.current;
     if (!video || !videoReadyRef.current) return;
     if (!Number.isFinite(duration) || duration <= 0) return;
-    if (video.seeking) return;
 
     const end = Math.max(0, duration - END_FRAME_OFFSET);
-    const target = progress * end;
-    if (Math.abs(video.currentTime - target) < SEEK_EPSILON) return;
+    const targetTime = Math.min(Math.max(target, 0), end);
+    if (Math.abs(video.currentTime - targetTime) < SEEK_EPSILON) {
+      pendingSeekTargetRef.current = null;
+      return;
+    }
 
+    seekInFlightRef.current = true;
+    activeSeekGenerationRef.current = seekGenerationRef.current;
+    pendingSeekTargetRef.current = null;
     try {
-      video.currentTime = target;
+      video.currentTime = targetTime;
     } catch {
       // Keep the current frame and poster; the next scroll or seek retries.
+      seekInFlightRef.current = false;
+      pendingSeekTargetRef.current = null;
     }
   }, []);
 
-  const handleVideoMetadata = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const currentSource = video.currentSrc || video.src;
-    if (currentSource && currentSource !== videoSourceRef.current) return;
-    const duration = video.duration;
-    if (!Number.isFinite(duration) || duration <= 0) return;
-    durationRef.current = duration;
-    videoReadyRef.current = true;
-    applyVideoProgress();
-  }, [applyVideoProgress]);
+  /**
+   * Apply the current progress to the film. Only one seek is allowed in
+   * flight: while it runs, newer positions are coalesced into the pending
+   * target, which `seeked` applies once. This avoids cancelling and restarting
+   * seeks on every scroll event.
+   */
+  const applyVideoProgress = useCallback(
+    (nextProgress = progressRef.current) => {
+      const progress = clamp01(Number.isFinite(nextProgress) ? nextProgress : 0);
+      progressRef.current = progress;
 
-  const handleVideoSeeked = useCallback(() => {
-    applyVideoProgress();
-  }, [applyVideoProgress]);
+      const video = videoRef.current;
+      const duration = durationRef.current;
+      if (!video || !videoReadyRef.current) return;
+      if (!Number.isFinite(duration) || duration <= 0) return;
+
+      const end = Math.max(0, duration - END_FRAME_OFFSET);
+      const target = progress * end;
+
+      if (seekInFlightRef.current) {
+        pendingSeekTargetRef.current = target;
+        return;
+      }
+
+      startSeek(target);
+    },
+    [startSeek],
+  );
+
+  const syncVideoMetadata = useCallback(
+    (resetSeekOnLoad = false) => {
+      const video = videoRef.current;
+      if (!video) return;
+      const currentSource = video.currentSrc || video.src;
+      if (currentSource && currentSource !== videoSourceRef.current) return;
+      const duration = video.duration;
+      if (!Number.isFinite(duration) || duration <= 0) return;
+
+      if (resetSeekOnLoad) {
+        resetSeekState();
+        metadataAtRef.current = performance.now();
+      }
+      durationRef.current = duration;
+      videoReadyRef.current = true;
+      applyVideoProgress();
+    },
+    [applyVideoProgress, resetSeekState],
+  );
+
+  const handleVideoLoadedMetadata = useCallback(() => {
+    syncVideoMetadata(true);
+  }, [syncVideoMetadata]);
+
+  const handleVideoCanPlay = useCallback(() => {
+    syncVideoMetadata(false);
+  }, [syncVideoMetadata]);
+
+  const handleVideoSeeked = useCallback(
+    (event) => {
+      const video = videoRef.current;
+      if (!video || !seekInFlightRef.current) return;
+
+      if (activeSeekGenerationRef.current !== seekGenerationRef.current) {
+        resetSeekState();
+        return;
+      }
+
+      const currentSource = video.currentSrc || video.src;
+      if (currentSource && currentSource !== videoSourceRef.current) {
+        resetSeekState();
+        return;
+      }
+
+      /* A seek from the previous source can be queued before the new source's
+         metadata. Do not let it release the new source's guard. */
+      const seekedAt = Number(event?.timeStamp);
+      if (Number.isFinite(seekedAt) && seekedAt > 0 && seekedAt < metadataAtRef.current) {
+        return;
+      }
+
+      seekInFlightRef.current = false;
+      const pending = pendingSeekTargetRef.current;
+      pendingSeekTargetRef.current = null;
+      if (pending === null) return;
+
+      const duration = durationRef.current;
+      if (!Number.isFinite(duration) || duration <= 0) return;
+      const end = Math.max(0, duration - END_FRAME_OFFSET);
+      const target = Math.min(Math.max(pending, 0), end);
+      if (Math.abs(video.currentTime - target) < SEEK_EPSILON) return;
+
+      startSeek(target);
+    },
+    [resetSeekState, startSeek],
+  );
+
+  const handleVideoEmptied = useCallback(() => {
+    resetSeekState();
+    videoReadyRef.current = false;
+    durationRef.current = 0;
+  }, [resetSeekState]);
 
   const handleVideoError = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    const currentSource = video.currentSrc || video.src;
+    if (currentSource && currentSource !== videoSourceRef.current) return;
+
+    resetSeekState();
     videoReadyRef.current = false;
     durationRef.current = 0;
 
@@ -197,11 +316,17 @@ export const EntranceExperience = () => {
 
     const source = video.currentSrc || video.src || videoSource;
     const errorCode = error.code;
+    const isWebmSource =
+      videoSource === VIDEO_WEBM_URL || videoSource === VIDEO_WEBM_RECOVERY_URL;
     const canUseFallback =
       videoSource === VIDEO_MP4_URL &&
       !fallbackAttemptedRef.current &&
       (errorCode === MEDIA_ERR_DECODE || errorCode === MEDIA_ERR_SRC_NOT_SUPPORTED) &&
       canPlayVideoType(VIDEO_WEBM_TYPE);
+    const canUseWebmRecovery =
+      isWebmSource &&
+      !webmRecoveryAttemptedRef.current &&
+      (errorCode === MEDIA_ERR_DECODE || errorCode === MEDIA_ERR_SRC_NOT_SUPPORTED);
 
     console.warn('[Hero video] media failure', {
       source,
@@ -210,13 +335,20 @@ export const EntranceExperience = () => {
       readyState: video.readyState,
       networkState: video.networkState,
       fallback: canUseFallback ? VIDEO_WEBM_URL : null,
+      recovery: canUseWebmRecovery ? VIDEO_WEBM_RECOVERY_URL : null,
     });
 
-    if (!canUseFallback) return;
+    if (canUseFallback) {
+      fallbackAttemptedRef.current = true;
+      setVideoSource(VIDEO_WEBM_URL);
+      return;
+    }
 
-    fallbackAttemptedRef.current = true;
-    setVideoSource(VIDEO_WEBM_URL);
-  }, [videoSource]);
+    if (!canUseWebmRecovery) return;
+
+    webmRecoveryAttemptedRef.current = true;
+    setVideoSource(VIDEO_WEBM_RECOVERY_URL);
+  }, [resetSeekState, videoSource]);
 
   const update = useCallback(() => {
     const track = trackRef.current;
@@ -424,8 +556,9 @@ export const EntranceExperience = () => {
       motionQuery.removeEventListener?.('change', syncMotionPreference);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
+      resetSeekState();
     };
-  }, [update, measure]);
+  }, [update, measure, resetSeekState]);
 
   const handleEnterClick = () => {
     const secondSection = document.getElementById('story');
@@ -479,9 +612,10 @@ export const EntranceExperience = () => {
           playsInline
           aria-hidden="true"
           tabIndex={-1}
-          onLoadedMetadata={handleVideoMetadata}
-          onCanPlay={handleVideoMetadata}
+          onLoadedMetadata={handleVideoLoadedMetadata}
+          onCanPlay={handleVideoCanPlay}
           onSeeked={handleVideoSeeked}
+          onEmptied={handleVideoEmptied}
           onError={handleVideoError}
         />
 

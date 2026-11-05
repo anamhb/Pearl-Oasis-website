@@ -17,26 +17,17 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
  * by `requestAnimationFrame`, so cards travel along the arc instead of sliding
  * in a straight line. Moving past the last card wraps to the first.
  *
- * The burger film is the section background. It sits behind the heading and the
+ * The still is the section background. It sits behind the heading and the
  * carousel in its own layer, and uses `object-fit: cover` with centered framing
  * (`object-position: 50% 50%`). The active card keeps an opaque dark surface so
- * the moving video cannot reduce its text contrast; inactive cards fade along
- * the arc by design. The film has no tint, vignette or filter. A separate soft
- * scrim sits under the heading only and fades before the burger's center.
+ * the image cannot reduce its text contrast; inactive cards fade along the
+ * arc by design. The still has no tint, vignette or filter. A separate soft
+ * scrim sits under the heading only and fades before the still's center.
  */
-const TESTIMONIAL_VIDEO =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/v1792900563/Burger_layers_assemble_together_20261025085531.mp4';
-const TESTIMONIAL_VIDEO_MOBILE =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.mp4';
-const TESTIMONIAL_VIDEO_WEBM =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm';
-const TESTIMONIAL_VIDEO_WEBM_MOBILE =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/w_720,f_webm,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.webm';
-const TESTIMONIAL_POSTER =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg';
-const TESTIMONIAL_POSTER_MOBILE =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1792900563/Burger_layers_assemble_together_20261025085531.jpg';
-const MOBILE_VIDEO_QUERY = '(max-width: 767px)';
+const TESTIMONIAL_IMAGE =
+  'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,q_auto/v1793785344/Animate_start_to_end_frame_4d96b20f_1.jpg';
+const TESTIMONIAL_IMAGE_SMALL =
+  'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_720,q_auto/v1793785344/Animate_start_to_end_frame_4d96b20f_1.jpg';
 
 const AUTOPLAY_MS = 3500;
 const DRAG_THRESHOLD = 8;
@@ -169,7 +160,6 @@ const TestimonialCard = memo(function TestimonialCard({
 
 export const Testimonials = () => {
   const sectionRef = useRef(null);
-  const videoRef = useRef(null);
   const arcRef = useRef(null);
   const cardRefs = useRef([]);
   const positionRef = useRef(0);
@@ -212,11 +202,6 @@ export const Testimonials = () => {
     () => typeof document === 'undefined' || !document.hidden,
   );
   const [interactionTick, setInteractionTick] = useState(0);
-  const [mobileVideo, setMobileVideo] = useState(
-    () =>
-      typeof window !== 'undefined' &&
-      window.matchMedia(MOBILE_VIDEO_QUERY).matches,
-  );
 
   /* Writes one frame of the arc to the DOM. Only five elements are touched,
      and only when the position actually changes, so React never re-renders
@@ -718,91 +703,6 @@ export const Testimonials = () => {
     [],
   );
 
-  useEffect(() => {
-    const query = window.matchMedia(MOBILE_VIDEO_QUERY);
-    const onChange = (event) => setMobileVideo(event.matches);
-    setMobileVideo(query.matches);
-    query.addEventListener('change', onChange);
-    return () => query.removeEventListener('change', onChange);
-  }, []);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const video = videoRef.current;
-    if (!section || !video) return undefined;
-
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let near = false;
-
-    const handleVideoError = () => {
-      const selection = video.currentSrc || video.src || 'unknown';
-      const errorCode = video.error?.code ?? null;
-      const errorMessage = video.error?.message ?? 'unknown';
-      console.warn('[Testimonials video] source failed or is unsupported', {
-        source: selection,
-        poster: video.poster || null,
-        readyState: video.readyState,
-        networkState: video.networkState,
-        errorCode,
-        errorMessage,
-      });
-    };
-
-    const applyPlayback = () => {
-      if (near && !motionQuery.matches) {
-        const attempt = video.play();
-        if (attempt && typeof attempt.catch === 'function') {
-          attempt.catch((error) => {
-            console.warn('[Testimonials video] playback rejected', {
-              currentSrc: video.currentSrc || '',
-              readyState: video.readyState,
-              networkState: video.networkState,
-              errorName: error?.name ?? 'UnknownError',
-              errorMessage: error?.message ?? 'Unknown playback error',
-            });
-          });
-        }
-      } else {
-        video.pause();
-      }
-    };
-
-    /* A source swap can replace the video element before it has decoded
-       enough data for play(). Retry when the new source is ready. */
-    video.addEventListener('canplay', applyPlayback);
-    video.addEventListener('loadeddata', applyPlayback);
-    video.addEventListener('error', handleVideoError);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        near = entries.some((entry) => entry.isIntersecting);
-        applyPlayback();
-      },
-      { rootMargin: '100% 0px' },
-    );
-
-    /* Deep links (#experience) and restored scroll positions can mount with the
-       section already on screen, before the observer's first delivery. */
-    const rect = section.getBoundingClientRect();
-    near = rect.top < window.innerHeight * 2 && rect.bottom > -window.innerHeight;
-    applyPlayback();
-
-    observer.observe(section);
-    motionQuery.addEventListener('change', applyPlayback);
-
-    return () => {
-      observer.disconnect();
-      motionQuery.removeEventListener('change', applyPlayback);
-      video.removeEventListener('canplay', applyPlayback);
-      video.removeEventListener('loadeddata', applyPlayback);
-      video.removeEventListener('error', handleVideoError);
-    };
-  }, [mobileVideo]);
-
-  const videoSource = mobileVideo ? TESTIMONIAL_VIDEO_MOBILE : TESTIMONIAL_VIDEO;
-  const videoWebmSource = mobileVideo ? TESTIMONIAL_VIDEO_WEBM_MOBILE : TESTIMONIAL_VIDEO_WEBM;
-  const videoPoster = mobileVideo ? TESTIMONIAL_POSTER_MOBILE : TESTIMONIAL_POSTER;
-
   return (
     <section
       ref={sectionRef}
@@ -810,37 +710,25 @@ export const Testimonials = () => {
       aria-labelledby="testimonials-heading"
       className="relative isolate overflow-hidden border-t border-[#1f1d18] bg-[#0a0b0d]"
     >
-      {/* The film is the section background, not a band below the heading. It
+      {/* The still is the section background, not a band below the heading. It
           is the first child of the section so its absolute box covers the whole
           section; the heading and carousel paint above it. No overlay or filter
-          is applied, so the burger remains visible around the cards. */}
+          is applied, so the image remains visible around the cards. */}
       <div aria-hidden="true" className="testimonial-film">
-        <video
-          key={videoSource}
-          ref={videoRef}
-          poster={videoPoster}
+        <img
+          src={TESTIMONIAL_IMAGE}
+          srcSet={`${TESTIMONIAL_IMAGE_SMALL} 720w, ${TESTIMONIAL_IMAGE} 1280w`}
+          sizes="100vw"
+          alt=""
           className="testimonial-film__video"
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          tabIndex={-1}
-          disablePictureInPicture
+          decoding="async"
+          loading="lazy"
           onError={(event) => {
-            const source = event.currentTarget.currentSrc || event.currentTarget.src || 'unknown';
-            const error = event.currentTarget.error;
-            console.warn('[Testimonials video] source failed', {
-              source,
-              readyState: event.currentTarget.readyState,
-              networkState: event.currentTarget.networkState,
-              errorCode: error?.code ?? null,
-              errorMessage: error?.message ?? '',
+            console.warn('[Testimonials image] failed to load', {
+              source: event.currentTarget.currentSrc || event.currentTarget.src || 'unknown',
             });
           }}
-        >
-          <source src={videoSource} type="video/mp4; codecs=avc1" />
-          <source src={videoWebmSource} type="video/webm; codecs=vp9" />
-        </video>
+        />
       </div>
 
       <div className="testimonial-header relative z-10 mx-auto max-w-3xl px-6 pt-10 pb-4 text-center sm:px-12 sm:pt-12 sm:pb-5">

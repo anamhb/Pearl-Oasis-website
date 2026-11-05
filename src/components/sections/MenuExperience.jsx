@@ -1,18 +1,13 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import {
-  BookOpen,
-  ChevronLeft,
-  ChevronRight,
-  X,
-  CheckCircle2,
-} from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { BookOpen, ChevronRight, X, CheckCircle2 } from 'lucide-react';
 
-// Existing category images. Each tile uses the image that belongs to its
-// existing menu section; no new categories or stock photography are added.
-import soupImg from '../../assets/images/Chicken_soup.png';
-import chineseImg from '../../assets/images/Chowmen.png';
+// Menu section images. Cards 1, 2 and 4 use the owner-supplied photos
+// (soup.jpg, chawmen.jpg, malai-boti.jpg); the other cards keep the assets
+// they already used.
+import soupImg from '../../assets/images/soup.jpg';
+import chineseImg from '../../assets/images/chawmen.jpg';
 import handiImg from '../../assets/images/royal_dum_biryani_1792250482066.jpg';
-import bbqImg from '../../assets/images/Malai_Boti.png';
+import bbqImg from '../../assets/images/malai-boti.jpg';
 import bbqPlattersImg from '../../assets/images/Seekh_Kabab-1.png';
 
 import riceImg from '../../assets/images/Chicken_Fried_Rice.png';
@@ -118,63 +113,27 @@ const RIGHT_CARDS = [
 ];
 
 const ALL_CARDS_IN_ORDER = [...LEFT_CARDS, ...RIGHT_CARDS].sort((a, b) => a.step - b.step);
-const CATEGORY_COUNT = ALL_CARDS_IN_ORDER.length;
 
-const MENU_STEP = 3;
-const MENU_GAP = 14;
-const MENU_MIN_TILE_WIDTH = 176;
-const MENU_MAX_VISIBLE = 6;
-const MENU_HOVER_GROWTH = 0.32;
-// These portraits sit tight against the card edge; the other tiles keep their
-// existing full-bleed treatment.
-const IMAGE_INSET_STEPS = new Set([1, 2, 4, 5, 6, 8]);
+/* Two desktop rows: the first four sections in step order, which the
+   12-column grid pairs as 7+5 then the flipped 5+7. Every rendered card now
+   uses a full-bleed photo, so all of them take `cover`. The full-menu modal
+   keeps listing every section; only the grid is trimmed. */
+const GRID_CARDS = ALL_CARDS_IN_ORDER.slice(0, 4);
 
-// Each portrait asset has different transparent padding. These scales trim
-// that padding without cutting the dish, while keeping the visible subject
-// inside the inset media box.
-const IMAGE_FIT_SCALE = {
-  1: 1.42,
-  2: 1.24,
-  4: 1.3,
-  5: 1.36,
-  6: 1.21,
-  8: 1.18,
+/* Zigzag pairing for the 12-column desktop grid: an even row runs
+   large + small, the next row flips to small + large, so the widths
+   alternate down the section (7,5 / 5,7 / 7,5 …). */
+const isLargeCard = (index) => {
+  const rowIsEven = Math.floor(index / 2) % 2 === 0;
+  const isFirstInRow = index % 2 === 0;
+  return rowIsEven ? isFirstInRow : !isFirstInRow;
 };
 
 export const MenuExperience = () => {
-  const viewportRef = useRef(null);
-  const scrollTimerRef = useRef(null);
-  const programmaticScrollRef = useRef(false);
-  const indexRef = useRef(0);
-  const [layout, setLayout] = useState({
-    visible: MENU_MAX_VISIBLE,
-    tileWidth: 0,
-    imageHeight: 0,
-    trackWidth: 0,
-  });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [isFullMenuModalOpen, setIsFullMenuModalOpen] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const modalRef = useRef(null);
   const modalCloseRef = useRef(null);
   const modalOpenerRef = useRef(null);
-
-  const maxIndex = Math.max(0, CATEGORY_COUNT - layout.visible);
-  const navigationStep = isMobile ? 1 : MENU_STEP;
-  const canGoBack = activeIndex > 0;
-  const canGoForward = activeIndex < maxIndex;
-
-  const readScrollStep = () => {
-    const viewport = viewportRef.current;
-    const tile = viewport?.querySelector('.menu-tile');
-    if (!tile) return 0;
-
-    const track = tile.parentElement;
-    const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
-    return tile.getBoundingClientRect().width + gap;
-  };
 
   const openFullMenu = (event) => {
     modalOpenerRef.current = event?.currentTarget ?? null;
@@ -185,115 +144,8 @@ export const MenuExperience = () => {
     setIsFullMenuModalOpen(false);
   };
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (event) => setPrefersReducedMotion(event.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  useLayoutEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport) return undefined;
-
-    let frame = 0;
-
-    const measure = () => {
-      const width = viewport.clientWidth;
-      const mobile = window.matchMedia('(max-width: 767px)').matches;
-
-      setIsMobile(mobile);
-
-      if (mobile || width === 0) {
-        setHoveredIndex(null);
-        setLayout({
-          visible: 1,
-          tileWidth: 0,
-          imageHeight: 0,
-          trackWidth: 0,
-        });
-        return;
-      }
-
-      const visible = Math.min(
-        MENU_MAX_VISIBLE,
-        Math.max(1, Math.floor((width + MENU_GAP) / (MENU_MIN_TILE_WIDTH + MENU_GAP))),
-      );
-      const tileWidth = (width - (visible - 1) * MENU_GAP) / visible;
-      const imageHeight = Math.round(tileWidth * 0.75);
-      const trackWidth = CATEGORY_COUNT * tileWidth + (CATEGORY_COUNT - 1) * MENU_GAP;
-      const nextMaxIndex = Math.max(0, CATEGORY_COUNT - visible);
-
-      setLayout({ visible, tileWidth, imageHeight, trackWidth });
-      setActiveIndex((previousIndex) => {
-        const nextIndex = Math.min(previousIndex, nextMaxIndex);
-        indexRef.current = nextIndex;
-        return nextIndex;
-      });
-    };
-
-    const scheduleMeasure = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(measure);
-    };
-
-    const observer = new ResizeObserver(scheduleMeasure);
-    observer.observe(viewport);
-    window.addEventListener('resize', scheduleMeasure);
-    measure();
-
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-      window.removeEventListener('resize', scheduleMeasure);
-    };
-  }, []);
-
-  /* Keep the mobile index in step with the native scroll position after the
-     responsive layout changes. This matters when a tablet/desktop window is
-     resized into the phone breakpoint while the row is scrolled. */
-  useEffect(() => {
-    if (!isMobile) return undefined;
-
-    const viewport = viewportRef.current;
-    if (!viewport) return undefined;
-
-    const frame = requestAnimationFrame(() => {
-      const step = readScrollStep();
-      if (!step) return;
-
-      const nextIndex = Math.min(
-        maxIndex,
-        Math.max(0, Math.round(viewport.scrollLeft / step)),
-      );
-      indexRef.current = nextIndex;
-      setActiveIndex((previousIndex) =>
-        previousIndex === nextIndex ? previousIndex : nextIndex,
-      );
-    });
-
-    return () => cancelAnimationFrame(frame);
-  }, [isMobile, layout.visible, maxIndex]);
-
-  useEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport || isMobile || !layout.tileWidth) return;
-
-    const targetIndex = Math.min(indexRef.current, maxIndex);
-    const targetScroll = targetIndex * (layout.tileWidth + MENU_GAP);
-    if (Math.abs(viewport.scrollLeft - targetScroll) > 1) {
-      viewport.scrollLeft = targetScroll;
-    }
-  }, [isMobile, layout.tileWidth, layout.visible, maxIndex]);
-
-  useEffect(() => () => {
-    if (scrollTimerRef.current) window.clearTimeout(scrollTimerRef.current);
-  }, []);
-
   /* Escape closes, Tab stays inside the dialog, and focus returns to the
-     tile or footer button that opened it. */
+     card or footer button that opened it. */
   useEffect(() => {
     if (!isFullMenuModalOpen) return undefined;
 
@@ -339,102 +191,6 @@ export const MenuExperience = () => {
     };
   }, [isFullMenuModalOpen]);
 
-  const syncIndexFromScroll = () => {
-    const viewport = viewportRef.current;
-    if (!viewport || programmaticScrollRef.current) return;
-
-    const step = layout.tileWidth
-      ? layout.tileWidth + MENU_GAP
-      : readScrollStep();
-    if (!step) return;
-
-    const rawIndex = viewport.scrollLeft / step;
-    const nextIndex = Math.min(maxIndex, Math.max(0, Math.round(rawIndex)));
-    indexRef.current = nextIndex;
-    setActiveIndex((previousIndex) =>
-      previousIndex === nextIndex ? previousIndex : nextIndex,
-    );
-  };
-
-  const scrollToIndex = (nextIndex, behavior) => {
-    const viewport = viewportRef.current;
-    const clampedIndex = Math.min(maxIndex, Math.max(0, nextIndex));
-    indexRef.current = clampedIndex;
-    setActiveIndex(clampedIndex);
-    setHoveredIndex(null);
-
-    if (!viewport) return;
-
-    const step = layout.tileWidth
-      ? layout.tileWidth + MENU_GAP
-      : readScrollStep();
-    if (!step) return;
-
-    programmaticScrollRef.current = true;
-    if (scrollTimerRef.current) window.clearTimeout(scrollTimerRef.current);
-
-    viewport.scrollTo({
-      left: clampedIndex * step,
-      behavior,
-    });
-
-    scrollTimerRef.current = window.setTimeout(() => {
-      programmaticScrollRef.current = false;
-    }, behavior === 'smooth' ? 700 : 40);
-  };
-
-  const goToPrevious = () => {
-    scrollToIndex(activeIndex - navigationStep, prefersReducedMotion ? 'auto' : 'smooth');
-  };
-
-  const goToNext = () => {
-    scrollToIndex(activeIndex + navigationStep, prefersReducedMotion ? 'auto' : 'smooth');
-  };
-
-  const hoverEnabled =
-    !isMobile &&
-    !prefersReducedMotion &&
-    layout.tileWidth > 0 &&
-    typeof window !== 'undefined' &&
-    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  const hoverWidth = layout.tileWidth * (1 + MENU_HOVER_GROWTH);
-  const peerWidth =
-    layout.tileWidth * (1 - MENU_HOVER_GROWTH / Math.max(1, layout.visible - 1));
-
-  const handleTilePointerEnter = (index, event) => {
-    if (!hoverEnabled || event.pointerType !== 'mouse') return;
-    setHoveredIndex(index);
-  };
-
-  const handleTilePointerLeave = (index, event) => {
-    if (event.pointerType !== 'mouse') return;
-    setHoveredIndex((currentIndex) => (currentIndex === index ? null : currentIndex));
-  };
-
-  const handleTileFocus = (index) => {
-    if (isMobile || !layout.tileWidth) return;
-
-    const firstVisible = activeIndex;
-    const lastVisible = activeIndex + layout.visible - 1;
-
-    if (index < firstVisible) {
-      scrollToIndex(index, 'instant');
-    } else if (index > lastVisible) {
-      scrollToIndex(index - layout.visible + 1, 'instant');
-    }
-  };
-
-  const trackStyle = layout.tileWidth
-    ? {
-        '--menu-tile-width': `${layout.tileWidth}px`,
-        '--menu-image-height': `${layout.imageHeight}px`,
-        '--menu-track-width': `${layout.trackWidth}px`,
-        '--menu-hover-width': `${hoverWidth}px`,
-        '--menu-peer-width': `${peerWidth}px`,
-      }
-    : undefined;
-
   return (
     <section
       id="menu"
@@ -448,146 +204,65 @@ export const MenuExperience = () => {
       </div>
 
       <div className="relative max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
-        <div className="menu-carousel__header">
-          <div className="max-w-3xl">
-            <p className="text-[10px] font-cinzel text-[#ffd875] tracking-[0.2em] uppercase mb-3">
-              Kohat Culinary Collection
-            </p>
-            <h2
-              id="menu-heading"
-              className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl text-[#fcf9f2] font-normal tracking-tight max-w-2xl"
-            >
-              A Taste for Every Craving.
-            </h2>
-            <div className="w-20 h-0.5 bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-transparent mt-5 mb-4 opacity-80" />
-            <p className="text-sm sm:text-[15px] lg:text-base text-[#d8d0c2] font-sans leading-relaxed tracking-wide max-w-2xl">
-              Discover the flavours of Pearl Oasis, from satisfying favourites to dishes made for sharing.
-            </p>
-          </div>
-
-          <div
-            className="menu-carousel__controls"
-            role="group"
-            aria-label="Menu carousel controls"
+        <div className="mb-6 max-w-3xl lg:mb-10">
+          <p className="text-[10px] font-cinzel text-[#ffd875] tracking-[0.2em] uppercase mb-3">
+            Kohat Culinary Collection
+          </p>
+          <h2
+            id="menu-heading"
+            className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl text-[#fcf9f2] font-normal tracking-tight max-w-2xl"
           >
-            <button
-              type="button"
-              onClick={goToPrevious}
-              disabled={!canGoBack}
-              aria-label="Previous menu item"
-              aria-controls="menu-carousel-viewport"
-              className="menu-carousel__arrow"
-            >
-              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={goToNext}
-              disabled={!canGoForward}
-              aria-label="Next menu item"
-              aria-controls="menu-carousel-viewport"
-              className="menu-carousel__arrow"
-            >
-              <ChevronRight className="w-5 h-5" aria-hidden="true" />
-            </button>
-          </div>
+            A Taste for Every Craving.
+          </h2>
+          <div className="w-20 h-0.5 bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-transparent mt-5 mb-4 opacity-80" />
+          <p className="text-sm sm:text-[15px] lg:text-base text-[#d8d0c2] font-sans leading-relaxed tracking-wide max-w-2xl">
+            Discover the flavours of Pearl Oasis, from satisfying favourites to dishes made for sharing.
+          </p>
         </div>
 
-        <div
-          className="menu-carousel"
-          role="group"
-          aria-roledescription="carousel"
-          aria-label="Menu categories"
-        >
-          <div
-            id="menu-carousel-viewport"
-            ref={viewportRef}
-            className="menu-carousel__viewport"
-            onScroll={syncIndexFromScroll}
+        <div className="menu-grid">
+          {GRID_CARDS.map((card, index) => {
+            const sizeClass = isLargeCard(index)
+              ? ' menu-card--large'
+              : ' menu-card--small';
+
+            return (
+              <button
+                key={card.id}
+                type="button"
+                onClick={openFullMenu}
+                className={`menu-card${sizeClass}`}
+                aria-label={`Open full menu: ${card.title}`}
+              >
+                <span className="menu-card__media">
+                  <img
+                    src={card.image}
+                    alt=""
+                    loading={index < 2 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                </span>
+                <span className="menu-card__scrim" />
+                <span className="menu-card__tag">{card.categoryTag}</span>
+                <span className="menu-card__body">
+                  <span className="menu-card__title">{card.title}</span>
+                  <span className="menu-card__description">{card.description}</span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 flex justify-center lg:mt-10">
+          <button
+            type="button"
+            onClick={openFullMenu}
+            className="gold-cta inline-flex items-center justify-center gap-2.5 min-h-11 px-7 py-3 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-[0.18em] shadow-[0_4px_20px_rgba(212,175,55,0.3)] transition-[transform,box-shadow] duration-300 hover:shadow-[0_6px_28px_rgba(212,175,55,0.45)] active:scale-[0.98] cursor-pointer"
           >
-            <div className="menu-carousel__track" style={trackStyle}>
-              {ALL_CARDS_IN_ORDER.map((card, index) => {
-                const isVisibleTile =
-                  index >= activeIndex && index < activeIndex + layout.visible;
-                const isHovered = hoveredIndex === index;
-                const isPeer = hoveredIndex !== null && isVisibleTile && !isHovered;
-                const hasImageInset = IMAGE_INSET_STEPS.has(card.step);
-                const tileClassName = [
-                  'menu-tile',
-                  isHovered ? 'menu-tile--hovered' : '',
-                  isPeer ? 'menu-tile--peer' : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ');
-
-                return (
-                  <button
-                    key={card.id}
-                    type="button"
-                    onClick={openFullMenu}
-                    onFocus={() => handleTileFocus(index)}
-                    onPointerEnter={(event) => handleTilePointerEnter(index, event)}
-                    onPointerLeave={(event) => handleTilePointerLeave(index, event)}
-                    className={tileClassName}
-                    aria-label={`Open full menu: ${card.title}`}
-                  >
-                    <span
-                      className={`menu-tile__media${
-                        hasImageInset ? ' menu-tile__media--inset' : ''
-                      }`}
-                      style={
-                        hasImageInset
-                          ? { '--menu-image-fit-scale': IMAGE_FIT_SCALE[card.step] }
-                          : undefined
-                      }
-                    >
-                      <img
-                        src={card.image}
-                        alt=""
-                        loading={index < 6 ? 'eager' : 'lazy'}
-                        decoding="async"
-                      />
-                      <span className="menu-tile__step" aria-hidden="true">
-                        {card.stepNumber}
-                      </span>
-                    </span>
-                    <span className="menu-tile__body">
-                      <span className="menu-tile__tag">{card.categoryTag}</span>
-                      <span className="menu-tile__title">{card.title}</span>
-                      <span className="menu-tile__description">{card.description}</span>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <p className="sr-only" role="status" aria-live="polite">
-            {isMobile
-              ? `Showing ${Math.min(
-                  activeIndex + 1,
-                  CATEGORY_COUNT,
-                )} of ${CATEGORY_COUNT} menu categories`
-              : `Showing ${Math.min(
-                  activeIndex + 1,
-                  CATEGORY_COUNT,
-                )} to ${Math.min(
-                  activeIndex + layout.visible,
-                  CATEGORY_COUNT,
-                )} of ${CATEGORY_COUNT} menu categories`}
-          </p>
-
-          <div className="menu-carousel__footer">
-            <button
-              type="button"
-              onClick={openFullMenu}
-              className="gold-cta inline-flex items-center justify-center gap-2.5 min-h-11 px-7 py-3 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#ffd875] to-[#b8860b] text-[#0a0a0b] font-cinzel text-xs font-bold uppercase tracking-[0.18em] shadow-[0_4px_20px_rgba(212,175,55,0.3)] transition-[transform,box-shadow] duration-300 hover:shadow-[0_6px_28px_rgba(212,175,55,0.45)] active:scale-[0.98] cursor-pointer"
-            >
-              <BookOpen className="w-4 h-4" aria-hidden="true" />
-              <span>See Menu Sections</span>
-              <ChevronRight className="w-4 h-4" aria-hidden="true" />
-            </button>
-          </div>
+            <BookOpen className="w-4 h-4" aria-hidden="true" />
+            <span>See Menu Sections</span>
+            <ChevronRight className="w-4 h-4" aria-hidden="true" />
+          </button>
         </div>
       </div>
 
