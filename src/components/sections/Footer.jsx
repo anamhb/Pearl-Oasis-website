@@ -71,29 +71,29 @@ export const Footer = () => {
             </h3>
             <ul className="flex flex-nowrap items-center justify-between gap-x-3 whitespace-nowrap sm:block sm:space-y-0.5 text-xs font-sans">
               <li>
-                <a href="#story" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="/#story" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Our Story
                 </a>
               </li>
               <li>
-                <a href="#signature" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="/#signature" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Featured Dishes
                 </a>
               </li>
               <li>
-                <a href="#menu" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="/#menu" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Menu
                 </a>
               </li>
               {/* Testimonials stays reachable from the top navigation, so the
                   phone-width row keeps three links, unwrapped and unscrolled. */}
               <li className="hidden sm:block">
-                <a href="#experience" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="/#experience" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Testimonials
                 </a>
               </li>
               <li className="hidden sm:block">
-                <a href="#booking" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
+                <a href="/book-a-table" className="inline-flex items-center min-h-11 min-w-11 py-1.5 hover:text-[#d4af37] transition-colors">
                   Book a Table
                 </a>
               </li>
@@ -113,8 +113,8 @@ export const Footer = () => {
                 <div className="flex flex-wrap items-baseline gap-x-2 sm:block">
                   <div className="text-white font-medium">Daily Hours</div>
                   <div className="text-[#a39a8c]">
-                    <span className="sm:hidden">2:00 PM – 11:00 PM</span>
-                    <span className="hidden sm:inline">Mon – Sun: 2:00 PM – 11:00 PM</span>
+                    <span className="sm:hidden">11:00 AM – 11:00 PM</span>
+                    <span className="hidden sm:inline">Mon – Sun: 11:00 AM – 11:00 PM</span>
                   </div>
                 </div>
               </div>
@@ -122,21 +122,10 @@ export const Footer = () => {
               <div className="flex items-start gap-2 sm:pt-2">
                 <Clock className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                 <div className="flex flex-wrap items-baseline gap-x-2 sm:block">
-                  <div className="text-white font-medium">Lunch and Afternoon Service</div>
+                  <div className="text-white font-medium">Friday Prayer Break</div>
                   <div className="text-[#a39a8c]">
-                    <span className="sm:hidden">2:00 PM – 5:00 PM</span>
-                    <span className="hidden sm:inline">Mon – Sun: 2:00 PM – 5:00 PM</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2 sm:pt-2">
-                <Clock className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
-                <div className="flex flex-wrap items-baseline gap-x-2 sm:block">
-                  <div className="text-white font-medium">Dinner and Evening Service</div>
-                  <div className="text-[#a39a8c]">
-                    <span className="sm:hidden">5:00 PM – 11:00 PM</span>
-                    <span className="hidden sm:inline">Mon – Sun: 5:00 PM – 11:00 PM</span>
+                    <span className="sm:hidden">1:00 PM – 2:30 PM</span>
+                    <span className="hidden sm:inline">Fri: 1:00 PM – 2:30 PM</span>
                   </div>
                 </div>
               </div>

@@ -136,9 +136,30 @@ html.lenis {
   .animate-spin-reverse-slow,
   .animate-spin-ring-accent,
   .animate-rotate-3d,
-  .animate-rotate-3d-slow {
+  .animate-rotate-3d-slow,
+  .booking-step-panel {
     animation: none !important;
   }
+}
+
+/* ── Booking stepper: step panel entrance ───────────────────────────────────
+   The panel is keyed by step number, so it remounts on every step change and
+   this entrance replays: a short rise-and-fade that keeps the transition
+   between steps visible without a page reload. Reduced-motion users get the
+   rule above switching it off entirely. */
+@keyframes booking-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.booking-step-panel {
+  animation: booking-step-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* ---------------------------------------------------------------------------

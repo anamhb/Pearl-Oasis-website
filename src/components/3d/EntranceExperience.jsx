@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useLenis } from 'lenis/react';
 import { PROGRAMMATIC_SCROLL_DURATION } from '../ui/scroll.js';
@@ -6,76 +6,60 @@ import { PROGRAMMATIC_SCROLL_DURATION } from '../ui/scroll.js';
 /**
  * One continuous, scroll-driven walkthrough.
  *
- * The hero footage is one remote film. Scroll position, not elapsed time, is
- * the source of truth: progress picks the video timestamp and drives the
+ * The hero is a fixed sequence of local frames. Scroll position, not elapsed
+ * time, is the source of truth: progress picks the frame index and drives the
  * hand-over between the two content overlays.
  *
- * The film is never played. Seeking a paused video gives the same frame for a
- * given scroll position on the way down and on the way back up, and the last
- * seek is held at the end. The original upload had a single sync sample at 0,
- * so every paused seek decoded from the start. This derived Cloudinary URL
- * re-encodes the same film with a 1 s keyframe interval (ki_1) and best
- * automatic quality, so a seek starts no more than one second away. Requests
- * are coalesced so only one seek is in flight at a time. The first-frame
- * poster keeps the stage filled while metadata, data, or a seek is arriving.
+ * Frames are never played. Mapping progress straight to an index gives the
+ * same frame for a given scroll position on the way down and on the way back
+ * up, and the final index is held at the end. The previous film scrub seeked
+ * a paused video on every step: each seek was a range fetch plus a keyframe
+ * decode, only one seek could be in flight, and the queued target snapped
+ * when it landed, so the walk lagged behind the scroll. Here a paint is one
+ * `drawImage` of an image already fetched and decoded ahead of the scroll
+ * position, which keeps the display in step in both directions.
  *
- * The H.264 MP4 is the primary source. Browsers without H.264 get the
- * validated VP9 WebM before the first load. If the MP4 reports support but
- * then fails with a decode or source error, one controlled switch to WebM is
- * allowed. If the WebM itself fails with a decode or source error, one reload
- * of the same WebM URL with a cache-busting query is allowed. Seek
- * cancellations and aborted range requests do not switch or retry.
+ * Downloads run in batches ordered by distance from the current index, and
+ * only a small window around that index is decoded ahead; the rest stay
+ * compressed (about 90 KB each, 6.1 MB for all 70) until they approach it.
+ * Decoded rasters stay browser-managed and are evicted under memory pressure,
+ * so the full-resolution sequence is never all decoded at once. A frame that
+ * fails to load is skipped with one warning: the stage keeps the last good
+ * frame, then the first-frame poster, then its own background, so it never
+ * blanks.
  */
-const VIDEO_MP4_URL =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/q_auto:best,ki_1/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.mp4';
-const VIDEO_WEBM_URL =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/v1793251281/hero-lobby-20261029-vp9-6148df8e.webm';
-const VIDEO_WEBM_RECOVERY_URL = `${VIDEO_WEBM_URL}?recovery=1`;
-const VIDEO_POSTER =
-  'https://res.cloudinary.com/z8nlnc6b/video/upload/so_0,w_1280,h_720,c_fill/v1792936612/new-video-Camera_moving_through_hotel_lobby_20261023081539.jpg';
-const VIDEO_MP4_TYPE = 'video/mp4; codecs="avc1.42E01E"';
-const VIDEO_WEBM_TYPE = 'video/webm; codecs="vp9"';
-const MEDIA_ERR_DECODE = 3;
-const MEDIA_ERR_SRC_NOT_SUPPORTED = 4;
 
-const canPlayVideoType = (type) => {
-  if (typeof document === 'undefined') return false;
-  const probe = document.createElement('video');
-  return typeof probe.canPlayType === 'function' && Boolean(probe.canPlayType(type));
-};
+/** `public/video-frames-hero`: 2560x1440 JPEG, `ezgif-frame-001` .. `070`. */
+const FRAME_COUNT = 70;
+const frameUrl = (index) =>
+  `/video-frames-hero/ezgif-frame-${String(index + 1).padStart(3, '0')}.jpg`;
 
-const getInitialVideoSource = () => {
-  if (canPlayVideoType(VIDEO_MP4_TYPE)) return VIDEO_MP4_URL;
-  if (canPlayVideoType(VIDEO_WEBM_TYPE)) return VIDEO_WEBM_URL;
-  return VIDEO_MP4_URL;
-};
+/** Frames decoded ahead of the current index; behind covers reverse scrolls. */
+const DECODE_BEHIND = 2;
+const DECODE_AHEAD = 5;
+
+/** One download batch matches the browser's per-host connection pool. */
+const DOWNLOAD_BATCH = 6;
+
+/** Canvas backing cap; the sequence is photographic, 3x buys no detail. */
+const MAX_CANVAS_DPR = 2;
 
 /**
- * Keep the same 329vh track as the previous 70-frame sequence (70 x 3.27vh
- * plus one viewport), so the hero releases at the same point on the page.
+ * The track keeps the length the walkthrough has always used: 70 frames at
+ * 3.27vh each plus one viewport, so the hero releases at the same point on
+ * the page.
  */
 const TRACK_HEIGHT_VH = 328.9;
 
 /**
- * The copy hand-over stays where it was in the frame sequence: frame 24 of 70,
- * or the first third of the walk. The supplied film is one continuous shot, so
- * this boundary now marks the same reading beat rather than a hard visual cut.
+ * The copy hand-over sits at frame 24 of 70 (23 / 69 of progress), the same
+ * reading beat the walkthrough has always used: the entrance copy holds for
+ * the first third of the walk and the dining copy takes over from there.
  */
 const CONTENT_HANDOVER_PROGRESS = 23 / 69;
 
 /** Half-width of the content dissolve, in scroll progress. */
 const TRANSITION_HALF_WIDTH = 0.04;
-
-/**
- * The supplied film is 24 fps (measured: 0.041667 s between frames), so one
- * source frame is 1/24 s. A target change smaller than a frame stays on the
- * same displayed image and is not worth a seek.
- */
-const SOURCE_FRAME_DURATION = 1 / 24;
-const SEEK_EPSILON = SOURCE_FRAME_DURATION;
-
-/** Stop just before the end so the final frame stays visible. */
-const END_FRAME_OFFSET = SOURCE_FRAME_DURATION;
 
 const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 
@@ -83,13 +67,9 @@ const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 const smoothstep = (value) => value * value * (3 - 2 * value);
 
 export const EntranceExperience = () => {
-  const [videoSource, setVideoSource] = useState(getInitialVideoSource);
   const trackRef = useRef(null);
-  const videoRef = useRef(null);
-  const videoSourceRef = useRef(videoSource);
-  const previousVideoSourceRef = useRef(videoSource);
-  const fallbackAttemptedRef = useRef(videoSource === VIDEO_WEBM_URL);
-  const webmRecoveryAttemptedRef = useRef(false);
+  const canvasRef = useRef(null);
+  const canvasCtxRef = useRef(null);
   const entranceContentRef = useRef(null);
   const diningContentRef = useRef(null);
   const centerScrimRef = useRef(null);
@@ -101,20 +81,14 @@ export const EntranceExperience = () => {
   const styleCacheRef = useRef({});
   const rafRef = useRef(0);
   const reducedMotionRef = useRef(false);
-  const videoReadyRef = useRef(false);
-  const durationRef = useRef(0);
-  const progressRef = useRef(0);
-  /**
-   * `video.seeking` is unreliable in Chromium 107: it can read false while the
-   * previous seek is still decoding, so the next assignment cancels and
-   * restarts the seek. This ref is set synchronously before the assignment
-   * and released by the matching `seeked`.
-   */
-  const seekInFlightRef = useRef(false);
-  const pendingSeekTargetRef = useRef(null);
-  const seekGenerationRef = useRef(0);
-  const activeSeekGenerationRef = useRef(0);
-  const metadataAtRef = useRef(0);
+  /* Frame machinery: one record per index (download and decode state) and
+     the index the scroll position asks for. */
+  const framesRef = useRef([]);
+  const frameIndexRef = useRef(0);
+  const paintedRef = useRef({ drawn: -1, target: 0 });
+  const canvasSizeRef = useRef({ w: 0, h: 0 });
+  const downloadsRef = useRef({ running: false, done: false, errors: 0 });
+  const aliveRef = useRef(false);
   /**
    * False while the hero is far outside the viewport. The scroll listener is
    * global, so without this every scroll anywhere in the ~16 000 px document
@@ -130,32 +104,11 @@ export const EntranceExperience = () => {
   const lenis = useLenis();
   const lenisRef = useRef(null);
 
-  /* Any source change, media reset, error or unmount invalidates the seek that
-     was in flight for the previous media state. */
-  const resetSeekState = useCallback(() => {
-    seekInFlightRef.current = false;
-    pendingSeekTargetRef.current = null;
-    seekGenerationRef.current += 1;
-    metadataAtRef.current = 0;
-  }, []);
-
   /* Keep the resize correction on the same scroll controller as the rest of
      the page without making the main effect restart when Lenis mounts. */
   useEffect(() => {
     lenisRef.current = lenis;
   }, [lenis]);
-
-  /* A source swap must not inherit the old film's metadata or pending seek.
-     Progress stays put; the new source resumes at the same scroll position. */
-  useEffect(() => {
-    videoSourceRef.current = videoSource;
-    if (previousVideoSourceRef.current === videoSource) return;
-    previousVideoSourceRef.current = videoSource;
-    videoReadyRef.current = false;
-    durationRef.current = 0;
-    resetSeekState();
-    videoRef.current?.load();
-  }, [videoSource, resetSeekState]);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -168,187 +121,257 @@ export const EntranceExperience = () => {
     };
   }, []);
 
-  /**
-   * Start one seek and hold the guard until its `seeked`. The pending target is
-   * cleared because the caller either has no newer target or has just taken
-   * the latest one.
-   */
-  const startSeek = useCallback((target) => {
-    const video = videoRef.current;
-    const duration = durationRef.current;
-    if (!video || !videoReadyRef.current) return;
-    if (!Number.isFinite(duration) || duration <= 0) return;
+  /** Indexes whose decode the current scroll position can use next. */
+  const isInDecodeWindow = useCallback((index) => {
+    const current = frameIndexRef.current;
+    return (
+      index >= current - DECODE_BEHIND && index <= current + DECODE_AHEAD
+    );
+  }, []);
 
-    const end = Math.max(0, duration - END_FRAME_OFFSET);
-    const targetTime = Math.min(Math.max(target, 0), end);
-    if (Math.abs(video.currentTime - targetTime) < SEEK_EPSILON) {
-      pendingSeekTargetRef.current = null;
-      return;
-    }
-
-    seekInFlightRef.current = true;
-    activeSeekGenerationRef.current = seekGenerationRef.current;
-    pendingSeekTargetRef.current = null;
-    try {
-      video.currentTime = targetTime;
-    } catch {
-      // Keep the current frame and poster; the next scroll or seek retries.
-      seekInFlightRef.current = false;
-      pendingSeekTargetRef.current = null;
-    }
+  /** Canvas backing size in device pixels for the current stage box. */
+  const renderSize = useCallback(() => {
+    const { width, viewport } = metricsRef.current;
+    if (!width || !viewport) return { w: 0, h: 0 };
+    const dpr = Math.min(window.devicePixelRatio || 1, MAX_CANVAS_DPR);
+    return {
+      w: Math.max(1, Math.round(width * dpr)),
+      h: Math.max(1, Math.round(viewport * dpr)),
+    };
   }, []);
 
   /**
-   * Apply the current progress to the film. Only one seek is allowed in
-   * flight: while it runs, newer positions are coalesced into the pending
-   * target, which `seeked` applies once. This avoids cancelling and restarting
-   * seeks on every scroll event.
+   * Nearest index to `current` that can be drawn: an already-decoded frame
+   * first, so a paint never waits on a synchronous decode, then any loaded
+   * frame (drawImage decodes those synchronously as a last resort).
    */
-  const applyVideoProgress = useCallback(
-    (nextProgress = progressRef.current) => {
-      const progress = clamp01(Number.isFinite(nextProgress) ? nextProgress : 0);
-      progressRef.current = progress;
-
-      const video = videoRef.current;
-      const duration = durationRef.current;
-      if (!video || !videoReadyRef.current) return;
-      if (!Number.isFinite(duration) || duration <= 0) return;
-
-      const end = Math.max(0, duration - END_FRAME_OFFSET);
-      const target = progress * end;
-
-      if (seekInFlightRef.current) {
-        pendingSeekTargetRef.current = target;
-        return;
+  const nearestPaintable = useCallback((current) => {
+    const frames = framesRef.current;
+    const scan = (decodedOnly) => {
+      const usable = (index) => {
+        const frame = frames[index];
+        if (!frame || frame.status !== 'ready') return false;
+        return decodedOnly ? Boolean(frame.decoded) : true;
+      };
+      if (usable(current)) return current;
+      for (let offset = 1; offset < FRAME_COUNT; offset += 1) {
+        const back = current - offset;
+        const forward = current + offset;
+        if (back >= 0 && usable(back)) return back;
+        if (forward < FRAME_COUNT && usable(forward)) return forward;
       }
+      return -1;
+    };
+    const decoded = scan(true);
+    return decoded !== -1 ? decoded : scan(false);
+  }, []);
 
-      startSeek(target);
-    },
-    [startSeek],
-  );
+  /**
+   * Draw the frame for the current index. Nothing is cleared when the index
+   * and size are unchanged, so there is no blank between paints; a resize
+   * clears the canvas, and it either repaints in the same tick or steps aside
+   * so the poster shows.
+   */
+  const paint = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const { w: width, h: height } = renderSize();
+    if (!width || !height) return;
 
-  const syncVideoMetadata = useCallback(
-    (resetSeekOnLoad = false) => {
-      const video = videoRef.current;
-      if (!video) return;
-      const currentSource = video.currentSrc || video.src;
-      if (currentSource && currentSource !== videoSourceRef.current) return;
-      const duration = video.duration;
-      if (!Number.isFinite(duration) || duration <= 0) return;
+    let ctx = canvasCtxRef.current;
+    if (!ctx) {
+      ctx = canvas.getContext('2d', { alpha: false });
+      if (!ctx) return; // No 2D context: the poster below carries the stage.
+      canvasCtxRef.current = ctx;
+    }
 
-      if (resetSeekOnLoad) {
-        resetSeekState();
-        metadataAtRef.current = performance.now();
+    const resized =
+      canvasSizeRef.current.w !== width || canvasSizeRef.current.h !== height;
+    if (resized) {
+      canvas.width = width;
+      canvas.height = height;
+      canvasSizeRef.current = { w: width, h: height };
+    }
+
+    const target = frameIndexRef.current;
+    const painted = paintedRef.current;
+    let drawn = nearestPaintable(target);
+    /* Never step opposite to the scroll direction: hold the frame already on
+       screen rather than jump backwards when a nearer index is briefly not
+       paintable (an unreadily decoded overshoot, an evicted neighbour). */
+    if (painted.drawn >= 0 && drawn >= 0) {
+      const movingForward = target >= painted.target;
+      if (movingForward ? drawn < painted.drawn : drawn > painted.drawn) {
+        drawn = painted.drawn;
       }
-      durationRef.current = duration;
-      videoReadyRef.current = true;
-      applyVideoProgress();
-    },
-    [applyVideoProgress, resetSeekState],
-  );
+    }
+    const changed = drawn !== painted.drawn;
+    painted.target = target;
+    if (!resized && !changed) return;
 
-  const handleVideoLoadedMetadata = useCallback(() => {
-    syncVideoMetadata(true);
-  }, [syncVideoMetadata]);
-
-  const handleVideoCanPlay = useCallback(() => {
-    syncVideoMetadata(false);
-  }, [syncVideoMetadata]);
-
-  const handleVideoSeeked = useCallback(
-    (event) => {
-      const video = videoRef.current;
-      if (!video || !seekInFlightRef.current) return;
-
-      if (activeSeekGenerationRef.current !== seekGenerationRef.current) {
-        resetSeekState();
-        return;
-      }
-
-      const currentSource = video.currentSrc || video.src;
-      if (currentSource && currentSource !== videoSourceRef.current) {
-        resetSeekState();
-        return;
-      }
-
-      /* A seek from the previous source can be queued before the new source's
-         metadata. Do not let it release the new source's guard. */
-      const seekedAt = Number(event?.timeStamp);
-      if (Number.isFinite(seekedAt) && seekedAt > 0 && seekedAt < metadataAtRef.current) {
-        return;
-      }
-
-      seekInFlightRef.current = false;
-      const pending = pendingSeekTargetRef.current;
-      pendingSeekTargetRef.current = null;
-      if (pending === null) return;
-
-      const duration = durationRef.current;
-      if (!Number.isFinite(duration) || duration <= 0) return;
-      const end = Math.max(0, duration - END_FRAME_OFFSET);
-      const target = Math.min(Math.max(pending, 0), end);
-      if (Math.abs(video.currentTime - target) < SEEK_EPSILON) return;
-
-      startSeek(target);
-    },
-    [resetSeekState, startSeek],
-  );
-
-  const handleVideoEmptied = useCallback(() => {
-    resetSeekState();
-    videoReadyRef.current = false;
-    durationRef.current = 0;
-  }, [resetSeekState]);
-
-  const handleVideoError = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const currentSource = video.currentSrc || video.src;
-    if (currentSource && currentSource !== videoSourceRef.current) return;
-
-    resetSeekState();
-    videoReadyRef.current = false;
-    durationRef.current = 0;
-
-    const error = video.error;
-    if (!error) return;
-
-    const source = video.currentSrc || video.src || videoSource;
-    const errorCode = error.code;
-    const isWebmSource =
-      videoSource === VIDEO_WEBM_URL || videoSource === VIDEO_WEBM_RECOVERY_URL;
-    const canUseFallback =
-      videoSource === VIDEO_MP4_URL &&
-      !fallbackAttemptedRef.current &&
-      (errorCode === MEDIA_ERR_DECODE || errorCode === MEDIA_ERR_SRC_NOT_SUPPORTED) &&
-      canPlayVideoType(VIDEO_WEBM_TYPE);
-    const canUseWebmRecovery =
-      isWebmSource &&
-      !webmRecoveryAttemptedRef.current &&
-      (errorCode === MEDIA_ERR_DECODE || errorCode === MEDIA_ERR_SRC_NOT_SUPPORTED);
-
-    console.warn('[Hero video] media failure', {
-      source,
-      errorCode,
-      errorMessage: error.message || '',
-      readyState: video.readyState,
-      networkState: video.networkState,
-      fallback: canUseFallback ? VIDEO_WEBM_URL : null,
-      recovery: canUseWebmRecovery ? VIDEO_WEBM_RECOVERY_URL : null,
-    });
-
-    if (canUseFallback) {
-      fallbackAttemptedRef.current = true;
-      setVideoSource(VIDEO_WEBM_URL);
+    if (drawn === -1) {
+      /* Nothing is loaded yet: step aside so the first-frame poster shows
+         instead of a cleared (black) canvas. */
+      canvas.style.opacity = '0';
+      paintedRef.current = { drawn: -1, target };
       return;
     }
 
-    if (!canUseWebmRecovery) return;
+    const img = framesRef.current[drawn].img;
+    const scale = Math.max(width / img.naturalWidth, height / img.naturalHeight);
+    const drawWidth = img.naturalWidth * scale;
+    const drawHeight = img.naturalHeight * scale;
+    try {
+      ctx.drawImage(
+        img,
+        (width - drawWidth) / 2,
+        (height - drawHeight) / 2,
+        drawWidth,
+        drawHeight,
+      );
+    } catch {
+      /* An undrawable source falls back to the poster rather than a hole. */
+      canvas.style.opacity = '0';
+      paintedRef.current = { drawn: -1, target };
+      return;
+    }
+    canvas.style.opacity = '1';
+    canvas.dataset.frame = String(drawn);
+    paintedRef.current = { drawn, target };
+  }, [nearestPaintable, renderSize]);
 
-    webmRecoveryAttemptedRef.current = true;
-    setVideoSource(VIDEO_WEBM_RECOVERY_URL);
-  }, [resetSeekState, videoSource]);
+  /**
+   * Decode `index` ahead of the scroll position. `img.decode()` resolves off
+   * the critical path (measured ~15 ms versus 170-250 ms for an equivalent
+   * `createImageBitmap` resize on the main thread), so scrolling never pays
+   * for a decode it did not ask for.
+   */
+  const decodeFrame = useCallback(
+    (index) => {
+      const frame = framesRef.current[index];
+      if (!frame || frame.status !== 'ready') return;
+      if (frame.decoded || frame.decoding || frame.decodeFailed) return;
+      frame.decoding = true;
+      frame.img
+        .decode()
+        .then(() => {
+          frame.decoded = true;
+          frame.decoding = false;
+          if (index === frameIndexRef.current) paint();
+        })
+        .catch(() => {
+          /* Data the browser declines to decode: drawImage retries it
+             synchronously when the frame is actually needed. */
+          frame.decoding = false;
+          frame.decodeFailed = true;
+        });
+    },
+    [paint],
+  );
+
+  const syncDecodeWindow = useCallback(() => {
+    const current = frameIndexRef.current;
+    const from = Math.max(0, current - DECODE_BEHIND);
+    const to = Math.min(FRAME_COUNT - 1, current + DECODE_AHEAD);
+    for (let index = from; index <= to; index += 1) {
+      decodeFrame(index);
+    }
+  }, [decodeFrame]);
+
+  /** Start one frame's download; `settled` resolves on load or error. */
+  const ensureFrame = useCallback(
+    (index) => {
+      let frame = framesRef.current[index];
+      if (frame) return frame;
+
+      const img = new Image();
+      img.decoding = 'async';
+      let settle = () => {};
+      const settled = new Promise((resolve) => {
+        settle = resolve;
+      });
+      frame = { img, status: 'loading', settled };
+
+      img.onload = () => {
+        frame.status = 'ready';
+        settle();
+        if (isInDecodeWindow(index)) decodeFrame(index);
+        if (index === frameIndexRef.current) paint();
+      };
+      img.onerror = () => {
+        frame.status = 'error';
+        settle();
+        downloadsRef.current.errors += 1;
+        if (downloadsRef.current.errors === 1) {
+          console.warn('[Hero frames] frame failed to load', {
+            frame: index + 1,
+            url: frameUrl(index),
+          });
+        }
+      };
+
+      framesRef.current[index] = frame;
+      img.src = frameUrl(index);
+      return frame;
+    },
+    [decodeFrame, isInDecodeWindow, paint],
+  );
+
+  /** Progress picks the index; nothing else in the pipeline stores it. */
+  const applyFrameProgress = useCallback(
+    (nextProgress) => {
+      const progress = clamp01(Number.isFinite(nextProgress) ? nextProgress : 0);
+      const index = Math.round(progress * (FRAME_COUNT - 1));
+      if (index !== frameIndexRef.current) {
+        frameIndexRef.current = index;
+        syncDecodeWindow();
+      }
+      paint();
+    },
+    [paint, syncDecodeWindow],
+  );
+
+  /**
+   * Fetch every frame in batches ordered by distance from the current index,
+   * re-sorted between batches so downloads chase the scroll instead of racing
+   * it. One bounded pass over a fixed set: it stops when all 70 have a record
+   * or the component unmounts.
+   */
+  const runDownloads = useCallback(async () => {
+    const downloads = downloadsRef.current;
+    if (downloads.running || downloads.done) return;
+    downloads.running = true;
+    try {
+      while (aliveRef.current) {
+        const pending = [];
+        for (let index = 0; index < FRAME_COUNT; index += 1) {
+          if (!framesRef.current[index]) pending.push(index);
+        }
+        if (pending.length === 0) {
+          downloads.done = true;
+          if (downloads.errors > 0) {
+            console.warn('[Hero frames] sequence incomplete', {
+              failed: downloads.errors,
+              total: FRAME_COUNT,
+            });
+          }
+          break;
+        }
+        const current = frameIndexRef.current;
+        /* Forward frames win ties: reverse scrolls lean on the frames the
+           decode window already fetched behind the current index. */
+        const distance = (index) => {
+          const gap = index - current;
+          return gap >= 0 ? gap : -gap * 1.5;
+        };
+        pending.sort((a, b) => distance(a) - distance(b));
+        const batch = pending.slice(0, DOWNLOAD_BATCH);
+        await Promise.all(batch.map((index) => ensureFrame(index).settled));
+      }
+    } finally {
+      downloads.running = false;
+    }
+  }, [ensureFrame]);
 
   const update = useCallback(() => {
     const track = trackRef.current;
@@ -361,8 +384,8 @@ export const EntranceExperience = () => {
     const progress =
       scrollDistance > 0 ? clamp01((window.scrollY - top) / scrollDistance) : 0;
 
-    /* -------------------------- film -------------------------- */
-    applyVideoProgress(progress);
+    /* -------------------------- frames -------------------------- */
+    applyFrameProgress(progress);
 
     /* -------------------- content hand-over -------------------- */
     const boundary = CONTENT_HANDOVER_PROGRESS;
@@ -454,26 +477,16 @@ export const EntranceExperience = () => {
     setInert(entranceContentRef.current, 'entranceInert', mix > 0.95);
     setInert(diningContentRef.current, 'diningInert', mix < 0.05);
     setInert(entranceCueRef.current, 'cueInert', mix >= 0.2);
-  }, [applyVideoProgress, measure]);
+  }, [applyFrameProgress, measure]);
 
   useEffect(() => {
     const track = trackRef.current;
-    const video = videoRef.current;
     if (!track) return;
 
-    /* A cached film can already have metadata when the effect runs. */
-    if (
-      video &&
-      Number.isFinite(video.duration) &&
-      video.duration > 0
-    ) {
-      durationRef.current = video.duration;
-      videoReadyRef.current = true;
-    }
     measure();
 
-    /* Reduced motion: keep the film user-driven, but swap the copy abruptly
-       instead of dissolving/sliding it. */
+    /* Reduced motion: keep the sequence user-driven, but swap the copy
+       abruptly instead of dissolving/sliding it. */
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const syncMotionPreference = () => {
       reducedMotionRef.current = motionQuery.matches;
@@ -548,6 +561,8 @@ export const EntranceExperience = () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
+    aliveRef.current = true;
+    runDownloads();
     update();
 
     return () => {
@@ -556,9 +571,10 @@ export const EntranceExperience = () => {
       motionQuery.removeEventListener?.('change', syncMotionPreference);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
-      resetSeekState();
+      /* The download loop checks this between batches and stops. */
+      aliveRef.current = false;
     };
-  }, [update, measure, resetSeekState]);
+  }, [update, measure, runDownloads]);
 
   const handleEnterClick = () => {
     const secondSection = document.getElementById('story');
@@ -596,27 +612,24 @@ export const EntranceExperience = () => {
       style={{ height: `${TRACK_HEIGHT_VH}vh` }}
       aria-label="Pearl Oasis walkthrough"
     >
-      {/* Pinned stage: the film never leaves the viewport while the track
+      {/* Pinned stage: the frames never leave the viewport while the track
           scrolls past it, so the camera walk reads as one continuous take. */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#090a0c] select-none">
-        {/* One video layer, never played. Scroll only seeks it; the poster is
-            the first frame, so the stage is not blank while data arrives or if
-            the film cannot load. */}
-        <video
-          ref={videoRef}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-          src={videoSource}
-          poster={VIDEO_POSTER}
-          preload="auto"
-          muted
-          playsInline
+        {/* First-frame poster under the canvas: the stage is filled from the
+            first paint and stays up if the canvas or a frame cannot load. */}
+        <img
+          src={frameUrl(0)}
+          alt=""
           aria-hidden="true"
-          tabIndex={-1}
-          onLoadedMetadata={handleVideoLoadedMetadata}
-          onCanPlay={handleVideoCanPlay}
-          onSeeked={handleVideoSeeked}
-          onEmptied={handleVideoEmptied}
-          onError={handleVideoError}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+        />
+        {/* Scroll only picks indices. The canvas is revealed after its first
+            successful draw, so the poster handover is pixel-identical. */}
+        <canvas
+          ref={canvasRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+          style={{ opacity: 0 }}
         />
 
         {/* Light cinematic tint. This used to be black/40, which flattened the

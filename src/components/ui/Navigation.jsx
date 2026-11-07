@@ -60,7 +60,7 @@ export const Navigation = () => {
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between gap-8">
         <a
-          href="#entrance"
+          href="/#entrance"
           className="whitespace-nowrap shrink-0 group flex items-center gap-3 transition-opacity hover:opacity-90"
           aria-label="Pearl Oasis Homepage"
         >
@@ -69,31 +69,31 @@ export const Navigation = () => {
 
         <nav className="hidden lg:flex items-center gap-8 text-xs font-cinzel tracking-[0.2em] text-[#d6d3cd] uppercase">
           <a
-            href="#story"
+            href="/#story"
             className="hover:text-[#d4af37] transition-colors whitespace-nowrap shrink-0 py-1 border-b border-transparent hover:border-[#d4af37]"
           >
             Our Story
           </a>
           <a
-            href="#signature"
+            href="/#signature"
             className="hover:text-[#d4af37] transition-colors whitespace-nowrap shrink-0 py-1 border-b border-transparent hover:border-[#d4af37]"
           >
             Featured Dishes
           </a>
           <a
-            href="#menu"
+            href="/#menu"
             className="hover:text-[#d4af37] transition-colors whitespace-nowrap shrink-0 py-1 border-b border-transparent hover:border-[#d4af37]"
           >
             Menu
           </a>
           <a
-            href="#experience"
+            href="/#experience"
             className="hover:text-[#d4af37] transition-colors whitespace-nowrap shrink-0 py-1 border-b border-transparent hover:border-[#d4af37]"
           >
             Testimonial
           </a>
           <a
-            href="#booking"
+            href="/book-a-table"
             className="hover:text-[#d4af37] transition-colors whitespace-nowrap shrink-0 py-1 border-b border-transparent hover:border-[#d4af37]"
           >
             Table Booking
@@ -102,14 +102,14 @@ export const Navigation = () => {
 
         <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <a
-            href="#menu"
+            href="/#menu"
             className="hidden xl:inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded border border-[#d4af37]/40 text-[#f5efe6] hover:border-[#d4af37] hover:text-[#d4af37] font-cinzel text-xs font-bold tracking-[0.18em] uppercase transition-all whitespace-nowrap shrink-0"
           >
             <span>View Menu</span>
           </a>
 
           <a
-            href="#booking"
+            href="/book-a-table"
             className="hidden min-[480px]:inline-flex items-center justify-center gap-2 min-h-11 px-4 sm:px-5 py-2.5 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#12110d] font-cinzel text-xs font-bold tracking-[0.18em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_20px_rgba(212,175,55,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap shrink-0 cursor-pointer"
           >
             <span>Book a Table</span>
@@ -136,35 +136,35 @@ export const Navigation = () => {
         >
           <nav className="flex flex-col gap-4 text-sm font-cinzel tracking-[0.2em] text-[#d6d3cd] uppercase">
             <a
-              href="#story"
+              href="/#story"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
               Our Story
             </a>
             <a
-              href="#signature"
+              href="/#signature"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
               Featured Dishes
             </a>
             <a
-              href="#menu"
+              href="/#menu"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
               Menu
             </a>
             <a
-              href="#experience"
+              href="/#experience"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
               Testimonial
             </a>
             <a
-              href="#booking"
+              href="/book-a-table"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center min-h-11 py-3 border-b border-white/5 hover:text-[#d4af37]"
             >
@@ -172,14 +172,14 @@ export const Navigation = () => {
             </a>
             <div className="pt-2 flex flex-col gap-3">
               <a
-                href="#booking"
+                href="/book-a-table"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="inline-flex items-center justify-center min-h-11 py-3 rounded bg-[#d4af37] bg-gradient-to-r from-[#d4af37] via-[#f3d47d] to-[#aa8010] text-[#0d0e10] font-cinzel font-bold text-xs tracking-[0.2em] uppercase shadow-[0_2px_12px_rgba(212,175,55,0.25)]"
               >
                 <span>Book a Table</span>
               </a>
               <a
-                href="#menu"
+                href="/#menu"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="inline-flex items-center justify-center min-h-11 py-3 rounded border border-[#d4af37]/40 text-[#f5efe6] font-cinzel font-bold text-xs tracking-[0.2em] uppercase hover:border-[#d4af37] hover:text-[#d4af37] transition-all"
               >
